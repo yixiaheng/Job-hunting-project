@@ -107,7 +107,7 @@ public class PlayerJumpState : IState
     }
     private void UpdateEnd()
     {
-        if(machine.player.Animation.IsAnimationFinished("JumpEnd", 0.6f))
+        if(machine.player.Animation.IsAnimationFinished("JumpEnd", 1f))
         {
             bool hasMoveInput = machine.player.inputActions.Player.Move.ReadValue<Vector2>() != Vector2.zero;
             if(hasMoveInput)
