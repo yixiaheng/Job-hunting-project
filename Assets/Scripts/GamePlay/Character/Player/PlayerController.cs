@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using UnityEngine.Animations.Rigging;
+using System.Collections.Generic;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class PlayerController : MonoBehaviour
     //地面检测
     private GroundCheck groundCheck;
     private float airborneTime;
+    //Trigger检测
+    private List<DialogueTrigger> dialogues = new List<DialogueTrigger>();
     [Header("超过此时间，视为脱离地面")][SerializeField] private float coyoteTime = 0.12f; //超过这个时间，视为脱离地面
     void Awake()
     {
@@ -43,9 +47,29 @@ public class PlayerController : MonoBehaviour
     {
         playerMoveStateMachine.currentState.PhysicsUpdate();
     }
-    void ODisable()
+
+    void OnTriggerStay(Collider other)
+    {
+        var dt = other.GetComponent<DialogueTrigger>();
+        if (dt != null && !dialogues.Contains(dt))
+        {
+            dialogues.Add(dt);
+            Debug.Log($"发现 DialogueTrigger: {dt.name}");
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        var dt = other.GetComponent<DialogueTrigger>();
+        if (dt != null)
+            dialogues.Remove(dt);
+    }
+
+    void OnDisable()
     {
         inputActions.Disable();
+
+        //清空dialogues
+        dialogues.Clear();
     }
 
     public void SetMove(Vector3 direction, float speed)
