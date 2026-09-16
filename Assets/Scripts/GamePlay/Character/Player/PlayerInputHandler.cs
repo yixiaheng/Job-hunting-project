@@ -13,7 +13,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         
     }
-    void ODisable()
+    void OnDisable()
     {
         
     }

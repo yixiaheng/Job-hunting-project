@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
 public class DialogueRunner : MonoBehaviour
 {
     public static DialogueRunner Instance{get; private set;}
@@ -50,6 +50,7 @@ public class DialogueRunner : MonoBehaviour
     /// 改变选中对话索引
     /// </summary>
     /// <param name="dir">传入-1代表减ID,传1代表加ID</param>
+    [Button]
     public void ChangeSelectID(int dir)
     {
         interactionSelectID += dir;

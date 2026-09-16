@@ -74,6 +74,7 @@
   <Project Path="Unity.Animation.Rigging.DocCodeExamples.csproj" />
   <Project Path="Unity.InternalAPIEngineBridge.004.csproj" />
   <Project Path="Unity.InputSystem.DocCodeSamples.csproj" />
+  <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
   <Project Path="Unity.RenderPipelines.Universal.Shaders.csproj" />
   <Project Path="Unity.RenderPipelines.Core.Runtime.Shared.csproj" />
   <Project Path="Unity.ProBuilder.Stl.csproj" />
