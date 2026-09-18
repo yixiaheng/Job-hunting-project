@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "DialogueConfigSO", menuName = "Dialogue/DialogueConfigSO")]
-public class DialogueConfigSO : ScriptableObject
+public class DialogueNodeSO : ScriptableObject
 {
     //基础对话数据
     public string dialogueName;             //对话名称
     public string id;                       //ID
-    public string speakerName;              //说话者的名字
+    public SpeakerSO speakerSO;              //说话者的名字
     [TextArea(5,10)]
     public string text;                     //讲话内容
     public NodeType nodeType;               //对话Type

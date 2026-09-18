@@ -8,7 +8,7 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueChoice
 {
-    string choiceText;
-    string nextNodeId;
-    DialogueCondition[] conditions;
+    public string choiceText;
+    public string nextNodeId;
+    public DialogueCondition[] conditions;
 }

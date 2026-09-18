@@ -54,11 +54,13 @@ public class DialogueUIController : MonoBehaviour
         DialogueRunner.Instance.OnInterectionSelectionChange -= OnSelectChange_Interaction;
     }
 
-    public void ShowDialogueContext(DialogueConfigSO configSO)
+    public void ShowDialogueContext(DialogueNodeSO configSO)
     {
         DialogueContext.alpha = 1;
         DialogueContext.interactable = true;
         DialogueContext.blocksRaycasts = true;
+
+        Debug.Log("ShowDialogueContext");
 
         dialogueContext.text = configSO.text;
 
@@ -103,16 +105,15 @@ public class DialogueUIController : MonoBehaviour
             DialogueInteractUI d = currentInteractionObject.GetComponent<DialogueInteractUI>();
             d.image.color = Color.white;
         }
-        GameObject obj;
-        if(Dic_Intercations.TryGetValue(dialogue, out obj))
+        if(Dic_Intercations.TryGetValue(dialogue, out currentInteractionObject))
         {
-            DialogueInteractUI d = obj.GetComponent<DialogueInteractUI>();
+            DialogueInteractUI d = currentInteractionObject.GetComponent<DialogueInteractUI>();
             d.image.color = Color.red;
         }
     }
 
     //对话选项
-    public void ShowDialogueChoice(DialogueConfigSO configSO)
+    public void ShowDialogueChoice(DialogueNodeSO configSO)
     {
         DialogueChoices.alpha = 1;
         DialogueChoices.interactable = true;

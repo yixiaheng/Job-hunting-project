@@ -41,7 +41,7 @@ public class PlayerIdleState : IState
             return;
         }
 
-        if (machine.player.inputActions.Player.Move.ReadValue<Vector2>() != Vector2.zero)
+        if (machine.player.InputHandler.inputActions.Player.Move.ReadValue<Vector2>() != Vector2.zero)
         {
             machine.ChangeState<PlayerMoveState>();
             return;

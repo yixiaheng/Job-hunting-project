@@ -26,7 +26,7 @@ public class PlayerMoveState : IState
     }
     public void Update()
     {
-        moveInput = machine.player.inputActions.Player.Move.ReadValue<Vector2>();
+        moveInput = machine.player.InputHandler.inputActions.Player.Move.ReadValue<Vector2>();
 
         
         if(CalculateStateChange())

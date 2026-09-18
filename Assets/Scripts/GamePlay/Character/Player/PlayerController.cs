@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [HideInInspector]public Rigidbody rb;
     //新输入系统
-    public InputSystem_Actions inputActions;
+    public PlayerInputHandler InputHandler{get; private set;}
     //角色移动状态管理
     public PlayerMoveStateMachine playerMoveStateMachine{get; private set;}
     //Animation数据管理
@@ -24,11 +24,11 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         playerMoveStateMachine = new PlayerMoveStateMachine(this);
-        inputActions = new InputSystem_Actions();
         Animation = GetComponent<PlayerAnimation>();
         rb = GetComponent<Rigidbody>();
         groundCheck = GetComponent<GroundCheck>();
-        inputActions.Enable();
+        InputHandler = GetComponent<PlayerInputHandler>();
+
     }
 
     void Start()
@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
 
     void OnDisable()
     {
-        inputActions.Disable();
 
         //清空dialogues
         dialogues.Clear();
@@ -74,6 +73,12 @@ public class PlayerController : MonoBehaviour
 
     public void SetMove(Vector3 direction, float speed)
     {
+        if(!InputHandler.CanMove)
+        {
+            Debug.Log("不在可移动状态");
+            return;
+        }
+
         //设置角色移动速度
         Vector3 velocity = rb.linearVelocity;
 

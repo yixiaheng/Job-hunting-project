@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4615d991256bdc14fb8414423c8736c2, type: 3}
   m_Name: SpeakerSO
   m_EditorClassIdentifier: Assembly-CSharp::SpeakerSO
+  speakerName: "\u5BF9\u8BDD1"
+  nameColor: {r: 0, g: 0, b: 0, a: 0}
