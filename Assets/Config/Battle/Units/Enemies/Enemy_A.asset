@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
+  m_Name: Enemy_A
+  m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
+  displayName: Enemy_A
+  maxHealth: 60
+  attack: 16
+  defence: 5
+  speed: 110
+  startEnergy: 0
+  prefab: {fileID: 4064924966840310132, guid: 1d8107d23af8875448bc3ae9a21fb0db, type: 3}
+  skills:
+  - {fileID: 11400000, guid: e74f913bb782dc64ea9edabaa0b23cd3, type: 2}

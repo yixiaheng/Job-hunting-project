@@ -11,10 +11,20 @@ public enum EffectType
 
 }
 
+/// <summary>
+/// 属性类型
+/// </summary>
 public enum StatType
 {
     Attack,
-    Health
+    Health,
+    Speed,
+    Defence
+}
+
+public enum BuffType
+{
+    StatMod
 }
 
 public enum TargetRule

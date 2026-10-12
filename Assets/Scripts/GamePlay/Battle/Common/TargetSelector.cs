@@ -26,7 +26,7 @@ namespace Battle.Logic
             {
                 case TargetRule.Single:
                     BattleUnit unit;
-                    if(mainTarget != null && mainTarget.isActive && mainTarget.faction == targetFaction)
+                    if(mainTarget != null && mainTarget.IsActive && mainTarget.faction == targetFaction)
                     {
                         unit = mainTarget;
                     }
@@ -39,19 +39,19 @@ namespace Battle.Logic
                 case TargetRule.AoE:
                     foreach(var u in units)
                     {
-                        if(u.faction == targetFaction && u.isActive)
+                        if(u.faction == targetFaction && u.IsActive)
                         {
                             res.Add(u);
                         }
                     }
                     break;
                 case TargetRule.Self:
-                    if(caster.isActive)
+                    if(caster.IsActive)
                         res.Add(caster);
                     break;
                 case TargetRule.Spread:
                     BattleUnit center = null;
-                    if(mainTarget != null && mainTarget.isActive && mainTarget.faction == targetFaction)
+                    if(mainTarget != null && mainTarget.IsActive && mainTarget.faction == targetFaction)
                     {
                         center = mainTarget;
                     }
@@ -75,7 +75,7 @@ namespace Battle.Logic
         {
             foreach(var u in units)
             {
-                if(u.isActive && u.faction == faction && u.pos == pos)
+                if(u.IsActive && u.faction == faction && u.pos == pos)
                     return u;
             }
             return null;
@@ -86,7 +86,7 @@ namespace Battle.Logic
             BattleUnit res;
             foreach(var u in units)
             {
-                if(u.faction == targetFaction && u.isActive)
+                if(u.faction == targetFaction && u.IsActive)
                 {
                     res = u;
                     return res;
@@ -96,7 +96,7 @@ namespace Battle.Logic
         }
         void TryAdd(List<BattleUnit> res, BattleUnit unit)
         {
-            if (unit == null || !unit.isActive)
+            if (unit == null || !unit.IsActive)
                 return;
             if (res.Contains(unit))
                 return;

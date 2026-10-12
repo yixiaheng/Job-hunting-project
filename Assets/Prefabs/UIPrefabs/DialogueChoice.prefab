@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3707368485376911192}
+  - component: {fileID: 6017613451072481643}
   m_Layer: 5
   m_Name: DialogueChoice
   m_TagString: Untagged
@@ -294,3 +295,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6017613451072481643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793784798659353317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0be43937c649efb15839f9f69f5340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DialogueSystem.Runtime::DialogueSystem.DialogueChoiceUI
+  button: {fileID: 6017613451072481642}
+  label: {fileID: 423837004454288949}

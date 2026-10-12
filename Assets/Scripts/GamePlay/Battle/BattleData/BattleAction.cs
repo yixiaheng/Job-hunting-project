@@ -1,6 +1,8 @@
 using UnityEngine;
 
-
+/// <summary>
+/// 战时操作行为数据传递，包括选择的技能，选择的主目标
+/// </summary>
 public class BattleAction
 {
     public SkillConfig skill;

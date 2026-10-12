@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639a8fd13b4e00b4caa6ff014c771e9d, type: 3}
+  m_Name: SampleDialogue
+  m_EditorClassIdentifier: DialogueSystem.Runtime::DialogueSystem.DialogueGraphSO
+  graphName: Sample NPC
+  entryNodeId: node_entry_branch
+  nodes:
+  - id: node_entry_branch
+    title: "\u5165\u53E3\u5206\u652F\u793A\u4F8B"
+    speaker: {fileID: 11400000, guid: dec99bf8ea75db14d99178abd90c4dd1, type: 2}
+    text: 
+    textId: 
+    nextNodeId: node_start
+    editorPosition: {x: -420, y: 200.8}
+    nodeType: 1
+    choices:
+    - choiceText: "\u5DF2\u7ECF\u8BBF\u95EE\u8FC7\u793A\u4F8B\u5BF9\u8BDD"
+      nextNodeId: node_returning
+      conditions:
+      - type: 1
+        key: SampleDialogueVisited
+        value: 
+    enterSignals: []
+  - id: node_start
+    title: 111
+    speaker: {fileID: 11400000, guid: dec99bf8ea75db14d99178abd90c4dd1, type: 2}
+    text: "\u4F60\u597D\u554A\uFF0C\u5192\u9669\u8005"
+    textId: 
+    nextNodeId: node_choice
+    editorPosition: {x: -28, y: 200.8}
+    nodeType: 0
+    choices: []
+    enterSignals:
+    - type: 0
+      key: SampleDialogueVisited
+      value: 1
+  - id: node_choice
+    title: Choice
+    speaker: {fileID: 11400000, guid: dec99bf8ea75db14d99178abd90c4dd1, type: 2}
+    text: "\u6709\u4EC0\u4E48\u60F3\u95EE\u7684\u5417"
+    textId: 
+    nextNodeId: 
+    editorPosition: {x: 421.6, y: 404}
+    nodeType: 0
+    choices:
+    - choiceText: "\u4F60\u53EB\u4EC0\u4E48\u540D\u5B57"
+      nextNodeId: node_end_a
+      conditions:
+      - type: 1
+        key: aaa
+        value: 
+    - choiceText: "\u6211\u662F\u8C01\uFF0C\u6211\u8BB0\u4E0D\u6E05\u4E86"
+      nextNodeId: node_end_b
+      conditions: []
+    - choiceText: "\u8FDB\u884C\u4EFB\u52A1"
+      nextNodeId: c8c8ce2c3ef54ea792499c1bd066aaef
+      conditions: []
+    enterSignals: []
+  - id: node_end_a
+    title: End A
+    speaker: {fileID: 11400000, guid: dec99bf8ea75db14d99178abd90c4dd1, type: 2}
+    text: "\u6211\u53EB\u5F00\u62D3\u8005"
+    textId: 
+    nextNodeId: 
+    editorPosition: {x: 760, y: 40}
+    nodeType: 0
+    choices: []
+    enterSignals: []
+  - id: node_end_b
+    title: End B
+    speaker: {fileID: 11400000, guid: dec99bf8ea75db14d99178abd90c4dd1, type: 2}
+    text: "\u4F60\u662F\u6D41\u8424\uFF0C\u6211\u6700\u597D\u7684\u4F19\u4F34"
+    textId: 
+    nextNodeId: 
+    editorPosition: {x: 792, y: 337.6}
+    nodeType: 0
+    choices: []
+    enterSignals: []
+  - id: node_returning
+    title: Returning Visitor
+    speaker: {fileID: 11400000, guid: dec99bf8ea75db14d99178abd90c4dd1, type: 2}
+    text: "\u53C8\u89C1\u9762\u4E86\uFF0C\u5192\u9669\u8005\u3002"
+    textId: 
+    nextNodeId: node_choice
+    editorPosition: {x: -14.4, y: 571.19995}
+    nodeType: 0
+    choices: []
+    enterSignals: []
+  - id: c8c8ce2c3ef54ea792499c1bd066aaef
+    title: Choice
+    speaker: {fileID: 11400000, guid: dec99bf8ea75db14d99178abd90c4dd1, type: 2}
+    text: "Text\u4E0D\u518D\u663E\u793A\uFF0C\u76F4\u63A5\u6839\u636E\u6761\u4EF6\u8DF3\u8F6C"
+    textId: 
+    nextNodeId: 5cb9cb7fd6d4404cb7497718fac272ca
+    editorPosition: {x: 792, y: 605.6}
+    nodeType: 1
+    choices:
+    - choiceText: Choice
+      nextNodeId: 
+      conditions:
+      - type: 0
+        key: 
+        value: 
+    enterSignals: []
+  - id: 5cb9cb7fd6d4404cb7497718fac272ca
+    title: Dialogue
+    speaker: {fileID: 0}
+    text: "\u4EFB\u52A1\u5DF2\u7ECF\u63A5\u53D6"
+    textId: 
+    nextNodeId: 
+    editorPosition: {x: 1184.8, y: 605.6}
+    nodeType: 0
+    choices: []
+    enterSignals: []

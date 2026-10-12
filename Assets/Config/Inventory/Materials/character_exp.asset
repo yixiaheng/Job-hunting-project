@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2fea347c63b1341b843d40fe48e24b, type: 3}
+  m_Name: character_exp
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.ItemConfig
+  id: character_exp
+  displayName: "\u65C5\u9014\u7ECF\u9A8C\u4E66"
+  icon: {fileID: 6486645750706404575, guid: 72cdf1be9d98d2e46b06b5ddcdbb7ef4, type: 3}
+  description: "\u8BB0\u5F55\u65C5\u9014\u89C1\u95FB\u7684\u7ECF\u9A8C\u4E66\u3002\n\u7528\u4E8E\u63D0\u5347\u89D2\u8272\u7B49\u7EA7\u3002"
+  category: 0
+  rarity: 1
+  useKind: 1
+  effectValue: 1000
+  effectRatio: 0
+  requiresTarget: 1

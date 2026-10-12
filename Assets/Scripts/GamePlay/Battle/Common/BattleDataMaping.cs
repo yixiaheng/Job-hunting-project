@@ -1,0 +1,34 @@
+using UnityEngine;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+
+namespace Battle.Logic
+{
+    public static class BattleDataMaping
+    {
+        public static BattleUnit ToUnit(UnitConfig cfg, Faction faction, int pos, int tieBreaker)
+        {
+            if (cfg == null)
+                return null;
+
+            var skills = cfg.skills != null
+                ? new List<SkillConfig>(cfg.skills)
+                : new List<SkillConfig>();
+
+            return new BattleUnit
+            {
+                displayName = string.IsNullOrEmpty(cfg.displayName) ? cfg.name : cfg.displayName,
+                faction = faction,
+                pos = pos,
+                tieBreaker = tieBreaker,
+                maxHealth = cfg.maxHealth,
+                currentHealth = cfg.maxHealth,
+                attack = cfg.attack,
+                defence = cfg.defence,
+                speed = cfg.speed,
+                currentEnergy = cfg.startEnergy,
+                skills = skills
+            };
+        }
+    }
+}

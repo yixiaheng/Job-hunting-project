@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 namespace Battle.Logic
 {
@@ -33,7 +35,7 @@ namespace Battle.Logic
             BattleUnit best = null;
             foreach(var u in units)
             {
-                if(!u.isActive) continue;
+                if(!u.IsActive) continue;
                 if(best == null || u.nextActionTime < best.nextActionTime)
                     best = u;
                 else if(u.nextActionTime == best.nextActionTime &&        //如果时间打平
@@ -49,7 +51,8 @@ namespace Battle.Logic
         }
         public void EndTurn(BattleUnit u)     //计算下一次行动的行动值
         {
-            u.nextActionTime = CurrentTime + BaseActionValue / u.speed;
+            int spd = Mathf.Max(1, u.GetStat(StatType.Speed));
+            u.nextActionTime = CurrentTime + BaseActionValue / spd;
         }
 
     }

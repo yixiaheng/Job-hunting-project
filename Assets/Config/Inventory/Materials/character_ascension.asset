@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2fea347c63b1341b843d40fe48e24b, type: 3}
+  m_Name: character_ascension
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.ItemConfig
+  id: character_ascension
+  displayName: "\u661F\u6838\u788E\u6676"
+  icon: {fileID: 2202210615360578257, guid: 6c53ca42b861a414780b9cf66fa36157, type: 3}
+  description: "\u51DD\u7ED3\u661F\u8FB0\u80FD\u91CF\u7684\u6676\u4F53\u3002\n\u7528\u4E8E\u89D2\u8272\u7A81\u7834\uFF0C\u5177\u4F53\u6D88\u8017\u7531\u517B\u6210\u7CFB\u7EDF\u51B3\u5B9A\u3002"
+  category: 0
+  rarity: 2
+  useKind: 3
+  effectValue: 0
+  effectRatio: 0
+  requiresTarget: 1
