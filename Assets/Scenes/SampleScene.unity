@@ -12347,6 +12347,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1853093363}
     m_Modifications:
+    - target: {fileID: 119775588146814976, guid: 59bd166c883a13c4b81300500ca9bbed, type: 3}
+      propertyPath: drawBones
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 119775588146814976, guid: 59bd166c883a13c4b81300500ca9bbed, type: 3}
+      propertyPath: drawTripods
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7418000390805513899, guid: 59bd166c883a13c4b81300500ca9bbed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

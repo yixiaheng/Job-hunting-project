@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Inventory
 {
+    /// <summary>
+    /// 物品仓库，ScriptObject存储
+    /// </summary>
     [CreateAssetMenu(fileName = "ItemCatalog", menuName = "Inventory/Catalog")]
     public class ItemCatalog : ScriptableObject
     {

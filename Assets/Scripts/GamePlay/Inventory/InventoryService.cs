@@ -3,31 +3,47 @@ using System.Collections.Generic;
 
 namespace Game.Inventory
 {
-    //背包服务
+    /// <summary>
+    /// 背包服务
+    /// 首先是初始化的时候，需要知道物品的数量，品质等信息，直接获取config
+    /// 然后是物品的使用，涉及到物品的减少
+    /// 获取物品也要有物品的增加
+    /// 对于装备，需要装备的实例，装备升级的接口
+    /// 物品的锁定
+    /// </summary>
     public sealed class InventoryService
     {   
-        //背包物品与string名字绑定
+        //背包物品与string名字绑定，配置表
         private readonly Dictionary<string, ItemConfig> configs;
+        //数量表,StringComparer.Ordinal 表示：按 Unicode 码位进行序号比较，区分大小写，不依赖当前语言文化。
         private readonly Dictionary<string, int> stacks = new Dictionary<string, int>(StringComparer.Ordinal);
+        //装备实例表
         private readonly Dictionary<string, EquipmentInstance> equipment = new Dictionary<string, EquipmentInstance>(StringComparer.Ordinal);
+        //处理器表,s
         private readonly Dictionary<ItemUseKind, IItemUseHandler> useHandlers = new Dictionary<ItemUseKind, IItemUseHandler>();
+        //标志位
         private bool executingUse;
 
+        //变更Action
         public event Action Changed;
+
         public IEquipmentUsageProvider EquipmentUsage { get; set; }
 
+        //初始化
         public InventoryService(ItemCatalog catalog)
         {
             if (catalog == null) throw new ArgumentNullException(nameof(catalog));
             configs = catalog.BuildIndex();
         }
 
+        //访问字典，获取物品信息
         public bool TryGetConfig(string configId, out ItemConfig config)
         {
             config = null;
             return configId != null && configs.TryGetValue(configId, out config);
         }
 
+        //获取物品数量
         public int GetQuantity(string configId)
         {
             if (configId == null) return 0;
@@ -38,11 +54,13 @@ namespace Game.Inventory
             return count;
         }
 
+        //添加物品
         public bool TryAdd(string configId, int quantity, out string reason)
         {
             return TryAddRewards(new[] { new ItemAmount(configId, quantity) }, out reason);
         }
 
+        //添加物品
         public bool TryAddRewards(IEnumerable<ItemAmount> rewards, out string reason)
         {
             reason = null;
@@ -71,6 +89,7 @@ namespace Game.Inventory
             return true;
         }
 
+        //尝试消耗/删除物品
         public bool TryRemove(string configId, int quantity, out string reason)
         {
             return TryConsume(new[] { new ItemAmount(configId, quantity) }, out reason);
@@ -98,6 +117,7 @@ namespace Game.Inventory
             return true;
         }
 
+        //获取装备实例
         public bool TryGetEquipment(string instanceId, out EquipmentInstance instance)
         {
             instance = null;
@@ -106,6 +126,7 @@ namespace Game.Inventory
             return true;
         }
 
+        //尝试设锁
         public bool TrySetLocked(string instanceId, bool locked, out string reason)
         {
             reason = null;
@@ -121,6 +142,7 @@ namespace Game.Inventory
             return true;
         }
 
+        //尝试删除装备
         public bool TryRemoveEquipment(string instanceId, out string reason)
         {
             reason = null;
@@ -140,6 +162,7 @@ namespace Game.Inventory
             return true;
         }
 
+        //装备成长升级
         public bool TrySetEquipmentProgress(string instanceId, int level, int experience, int ascension, out string reason)
         {
             reason = null;
@@ -162,12 +185,14 @@ namespace Game.Inventory
             return true;
         }
 
+        //注册物品处理方法
         public void RegisterUseHandler(ItemUseKind kind, IItemUseHandler handler)
         {
             if (handler == null) useHandlers.Remove(kind);
             else useHandlers[kind] = handler;
         }
 
+        //判断物品是否可以使用
         public bool CanUse(string configId, int quantity, string targetId, out string reason)
         {
             reason = null;
@@ -193,7 +218,7 @@ namespace Game.Inventory
             }
             return handler.CanUse(new ItemUseRequest(config, quantity, targetId), out reason);
         }
-
+        //尝试使用
         public bool TryUse(string configId, int quantity, string targetId, out string reason)
         {
             reason = null;
@@ -212,6 +237,13 @@ namespace Game.Inventory
             return true;
         }
 
+        /// <summary>
+        /// 获取仓库数据，物品堆叠数据以及装备实例,统一存于InventoryEntry
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="kind"></param>
+        /// <param name="sort"></param>
+        /// <returns></returns>
         public List<InventoryEntry> GetEntries(ItemCategory? category = null, EquipmentKind? kind = null, InventorySort sort = InventorySort.Rarity)
         {
             var entries = new List<InventoryEntry>();
@@ -223,6 +255,7 @@ namespace Game.Inventory
             }
             foreach (EquipmentInstance instance in equipment.Values)
             {
+                //EquipmentConfig继承ItemConfig
                 var config = (EquipmentConfig)configs[instance.configId];
                 if ((!category.HasValue || config.category == category.Value) && (!kind.HasValue || config.equipmentKind == kind.Value))
                     entries.Add(new InventoryEntry(config, 1, Copy(instance)));

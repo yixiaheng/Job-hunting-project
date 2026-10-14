@@ -11,7 +11,7 @@ public class GroundCheck : MonoBehaviour
 
     public bool isGrounded()
     {
-        Debug.Log("Checking if player is grounded");
+        //Debug.Log("Checking if player is grounded");
 
         return Physics.SphereCast(
             GroundCheckPoint.position,

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Game.Inventory
 {
+    /// <summary>
+    /// 物品堆叠
+    /// </summary>
     [Serializable]
     public class ItemStack
     {
@@ -23,10 +26,15 @@ namespace Game.Inventory
         public bool isLocked;
     }
 
+    /// <summary>
+    /// 仓库数据
+    /// </summary>
     [Serializable]
     public class InventoryData
     {
+        //物品堆叠的列表
         public List<ItemStack> stacks = new List<ItemStack>();
+        //装备实例的列表
         public List<EquipmentInstance> equipment = new List<EquipmentInstance>();
     }
 
