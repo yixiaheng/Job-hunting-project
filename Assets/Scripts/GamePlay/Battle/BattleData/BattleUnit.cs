@@ -3,8 +3,6 @@ using UnityEngine;
 
 /// <summary>
 /// 战斗时单元数据，不需要SO资产存储
-/// </summary> <summary>
-/// 
 /// </summary>
 public class BattleUnit
 {

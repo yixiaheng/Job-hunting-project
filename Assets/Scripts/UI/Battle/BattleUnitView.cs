@@ -4,6 +4,7 @@ using UnityEngine;
 public class BattleUnitView : MonoBehaviour
 {
     public TextMeshProUGUI nameHp;
+    
     BattleUnit unit;
     Vector3 restScale;
     bool scaleInitialized;
@@ -38,7 +39,7 @@ public class BattleUnitView : MonoBehaviour
         }
         gameObject.SetActive(unit.IsActive);
         if (nameHp != null)
-            nameHp.text = $"{unit.displayName}  {unit.currentHealth}/{unit.maxHealth}";
+            nameHp.text = $"{unit.displayName}";
     }
 
     public void SetActing(bool acting)

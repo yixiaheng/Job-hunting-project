@@ -6,6 +6,9 @@ namespace Battle.Logic
 {
     public enum BattleResult { None, AllyWin, EnemyWin, Draw }
 
+    /// <summary>
+    /// 战斗流程，纯数据操作，开始战斗就是new BattleFlow
+    /// </summary>
     public class BattleFlow
     {
         public const int MaxTurns = 500;

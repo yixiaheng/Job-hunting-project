@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Battle.SaveData
 {
+    /// <summary>
+    /// 角色配对界面的站队调整
+    /// </summary>
     [Serializable]
     public class BattleFormation
     {

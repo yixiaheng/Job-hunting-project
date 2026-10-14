@@ -21,7 +21,7 @@ MonoBehaviour:
     text: 
     textId: 
     nextNodeId: node_start
-    editorPosition: {x: -420, y: 200.8}
+    editorPosition: {x: -524, y: 274.4}
     nodeType: 1
     choices:
     - choiceText: "\u5DF2\u7ECF\u8BBF\u95EE\u8FC7\u793A\u4F8B\u5BF9\u8BDD"
@@ -50,7 +50,7 @@ MonoBehaviour:
     text: "\u6709\u4EC0\u4E48\u60F3\u95EE\u7684\u5417"
     textId: 
     nextNodeId: 
-    editorPosition: {x: 421.6, y: 404}
+    editorPosition: {x: 434.4, y: 346.4}
     nodeType: 0
     choices:
     - choiceText: "\u4F60\u53EB\u4EC0\u4E48\u540D\u5B57"
@@ -72,7 +72,7 @@ MonoBehaviour:
     text: "\u6211\u53EB\u5F00\u62D3\u8005"
     textId: 
     nextNodeId: 
-    editorPosition: {x: 760, y: 40}
+    editorPosition: {x: 816.8, y: 26.4}
     nodeType: 0
     choices: []
     enterSignals: []
@@ -82,7 +82,7 @@ MonoBehaviour:
     text: "\u4F60\u662F\u6D41\u8424\uFF0C\u6211\u6700\u597D\u7684\u4F19\u4F34"
     textId: 
     nextNodeId: 
-    editorPosition: {x: 792, y: 337.6}
+    editorPosition: {x: 824.8, y: 323.2}
     nodeType: 0
     choices: []
     enterSignals: []
@@ -102,7 +102,7 @@ MonoBehaviour:
     text: "Text\u4E0D\u518D\u663E\u793A\uFF0C\u76F4\u63A5\u6839\u636E\u6761\u4EF6\u8DF3\u8F6C"
     textId: 
     nextNodeId: 5cb9cb7fd6d4404cb7497718fac272ca
-    editorPosition: {x: 792, y: 605.6}
+    editorPosition: {x: 816.8, y: 593.6}
     nodeType: 1
     choices:
     - choiceText: Choice

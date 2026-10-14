@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 namespace Battle.Logic
 {
+    //选择对象
     public class TargetSelector
     {
         private readonly List<BattleUnit> units;

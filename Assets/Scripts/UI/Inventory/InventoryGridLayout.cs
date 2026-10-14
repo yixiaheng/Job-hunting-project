@@ -12,7 +12,8 @@ public class InventoryGridLayout : MonoBehaviour
 
     private void Resize()
     {
-        if (grid == null) grid = GetComponent<GridLayoutGroup>();
+        if (grid == null) 
+            grid = GetComponent<GridLayoutGroup>();
         if (grid == null) return;
         float width = ((RectTransform)transform).rect.width - grid.padding.horizontal;
         if (width <= 0f) return;

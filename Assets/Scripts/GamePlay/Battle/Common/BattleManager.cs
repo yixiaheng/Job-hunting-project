@@ -3,6 +3,10 @@ using Battle.Logic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+
+/// <summary>
+/// 为BattleFlow提供各种信息与玩家操作，为战斗流程提供
+/// </summary>
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance{get; private set;}

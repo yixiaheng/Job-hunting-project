@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-
+//鼠标战斗检测：用于选择对象
 public class MouseRayCasting : MonoBehaviour
 {
     public BattleUnit selectedTarget{get; private set;}

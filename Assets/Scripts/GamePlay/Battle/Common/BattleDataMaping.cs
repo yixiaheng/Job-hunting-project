@@ -4,6 +4,9 @@ using Unity.VisualScripting;
 
 namespace Battle.Logic
 {
+    /// <summary>
+    /// 战斗数据映射
+    /// </summary>
     public static class BattleDataMaping
     {
         public static BattleUnit ToUnit(UnitConfig cfg, Faction faction, int pos, int tieBreaker)
