@@ -11,6 +11,7 @@ namespace Battle.Logic
     /// </summary>
     public class BattleFlow
     {
+        #region Fields
         public const int MaxTurns = 500;
         private readonly List<BattleUnit> units;
         private readonly ActionQueue queue;
@@ -22,6 +23,7 @@ namespace Battle.Logic
         public BattleUnit CurrentUnit => currentUnit;
 
         public UnityAction<BattleResult> GameOverEvent;
+        #endregion
 
         public BattleFlow(IEnumerable<BattleUnit> allUnits, IActionDecider decider = null)
         {
@@ -266,7 +268,6 @@ namespace Battle.Logic
                 }
             }
         }
-
 
         string StatNow(BattleUnit u, StatType stat)
         {

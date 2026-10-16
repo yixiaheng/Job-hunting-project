@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Inventory.Events;
 
 namespace Game.Inventory
 {
@@ -85,7 +86,7 @@ namespace Game.Inventory
                 }
                 else stacks[amount.Key] = GetQuantity(amount.Key) + amount.Value;
             }
-            Changed?.Invoke();
+            NotifyChanged();
             return true;
         }
 
@@ -113,7 +114,7 @@ namespace Game.Inventory
                 }
             }
             foreach (KeyValuePair<string, int> amount in amounts) RemoveStack(amount.Key, amount.Value);
-            Changed?.Invoke();
+            NotifyChanged();
             return true;
         }
 
@@ -138,7 +139,7 @@ namespace Game.Inventory
             }
             if (instance.isLocked == locked) return true;
             instance.isLocked = locked;
-            Changed?.Invoke();
+            NotifyChanged();
             return true;
         }
 
@@ -158,7 +159,7 @@ namespace Game.Inventory
                 return false;
             }
             equipment.Remove(instanceId);
-            Changed?.Invoke();
+            NotifyChanged();
             return true;
         }
 
@@ -181,7 +182,7 @@ namespace Game.Inventory
             instance.level = level;
             instance.experience = experience;
             instance.ascension = ascension;
-            Changed?.Invoke();
+            NotifyChanged();
             return true;
         }
 
@@ -233,7 +234,7 @@ namespace Game.Inventory
                 RemoveStack(configId, quantity);
             }
             finally { executingUse = false; }
-            Changed?.Invoke();
+            NotifyChanged();
             return true;
         }
 
@@ -314,7 +315,7 @@ namespace Game.Inventory
             equipment.Clear();
             foreach (KeyValuePair<string, int> stack in restoredStacks) stacks.Add(stack.Key, stack.Value);
             foreach (KeyValuePair<string, EquipmentInstance> instance in restoredEquipment) equipment.Add(instance.Key, instance.Value);
-            Changed?.Invoke();
+            NotifyChanged();
             return true;
         }
 
@@ -345,6 +346,12 @@ namespace Game.Inventory
             if (amounts.Count > 0) return true;
             reason = "物品清单不能为空。";
             return false;
+        }
+
+        private void NotifyChanged()
+        {
+            global::Game.GameEvents.Inventory.Publish(new InventoryChangedEvent(this));
+            Changed?.Invoke();
         }
 
         private bool CanMutate(out string reason)

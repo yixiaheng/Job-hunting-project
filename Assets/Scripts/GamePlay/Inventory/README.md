@@ -1,5 +1,7 @@
 # 背包系统
 
+背包现在也通过 `Game.GameEvents.Inventory` 发布 `InventoryChangedEvent`，原 `Service.Changed` 保留兼容。接入方选择一个来源监听，避免重复刷新。公共机制见 [事件系统说明](../../Common/Events/README.md)。
+
 完整的架构、字段、调用流程、接入示例和排查说明，请阅读 [背包系统开发与使用指南](Guide.md)。本文件保留快速使用说明。
 
 ## 运行

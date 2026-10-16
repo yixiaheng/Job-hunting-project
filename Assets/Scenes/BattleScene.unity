@@ -1064,6 +1064,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2073aeb13423ffe4693f5fb647b14308, type: 3}
+--- !u!114 &895771781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5127184368972224762, guid: 2073aeb13423ffe4693f5fb647b14308, type: 3}
+  m_PrefabInstance: {fileID: 895771780}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a452ef61c9598746aa1b245de472607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUnitView
 --- !u!1 &925111426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,6 +1369,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2073aeb13423ffe4693f5fb647b14308, type: 3}
+--- !u!114 &1074553418 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5127184368972224762, guid: 2073aeb13423ffe4693f5fb647b14308, type: 3}
+  m_PrefabInstance: {fileID: 1074553417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a452ef61c9598746aa1b245de472607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleUnitView
 --- !u!1 &1103074635
 GameObject:
   m_ObjectHideFlags: 0
@@ -3367,8 +3389,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a5e417b5391cc24eb35b902eca17ba4, type: 2}
   allyViews:
   - {fileID: 2074229232}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1074553418}
+  - {fileID: 895771781}
   enemyViews:
   - {fileID: 654170608}
   - {fileID: 2025187452}

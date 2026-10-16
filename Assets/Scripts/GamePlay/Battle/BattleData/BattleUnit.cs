@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Battle.Events;
+using Game;
 using UnityEngine;
 
 /// <summary>
@@ -25,7 +27,6 @@ public class BattleUnit
     public List<SkillConfig> skills = new ();
 
     public List<BuffInstance> buffs = new();
-
 
     public int GetStat(StatType stat)
     {

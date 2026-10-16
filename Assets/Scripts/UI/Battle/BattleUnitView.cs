@@ -39,7 +39,7 @@ public class BattleUnitView : MonoBehaviour
         }
         gameObject.SetActive(unit.IsActive);
         if (nameHp != null)
-            nameHp.text = $"{unit.displayName}";
+            nameHp.text = $"{unit.displayName}  {unit.currentHealth}/{unit.maxHealth}";
     }
 
     public void SetActing(bool acting)
