@@ -5,7 +5,7 @@ public class BattleUnitView : MonoBehaviour
 {
     public TextMeshProUGUI nameHp;
     
-    BattleUnit unit;
+    public BattleUnit unit;
     Vector3 restScale;
     bool scaleInitialized;
 
@@ -27,6 +27,11 @@ public class BattleUnitView : MonoBehaviour
     {
         InitializeScale();
         unit = u;
+       
+
+        BattleUnitAllyUI battleUnitAllyUI = GetComponent<BattleUnitAllyUI>();
+        if(battleUnitAllyUI != null)
+            battleUnitAllyUI.Bind(u);
         Refresh();
     }
 

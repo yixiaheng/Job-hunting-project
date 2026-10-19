@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Battle.Events;
+using Battle.Logic;
 using Game;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class BattleUnit
     public int pos;
     public int maxHealth;
     public int currentHealth;
+    public System.Guid BattleId { get; internal set; }
     public int shield;
     public bool IsActive => currentHealth > 0;
     public int attack;
@@ -27,6 +29,44 @@ public class BattleUnit
     public List<SkillConfig> skills = new ();
 
     public List<BuffInstance> buffs = new();
+
+    public int TakeDamage(int amount)
+    {
+        DamageApplication application = ApplyDamage(amount);
+        return application.HealthDamage;
+    }
+
+    public int Heal(int amount)
+    {
+        if (amount <= 0 || !IsActive) return 0;
+        int before = currentHealth;
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        int actual = currentHealth - before;
+        if (actual > 0)
+        {
+            Game.GameEvents.Battle.Publish(new HealthChangedEvent(
+                this, before, currentHealth, maxHealth));
+        }
+        return actual;
+    }
+
+    public DamageApplication ApplyDamage(int amount)
+    {
+        int previousHealth = currentHealth;
+        int safeAmount = Mathf.Max(0, amount);
+        int shieldDamage = Mathf.Min(shield, safeAmount);
+        shield -= shieldDamage;
+        int healthDamage = Mathf.Min(currentHealth, safeAmount - shieldDamage);
+        currentHealth -= healthDamage;
+
+        if (healthDamage > 0)
+        {
+            Game.GameEvents.Battle.Publish(new HealthChangedEvent(
+                this, previousHealth, currentHealth, maxHealth));
+        }
+
+        return new DamageApplication(shieldDamage, healthDamage, previousHealth, currentHealth);
+    }
 
     public int GetStat(StatType stat)
     {

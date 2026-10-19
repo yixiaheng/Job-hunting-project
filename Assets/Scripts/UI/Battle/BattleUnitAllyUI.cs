@@ -1,35 +1,51 @@
 using System;
 using System.Collections;
+using System.ComponentModel;
+using Battle.Events;
+using Game;
+using Game.Events;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(BattleUnitActor))]
+[RequireComponent(typeof(BattleUnitView))]
 public class BattleUnitAllyUI : MonoBehaviour
 {
-    private BattleUnitActor actor;
     [SerializeField] private Image hp_bar;
     [SerializeField] private Image delay_bar;
-    private int maxHp;
-    private int currentHp;
+    private BattleUnit Unit;
     private Coroutine delayCoroutine;
+    private SubscriptionBag subscriptions = new ();
 
-
+    void OnEnable()
+    {
+        subscriptions.Clear();
+        subscriptions.Add(GameEvents.Battle.Subscribe<Battle.Events.HealthChangedEvent>(OnHealthChanged));
+    }
+    void OnDisable()
+    {
+        subscriptions.Clear();
+    }
 
 
     private void Awake()
     {
-        actor = GetComponent<BattleUnitActor>();
-        if (maxHp <= 0)
-        {
-            Debug.LogError("maxHp 必须大于 0，已临时设置为 1");
-            maxHp = 1;
-        }
-
-        SetBarsImmediately(1f);
+        
     }
 
-    
+    private void OnHealthChanged(HealthChangedEvent changedEvent)
+    {
+        if(Unit.BattleId != changedEvent.BattleId)
+            return;
+        if(Unit != changedEvent.Unit)
+            return;
+        if(changedEvent.MaxHealth == 0)
+            return;
+        float targetFill = changedEvent.CurrentHealth / (float)changedEvent.MaxHealth;
+        UpdateLifeBar(targetFill);
+        Debug.Log("OnHealthChanged");
+    }
 
     private void UpdateLifeBar(float targetFill)
     {
@@ -38,7 +54,6 @@ public class BattleUnitAllyUI : MonoBehaviour
         StopDelayCoroutine();
         delayCoroutine = StartCoroutine(DelayBarLerp(targetFill));
     }
-
 
     private IEnumerator DelayBarLerp(float targetFill)
     {
@@ -54,15 +69,6 @@ public class BattleUnitAllyUI : MonoBehaviour
         if (delay_bar != null) delay_bar.fillAmount = targetFill;
         delayCoroutine = null;
     }
-
-    private void SetBarsImmediately(float fillAmount)
-    {
-        if (hp_bar != null) 
-            hp_bar.fillAmount = fillAmount;
-        if (delay_bar != null) 
-            delay_bar.fillAmount = fillAmount;
-    }
-
     private void StopDelayCoroutine()
     {
         if (delayCoroutine == null) return;
@@ -73,5 +79,11 @@ public class BattleUnitAllyUI : MonoBehaviour
     private void OnDestroy()
     {
         StopDelayCoroutine();
+    }
+
+    public void Bind(BattleUnit unit)
+    {
+        Unit = unit;
+        UpdateLifeBar((float)Unit.currentHealth / Unit.maxHealth);
     }
 }

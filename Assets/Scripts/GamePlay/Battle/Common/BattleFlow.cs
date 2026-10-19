@@ -16,6 +16,7 @@ namespace Battle.Logic
         private readonly List<BattleUnit> units;
         private readonly ActionQueue queue;
         private readonly TargetSelector selector;
+        private readonly EffectService effectService;
         public BattleResult Result { get; private set; } = BattleResult.None;
         public int TurnCount { get; private set; }
         private readonly IActionDecider decider;
@@ -30,6 +31,7 @@ namespace Battle.Logic
             units = new List<BattleUnit>(allUnits);
             queue = new ActionQueue(units);
             selector = new TargetSelector(units);
+            effectService = new EffectService();
             this.decider = decider ?? new FirstSkillDecider();
         }
 
@@ -142,59 +144,11 @@ namespace Battle.Logic
                 return false;
             }
 
-            //真正技能开始生效。
-            foreach (var effect in skill.effectConfigs)
+            /// Effect效果处理：调用效果服务来进行处理
+            foreach (EffectConfig effect in skill.effectConfigs)
             {
-                switch (effect.effectType)
-                {
-                    case EffectType.Damage:
-                        foreach (var u in targets)
-                        {
-                            if (!u.IsActive) continue;
-                            int scaled = Scale(caster, effect.scaleStat, effect.value);
-                            int def = u.GetStat(StatType.Defence);
-                            int dmg = Mathf.Max(1, scaled - def);
-                            int hpBefore = u.currentHealth;
-                            u.currentHealth = Mathf.Max(0, u.currentHealth - dmg);
-                            string dead = u.currentHealth <= 0 ? "  倒下" : "";
-                            int hpMax = Mathf.Max(u.maxHealth, hpBefore);
-                            Debug.Log($"    伤害 {Name(u)}  -{dmg}  HP {hpBefore}→{u.currentHealth}/{hpMax}  防御{def}{dead}");
-                        }
-                        break;
-
-                    case EffectType.Heal:
-                        foreach (var u in targets)
-                        {
-                            if (!u.IsActive) continue;
-                            int heal = Mathf.Max(1, Scale(caster, effect.scaleStat, effect.value));
-                            int hpBefore = u.currentHealth;
-                            int cap = Mathf.Max(u.maxHealth, u.currentHealth);
-                            u.currentHealth = Mathf.Min(cap, u.currentHealth + heal);
-                            Debug.Log($"    治疗 {Name(u)}  +{heal}  HP {hpBefore}→{u.currentHealth}/{cap}");
-                        }
-                        break;
-
-                    case EffectType.GainEnergy:
-                        foreach (var u in targets)
-                        {
-                            if (!u.IsActive) continue;
-                            int before = u.currentEnergy;
-                            u.currentEnergy += (int)effect.value;
-                            Debug.Log($"    {Name(u)} 能量 {before}→{u.currentEnergy}");
-                        }
-                        break;
-
-                    case EffectType.ApplyBuff:
-                        foreach (var u in targets)
-                            ApplyBuff(u, effect.buff, effect.stack);
-                        break;
-
-                    case EffectType.AddShield:
-                    case EffectType.RemoveBuff:
-                    case EffectType.RemoveDeBuff:
-                    case EffectType.AdvanceAction:
-                        break;
-                }
+                
+                effectService.Execute(caster, targets, effect);
             }
 
             int energyBefore = caster.currentEnergy;
@@ -203,11 +157,6 @@ namespace Battle.Logic
             if (skill.energyGain != 0)
                 Debug.Log($"    {Name(caster)} 能量 {energyBefore}→{caster.currentEnergy}");
             return true;
-        }
-
-        int Scale(BattleUnit caster, StatType stat, float value)
-        {
-            return Mathf.RoundToInt(caster.GetStat(stat) * value);
         }
 
         BattleResult CheckResult()
@@ -225,35 +174,6 @@ namespace Battle.Logic
             return BattleResult.None;
         }
 
-        void ApplyBuff(BattleUnit target, BuffConfig config, int addStacks)
-        {
-            if (target == null || !target.IsActive || config == null)
-                return;
-
-            int max = Mathf.Max(1, config.maxStack);
-            int add = Mathf.Max(1, addStacks);
-
-            foreach (var b in target.buffs)
-            {
-                if (b.config != null && b.config.id == config.id)
-                {
-                    b.stacks = Mathf.Min(max, b.stacks + add);
-                    b.remainingTurns = config.durationTimes;
-                    Debug.Log($"    Buff {Name(target)} 获得【{config.Name}】 {b.stacks}层/{max}  持续{b.remainingTurns}回合  {StatNow(target, config.stat)}");
-                    return;
-                }
-            }
-
-            var inst = new BuffInstance
-            {
-                config = config,
-                stacks = Mathf.Min(max, add),
-                remainingTurns = config.durationTimes
-            };
-            target.buffs.Add(inst);
-            Debug.Log($"    Buff {Name(target)} 获得【{config.Name}】 {inst.stacks}层/{max}  持续{inst.remainingTurns}回合  {StatNow(target, config.stat)}");
-        }
-
         void TickBuffs(BattleUnit u)
         {
             for (int i = u.buffs.Count - 1; i >= 0; i--)
@@ -267,17 +187,6 @@ namespace Battle.Logic
                     Debug.Log($"    {Name(u)} 的【{n}】结束");
                 }
             }
-        }
-
-        string StatNow(BattleUnit u, StatType stat)
-        {
-            return stat switch
-            {
-                StatType.Defence => $"防御{u.defence}→{u.GetStat(stat)}",
-                StatType.Attack => $"攻击{u.attack}→{u.GetStat(stat)}",
-                StatType.Speed => $"速度{u.speed}→{u.GetStat(stat)}",
-                _ => ""
-            };
         }
 
         int Count(Faction f)

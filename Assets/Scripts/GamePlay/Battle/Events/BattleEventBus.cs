@@ -1,6 +1,7 @@
 using System;
 using Battle.Logic;
 using Game.Events;
+using UnityEngine;
 
 namespace Battle.Events
 {
@@ -15,6 +16,7 @@ namespace Battle.Events
     public readonly struct HealthChangedEvent : IBattleEvent
     {
         public BattleUnit Unit { get; }
+        public Guid BattleId{ get;}
         public int PreviousHealth { get; }
         public int CurrentHealth { get; }
         public int MaxHealth { get; }
@@ -22,6 +24,7 @@ namespace Battle.Events
         public HealthChangedEvent(BattleUnit unit, int previousHealth, int currentHealth, int maxHealth)
         {
             Unit = unit;
+            BattleId = Unit.BattleId;
             PreviousHealth = previousHealth;
             CurrentHealth = currentHealth;
             MaxHealth = maxHealth;
