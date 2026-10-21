@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Game.UI
 {
+    /// <summary>
+    /// 输入协调器
+    /// </summary>
     public sealed class UIInputCoordinator
     {
         public UIInputState Current { get; private set; }

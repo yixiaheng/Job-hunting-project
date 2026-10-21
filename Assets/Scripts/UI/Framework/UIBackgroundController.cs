@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.UI
 {
+    /// <summary>
+    /// UI背景控制器
+    /// </summary>
     public class UIBackgroundController : MonoBehaviour
     {
         private readonly HashSet<int> blurHandles = new();

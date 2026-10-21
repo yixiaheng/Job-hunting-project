@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Game.UI
 {
+    /// <summary>
+    /// UI根节点HUD、弹窗、窗口等
+    /// </summary>
     public class UIRoot : MonoBehaviour
     {
         [SerializeField] private Transform hudRoot;

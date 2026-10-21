@@ -5,20 +5,27 @@ using UnityEngine.SceneManagement;
 
 namespace Game.UI
 {
+    //[DefaultExecutionOrder(-100)] 是 Unity 中的一个特性（Attribute）
+    //用来指定该脚本相对于其他 MonoBehaviour 脚本的执行优先级。
+    //数值 -100 意味着它比大多数默认脚本（默认值为 0）更早执行。
     [DefaultExecutionOrder(-100)]
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance { get; private set; }
 
         [Header("Framework References")]
-        [SerializeField] private UIRegistry registry;
+        [SerializeField] private UIRegistry registry;   
         [SerializeField] private UIRoot root;
         [SerializeField] private UIBackgroundController backgroundController;
         [SerializeField] private bool persistAcrossScenes = true;
 
+        //没有被销毁的窗口实例
         private readonly Dictionary<int, UIInstanceRecord> instances = new();
+        //单个窗口实例
         private readonly Dictionary<UIId, UIInstanceRecord> singleInstances = new();
+        //当前打开的窗口，以及先后顺序
         private readonly List<UIInstanceRecord> openedPanels = new();
+
 
         private UIInputCoordinator inputCoordinator = new();
         private int nextInstanceId = 1;
@@ -44,7 +51,7 @@ namespace Game.UI
 
             if (root != null && root.transform.parent != transform)
                 root.transform.SetParent(transform, false);
-
+            
             if (backgroundController == null)
                 backgroundController = gameObject.AddComponent<UIBackgroundController>();
 
@@ -408,6 +415,9 @@ namespace Game.UI
         }
     }
 
+    /// <summary>
+    /// UI实例的记录，内部有基本单元的各类信息
+    /// </summary>
     internal sealed class UIInstanceRecord
     {
         public UIInstanceRecord(UIHandle handle, UIConfig config, UIPanel panel, int ownerSceneHandle)
