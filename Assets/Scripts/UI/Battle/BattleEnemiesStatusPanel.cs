@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using Game.UI;
 using UnityEngine;
+using Battle.Events;
+using Game;
+using Game.Events;
 
 /// <summary>管理本场战斗的敌方血条实例，将模型挂点投影到 HUD。</summary>
 public class BattleEnemiesStatusPanel : UIPanel
@@ -21,6 +24,7 @@ public class BattleEnemiesStatusPanel : UIPanel
     private BattleUnit actingUnit;
 
     public int BarCount => entries.Count;
+    private readonly SubscriptionBag subscriptions = new();
 
     protected override void OnOpen(IUIContext context) => Bind(context);
     protected override void OnContextChanged(IUIContext context) => Bind(context);
@@ -45,8 +49,12 @@ public class BattleEnemiesStatusPanel : UIPanel
             return;
         }
 
+        subscriptions.Add(GameEvents.Battle.
+            Subscribe<TargetSelectionChangedEvent>(OnTargetSelectionChanged));
+
         foreach (BattleUnit unit in battleContext.Units)
             AddUnit(unit);
+            
         UpdatePositions();
     }
 
@@ -61,6 +69,15 @@ public class BattleEnemiesStatusPanel : UIPanel
         bar.name = $"EnemyBar_{unit.displayName}_{unit.pos}";
         bar.SetVisible(false);
         bar.Bind(unit);
+
+        BattleManager manager = BattleManager.Instance;
+        BattleUnit selectedTarget =
+            manager != null && manager.rayCasting != null
+                ? manager.rayCasting.selectedTarget
+                : null;
+
+        bar.SetSelected(unit == selectedTarget);
+
         bar.SetActing(unit == actingUnit);
         entries.Add(unit, new Entry { Bar = bar, Rect = (RectTransform)bar.transform });
     }
@@ -127,6 +144,25 @@ public class BattleEnemiesStatusPanel : UIPanel
         }
     }
 
+    /// <summary>
+    /// 选择目标改变
+    /// </summary>
+    /// <param name="evt"></param>
+    private void OnTargetSelectionChanged(
+        TargetSelectionChangedEvent evt)
+    {
+        foreach (var pair in entries)
+        {
+            BattleUnit unit = pair.Key;
+            BattleUnitEnemyBarUI bar = pair.Value.Bar;
+
+            if (unit.BattleId != evt.BattleId)
+                continue;
+
+            bar.SetSelected(unit == evt.CurrentTarget);
+        }
+    }
+
     private void Unbind()
     {
         foreach (Entry entry in entries.Values)
@@ -134,6 +170,8 @@ public class BattleEnemiesStatusPanel : UIPanel
         entries.Clear();
         actingUnit = null;
         battleCamera = null;
+
+        subscriptions.Clear();
     }
 
     private void Release(Entry entry)

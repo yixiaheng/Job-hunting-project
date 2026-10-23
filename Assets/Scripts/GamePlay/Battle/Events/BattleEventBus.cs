@@ -7,12 +7,25 @@ namespace Battle.Events
 {
     public interface IBattleEvent { }
 
+    #region Event
+
     public sealed class BattleEventBus : EventBus<IBattleEvent>
     {
-        public BattleEventBus(Action<Exception, Type, Delegate> reportException = null,
-            Action<Type, int> reportPublish = null) : base(reportException, reportPublish) { }
+        public BattleEventBus(
+            Action<Exception, Type, Delegate> reportException = null,
+            Action<Type, int> reportPublish = null) 
+            : base(reportException, reportPublish)
+        {
+            
+        }
     }
 
+    #endregion
+    
+    #region 数据定义
+    /// <summary>
+    /// 血量变化
+    /// </summary>
     public readonly struct HealthChangedEvent : IBattleEvent
     {
         public BattleUnit Unit { get; }
@@ -31,4 +44,24 @@ namespace Battle.Events
         }
     }
 
+    /// <summary>
+    /// 选中目标变化
+    /// </summary>
+    public readonly struct TargetSelectionChangedEvent : IBattleEvent
+    {
+        public Guid BattleId { get; }
+        public BattleUnit PreviousTarget { get; }
+        public BattleUnit CurrentTarget { get; }
+
+        public TargetSelectionChangedEvent(
+            Guid battleId,
+            BattleUnit previousTarget,
+            BattleUnit currentTarget)
+        {
+            BattleId = battleId;
+            PreviousTarget = previousTarget;
+            CurrentTarget = currentTarget;
+        }
+    }
+    #endregion
 }

@@ -4,6 +4,7 @@ using Game;
 using Game.Events;
 using TMPro;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 using UnityEngine.UI;
 
 /// <summary>
@@ -15,6 +16,8 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameHp;
     [SerializeField] private Image hp_bar;
     [SerializeField] private Image delay_bar;
+    [SerializeField] private Color selectedNameColor = new Color(1f, 0.8f, 0.2f, 1f);
+    private Color normalNameColor;
 
     public BattleUnit Unit { get; private set; }
 
@@ -60,6 +63,9 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
         restScale = transform.localScale;
+        if(nameHp != null)
+            normalNameColor = nameHp.color;
+
         initialized = true;
     }
 
@@ -71,6 +77,8 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
 
         Unit = unit;
         SetActing(false);
+        SetSelected(false);
+
         Refresh();
         // 首次绑定或切换敌人时，两条血条直接同步，避免从旧血量开始播放动画。
         SnapLifeBars(GetHealthFill());
@@ -131,6 +139,7 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
         if (!Unit.IsActive)
         {
             SetActing(false);
+            SetSelected(false);
             SnapLifeBars(targetFill);
         }
         else if (changedEvent.CurrentHealth > changedEvent.PreviousHealth)
@@ -199,5 +208,16 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
 
         StopCoroutine(delayCoroutine);
         delayCoroutine = null;
+    }
+
+    public void SetSelected(bool selected)
+    {
+        Initialize();
+        if(nameHp == null)
+            return;
+        
+        bool showSelected = selected && Unit != null && Unit.IsActive;
+
+        nameHp.color = showSelected ? selectedNameColor : normalNameColor;
     }
 }

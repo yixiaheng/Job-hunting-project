@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using Game;
+using Battle.Events;
 
 //鼠标战斗检测：用于选择对象
 public class MouseRayCasting : MonoBehaviour
@@ -28,18 +30,21 @@ public class MouseRayCasting : MonoBehaviour
         if (actor == null || actor.Unit == null || !actor.Unit.IsActive)
             return;
 
-        selectedTarget = actor.Unit;
         ShowMarker(actor.transform);
+        //广播
+        SetSelectedTarget(actor.Unit);
+
         Debug.Log($"选中 {selectedTarget.displayName} pos={selectedTarget.pos}");
 
     }
 
     public void ClearSelection()
     {
-        selectedTarget = null;
         if (marker != null)
             Destroy(marker.gameObject);
+
         marker = null;
+        SetSelectedTarget(null);
     }
 
     void ShowMarker(Transform parent)
@@ -76,6 +81,24 @@ public class MouseRayCasting : MonoBehaviour
         var results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(data, results);
         return results.Count > 0;
+    }
+
+    private void SetSelectedTarget(BattleUnit target)
+    {
+        if(selectedTarget == target)
+            return;
+        BattleUnit previousTarget = selectedTarget;
+
+        Guid battleId = target != null ? target.BattleId : previousTarget.BattleId;
+
+        selectedTarget = target;
+
+        GameEvents.Battle.Publish( new TargetSelectionChangedEvent
+        (
+            battleId,
+            previousTarget,
+            selectedTarget
+        ));
     }
 
 }
