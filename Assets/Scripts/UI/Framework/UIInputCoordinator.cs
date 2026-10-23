@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Game.UI
 {
     /// <summary>
-    /// 输入协调器
+    /// 输入协调器，负责把多个窗口的配置，合并成一份 UI 输入需求。
     /// </summary>
     public sealed class UIInputCoordinator
     {
@@ -21,7 +21,7 @@ namespace Game.UI
             for (int index = 0; index < openedPanels.Count; index++)
             {
                 UIInstanceRecord instance = openedPanels[index];
-                if (!instance.Panel.IsOpen)
+                if (instance.Panel.State == UIState.Destroyed)
                     continue;
 
                 showCursor |= instance.Config.showCursor;

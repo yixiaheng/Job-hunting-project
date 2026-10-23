@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Battle.Logic;
+using Game.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ using UnityEngine;
 /// <summary>
 /// 为BattleFlow提供各种信息与玩家操作，为战斗流程提供
 /// </summary>
+[DefaultExecutionOrder(-50)]
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance{get; private set;}
@@ -17,15 +19,18 @@ public class BattleManager : MonoBehaviour
     public UnitConfig[] allies;
     public UnitConfig[] enemies;
 
-    //角色显示自己拖拽即可
-    public BattleUnitView[] allyViews;
-    public BattleUnitView[] enemyViews;
+    [SerializeField] private Camera battleCamera;
 
     //pos由BattleManager中自己设置
     public Transform[] allyPos;
     public Transform[] enemyPos;
     public BattleFlow battleFlow{get; private set;}
-    readonly Dictionary<BattleUnit, BattleUnitView> views = new();
+    private readonly List<BattleUnit> spawnedUnits = new();
+    private UIManager battleUIManager;
+    private UIHandle alliesStatusHandle;
+    private UIHandle enemiesStatusHandle;
+
+    public event System.Action<BattleFlow> BattleStarted;
 
     private void Awake() 
     {
@@ -39,61 +44,128 @@ public class BattleManager : MonoBehaviour
         //从BattleLauchData中读取数据
         //BattleDataInit();
 
-        StartBattle();
     }
 
+    private void Start()
+    {
+        if (Instance == this && battleFlow == null)
+            StartBattle();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance != this)
+            return;
+
+        CloseStatusPanels();
+
+        ClearUnits();
+        Instance = null;
+    }
 
     public void StartBattle()
     {
+        if (UIManager.Instance == null)
+        {
+            Debug.LogError("请先初始化 UIManager，再开始战斗。", this);
+            return;
+        }
+
+        ClearUnits();
+        battleFlow = null;
         var units = new List<BattleUnit>();
-        views.Clear();
         int tie = 0;
 
-        SpawnUnits(allies, Faction.OurSide, allyPos, allyViews, units, ref tie);
-        SpawnUnits(enemies, Faction.Enemy, enemyPos, enemyViews, units, ref tie);
+        SpawnUnits(allies, Faction.OurSide, allyPos, units, ref tie);
+        SpawnUnits(enemies, Faction.Enemy, enemyPos, units, ref tie);
 
         if (units.Count == 0)
         {
+            CloseStatusPanels();
             Debug.LogError("没有单位：把 UnitConfig 拖到 Allies / Enemies");
             return;
         }
 
         battleFlow = new BattleFlow(units, new FirstSkillDecider());
+        battleUIManager = UIManager.Instance;
+        alliesStatusHandle = battleUIManager.Open(UIId.BattleAlliesStatus,
+            new BattleAlliesUIContext(units.FindAll(unit => unit.faction == Faction.OurSide)));
+        enemiesStatusHandle = battleUIManager.Open(UIId.BattleEnemiesStatus,
+            new BattleEnemiesUIContext(units.FindAll(unit => unit.faction == Faction.Enemy),
+                battleCamera != null ? battleCamera : Camera.main));
         battleFlow.Ready();
+        BattleStarted?.Invoke(battleFlow);
         RefreshAll();
         Debug.Log("战斗已创建，点 StepOnce 推进");
 
         ActingUntilPlayer();
     }
 
+    private void ClearUnits()
+    {
+        if (rayCasting != null)
+            rayCasting.ClearSelection();
+
+        foreach (BattleUnit unit in spawnedUnits)
+        {
+            if (unit.gameObject != null)
+                Destroy(unit.gameObject);
+        }
+        spawnedUnits.Clear();
+    }
+
+    private void CloseStatusPanels()
+    {
+        if (battleUIManager != null)
+        {
+            if (alliesStatusHandle.IsValid)
+                battleUIManager.Close(alliesStatusHandle);
+            if (enemiesStatusHandle.IsValid)
+                battleUIManager.Close(enemiesStatusHandle);
+        }
+        alliesStatusHandle = default;
+        enemiesStatusHandle = default;
+    }
 
     private void SpawnUnits(
         UnitConfig[] configs,
         Faction faction,
         Transform[] positions,
-        BattleUnitView[] unitViews,
         List<BattleUnit> units,
         ref int tie)
     {
+        if (configs == null)
+            return;
+
         for (int i = 0; i < configs.Length; i++)
         {
+            if (configs[i] == null)
+                continue;
+
+            if (configs[i].prefab == null || positions == null
+                || i >= positions.Length || positions[i] == null)
+            {
+                Debug.LogError($"{faction} 站位 {i} 缺少模型或场景站位，跳过该角色。", this);
+                continue;
+            }
+
             // 这里的 i 代表在场地上的序号
             var u = BattleDataMaping.ToUnit(configs[i], faction, i, tie++);
             if (u == null) continue;
 
             units.Add(u);
-            BindView(u, unitViews, i);
+            spawnedUnits.Add(u);
 
             GameObject obj = Instantiate(configs[i].prefab);
-            obj.AddComponent<BattleUnitActor>();
-
             var actor = obj.GetComponent<BattleUnitActor>();
+            if (actor == null)
+                actor = obj.AddComponent<BattleUnitActor>();
+            obj.transform.position = positions[i].position;
             actor.Bind(u);
 
             if (obj.GetComponentInChildren<Collider>() == null)
                 obj.AddComponent<CapsuleCollider>();
 
-            obj.transform.position = positions[i].position;
             u.gameObject = obj;
         }
     }
@@ -139,6 +211,10 @@ public class BattleManager : MonoBehaviour
 
     public void ChooseAbility(SkillKind kind)
     {
+        if (battleFlow == null || battleFlow.Result != BattleResult.None
+            || battleFlow.CurrentUnit == null)
+            return;
+
         BattleUnit unit = battleFlow.CurrentUnit;
         SkillConfig ability = null;
         foreach(var skill in unit.skills)
@@ -163,7 +239,7 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        BattleUnit target = rayCasting.selectedTarget;
+        BattleUnit target = rayCasting != null ? rayCasting.selectedTarget : null;
 
         var action = new BattleAction {skill = ability, mainTarget = target};
         battleFlow.Execute(action);
@@ -173,33 +249,19 @@ public class BattleManager : MonoBehaviour
 
 #endregion
 
-    /// <summary>
-    /// 绑定BattleUnit与BattleUnitView，数据与UI视图
-    /// </summary>
-    /// <param name="u"></param>
-    /// <param name="slots"></param>
-    /// <param name="i"></param>
-    void BindView(BattleUnit u, BattleUnitView[] slots, int i)
-    {
-        if (slots == null || i >= slots.Length || slots[i] == null)
-            return;
-        slots[i].Bind(u);
-        views[u] = slots[i];
-    }
-
     void RefreshAll()
     {
-        foreach (var v in views.Values)
+        if (battleUIManager != null
+            && battleUIManager.TryGetPanel(alliesStatusHandle, out BattleAlliesStatusControll alliesPanel))
         {
-            if (v == null) continue;
-            v.Refresh();
-            v.SetActing(false);
+            alliesPanel.Refresh(battleFlow?.CurrentUnit);
         }
 
-        if (battleFlow == null || battleFlow.CurrentUnit == null)
-            return;
-        if (views.TryGetValue(battleFlow.CurrentUnit, out var view) && view != null)
-            view.SetActing(true);
+        if (battleUIManager != null
+            && battleUIManager.TryGetPanel(enemiesStatusHandle, out BattleEnemiesStatusPanel enemiesPanel))
+        {
+            enemiesPanel.Refresh(battleFlow?.CurrentUnit);
+        }
     }
     
     void ActingUntilPlayer()

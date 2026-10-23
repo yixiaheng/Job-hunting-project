@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
-using System.ComponentModel;
 using Battle.Events;
 using Game;
 using Game.Events;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,40 +12,42 @@ public class BattleUnitAllyUI : MonoBehaviour
     [SerializeField] private Image delay_bar;
     private BattleUnit Unit;
     private Coroutine delayCoroutine;
-    private SubscriptionBag subscriptions = new ();
+    private readonly SubscriptionBag subscriptions = new();
 
     void OnEnable()
     {
         subscriptions.Clear();
-        subscriptions.Add(GameEvents.Battle.Subscribe<Battle.Events.HealthChangedEvent>(OnHealthChanged));
+        subscriptions.Add(GameEvents.Battle.Subscribe<HealthChangedEvent>(OnHealthChanged));
+        if (Unit != null)
+            SnapLifeBars(GetHealthFill());
     }
     void OnDisable()
     {
         subscriptions.Clear();
-    }
-
-
-    private void Awake()
-    {
-        
+        StopDelayCoroutine();
     }
 
     private void OnHealthChanged(HealthChangedEvent changedEvent)
     {
-        if(Unit.BattleId != changedEvent.BattleId)
+        if(Unit == null || Unit.BattleId != changedEvent.BattleId)
             return;
         if(Unit != changedEvent.Unit)
             return;
-        if(changedEvent.MaxHealth == 0)
+        if(changedEvent.MaxHealth <= 0)
             return;
         float targetFill = changedEvent.CurrentHealth / (float)changedEvent.MaxHealth;
         UpdateLifeBar(targetFill);
-        Debug.Log("OnHealthChanged");
     }
 
     private void UpdateLifeBar(float targetFill)
     {
         targetFill = Mathf.Clamp01(targetFill);
+        if (!isActiveAndEnabled)
+        {
+            SnapLifeBars(targetFill);
+            return;
+        }
+
         if (hp_bar != null) hp_bar.fillAmount = targetFill;
         StopDelayCoroutine();
         delayCoroutine = StartCoroutine(DelayBarLerp(targetFill));
@@ -78,12 +76,27 @@ public class BattleUnitAllyUI : MonoBehaviour
 
     private void OnDestroy()
     {
+        subscriptions.Clear();
         StopDelayCoroutine();
     }
 
     public void Bind(BattleUnit unit)
     {
         Unit = unit;
-        UpdateLifeBar((float)Unit.currentHealth / Unit.maxHealth);
+        SnapLifeBars(GetHealthFill());
+    }
+
+    private float GetHealthFill()
+    {
+        return Unit != null && Unit.maxHealth > 0
+            ? Mathf.Clamp01((float)Unit.currentHealth / Unit.maxHealth)
+            : 0f;
+    }
+
+    private void SnapLifeBars(float fill)
+    {
+        StopDelayCoroutine();
+        if (hp_bar != null) hp_bar.fillAmount = fill;
+        if (delay_bar != null) delay_bar.fillAmount = fill;
     }
 }

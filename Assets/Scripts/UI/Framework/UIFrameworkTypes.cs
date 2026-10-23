@@ -9,7 +9,9 @@ namespace Game.UI
         ItemDetail = 2,
         CharacterDetail = 3,
         Settings = 4,
-        Confirm = 5
+        Confirm = 5,
+        BattleAlliesStatus = 6,
+        BattleEnemiesStatus = 7
     }
 
     public enum UILayer

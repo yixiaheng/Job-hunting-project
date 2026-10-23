@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using DialogueSystem;
 using Game.Inventory;
+using Game.UI;
 using TMPro;
-using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class InventoryUIController : MonoBehaviour
+public class InventoryUIController : UIPanel
 {
     [SerializeField] private GameObject backPanel;
     [SerializeField] private InventoryManager inventory;
@@ -37,24 +36,13 @@ public class InventoryUIController : MonoBehaviour
     private InventoryService service;
     private InventoryEntry selected;
     private int useQuantity = 1;
-    private bool isOpen;
-    private PlayerInputHandler playerInput;
-    private CinemachineInputAxisController cameraInput;
-    private bool previousMovement;
-    private bool previousCameraInput;
+    public bool IsSearchInputFocused =>
+            searchInput != null && searchInput.isFocused;
 
     public InventoryEntry Selected => selected;
-    public bool IsOpen => isOpen;
 
-    private void Start()
+    protected override void OnInitialize()
     {
-        if (inventory == null) 
-            inventory = InventoryManager.Instance;
-        service = inventory == null ? null : inventory.Service;
-
-        //Change订阅
-        if (service != null) service.Changed += Refresh;
-
         //给界面上的各种控件（下拉框、输入框、按钮）绑定事件监听，让它们在用户操作时触发对应的方法
         if (categoryDropdown != null) categoryDropdown.onValueChanged.AddListener(FilterChanged);
         if (rarityDropdown != null) rarityDropdown.onValueChanged.AddListener(FilterChanged);
@@ -68,90 +56,66 @@ public class InventoryUIController : MonoBehaviour
         if (saveButton != null) saveButton.onClick.AddListener(Save);
         if (decreaseButton != null) decreaseButton.onClick.AddListener(DecreaseQuantity);
         if (increaseButton != null) increaseButton.onClick.AddListener(IncreaseQuantity);
-
-        //关闭背包
-        CloseInventory();
     }
 
-    private void Update()
+    protected override void OnOpen(IUIContext context)
     {
-        //处理按键输入
-        Keyboard keyboard = Keyboard.current;
-        if (keyboard == null) return;
-        //ESC处理退出背包
-        if (isOpen && keyboard.escapeKey.wasPressedThisFrame)
-        {
-            CloseInventory();
-            return;
-        }
-        if (searchInput != null && searchInput.isFocused) return;
-        //B键处理背包交互
-        if (keyboard.bKey.wasPressedThisFrame)
-        {
-            if (isOpen) CloseInventory();
-            else OpenInventory();
-        }
+        if (service != null)
+        service.Changed -= Refresh;
+
+        inventory = InventoryManager.Instance;
+        service = inventory == null ? null : inventory.Service;
+
+        if (service != null)
+            service.Changed += Refresh;
+
+        if (backPanel != null)
+            backPanel.SetActive(true);
+
+        SetStatus(service == null
+            ? "背包尚未初始化，请检查物品目录。"
+            : "选择物品查看详情");
+
+        Refresh();
     }
+
 
     public void OpenInventory()
     {
-        //下面情况返回： 已经打开/缺失Panel/正在对话中
-        if (isOpen || backPanel == null) 
+        Debug.Log("OpenInventory被调用");
+        if (DialogueRunner.Instance != null &&
+            DialogueRunner.Instance.isDialoguing)
             return;
-        if (DialogueRunner.Instance != null && DialogueRunner.Instance.isDialoguing) 
+        if (UIManager.Instance == null)
+        {
+            Debug.LogError("无法打开背包：UIManager 尚未初始化。");
             return;
+        }
+        UIManager.Instance.Open(UIId.Backpack);
+    }
+
+    protected override void OnClosed()
+    {
+        if(service != null)
+            service.Changed -= Refresh;
         
-        if (InventoryManager.Instance != null) 
-            inventory = InventoryManager.Instance;
-        if (inventory != null && service != inventory.Service)
-        {
-            //重新注册Refresh到service.Changed
-            if (service != null) 
-                service.Changed -= Refresh;
-            service = inventory.Service;
-            if (service != null) 
-                service.Changed += Refresh;
-        }
-        playerInput = FindFirstObjectByType<PlayerInputHandler>();
-        cameraInput = FindFirstObjectByType<CinemachineInputAxisController>();
-        if (playerInput != null)
-        {
-            //禁止移动
-            //保存原有状态
-            previousMovement = playerInput.CanMove;
-            playerInput.SetMoveEnable(false);
-        }
-        if (cameraInput != null)
-        {
-            //禁用相机输入
-            //保存原有状态
-            previousCameraInput = cameraInput.enabled;
-            cameraInput.enabled = false;
-        }
-        isOpen = true;
-        backPanel.SetActive(true);
-        SetStatus(service == null ? "背包尚未初始化，请检查物品目录。" : "选择物品查看详情");
-        Refresh();
+        if(inventory != null)
+            inventory.SaveInventory();
     }
 
     public void CloseInventory()
     {
-        if (backPanel != null) 
-            backPanel.SetActive(false);
+        if (Owner == null || !IsOpen)
+            return;
 
-        RestoreControls();
-
-        //记得保存
-        if (isOpen && inventory != null) 
-            inventory.SaveInventory();
-        isOpen = false;
+        Owner.Close(Handle);
     }
 
     //背包刷新
     public void Refresh()
     {
         //没有打开/背包服务不存在/item根和prefab不存在
-        if (!isOpen || service == null || itemRoot == null || itemPrefab == null) 
+        if (!IsOpen || service == null || itemRoot == null || itemPrefab == null) 
             return;
 
         //分类下滑菜单
@@ -391,28 +355,10 @@ public class InventoryUIController : MonoBehaviour
             default: return string.Empty;
         }
     }
-    //恢复打开背包前的操作设置
-    private void RestoreControls()
-    {
-        if (!isOpen) 
-            return;
-
-        bool dialogueLocked = DialogueRunner.Instance != null && DialogueRunner.Instance.isDialoguing;
-
-        if (playerInput != null) 
-            playerInput.SetMoveEnable(previousMovement && !dialogueLocked);
-
-        if (cameraInput != null) 
-            cameraInput.enabled = previousCameraInput && !dialogueLocked;
-    }
-
-    private void OnDisable() 
-    { 
-        CloseInventory(); 
-    }
     private void OnDestroy() 
     { 
         if (service != null)    
             service.Changed -= Refresh; 
+
     }
 }

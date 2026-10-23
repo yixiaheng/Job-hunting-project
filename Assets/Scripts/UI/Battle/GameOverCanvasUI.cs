@@ -1,27 +1,44 @@
 using Battle.Logic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameOverCanvasUI : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
+    private BattleFlow subscribedFlow;
+    private BattleManager battleManager;
 
     private void Awake() 
     {
         canvasGroup = GetComponent<CanvasGroup>();
         CanvasVisibility(false);
     }
-    void Start()
+    void OnEnable()
     {
-        BattleManager.Instance.battleFlow.GameOverEvent += OnGameOver;
+        battleManager = BattleManager.Instance;
+        if (battleManager == null)
+            return;
+        battleManager.BattleStarted += BindFlow;
+        BindFlow(battleManager.battleFlow);
     }
-    void OnEnable() 
+
+    private void BindFlow(BattleFlow flow)
     {
-        
-    }   
+        if (subscribedFlow != null)
+            subscribedFlow.GameOverEvent -= OnGameOver;
+        subscribedFlow = flow;
+        CanvasVisibility(false);
+        if (subscribedFlow != null)
+            subscribedFlow.GameOverEvent += OnGameOver;
+    }
+
     void OnDisable() 
     {
-        BattleManager.Instance.battleFlow.GameOverEvent -= OnGameOver;
+        if (battleManager != null)
+            battleManager.BattleStarted -= BindFlow;
+        battleManager = null;
+        if (subscribedFlow != null)
+            subscribedFlow.GameOverEvent -= OnGameOver;
+        subscribedFlow = null;
     }
 
     void OnGameOver(BattleResult result)

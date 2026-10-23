@@ -28,12 +28,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!InputHandler.CanMove && Animation.isGrounded)
+        {
+            if (playerMoveStateMachine.currentState is PlayerMoveState)
+                playerMoveStateMachine.ChangeState<PlayerIdleState>();
+            UpdateStateData();
+            return;
+        }
         playerMoveStateMachine.currentState.Update();
         UpdateStateData();
     }
 
     void FixedUpdate()
     {
+        if (!InputHandler.CanMove)
+        {
+            Vector3 velocity = rb.linearVelocity;
+            rb.linearVelocity = new Vector3(0f, velocity.y, 0f);
+            return;
+        }
         playerMoveStateMachine.currentState.PhysicsUpdate();
     }
 

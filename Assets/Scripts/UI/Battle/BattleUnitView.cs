@@ -27,7 +27,7 @@ public class BattleUnitView : MonoBehaviour
     {
         InitializeScale();
         unit = u;
-       
+        SetActing(false);
 
         BattleUnitAllyUI battleUnitAllyUI = GetComponent<BattleUnitAllyUI>();
         if(battleUnitAllyUI != null)
@@ -39,6 +39,8 @@ public class BattleUnitView : MonoBehaviour
     {
         if (unit == null)
         {
+            if (nameHp != null)
+                nameHp.text = string.Empty;
             gameObject.SetActive(false);
             return;
         }

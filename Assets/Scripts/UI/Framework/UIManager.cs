@@ -70,8 +70,16 @@ namespace Game.UI
             Instance = null;
         }
 
+        /// <summary>
+        /// 打开UI
+        /// </summary>
+        /// <param name="id"> 哪个界面 </param>
+        /// <param name="context"></param>
+        /// <param name="parent"></param>
+        /// <returns></returns>
         public UIHandle Open(UIId id, IUIContext context = null, UIHandle? parent = null)
         {
+            //查找UIConfig
             if (!TryGetConfig(id, out UIConfig config))
                 return default;
 
@@ -81,8 +89,11 @@ namespace Game.UI
                 return default;
             }
 
+            //有就取出，没有就创建
             UIInstanceRecord instance = GetOrCreate(config);
+            //设置父节点
             SetParent(instance, parent);
+            
             instance.RequestedOpen = true;
             instance.PendingContext = context;
 
@@ -96,6 +107,7 @@ namespace Game.UI
             return instance.Handle;
         }
 
+        //关闭UI
         public bool Close(UIHandle handle)
         {
             if (!TryGetInstance(handle, out UIInstanceRecord instance))

@@ -16,6 +16,8 @@ namespace Game.UI
         private CanvasGroup canvasGroup;
         private bool initialized;
         private bool covered;
+        public bool IsOpen => State == UIState.Open || State == UIState.Opening;
+        protected UIManager Owner => owner;
 
         internal void Initialize(UIManager manager, UIHandle handle, UIConfig config)
         {
@@ -96,11 +98,7 @@ namespace Game.UI
             State = UIState.Destroyed;
         }
 
-        public bool IsOpen => State == UIState.Open || State == UIState.Opening;
-
         public virtual bool CanCloseFromBack() => true;
-
-        protected UIManager Owner => owner;
 
         protected virtual void OnInitialize() { }
 

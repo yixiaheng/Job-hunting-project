@@ -17,6 +17,7 @@ namespace Battle.Logic
         private readonly ActionQueue queue;
         private readonly TargetSelector selector;
         private readonly EffectService effectService;
+        public System.Guid BattleId { get; } = System.Guid.NewGuid();
         public BattleResult Result { get; private set; } = BattleResult.None;
         public int TurnCount { get; private set; }
         private readonly IActionDecider decider;
@@ -29,6 +30,9 @@ namespace Battle.Logic
         public BattleFlow(IEnumerable<BattleUnit> allUnits, IActionDecider decider = null)
         {
             units = new List<BattleUnit>(allUnits);
+            foreach (BattleUnit unit in units)
+                unit.BattleId = BattleId;
+
             queue = new ActionQueue(units);
             selector = new TargetSelector(units);
             effectService = new EffectService();

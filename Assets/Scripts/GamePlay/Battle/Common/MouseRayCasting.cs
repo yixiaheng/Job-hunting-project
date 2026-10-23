@@ -13,10 +13,9 @@ public class MouseRayCasting : MonoBehaviour
 
     void Update()
     {
-        if (IsPointerOverUI()) return;
-
         if (Mouse.current == null) return;
         if (!Mouse.current.leftButton.wasPressedThisFrame) return;
+        if (IsPointerOverUI()) return;
 
         Camera cam = Camera.main;
         if (cam == null) return;
@@ -33,6 +32,14 @@ public class MouseRayCasting : MonoBehaviour
         ShowMarker(actor.transform);
         Debug.Log($"选中 {selectedTarget.displayName} pos={selectedTarget.pos}");
 
+    }
+
+    public void ClearSelection()
+    {
+        selectedTarget = null;
+        if (marker != null)
+            Destroy(marker.gameObject);
+        marker = null;
     }
 
     void ShowMarker(Transform parent)
