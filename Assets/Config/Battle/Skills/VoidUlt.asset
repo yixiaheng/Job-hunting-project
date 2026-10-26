@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc8fb2b8821ef5f43ba17b3c3ecb2497, type: 3}
+  m_Name: VoidUlt
+  m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
+  id: 115
+  Name: 寂灭领域
+  kind: 2
+  element: 4
+  skillPointCost: 0
+  energyCost: 100
+  energyGain: 20
+  targetRule: 2
+  targetSide: 1
+  effectConfigs:
+  - effectType: 0
+    value: 1.0
+    scaleStat: 0
+    target: 2
+    buffId: 0
+    buff: {fileID: 0}
+    stack: 0
+  - effectType: 3
+    value: 0
+    scaleStat: 3
+    target: 2
+    buffId: 206
+    buff: {fileID: 11400000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 2}
+    stack: 1
+  - effectType: 7
+    value: 0
+    scaleStat: 0
+    target: 0
+    buffId: 0
+    buff: {fileID: 0}
+    stack: 0

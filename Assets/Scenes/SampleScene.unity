@@ -2298,8 +2298,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5F00\u59CB\u6218\u6597"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 06505abd5b789c045924a23791b88689, type: 2}
-  m_sharedMaterial: {fileID: -3384997390594989360, guid: 06505abd5b789c045924a23791b88689, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ef0cfcb4f8436af4dad91b1b7cc53e27, type: 2}
+  m_sharedMaterial: {fileID: 7987094426385718310, guid: ef0cfcb4f8436af4dad91b1b7cc53e27, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

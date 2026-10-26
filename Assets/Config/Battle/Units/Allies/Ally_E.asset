@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
+  m_Name: Ally_E
+  m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
+  id: UmbralHex
+  displayName: 暮影诅咒师
+  element: 4
+  path: 4
+  maxHealth: 200
+  attack: 52
+  defence: 22
+  speed: 100
+  startEnergy: 0
+  maxEnergy: 100
+  prefab: {fileID: 100000000000000001, guid: 397f9c4546f1429ebf6a7eabfaa1994f, type: 3}
+  skills:
+  - {fileID: 11400000, guid: aaa5ec42aed946058f772406c7c7cce0, type: 2}
+  - {fileID: 11400000, guid: cae41c173f6241d484d3f2af1ae26396, type: 2}
+  - {fileID: 11400000, guid: 59221934424e45f89ef3f0ed0024721a, type: 2}

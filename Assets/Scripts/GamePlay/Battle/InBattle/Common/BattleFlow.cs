@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +7,7 @@ namespace Battle.Logic
     public enum BattleResult { None, AllyWin, EnemyWin, Draw }
 
     /// <summary>
-    /// 战斗流程，纯数据操作，开始战斗就是new BattleFlow
+    /// 鎴樻枟娴佺▼锛岀函鏁版嵁鎿嶄綔锛屽紑濮嬫垬鏂楀氨鏄痭ew BattleFlow
     /// </summary>
     public class BattleFlow
     {
@@ -35,13 +35,13 @@ namespace Battle.Logic
 
             queue = new ActionQueue(units);
             selector = new TargetSelector(units);
-            effectService = new EffectService();
+            effectService = new EffectService(actionQueue: queue);
             this.decider = decider ?? new FirstSkillDecider();
         }
 
         public BattleResult Run()
         {
-            Debug.Log($"战斗开始  我方{Count(Faction.OurSide)}人  敌方{Count(Faction.Enemy)}人");
+            Debug.Log($"Battle started. Allies={Count(Faction.OurSide)}, Enemies={Count(Faction.Enemy)}");
 
             while (Step())
             {
@@ -51,7 +51,7 @@ namespace Battle.Logic
             if (Result == BattleResult.None)
                 Result = BattleResult.Draw;
 
-            Debug.Log($"战斗结束：{ResultText(Result)}  共行动{TurnCount}次");
+            Debug.Log($"Battle ended: {ResultText(Result)}, Turns={TurnCount}");
             return Result;
         }
 
@@ -79,14 +79,14 @@ namespace Battle.Logic
 
             if(Result != BattleResult.None)
             {   
-                //游戏结束
+                //娓告垙缁撴潫
                 GameOverEvent?.Invoke(Result);
                 Debug.Log(Result switch
                 {
-                    BattleResult.AllyWin => "玩家胜利",
-                    BattleResult.EnemyWin => "敌人胜利",
-                    BattleResult.Draw => "平局",
-                    _ => "未知结果"
+                    BattleResult.AllyWin => "Ally Victory",
+                    BattleResult.EnemyWin => "Enemy Victory",
+                    BattleResult.Draw => "Draw",
+                    _ => "Unknown Result"
                 });
             }
 
@@ -94,8 +94,8 @@ namespace Battle.Logic
             return true;
         }
 
-        //Step是直接用于ai调用的，step分为获取 Action 、 Execute 、Peek三步
-        //人为选择的时候直接调用Execute即可
+        //Step鏄洿鎺ョ敤浜巃i璋冪敤鐨勶紝step鍒嗕负鑾峰彇 Action 銆?Execute 銆丳eek涓夋
+        //浜轰负閫夋嫨鐨勬椂鍊欑洿鎺ヨ皟鐢‥xecute鍗冲彲
         public bool Step()
         {
             if (Result != BattleResult.None || TurnCount >= MaxTurns)
@@ -111,7 +111,7 @@ namespace Battle.Logic
         {
             if (action == null || action.skill == null)
             {
-                Debug.Log($"[{TurnCount + 1}] {Name(caster)} 无法行动");
+                Debug.Log($"[{TurnCount + 1}] {Name(caster)} cannot act.");
                 return false;
             }
 
@@ -119,7 +119,7 @@ namespace Battle.Logic
 
             if(skill.energyCost > caster.currentEnergy)
             {
-                Debug.Log($"{Name(caster)}能量不足，无法释放");
+                Debug.Log($"{Name(caster)} does not have enough energy.");
                 return false;
             }
             else
@@ -127,7 +127,7 @@ namespace Battle.Logic
                 caster.currentEnergy -= skill.energyCost;
             }
 
-            Debug.Log($"[{TurnCount + 1}] {Name(caster)} 使用【{SkillName(skill)}】  HP {Hp(caster)}  能量{caster.currentEnergy}");
+            Debug.Log($"[{TurnCount + 1}] {Name(caster)} uses {SkillName(skill)}. HP={Hp(caster)}, Energy={caster.currentEnergy}");
 
             var targets = selector.Select(
                 caster,
@@ -137,7 +137,7 @@ namespace Battle.Logic
 
             if (targets == null || targets.Count == 0)
             {
-                Debug.Log("    没有目标");
+                Debug.Log("    No targets.");
                 caster.currentEnergy += skill.energyGain;
                 return false;
             }
@@ -148,7 +148,7 @@ namespace Battle.Logic
                 return false;
             }
 
-            /// Effect效果处理：调用效果服务来进行处理
+            /// Effect鏁堟灉澶勭悊锛氳皟鐢ㄦ晥鏋滄湇鍔℃潵杩涜澶勭悊
             foreach (EffectConfig effect in skill.effectConfigs)
             {
                 
@@ -159,7 +159,7 @@ namespace Battle.Logic
             caster.currentEnergy += skill.energyGain;
 
             if (skill.energyGain != 0)
-                Debug.Log($"    {Name(caster)} 能量 {energyBefore}→{caster.currentEnergy}");
+                Debug.Log($"    {Name(caster)} energy {energyBefore}->{caster.currentEnergy}");
             return true;
         }
 
@@ -188,7 +188,7 @@ namespace Battle.Logic
                 {
                     string n = b.config != null ? b.config.Name : "Buff";
                     u.buffs.RemoveAt(i);
-                    Debug.Log($"    {Name(u)} 的【{n}】结束");
+                    Debug.Log($"    {Name(u)}'s [{n}] expired.");
                 }
             }
         }
@@ -206,7 +206,7 @@ namespace Battle.Logic
             if (u == null) return "?";
             if (!string.IsNullOrEmpty(u.displayName))
                 return u.displayName;
-            string side = u.faction == Faction.OurSide ? "我方" : "敌方";
+            string side = u.faction == Faction.OurSide ? "Ally" : "Enemy";
             return $"{side}{u.pos}";
         }
 
@@ -225,10 +225,11 @@ namespace Battle.Logic
 
         static string ResultText(BattleResult r) => r switch
         {
-            BattleResult.AllyWin => "我方胜利",
-            BattleResult.EnemyWin => "敌方胜利",
-            BattleResult.Draw => "平局",
+            BattleResult.AllyWin => "Ally Victory",
+            BattleResult.EnemyWin => "Enemy Victory",
+            BattleResult.Draw => "Draw",
             _ => r.ToString()
         };
     }
 }
+

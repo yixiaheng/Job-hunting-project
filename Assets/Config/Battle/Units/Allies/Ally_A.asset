@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
   m_Name: Ally_A
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
-  displayName: Ally_A
-  maxHealth: 80
-  attack: 20
-  defence: 5
-  speed: 100
+  id: Aegis
+  displayName: 岩壁守卫
+  element: 0
+  path: 0
+  maxHealth: 260
+  attack: 48
+  defence: 32
+  speed: 95
   startEnergy: 0
-  prefab: {fileID: 4064924966840310132, guid: 1d8107d23af8875448bc3ae9a21fb0db, type: 3}
+  maxEnergy: 100
+  prefab: {fileID: 100000000000000001, guid: 8d3bacb7640e4f24ad00097c2d9799f9, type: 3}
   skills:
-  - {fileID: 11400000, guid: 26d0122012b979a4e81512574078ffe7, type: 2}
-  - {fileID: 11400000, guid: 3362250c4f842aa43b7f83dbbc9bc8cf, type: 2}
+  - {fileID: 11400000, guid: eea34c8d40044023b8448f05a67c692d, type: 2}
+  - {fileID: 11400000, guid: 220b7ddcad344625b7c5a124fd20c1c6, type: 2}
+  - {fileID: 11400000, guid: 4c1899cff59042219efb6daf466ba699, type: 2}

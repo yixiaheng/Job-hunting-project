@@ -49,4 +49,24 @@ public enum SkillKind
     Basic,
     Skill,
     Ultimate
-} 
+}
+
+public enum ElementType
+{
+    Fire,
+    Ice,
+    Lightning,
+    Wind,
+    Quantum,
+    Imaginary
+}
+
+public enum PathType
+{
+    Preservation,
+    Abundance,
+    Hunt,
+    Erudition,
+    Nihility,
+    Harmony
+}

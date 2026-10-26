@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
   m_Name: Ally_B
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
-  displayName: Ally_B
-  maxHealth: 70
-  attack: 18
-  defence: 6
-  speed: 150
+  id: Verdant
+  displayName: 春风医者
+  element: 3
+  path: 1
+  maxHealth: 190
+  attack: 42
+  defence: 18
+  speed: 108
   startEnergy: 0
-  prefab: {fileID: 4064924966840310132, guid: 1d8107d23af8875448bc3ae9a21fb0db, type: 3}
+  maxEnergy: 100
+  prefab: {fileID: 100000000000000001, guid: 7e9e22624b054358a5d4570b12804b9f, type: 3}
   skills:
-  - {fileID: 11400000, guid: 26d0122012b979a4e81512574078ffe7, type: 2}
-  - {fileID: 11400000, guid: 3362250c4f842aa43b7f83dbbc9bc8cf, type: 2}
+  - {fileID: 11400000, guid: 617275b29d6a4af48aeae08235afbd85, type: 2}
+  - {fileID: 11400000, guid: 205205e4efca4372994cd442d9d8b12b, type: 2}
+  - {fileID: 11400000, guid: 84f6e1e90c21456a8cec7a8f3126f078, type: 2}

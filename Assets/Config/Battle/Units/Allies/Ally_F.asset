@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
+  m_Name: Ally_F
+  m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
+  id: AstralChord
+  displayName: 星弦指挥家
+  element: 5
+  path: 5
+  maxHealth: 175
+  attack: 40
+  defence: 20
+  speed: 115
+  startEnergy: 0
+  maxEnergy: 100
+  prefab: {fileID: 100000000000000001, guid: ecc36865d82147ed88fd9fdd0f018da9, type: 3}
+  skills:
+  - {fileID: 11400000, guid: 999629137179433aa39840227e175092, type: 2}
+  - {fileID: 11400000, guid: e21f530eb17f49509a8a1647fc2b3744, type: 2}
+  - {fileID: 11400000, guid: 2e0d671dfec542bc83cc33af03260306, type: 2}

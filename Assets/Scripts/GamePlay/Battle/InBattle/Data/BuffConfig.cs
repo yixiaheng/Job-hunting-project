@@ -11,4 +11,5 @@ public class BuffConfig : ScriptableObject
    public int maxStack;             
    public StatType stat;            // 属性类型
    public float value;              // 0.2 = +20% , -0.15 = -15%
+   public bool isDebuff;
 }

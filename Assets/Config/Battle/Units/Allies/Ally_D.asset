@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
+  m_Name: Ally_D
+  m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
+  id: FrostNova
+  displayName: 寒星术士
+  element: 1
+  path: 3
+  maxHealth: 180
+  attack: 55
+  defence: 20
+  speed: 102
+  startEnergy: 0
+  maxEnergy: 100
+  prefab: {fileID: 100000000000000001, guid: 5a5e516256ae44688e45ac0b990ea91d, type: 3}
+  skills:
+  - {fileID: 11400000, guid: 7a1935534d6d49c8ac59b5f78e27556b, type: 2}
+  - {fileID: 11400000, guid: 4977350aac2d47a4985df701c54071d3, type: 2}
+  - {fileID: 11400000, guid: 041cea0f12ef479a8e68ccdbabb9c6e7, type: 2}

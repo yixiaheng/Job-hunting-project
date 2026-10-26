@@ -399,7 +399,7 @@ public static class InventoryDemoSetup
         grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         grid.constraintCount = 5;
         grid.cellSize = new Vector2(168f, 193f);
-        gridObject.AddComponent<InventoryGridLayout>();
+        gridObject.AddComponent<GridLayoutSet>();
         gridObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         ScrollRect scroll = scrollObject.AddComponent<ScrollRect>();
         scroll.viewport = (RectTransform)viewport.transform;

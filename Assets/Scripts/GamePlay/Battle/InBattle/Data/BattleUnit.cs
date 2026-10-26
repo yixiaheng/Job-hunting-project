@@ -10,6 +10,8 @@ using UnityEngine;
 public class BattleUnit
 {
     public string displayName;
+    public ElementType element;
+    public PathType path;
     public Faction faction;
     public int pos;
     public int maxHealth;
@@ -21,6 +23,7 @@ public class BattleUnit
     public int defence;
     public int speed;
     public int currentEnergy;
+    public int maxEnergy = 100;
     public double nextActionTime;   // 下次行动的时刻（绝对时间戳）
 
     public int tieBreaker;

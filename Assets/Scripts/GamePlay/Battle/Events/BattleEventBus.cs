@@ -1,13 +1,13 @@
 using System;
+using System.Collections.Generic;
 using Battle.Logic;
+using Battle.SaveData;
 using Game.Events;
 using UnityEngine;
 
 namespace Battle.Events
 {
     public interface IBattleEvent { }
-
-    #region Event
 
     public sealed class BattleEventBus : EventBus<IBattleEvent>
     {
@@ -19,10 +19,15 @@ namespace Battle.Events
             
         }
     }
-
-    #endregion
+    public readonly struct AllySlectionEvent : IBattleEvent
+    {
+        public UnitConfig Unit{ get; }
+        public AllySlectionEvent(UnitConfig unit)
+        {
+            Unit = unit;
+        }
+    }
     
-    #region 数据定义
     /// <summary>
     /// 血量变化
     /// </summary>
@@ -63,5 +68,4 @@ namespace Battle.Events
             CurrentTarget = currentTarget;
         }
     }
-    #endregion
 }

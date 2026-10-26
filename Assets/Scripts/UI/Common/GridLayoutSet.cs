@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(GridLayoutGroup))]
-public class InventoryGridLayout : MonoBehaviour
+public class GridLayoutSet : MonoBehaviour
 {
     [SerializeField] private float minimumCellWidth = 160f;
     private GridLayoutGroup grid;
@@ -14,7 +14,8 @@ public class InventoryGridLayout : MonoBehaviour
     {
         if (grid == null) 
             grid = GetComponent<GridLayoutGroup>();
-        if (grid == null) return;
+        if (grid == null) 
+            return;
         float width = ((RectTransform)transform).rect.width - grid.padding.horizontal;
         if (width <= 0f) return;
         int columns = Mathf.Max(1, Mathf.FloorToInt((width + grid.spacing.x) / (minimumCellWidth + grid.spacing.x)));

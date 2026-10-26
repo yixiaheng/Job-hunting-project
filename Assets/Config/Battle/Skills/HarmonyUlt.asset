@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc8fb2b8821ef5f43ba17b3c3ecb2497, type: 3}
+  m_Name: HarmonyUlt
+  m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
+  id: 118
+  Name: 星海共鸣
+  kind: 2
+  element: 5
+  skillPointCost: 0
+  energyCost: 100
+  energyGain: 20
+  targetRule: 2
+  targetSide: 0
+  effectConfigs:
+  - effectType: 4
+    value: 25
+    scaleStat: 0
+    target: 0
+    buffId: 0
+    buff: {fileID: 0}
+    stack: 0
+  - effectType: 5
+    value: 0.25
+    scaleStat: 2
+    target: 2
+    buffId: 0
+    buff: {fileID: 0}
+    stack: 0

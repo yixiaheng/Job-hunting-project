@@ -21,6 +21,8 @@ namespace Battle.Logic
             return new BattleUnit
             {
                 displayName = string.IsNullOrEmpty(cfg.displayName) ? cfg.name : cfg.displayName,
+                element = cfg.element,
+                path = cfg.path,
                 faction = faction,
                 pos = pos,
                 tieBreaker = tieBreaker,
@@ -30,6 +32,7 @@ namespace Battle.Logic
                 defence = cfg.defence,
                 speed = cfg.speed,
                 currentEnergy = cfg.startEnergy,
+                maxEnergy = Mathf.Max(1, cfg.maxEnergy),
                 skills = skills
             };
         }

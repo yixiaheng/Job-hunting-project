@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 3}
   m_Name: AtkUp
   m_EditorClassIdentifier: Assembly-CSharp::BuffConfig
-  id: 2
-  Name: AtkUp
+  id: 201
+  Name: 攻击提升
   buffType: 0
-  durationTimes: 2
-  maxStack: 2
+  durationTimes: 3
+  maxStack: 3
   stat: 0
   value: 0.2
+  isDebuff: false

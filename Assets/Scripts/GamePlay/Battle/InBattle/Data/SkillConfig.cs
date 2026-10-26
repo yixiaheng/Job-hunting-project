@@ -7,6 +7,8 @@ public class SkillConfig : ScriptableObject
     public int id;
     public string  Name;
     public SkillKind kind;
+    public ElementType element;
+    public int skillPointCost;
     public int energyCost;
     public int energyGain;
     public TargetRule targetRule;

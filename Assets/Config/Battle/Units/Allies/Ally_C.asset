@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
   m_Name: Ally_C
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
-  displayName: Ally_C
-  maxHealth: 75
-  attack: 22
-  defence: 4
-  speed: 120
+  id: VoltHunt
+  displayName: 雷鸣猎手
+  element: 2
+  path: 2
+  maxHealth: 170
+  attack: 68
+  defence: 15
+  speed: 125
   startEnergy: 0
-  prefab: {fileID: 7906588806946208785, guid: 59bd166c883a13c4b81300500ca9bbed, type: 3}
+  maxEnergy: 100
+  prefab: {fileID: 100000000000000001, guid: be1ab89e03254c2fb5b7929b06de4b8e, type: 3}
   skills:
-  - {fileID: 11400000, guid: 26d0122012b979a4e81512574078ffe7, type: 2}
-  - {fileID: 11400000, guid: 3362250c4f842aa43b7f83dbbc9bc8cf, type: 2}
+  - {fileID: 11400000, guid: e3be44acf9b043299864aa44ccfce467, type: 2}
+  - {fileID: 11400000, guid: fff9548cd6e24b5f8fd3fe55fd460ae8, type: 2}
+  - {fileID: 11400000, guid: 99d453969ed148afa14b88e10674de19, type: 2}
