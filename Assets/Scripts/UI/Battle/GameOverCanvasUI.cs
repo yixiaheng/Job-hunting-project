@@ -1,65 +1,88 @@
+﻿using Battle.Events;
 using Battle.Logic;
+using Game;
+using Game.UI;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameOverCanvasUI : MonoBehaviour
+public sealed class GameOverCanvasUI : UIPanel
 {
-    private CanvasGroup canvasGroup;
-    private BattleFlow subscribedFlow;
-    private BattleManager battleManager;
+    [SerializeField] private TMP_Text resultText;
+    [SerializeField] private TMP_Text turnsText;
+    [SerializeField] private Toggle reformPartyToggle;
+    [SerializeField] private Button exitButton;
+    [SerializeField] private Button retryButton;
 
-    private void Awake() 
+    private BattleResultUIContext resultContext;
+    private bool busy;
+
+    protected override void OnInitialize()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        CanvasVisibility(false);
+        exitButton.onClick.AddListener(ExitBattle);
+        retryButton.onClick.AddListener(RetryBattle);
     }
-    void OnEnable()
+
+    protected override void OnOpen(IUIContext context) => Bind(context);
+
+    protected override void OnContextChanged(IUIContext context) => Bind(context);
+
+    private void Bind(IUIContext context)
     {
-        battleManager = BattleManager.Instance;
-        if (battleManager == null)
+        resultContext = context as BattleResultUIContext;
+        reformPartyToggle.SetIsOnWithoutNotify(false);
+        SetBusy(resultContext == null);
+        resultText.text = resultContext?.Result switch
+        {
+            BattleResult.AllyWin => "挑战成功",
+            BattleResult.EnemyWin => "挑战失败",
+            BattleResult.Draw => "战斗结束：平局",
+            _ => "战斗结束"
+        };
+        turnsText.text = resultContext == null
+            ? string.Empty
+            : $"行动次数：{resultContext.TurnCount}";
+    }
+
+    private void RetryBattle()
+    {
+        if (!IsOpen || busy || resultContext == null)
             return;
-        battleManager.BattleStarted += BindFlow;
-        BindFlow(battleManager.battleFlow);
+
+        SetBusy(true);
+        GameEvents.Battle.Publish(new BattleRetryRequestedEvent(
+            resultContext.BattleId, reformPartyToggle.isOn));
     }
 
-    private void BindFlow(BattleFlow flow)
+    private void ExitBattle()
     {
-        if (subscribedFlow != null)
-            subscribedFlow.GameOverEvent -= OnGameOver;
-        subscribedFlow = flow;
-        CanvasVisibility(false);
-        if (subscribedFlow != null)
-            subscribedFlow.GameOverEvent += OnGameOver;
+        if (!IsOpen || busy || resultContext == null)
+            return;
+
+        SetBusy(true);
+        GameEvents.Battle.Publish(new BattleExitRequestedEvent(resultContext.BattleId));
     }
 
-    void OnDisable() 
+    public void SetBusy(bool value)
     {
-        if (battleManager != null)
-            battleManager.BattleStarted -= BindFlow;
-        battleManager = null;
-        if (subscribedFlow != null)
-            subscribedFlow.GameOverEvent -= OnGameOver;
-        subscribedFlow = null;
+        busy = value;
+        exitButton.interactable = !value;
+        retryButton.interactable = !value;
+        reformPartyToggle.interactable = !value;
     }
 
-    void OnGameOver(BattleResult result)
+    public override bool CanCloseFromBack() => false;
+
+    protected override void OnClosed()
     {
-        Debug.Log("GameOver");
-        CanvasVisibility(true);
+        resultContext = null;
     }
 
-    public void CanvasVisibility(bool vity)
+    private void OnDestroy()
     {
-        if(vity == true)
-        {
-            canvasGroup.alpha = 1;
-            canvasGroup.interactable = true;
-            canvasGroup.blocksRaycasts = true;
-        }
-        else
-        {
-            canvasGroup.alpha = 0;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-        }
+        if (exitButton != null)
+            exitButton.onClick.RemoveListener(ExitBattle);
+        if (retryButton != null)
+            retryButton.onClick.RemoveListener(RetryBattle);
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Game.UI
@@ -87,6 +87,14 @@ namespace Game.UI
         {
             transition?.Stop();
             SetInteractable(false);
+
+            if (State != UIState.Closed && State != UIState.Destroyed)
+            {
+                if (State != UIState.Closing)
+                    OnClosing();
+                OnClosed();
+            }
+
             Context = null;
             State = UIState.Closed;
             gameObject.SetActive(false);

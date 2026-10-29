@@ -1,5 +1,7 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Battle.Logic;
+using Battle.Events;
+using Game;
 using Game.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -15,7 +17,7 @@ public class BattleManager : MonoBehaviour
 
     public MouseRayCasting rayCasting;
 
-    //Todo:不拖拽，从BattleLaunchData;
+    // Inspector allies are only used when the scene has no launch snapshot.
     public UnitConfig[] allies;
     public UnitConfig[] enemies;
 
@@ -26,6 +28,8 @@ public class BattleManager : MonoBehaviour
     public Transform[] enemyPos;
     public BattleFlow battleFlow{get; private set;}
     private readonly List<BattleUnit> spawnedUnits = new();
+    private UnitConfig[] launchAllies;
+    private bool resultPublished;
     private UIManager battleUIManager;
     private UIHandle alliesStatusHandle;
     private UIHandle enemiesStatusHandle;
@@ -41,8 +45,8 @@ public class BattleManager : MonoBehaviour
         }
         Instance = this;    
 
-        //从BattleLauchData中读取数据
-        //BattleDataInit();
+        if (BattleLaunchContext.TryConsume(out BattleLaunchData data))
+            launchAllies = data.CopyAllies();
 
     }
 
@@ -59,6 +63,9 @@ public class BattleManager : MonoBehaviour
 
         CloseStatusPanels();
 
+        if (battleFlow != null)
+            battleFlow.GameOverEvent -= HandleBattleEnded;
+
         ClearUnits();
         Instance = null;
     }
@@ -71,12 +78,19 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
+        UnitConfig[] allyConfigs = launchAllies ?? allies;
+        if (!ValidateAllies(allyConfigs))
+            return;
+
+        if (battleFlow != null)
+            battleFlow.GameOverEvent -= HandleBattleEnded;
         ClearUnits();
         battleFlow = null;
+        resultPublished = false;
         var units = new List<BattleUnit>();
         int tie = 0;
 
-        SpawnUnits(allies, Faction.OurSide, allyPos, units, ref tie);
+        SpawnUnits(allyConfigs, Faction.OurSide, allyPos, units, ref tie);
         SpawnUnits(enemies, Faction.Enemy, enemyPos, units, ref tie);
 
         if (units.Count == 0)
@@ -87,6 +101,7 @@ public class BattleManager : MonoBehaviour
         }
 
         battleFlow = new BattleFlow(units, new FirstSkillDecider());
+        battleFlow.GameOverEvent += HandleBattleEnded;
         battleUIManager = UIManager.Instance;
         alliesStatusHandle = battleUIManager.Open(UIId.BattleAlliesStatus,
             new BattleAlliesUIContext(units.FindAll(unit => unit.faction == Faction.OurSide)));
@@ -99,6 +114,47 @@ public class BattleManager : MonoBehaviour
         Debug.Log("战斗已创建，点 StepOnce 推进");
 
         ActingUntilPlayer();
+    }
+
+    public bool TryCreateLaunchData(out BattleLaunchData data, out string error)
+    {
+        return BattleLaunchData.TryCreate(launchAllies ?? allies, out data, out error);
+    }
+
+    private void HandleBattleEnded(BattleResult result)
+    {
+        if (resultPublished || battleFlow == null || result == BattleResult.None)
+            return;
+
+        resultPublished = true;
+        GameEvents.Battle.Publish(new BattleEndedEvent(battleFlow.BattleId, result, battleFlow.TurnCount));
+    }
+
+    private bool ValidateAllies(UnitConfig[] configs)
+    {
+        bool hasAlly = false;
+        if (configs != null)
+        {
+            for (int position = 0; position < configs.Length; position++)
+            {
+                UnitConfig config = configs[position];
+                if (config == null)
+                    continue;
+
+                hasAlly = true;
+                if (config.prefab == null || allyPos == null || position >= allyPos.Length
+                    || allyPos[position] == null)
+                {
+                    Debug.LogError($"Cannot start battle: ally slot {position + 1} ({config.id}) needs a model prefab and scene anchor.", this);
+                    return false;
+                }
+            }
+        }
+
+        if (!hasAlly)
+            Debug.LogError("Cannot start battle without allies. Confirm a party, or assign Inspector allies for scene debugging.", this);
+
+        return hasAlly;
     }
 
     private void ClearUnits()

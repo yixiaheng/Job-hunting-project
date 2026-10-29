@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
@@ -101,7 +101,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (keyboard.escapeKey.wasPressedThisFrame)
         {
-            manager.Back();
+            // Global UIManager handles Back, including scenes without a player.
             return;
         }
 
@@ -215,7 +215,8 @@ public class PlayerInputHandler : MonoBehaviour
     /// <param name="state"></param>
     void HandleUIInput(UIInputState state)
     {
-        SetInputRestriction(uiSource, state.BlockMovement, state.BlockCamera, state.ShowCursor);
+        // UIManager owns the UI cursor request; dialogue keeps its own cursor source.
+        SetInputRestriction(uiSource, state.BlockMovement, state.BlockCamera, false);
     }
 
     void OnZoom(InputAction.CallbackContext context)

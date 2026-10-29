@@ -1,7 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 namespace Game.UI
 {
@@ -30,16 +34,28 @@ namespace Game.UI
         private UIInputCoordinator inputCoordinator = new();
         private int nextInstanceId = 1;
         private long openOrder;
+        private bool cursorOverridden;
+        private bool previousCursorVisible;
+        private CursorLockMode previousCursorLock;
 
         public UIRegistry Registry => registry;
         public UIRoot Root => root;
         public UIInputCoordinator Input => inputCoordinator;
         public UIBackgroundController Background => backgroundController;
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetInstance()
+        {
+            Instance = null;
+        }
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
             {
+                gameObject.SetActive(false);
+                if (root != null && root != Instance.root)
+                    root.gameObject.SetActive(false);
                 Destroy(gameObject);
                 return;
             }
@@ -56,7 +72,30 @@ namespace Game.UI
                 backgroundController = gameObject.AddComponent<UIBackgroundController>();
 
             registry?.Rebuild();
+            SceneManager.sceneUnloaded += HandleSceneUnloaded;
             RefreshFrameworkState();
+        }
+
+        private void Update()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+                Back();
+#elif ENABLE_LEGACY_INPUT_MANAGER
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+                Back();
+#endif
+
+            if (inputCoordinator.Current.ShowCursor)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
+        private void HandleSceneUnloaded(Scene scene)
+        {
+            ReleaseSceneUI(scene.handle);
         }
 
         private void OnDestroy()
@@ -64,8 +103,19 @@ namespace Game.UI
             if (Instance != this)
                 return;
 
-            foreach (UIInstanceRecord instance in instances.Values)
-                instance.Panel.StopTransition();
+            SceneManager.sceneUnloaded -= HandleSceneUnloaded;
+            StopAllCoroutines();
+            UIInstanceRecord[] copy = new List<UIInstanceRecord>(instances.Values).ToArray();
+            foreach (UIInstanceRecord instance in copy)
+            {
+                if (instance.Panel != null)
+                    instance.Panel.ForceCloseImmediate();
+                UnregisterOpened(instance);
+            }
+
+            instances.Clear();
+            singleInstances.Clear();
+            RefreshFrameworkState();
 
             Instance = null;
         }
@@ -184,14 +234,29 @@ namespace Game.UI
                 if (instance.Config.lifetime == UILifetime.Scene
                     && instance.OwnerSceneHandle == targetSceneHandle)
                 {
-                    instance.DestroyWhenClosed = true;
-
-                    if (instance.Panel.State == UIState.Closed && !instance.Processing)
-                        DestroyInstance(instance);
-                    else
-                        RequestCloseTree(instance);
+                    ReleaseInstanceImmediately(instance);
                 }
             }
+
+            RefreshFrameworkState();
+        }
+
+        private void ReleaseInstanceImmediately(UIInstanceRecord instance)
+        {
+            if (!instances.ContainsKey(instance.Handle.Value))
+                return;
+
+            foreach (UIInstanceRecord child in instance.Children.ToArray())
+                ReleaseInstanceImmediately(child);
+
+            if (instance.Routine != null)
+                StopCoroutine(instance.Routine);
+
+            instance.Processing = false;
+            instance.RequestedOpen = false;
+            instance.Panel.ForceCloseImmediate();
+            UnregisterOpened(instance);
+            DestroyInstance(instance);
         }
 
         private UIInstanceRecord GetOrCreate(UIConfig config)
@@ -226,7 +291,8 @@ namespace Game.UI
                 return;
 
             instance.Processing = true;
-            StartCoroutine(ProcessInstance(instance));
+            Coroutine routine = StartCoroutine(ProcessInstance(instance));
+            instance.Routine = instance.Processing ? routine : null;
         }
 
         private IEnumerator ProcessInstance(UIInstanceRecord instance)
@@ -239,8 +305,7 @@ namespace Game.UI
                         break;
 
                     RegisterOpened(instance);
-                    instance.Panel.SetCovered(false);
-                    yield return StartCoroutine(instance.Panel.OpenRoutine(instance.PendingContext));
+                    yield return instance.Panel.OpenRoutine(instance.PendingContext);
 
                     if (instance.RequestedOpen)
                         break;
@@ -273,11 +338,10 @@ namespace Game.UI
                     continue;
                 }
 
-                yield return StartCoroutine(instance.Panel.CloseRoutine());
+                yield return instance.Panel.CloseRoutine();
                 UnregisterOpened(instance);
 
-                if (instance.Config.cacheMode == UICacheMode.DestroyOnClose
-                    || instance.DestroyWhenClosed)
+                if (instance.Config.cacheMode == UICacheMode.DestroyOnClose)
                 {
                     DestroyInstance(instance);
                     break;
@@ -287,6 +351,7 @@ namespace Game.UI
             }
 
             instance.Processing = false;
+            instance.Routine = null;
             RefreshFrameworkState();
         }
 
@@ -360,6 +425,29 @@ namespace Game.UI
         {
             RefreshCoveredState();
             inputCoordinator.Refresh(openedPanels);
+            RefreshCursorState();
+        }
+
+        private void RefreshCursorState()
+        {
+            if (inputCoordinator.Current.ShowCursor)
+            {
+                if (!cursorOverridden)
+                {
+                    previousCursorVisible = Cursor.visible;
+                    previousCursorLock = Cursor.lockState;
+                    cursorOverridden = true;
+                }
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else if (cursorOverridden)
+            {
+                Cursor.lockState = previousCursorLock;
+                Cursor.visible = previousCursorVisible;
+                cursorOverridden = false;
+            }
         }
 
         private void RefreshCoveredState()
@@ -449,7 +537,7 @@ namespace Game.UI
         public IUIContext PendingContext { get; set; }
         public bool RequestedOpen { get; set; }
         public bool Processing { get; set; }
-        public bool DestroyWhenClosed { get; set; }
+        public Coroutine Routine { get; set; }
         public long OpenOrder { get; set; }
     }
 }

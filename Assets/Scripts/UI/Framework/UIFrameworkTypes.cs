@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Game.UI
 {
@@ -11,7 +11,10 @@ namespace Game.UI
         Settings = 4,
         Confirm = 5,
         BattleAlliesStatus = 6,
-        BattleEnemiesStatus = 7
+        BattleEnemiesStatus = 7,
+        BattleParty = 8,
+        AlliesChoose = 9,
+        BattleResult = 10
     }
 
     public enum UILayer

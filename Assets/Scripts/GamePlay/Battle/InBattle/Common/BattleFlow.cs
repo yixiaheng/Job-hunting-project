@@ -48,9 +48,6 @@ namespace Battle.Logic
                 
             }
 
-            if (Result == BattleResult.None)
-                Result = BattleResult.Draw;
-
             Debug.Log($"Battle ended: {ResultText(Result)}, Turns={TurnCount}");
             return Result;
         }
@@ -62,10 +59,15 @@ namespace Battle.Logic
         }
         public bool Execute(BattleAction action)
         {
+            if (CompleteIfEnded())
+                return false;
             if (currentUnit == null)
                 currentUnit = Peek();
-            if (currentUnit == null || Result != BattleResult.None)
+            if (currentUnit == null)
+            {
+                Complete(BattleResult.Draw);
                 return false;
+            }
 
             queue.BeginTurn(currentUnit);
             if(Act(currentUnit, action) == false)
@@ -75,20 +77,7 @@ namespace Battle.Logic
             TickBuffs(currentUnit);
             queue.EndTurn(currentUnit);
             TurnCount++;
-            Result = CheckResult();
-
-            if(Result != BattleResult.None)
-            {   
-                //娓告垙缁撴潫
-                GameOverEvent?.Invoke(Result);
-                Debug.Log(Result switch
-                {
-                    BattleResult.AllyWin => "Ally Victory",
-                    BattleResult.EnemyWin => "Enemy Victory",
-                    BattleResult.Draw => "Draw",
-                    _ => "Unknown Result"
-                });
-            }
+            CompleteIfEnded();
 
             currentUnit = Result == BattleResult.None ? Peek() : null;
             return true;
@@ -98,13 +87,42 @@ namespace Battle.Logic
         //浜轰负閫夋嫨鐨勬椂鍊欑洿鎺ヨ皟鐢‥xecute鍗冲彲
         public bool Step()
         {
-            if (Result != BattleResult.None || TurnCount >= MaxTurns)
+            if (CompleteIfEnded())
                 return false;
             if (currentUnit == null)
                 currentUnit = Peek();
             if (currentUnit == null)
+            {
+                Complete(BattleResult.Draw);
                 return false;
+            }
             return Execute(decider.Decide(currentUnit, units));
+        }
+
+        private bool CompleteIfEnded()
+        {
+            if (Result != BattleResult.None)
+                return true;
+
+            BattleResult result = CheckResult();
+            if (result == BattleResult.None && TurnCount >= MaxTurns)
+                result = BattleResult.Draw;
+            if (result == BattleResult.None)
+                return false;
+
+            Complete(result);
+            return true;
+        }
+
+        private void Complete(BattleResult result)
+        {
+            if (Result != BattleResult.None || result == BattleResult.None)
+                return;
+
+            Result = result;
+            currentUnit = null;
+            GameOverEvent?.Invoke(result);
+            Debug.Log(ResultText(result));
         }
 
         private bool Act(BattleUnit caster, BattleAction action)

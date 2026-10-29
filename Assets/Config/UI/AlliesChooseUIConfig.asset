@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b064ed19ca3eba041bc0a5273ea5d26b, type: 3}
+  m_Name: AlliesChooseUIConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIConfig
+  id: 9
+  prefab: {fileID: 900000003, guid: 458c2ac9280c4b5b8166d1e673db3390, type: 3}
+  layer: 2
+  instanceMode: 0
+  cacheMode: 1
+  lifetime: 1
+  handlesBack: 1
+  hideLowerWindows: 0
+  showCursor: 1
+  blockMovement: 1
+  blockCamera: 1
+  modal: 1
+  closeWhenClickMask: 1
+  blurBackground: 0

@@ -5,47 +5,103 @@ using Game;
 using Game.UI;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BattlePartyCanvasUI : UIPanel
 {
-    [SerializeField] private Transform[] alliesPosition;
     [SerializeField] private Button[] chooseButtons;
     [SerializeField] private Button sortButton;
-    [SerializeField] private AlliesChooseCanvasUI alliesChooseCanvasUI;
+    [SerializeField] private Button startBattleButton;
 
-    private readonly GameObject[] models = new GameObject[BattleFormation.MaxMembers];
-    private readonly UnitConfig[] shownConfigs = new UnitConfig[BattleFormation.MaxMembers];
     private UnityAction[] buttonActions;
+    private BattlePartyManager manager;
+    private Action startBattle;
     private IDisposable formationSubscription;
-
-    // The current party screen is scene-owned; UIManager-created panels use its hooks.
-    private void Start()
-    {
-        if (sortButton == null)
-            sortButton = FindButton("QuickSort");
-
-        if (sortButton != null)
-            sortButton.onClick.AddListener(SortFormation);
-
-        if (Config == null)
-        {
-            ButtonsSet();
-            OnOpened();
-        }
-    }
 
     protected override void OnInitialize()
     {
-        ButtonsSet();
+        if (chooseButtons != null)
+        {
+            buttonActions = new UnityAction[chooseButtons.Length];
+            for (int i = 0; i < chooseButtons.Length && i < BattleFormation.MaxMembers; i++)
+            {
+                if (chooseButtons[i] == null)
+                    continue;
+
+                int position = i;
+                buttonActions[i] = () => AddOrReplaceAlly(position);
+                chooseButtons[i].onClick.AddListener(buttonActions[i]);
+            }
+        }
+
+        if (sortButton != null)
+            sortButton.onClick.AddListener(SortFormation);
+        if (startBattleButton != null)
+            startBattleButton.onClick.AddListener(StartBattle);
     }
 
-    protected override void OnOpened()
+    protected override void OnOpen(IUIContext context)
     {
-        formationSubscription?.Dispose();
+        BindContext(context);
+    }
+
+    protected override void OnContextChanged(IUIContext context)
+    {
+        Owner.Close(UIId.AlliesChoose);
+        BindContext(context);
+    }
+
+    private void BindContext(IUIContext context)
+    {
+        StopListening();
+        BattlePartyUIContext partyContext = context as BattlePartyUIContext;
+        manager = partyContext?.Manager;
+        startBattle = partyContext?.StartBattle;
+        if (manager == null)
+            Debug.LogError("BattleParty requires a BattlePartyUIContext with a scene party manager.", this);
+
         formationSubscription = GameEvents.Battle.Subscribe<PartyFormationChangedEvent>(HandleFormationChanged);
-        RefreshFormation();
+        RefreshStartBattleButton();
+    }
+
+    private void HandleFormationChanged(PartyFormationChangedEvent message)
+    {
+        if (message.Manager == manager)
+            RefreshStartBattleButton();
+    }
+
+    private void RefreshStartBattleButton()
+    {
+        if (startBattleButton != null)
+            startBattleButton.interactable = manager != null && startBattle != null
+                && manager.Formation.members.Count > 0;
+    }
+
+    public void StartBattle()
+    {
+        if (IsOpen && manager != null && manager.Formation.members.Count > 0)
+            startBattle?.Invoke();
+    }
+
+    public void AddOrReplaceAlly(int position)
+    {
+        if (!IsOpen || manager == null || position < 0 || position >= BattleFormation.MaxMembers)
+            return;
+
+        Owner.Open(UIId.AlliesChoose, new AlliesChooseUIContext(manager, PartyMode.Replace, position), Handle);
+    }
+
+    public void SortFormation()
+    {
+        if (IsOpen && manager != null)
+            Owner.Open(UIId.AlliesChoose, new AlliesChooseUIContext(manager, PartyMode.Sort), Handle);
+    }
+
+    protected override void OnClosed()
+    {
+        StopListening();
+        startBattle = null;
+        manager = null;
     }
 
     protected override void OnClosing()
@@ -62,123 +118,23 @@ public class BattlePartyCanvasUI : UIPanel
     {
         formationSubscription?.Dispose();
         formationSubscription = null;
-
-        if (alliesChooseCanvasUI != null)
-            alliesChooseCanvasUI.Close();
-    }
-
-    public void ButtonsSet()
-    {
-        RemoveButtonListeners();
-
-        if (chooseButtons == null)
-            return;
-
-        buttonActions = new UnityAction[chooseButtons.Length];
-
-        for (int i = 0; i < chooseButtons.Length && i < BattleFormation.MaxMembers; i++)
-        {
-            if (chooseButtons[i] == null)
-                continue;
-
-            int position = i;
-            buttonActions[i] = () => AddOrReplaceAlly(position);
-            chooseButtons[i].onClick.AddListener(buttonActions[i]);
-        }
-    }
-
-    public void AddOrReplaceAlly(int position)
-    {
-        if (alliesChooseCanvasUI != null)
-            alliesChooseCanvasUI.Open(PartyMode.Replace, position);
-    }
-
-    public void SortFormation()
-    {
-        if (alliesChooseCanvasUI != null)
-            alliesChooseCanvasUI.Open(PartyMode.Sort);
-    }
-
-
-    //监听Formation的变化
-    private void HandleFormationChanged(PartyFormationChangedEvent message)
-    {
-        if (message.Manager == BattlePartyManager.Instance)
-            RefreshFormation();
-    }
-
-    public void RefreshFormation()
-    {
-        BattlePartyManager manager = BattlePartyManager.Instance;
-
-        if (manager == null)
-            return;
-
-        BattleFormation formation = manager.Formation;
-
-        for (int position = 0; position < BattleFormation.MaxMembers; position++)
-        {
-            FormationMember member = formation.GetMemberAtPosition(position);
-            UnitConfig config = member != null ? manager.FindConfig(member.unitId) : null;
-
-            if (shownConfigs[position] == config && (config == null || models[position] != null))
-                continue;
-
-            if (models[position] != null)
-            {
-                models[position].SetActive(false);
-                Destroy(models[position]);
-            }
-
-            models[position] = null;
-            shownConfigs[position] = null;
-
-            if (config == null || config.prefab == null || alliesPosition == null
-                || position >= alliesPosition.Length || alliesPosition[position] == null)
-                continue;
-
-            models[position] = Instantiate(config.prefab, alliesPosition[position], false);
-            models[position].transform.localPosition = Vector3.zero;
-            models[position].transform.localRotation = Quaternion.identity;
-            shownConfigs[position] = config;
-        }
-    }
-
-    private void RemoveButtonListeners()
-    {
-        if (buttonActions == null || chooseButtons == null)
-            return;
-
-        for (int i = 0; i < buttonActions.Length && i < chooseButtons.Length; i++)
-        {
-            if (chooseButtons[i] != null && buttonActions[i] != null)
-                chooseButtons[i].onClick.RemoveListener(buttonActions[i]);
-        }
     }
 
     private void OnDestroy()
     {
         StopListening();
-        RemoveButtonListeners();
+        if (buttonActions != null && chooseButtons != null)
+        {
+            for (int i = 0; i < buttonActions.Length && i < chooseButtons.Length; i++)
+            {
+                if (chooseButtons[i] != null && buttonActions[i] != null)
+                    chooseButtons[i].onClick.RemoveListener(buttonActions[i]);
+            }
+        }
 
         if (sortButton != null)
             sortButton.onClick.RemoveListener(SortFormation);
-
-        foreach (GameObject model in models)
-        {
-            if (model != null)
-                Destroy(model);
-        }
-    }
-
-    private Button FindButton(string objectName)
-    {
-        foreach (Button button in GetComponentsInChildren<Button>(true))
-        {
-            if (button.name == objectName)
-                return button;
-        }
-
-        return null;
+        if (startBattleButton != null)
+            startBattleButton.onClick.RemoveListener(StartBattle);
     }
 }

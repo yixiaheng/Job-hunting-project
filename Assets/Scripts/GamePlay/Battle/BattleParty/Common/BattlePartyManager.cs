@@ -40,11 +40,42 @@ public class BattlePartyManager : MonoBehaviour
         }
 
         Instance = this;
+        if (PartyFormationState.TryRestore(out BattleFormation remembered))
+        {
+            foreach (FormationMember member in remembered.members)
+            {
+                if (FindConfig(member.unitId) != null)
+                    formation.TryAdd(member.unitId, member.position);
+            }
+        }
     }
 
     public UnitConfig FindConfig(string unitId)
     {
         return unitCatalog != null ? unitCatalog.FindById(unitId) : null;
+    }
+
+    public bool TryCreateBattleLaunchData(out BattleLaunchData data, out string error)
+    {
+        var slots = new UnitConfig[BattleFormation.MaxMembers];
+        for (int position = 0; position < slots.Length; position++)
+        {
+            FormationMember member = formation.GetMemberAtPosition(position);
+            if (member == null)
+                continue;
+
+            UnitConfig config = FindConfig(member.unitId);
+            if (config == null)
+            {
+                data = null;
+                error = $"Ally slot {position + 1} references an unknown unit: {member.unitId}.";
+                return false;
+            }
+
+            slots[position] = config;
+        }
+
+        return BattleLaunchData.TryCreate(slots, out data, out error);
     }
 
     public bool AddOrReplace(UnitConfig config, int position)
@@ -105,6 +136,7 @@ public class BattlePartyManager : MonoBehaviour
 
     private void PublishFormationChanged()
     {
+        PartyFormationState.Save(Formation);
         GameEvents.Battle.Publish(new PartyFormationChangedEvent(this));
     }
 
