@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Battle.Logic;
 using Battle.SaveData;
@@ -8,6 +8,16 @@ using UnityEngine;
 namespace Battle.Events
 {
     public interface IBattleEvent { }
+
+    public readonly struct PartyFormationChangedEvent : IBattleEvent
+    {
+        public BattlePartyManager Manager { get; }
+
+        public PartyFormationChangedEvent(BattlePartyManager manager)
+        {
+            Manager = manager;
+        }
+    }
 
     public sealed class BattleEventBus : EventBus<IBattleEvent>
     {
@@ -21,10 +31,12 @@ namespace Battle.Events
     }
     public readonly struct AllySlectionEvent : IBattleEvent
     {
-        public UnitConfig Unit{ get; }
-        public AllySlectionEvent(UnitConfig unit)
+        public UnitConfig Unit { get; }
+        public AllyView Source { get; }
+        public AllySlectionEvent(UnitConfig unit, AllyView source = null)
         {
             Unit = unit;
+            Source = source;
         }
     }
     
