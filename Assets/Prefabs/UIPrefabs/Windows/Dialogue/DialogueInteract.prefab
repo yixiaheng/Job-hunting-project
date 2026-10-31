@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c763a94d902aa544a75eef0bbb9355a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: DialogueSystem.Runtime::DialogueSystem.DialogueInteractUI
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.DialogueInteractUI
   textMeshPro: {fileID: 3325550738629790858}
   image: {fileID: 1940884645574938930}
 --- !u!1 &4502756542413922285

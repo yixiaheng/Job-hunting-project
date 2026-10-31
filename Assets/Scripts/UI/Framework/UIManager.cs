@@ -21,6 +21,7 @@ namespace Game.UI
         [SerializeField] private UIRegistry registry;   
         [SerializeField] private UIRoot root;
         [SerializeField] private UIBackgroundController backgroundController;
+        [SerializeField] private UIBlurManager blurService;
         [SerializeField] private bool persistAcrossScenes = true;
 
         //没有被销毁的窗口实例
@@ -37,11 +38,13 @@ namespace Game.UI
         private bool cursorOverridden;
         private bool previousCursorVisible;
         private CursorLockMode previousCursorLock;
+        private Transform worldRoot;
 
         public UIRegistry Registry => registry;
         public UIRoot Root => root;
         public UIInputCoordinator Input => inputCoordinator;
         public UIBackgroundController Background => backgroundController;
+        public UIBlurManager Blur => blurService;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetInstance()
@@ -70,6 +73,11 @@ namespace Game.UI
             
             if (backgroundController == null)
                 backgroundController = gameObject.AddComponent<UIBackgroundController>();
+
+            if (blurService == null)
+                blurService = GetComponentInChildren<UIBlurManager>(true);
+            if (blurService != null)
+                blurService.Initialize(backgroundController);
 
             registry?.Rebuild();
             SceneManager.sceneUnloaded += HandleSceneUnloaded;
@@ -267,9 +275,7 @@ namespace Game.UI
                 return existing;
             }
 
-            Transform parent = root != null
-                ? root.GetLayerRoot(config.layer)
-                : transform;
+            Transform parent = GetPanelRoot(config);
 
             UIPanel panel = Instantiate(config.prefab, parent, false);
             panel.gameObject.SetActive(false);
@@ -283,6 +289,21 @@ namespace Game.UI
 
             panel.Initialize(this, handle, config);
             return instance;
+        }
+
+        private Transform GetPanelRoot(UIConfig config)
+        {
+            if (config.space == UISpace.Screen)
+                return root != null ? root.GetLayerRoot(config.layer) : transform;
+
+            if (worldRoot == null)
+            {
+                worldRoot = new GameObject("WorldUIRoot").transform;
+                worldRoot.SetParent(transform, false);
+                worldRoot.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+                worldRoot.localScale = Vector3.one;
+            }
+            return worldRoot;
         }
 
         private void StartProcessing(UIInstanceRecord instance)
@@ -308,7 +329,12 @@ namespace Game.UI
                     yield return instance.Panel.OpenRoutine(instance.PendingContext);
 
                     if (instance.RequestedOpen)
+                    {
+                        // 打开动画期间也可能收到下一行对话或新的交互目标。
+                        if (!ReferenceEquals(instance.Panel.Context, instance.PendingContext))
+                            instance.Panel.UpdateContext(instance.PendingContext);
                         break;
+                    }
 
                     continue;
                 }
@@ -339,7 +365,10 @@ namespace Game.UI
                 }
 
                 yield return instance.Panel.CloseRoutine();
-                UnregisterOpened(instance);
+                UnregisterOpened(instance, !instance.RequestedOpen);
+
+                if (instance.RequestedOpen)
+                    continue;
 
                 if (instance.Config.cacheMode == UICacheMode.DestroyOnClose)
                 {
@@ -367,11 +396,12 @@ namespace Game.UI
             RefreshFrameworkState();
         }
 
-        private void UnregisterOpened(UIInstanceRecord instance)
+        private void UnregisterOpened(UIInstanceRecord instance, bool detachFromParent = true)
         {
             openedPanels.Remove(instance);
             backgroundController.Release(instance.Handle);
-            RemoveFromParent(instance);
+            if (detachFromParent)
+                RemoveFromParent(instance);
         }
 
         private void RequestCloseTree(UIInstanceRecord instance)

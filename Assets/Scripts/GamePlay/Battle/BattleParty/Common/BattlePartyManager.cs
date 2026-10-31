@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Battle.Events;
 using Battle.SaveData;
@@ -13,11 +13,13 @@ public class BattlePartyManager : MonoBehaviour
 
     private BattleFormation formation = new();
 
+    //可选的上场角色，默认是全部，后续做成读取玩家现有情况
     public IReadOnlyList<UnitConfig> AvailableAllies => unitCatalog != null
         ? unitCatalog.Units
         : Array.Empty<UnitConfig>();
 
-    // Return a snapshot so UI cannot modify the real formation directly.
+
+    // 返回一个站队快照，确保UI部分无法直接修复真正的站队信息
     public BattleFormation Formation
     {
         get

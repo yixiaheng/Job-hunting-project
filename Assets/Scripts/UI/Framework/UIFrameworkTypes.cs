@@ -14,7 +14,12 @@ namespace Game.UI
         BattleEnemiesStatus = 7,
         BattleParty = 8,
         AlliesChoose = 9,
-        BattleResult = 10
+        BattleResult = 10,
+        BattleCommands = 11,
+        Dialogue = 12,
+        DialogueInteractions = 13,
+        ExplorationHUD = 14,
+        PartyBackdrop = 15
     }
 
     public enum UILayer
@@ -24,6 +29,12 @@ namespace Game.UI
         Popup = 2,
         Toast = 3,
         Overlay = 4
+    }
+
+    public enum UISpace
+    {
+        Screen = 0,
+        World = 1
     }
 
     public enum UIState

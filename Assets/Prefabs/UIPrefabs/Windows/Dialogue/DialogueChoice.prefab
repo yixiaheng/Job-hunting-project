@@ -306,6 +306,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be43937c649efb15839f9f69f5340, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: DialogueSystem.Runtime::DialogueSystem.DialogueChoiceUI
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.DialogueChoiceUI
   button: {fileID: 6017613451072481642}
   label: {fileID: 423837004454288949}

@@ -6,9 +6,6 @@ namespace Battle.Logic
 {
     public enum BattleResult { None, AllyWin, EnemyWin, Draw }
 
-    /// <summary>
-    /// 鎴樻枟娴佺▼锛岀函鏁版嵁鎿嶄綔锛屽紑濮嬫垬鏂楀氨鏄痭ew BattleFlow
-    /// </summary>
     public class BattleFlow
     {
         #region Fields
@@ -83,8 +80,6 @@ namespace Battle.Logic
             return true;
         }
 
-        //Step鏄洿鎺ョ敤浜巃i璋冪敤鐨勶紝step鍒嗕负鑾峰彇 Action 銆?Execute 銆丳eek涓夋
-        //浜轰负閫夋嫨鐨勬椂鍊欑洿鎺ヨ皟鐢‥xecute鍗冲彲
         public bool Step()
         {
             if (CompleteIfEnded())
@@ -166,7 +161,6 @@ namespace Battle.Logic
                 return false;
             }
 
-            /// Effect鏁堟灉澶勭悊锛氳皟鐢ㄦ晥鏋滄湇鍔℃潵杩涜澶勭悊
             foreach (EffectConfig effect in skill.effectConfigs)
             {
                 

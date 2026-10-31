@@ -4,13 +4,12 @@ using Battle.Logic;
 using Game;
 using Game.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public sealed class BattleSessionController : MonoBehaviour
 {
     [SerializeField] private BattleManager battleManager;
-    [SerializeField] private string partySceneName = "PartyScreen";
-    [SerializeField] private string exitSceneName = "SampleScene";
+    [SerializeField] private SceneId partyScene = SceneId.Party;
+    [SerializeField] private SceneId exitScene = SceneId.Sample;
 
     private IDisposable endedSubscription;
     private IDisposable retrySubscription;
@@ -61,10 +60,17 @@ public sealed class BattleSessionController : MonoBehaviour
         }
 
         BattleSession previous = BattleSessionContext.Current;
-        string battleScene = gameObject.scene.name;
-        string destination = previous != null && previous.BattleSceneName == battleScene
-            ? previous.ExitSceneName
-            : exitSceneName;
+        GameSceneManager scenes = GameSceneManager.Instance;
+        if (scenes == null || scenes.Catalog == null
+            || !scenes.Catalog.TryGetId(gameObject.scene.path, out SceneId battleScene))
+        {
+            Debug.LogError("当前战斗场景尚未在 SceneCatalog 中登记。", this);
+            return;
+        }
+
+        SceneId destination = previous != null && previous.BattleScene == battleScene
+            ? previous.ExitScene
+            : exitScene;
         BattleSessionContext.Begin(data, battleScene, destination);
     }
 
@@ -106,7 +112,7 @@ public sealed class BattleSessionController : MonoBehaviour
             return;
         }
 
-        string target = message.ReformParty ? partySceneName : session.BattleSceneName;
+        SceneId target = message.ReformParty ? partyScene : session.BattleScene;
         Navigate(target, () =>
         {
             BattleSessionContext.SetReforming(message.ReformParty);
@@ -122,7 +128,7 @@ public sealed class BattleSessionController : MonoBehaviour
         if (!AcceptRequest(message.BattleId))
             return;
 
-        string target = BattleSessionContext.Current?.ExitSceneName ?? exitSceneName;
+        SceneId target = BattleSessionContext.Current?.ExitScene ?? exitScene;
         Navigate(target, () =>
         {
             BattleLaunchContext.Clear();
@@ -130,11 +136,19 @@ public sealed class BattleSessionController : MonoBehaviour
         });
     }
 
-    private void Navigate(string target, Action prepare)
+    private void Navigate(SceneId target, Action prepare)
     {
-        if (!Application.CanStreamedLevelBeLoaded(target))
+        GameSceneManager scenes = GameSceneManager.Instance;
+        if (scenes == null)
         {
-            Debug.LogError($"Cannot load scene {target}. Check the active build profile.", this);
+            Debug.LogError("场景加载器尚未初始化。", this);
+            SetResultBusy(false);
+            return;
+        }
+
+        if (!scenes.CanLoad(target, out string error))
+        {
+            Debug.LogError(error, this);
             SetResultBusy(false);
             return;
         }
@@ -145,7 +159,8 @@ public sealed class BattleSessionController : MonoBehaviour
         try
         {
             prepare();
-            SceneManager.LoadScene(target);
+            if (!scenes.TryLoad(target, out error))
+                throw new InvalidOperationException(error);
         }
         catch (Exception exception)
         {

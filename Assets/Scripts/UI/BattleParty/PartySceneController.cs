@@ -4,14 +4,12 @@ using Battle.SaveData;
 using Game;
 using Game.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public sealed class PartySceneController : MonoBehaviour
 {
-    private const string BattleSceneName = "BattleScene";
-
     [SerializeField] private BattlePartyManager partyManager;
-    [SerializeField] private string exitSceneName = "SampleScene";
+    [SerializeField] private SceneId battleScene = SceneId.Battle;
+    [SerializeField] private SceneId exitScene = SceneId.Sample;
     [SerializeField] private Transform[] alliesPosition;
     [SerializeField, Min(0.01f)] private float modelScale = 7f;
 
@@ -71,20 +69,28 @@ public sealed class PartySceneController : MonoBehaviour
 
         BattleSession previous = BattleSessionContext.Current;
         bool continuing = previous != null && previous.IsReforming;
-        string targetScene = continuing ? previous.BattleSceneName : BattleSceneName;
-        string exitScene = continuing ? previous.ExitSceneName : exitSceneName;
-        if (!Application.CanStreamedLevelBeLoaded(targetScene))
+        SceneId targetScene = continuing ? previous.BattleScene : battleScene;
+        SceneId destination = continuing ? previous.ExitScene : exitScene;
+        GameSceneManager scenes = GameSceneManager.Instance;
+        if (scenes == null)
         {
-            Debug.LogError($"Add {targetScene} to the active build profile scene list before starting battle.", this);
+            Debug.LogError("场景加载器尚未初始化。", this);
+            return;
+        }
+
+        if (!scenes.CanLoad(targetScene, out error))
+        {
+            Debug.LogError(error, this);
             return;
         }
 
         isStartingBattle = true;
-        BattleLaunchContext.Set(data);
         try
         {
-            BattleSessionContext.Begin(data, targetScene, exitScene);
-            SceneManager.LoadScene(targetScene);
+            BattleLaunchContext.Set(data);
+            BattleSessionContext.Begin(data, targetScene, destination);
+            if (!scenes.TryLoad(targetScene, out error))
+                throw new InvalidOperationException(error);
         }
         catch (Exception exception)
         {

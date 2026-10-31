@@ -1,8 +1,11 @@
-﻿using System;
+using System;
 using Battle.SaveData;
 using UnityEngine;
 
 /// <summary>Confirmed formation for this application session; no scene references.</summary>
+/// <summary>
+/// 跨场景记住玩家已经确认的配队。
+/// </summary>
 public static class PartyFormationState
 {
     private static BattleFormation saved;

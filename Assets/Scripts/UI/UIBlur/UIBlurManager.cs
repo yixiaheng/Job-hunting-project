@@ -1,36 +1,36 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+/// <summary>由 UIManager 持有的背景模糊服务，负责相机捕获和纹理处理。</summary>
 [DefaultExecutionOrder(10000)]
 public class UIBlurManager : MonoBehaviour
 {
-    //单例模式
     public static UIBlurManager Instance { get; private set; }
+    public static event Action InstanceChanged;
 
-    //所看相机
     [SerializeField] private Camera sourceCamera;
-    //模糊材质
     [SerializeField] private Material blurMaterial;
-    //采样率降低的倍数
     [SerializeField, Range(1, 8)] private int downSample = 4;
-    //模糊强度
     [SerializeField, Range(0.1f, 10f)] private float blurSize = 1.5f;
-    //重复模糊次数
     [SerializeField, Range(1, 4)] private int iterations = 2;
-    //模糊颜色
     [SerializeField] private Color blurColor = new Color(0.72f, 0.78f, 0.9f, 0.82f);
 
-    //记录所有需要模糊的图片
     private readonly List<UIBlurMask> masks = new List<UIBlurMask>();
+    private UIBackgroundController backgroundController;
+    private bool callbacksRegistered;
+    private Camera capturedCamera;
     private RenderTexture blurTexture;
     private RenderTexture sourceTexture;
     private RenderTexture temporaryTexture;
     private int textureWidth;
     private int textureHeight;
     private Coroutine captureCoroutine;
-    private bool captureQueued;                     //捕获已入队
-    private bool hasCapturedCamera;                 //已经采集相机
+    private bool captureQueued;
+    private bool hasCapturedCamera;
     private Vector3 lastCapturedPosition;
     private Quaternion lastCapturedRotation;
     private float lastCapturedFieldOfView;
@@ -41,205 +41,289 @@ public class UIBlurManager : MonoBehaviour
     public RenderTexture BlurTexture => blurTexture;
     public Color BlurColor => blurColor;
 
-    private void Awake()
+    private bool CanRender => isActiveAndEnabled && masks.Count > 0
+        && (backgroundController == null || backgroundController.Current.ShouldBlur);
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetInstance()
+    {
+        Instance = null;
+        InstanceChanged = null;
+    }
+
+    /// <summary>绑定模糊请求统计，允许 UIManager 在本组件 OnEnable 前调用。</summary>
+    public void Initialize(UIBackgroundController controller)
+    {
+        Unsubscribe();
+        backgroundController = controller;
+        if (isActiveAndEnabled)
+        {
+            Subscribe();
+            RefreshDemand();
+        }
+    }
+
+    private void OnEnable()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            enabled = false;
+            // 服务挂在 UIManager 上，重复时只销毁服务组件。
+            Destroy(this);
             return;
         }
 
         Instance = this;
+        Subscribe();
+        InstanceChanged?.Invoke();
+        RefreshDemand();
     }
 
-    /// <summary>
-    /// UIBulurMask直接在初始化时调用方法注册
-    /// </summary>
-    /// <param name="mask"></param>
+    private void Subscribe()
+    {
+        if (callbacksRegistered)
+            return;
+        if (backgroundController != null)
+            backgroundController.StateChanged += HandleBackgroundChanged;
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+        SceneManager.sceneUnloaded += HandleSceneUnloaded;
+        SceneManager.activeSceneChanged += HandleActiveSceneChanged;
+        callbacksRegistered = true;
+    }
+
+    private void Unsubscribe()
+    {
+        if (!callbacksRegistered)
+            return;
+        if (backgroundController != null)
+            backgroundController.StateChanged -= HandleBackgroundChanged;
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
+        SceneManager.sceneUnloaded -= HandleSceneUnloaded;
+        SceneManager.activeSceneChanged -= HandleActiveSceneChanged;
+        callbacksRegistered = false;
+    }
+
     public void Register(UIBlurMask mask)
     {
-        if (mask == null) return;
-        if (!masks.Contains(mask)) masks.Add(mask);
+        if (mask == null || !mask.isActiveAndEnabled)
+            return;
+        if (!masks.Contains(mask))
+            masks.Add(mask);
+        if (CanRender && hasCapturedCamera && !CameraChanged())
+            mask.Apply(blurTexture, blurColor);
+        else
+            mask.Clear();
         RequestRender();
     }
-    /// <summary>
-    /// 取消注册
-    /// </summary>
-    /// <param name="mask"></param>
+
     public void Unregister(UIBlurMask mask)
     {
-        if (mask != null) masks.Remove(mask);
+        if (mask != null)
+        {
+            masks.Remove(mask);
+            mask.Clear();
+        }
+        if (masks.Count == 0)
+            CancelCaptureAndRelease();
     }
 
-
-    //渲染模糊
     public void RenderBlur()
     {
         RequestRender();
     }
 
-    //LateUpdate 在Update之后调用
+    private void HandleBackgroundChanged(UIBackgroundState state)
+    {
+        RefreshDemand();
+    }
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InvalidateCapture();
+    }
+
+    private void HandleSceneUnloaded(Scene scene)
+    {
+        InvalidateCapture();
+    }
+
+    private void HandleActiveSceneChanged(Scene previous, Scene next)
+    {
+        InvalidateCapture();
+    }
+
+    private void InvalidateCapture()
+    {
+        CancelCaptureAndRelease();
+        RefreshDemand();
+    }
+
+    private void RefreshDemand()
+    {
+        if (CanRender)
+            RequestRender();
+        else
+            CancelCaptureAndRelease();
+    }
+
     private void LateUpdate()
     {
-        if (masks.Count == 0) return;
+        masks.RemoveAll(mask => mask == null || !mask.isActiveAndEnabled);
+        if (!CanRender)
+        {
+            if (captureQueued || blurTexture != null)
+                CancelCaptureAndRelease();
+            return;
+        }
+        if (capturedCamera != ResolveCamera())
+            CancelCaptureAndRelease();
         if (!hasCapturedCamera || CameraChanged())
             RequestRender();
     }
 
-    //请求渲染
+    private Camera ResolveCamera()
+    {
+        // 不缓存 Camera.main，场景或主相机更换后使用新相机。
+        return sourceCamera != null ? sourceCamera : Camera.main;
+    }
+
     private void RequestRender()
     {
-        if (captureQueued || masks.Count == 0) return;
+        if (captureQueued || !CanRender || blurMaterial == null)
+            return;
+        captureQueued = true;
         captureCoroutine = StartCoroutine(RenderAtEndOfFrame());
     }
 
     private IEnumerator RenderAtEndOfFrame()
     {
-        captureQueued = true;
-
-        //等待当帧渲染完之后
         yield return new WaitForEndOfFrame();
         captureQueued = false;
         captureCoroutine = null;
-
-
-        if (masks.Count > 0)
+        if (CanRender)
             RenderBlurNow();
     }
 
-    /// <summary>
-    /// 渲染模糊图片
-    /// </summary>
     private void RenderBlurNow()
     {
-        if (blurMaterial == null)
-        {
-            Debug.LogError("UIBlurManager 缺少高斯模糊材质");
+        Camera camera = ResolveCamera();
+        if (camera == null || blurMaterial == null)
             return;
-        }
-
-        if (sourceCamera == null) sourceCamera = Camera.main;
-        if (sourceCamera == null)
-        {
-            Debug.LogError("UIBlurManager 找不到用于捕获背景的 Camera");
-            return;
-        }
 
         EnsureTextures();
-
-        //暂存摄像机原本的位置
-        RenderTexture previousTarget = sourceCamera.targetTexture;
-        //记录摄像机原本是否启用
-        bool previousEnabled = sourceCamera.enabled;
-        //关闭自动渲染
-        sourceCamera.enabled = false;
-        //修改摄像机的输出目标
-        sourceCamera.targetTexture = sourceTexture;
-        //手动渲染一次
-        sourceCamera.Render();      //本次渲染的输出目标是sourceTexture，也就是将这次的屏幕图形获取下来了
-
-        //恢复
-        sourceCamera.targetTexture = previousTarget;
-        sourceCamera.enabled = previousEnabled;
-
-        //给Material设置模糊强度
-        blurMaterial.SetFloat("_Size", blurSize);
-        //连续进行两次处理
-        //0是横向模糊，1是纵向模糊
-        Graphics.Blit(sourceTexture, temporaryTexture, blurMaterial, 0);
-        Graphics.Blit(temporaryTexture, blurTexture, blurMaterial, 1);
-        
-        //重复模糊次数，循环
-        for (int index = 1; index < iterations; index++)
+        RenderTexture previousTarget = camera.targetTexture;
+        RenderTexture previousActive = RenderTexture.active;
+        bool previousEnabled = camera.enabled;
+        try
         {
-            Graphics.Blit(blurTexture, temporaryTexture, blurMaterial, 0);
-            Graphics.Blit(temporaryTexture, blurTexture, blurMaterial, 1);
+            camera.enabled = false;
+            camera.targetTexture = sourceTexture;
+            camera.Render();
+        }
+        finally
+        {
+            if (camera != null)
+            {
+                camera.targetTexture = previousTarget;
+                camera.enabled = previousEnabled;
+            }
+            RenderTexture.active = previousActive;
         }
 
-        //记录本次捕获时的相机状态
-        lastCapturedPosition = sourceCamera.transform.position;
-        lastCapturedRotation = sourceCamera.transform.rotation;
-        lastCapturedFieldOfView = sourceCamera.fieldOfView;
-        lastCapturedAspect = sourceCamera.aspect;
+        try
+        {
+            // 保留横向、纵向两遍高斯模糊及原有迭代次数。
+            blurMaterial.SetFloat("_Size", blurSize);
+            Graphics.Blit(sourceTexture, temporaryTexture, blurMaterial, 0);
+            Graphics.Blit(temporaryTexture, blurTexture, blurMaterial, 1);
+            for (int index = 1; index < iterations; index++)
+            {
+                Graphics.Blit(blurTexture, temporaryTexture, blurMaterial, 0);
+                Graphics.Blit(temporaryTexture, blurTexture, blurMaterial, 1);
+            }
+        }
+        finally
+        {
+            RenderTexture.active = previousActive;
+        }
+
+        capturedCamera = camera;
+        lastCapturedPosition = camera.transform.position;
+        lastCapturedRotation = camera.transform.rotation;
+        lastCapturedFieldOfView = camera.fieldOfView;
+        lastCapturedAspect = camera.aspect;
         lastCapturedScreenWidth = Screen.width;
         lastCapturedScreenHeight = Screen.height;
         hasCapturedCamera = true;
-        RefreshMasks();
+        foreach (UIBlurMask mask in masks)
+        {
+            if (mask != null && mask.isActiveAndEnabled)
+                mask.Apply(blurTexture, blurColor);
+        }
     }
 
     private bool CameraChanged()
     {
-        //在跟过去的相机状态比较，每次渲染过后会进行状态记录
-        if (sourceCamera == null) return true;
-        if ((sourceCamera.transform.position - lastCapturedPosition).sqrMagnitude > 0.000001f)
+        Camera camera = ResolveCamera();
+        if (camera == null || camera != capturedCamera)
             return true;
-        if (Quaternion.Angle(sourceCamera.transform.rotation, lastCapturedRotation) > 0.01f)
+        if ((camera.transform.position - lastCapturedPosition).sqrMagnitude > 0.000001f)
             return true;
-        if (!Mathf.Approximately(sourceCamera.fieldOfView, lastCapturedFieldOfView))
+        if (Quaternion.Angle(camera.transform.rotation, lastCapturedRotation) > 0.01f)
             return true;
-        if (!Mathf.Approximately(sourceCamera.aspect, lastCapturedAspect))
+        if (!Mathf.Approximately(camera.fieldOfView, lastCapturedFieldOfView))
+            return true;
+        if (!Mathf.Approximately(camera.aspect, lastCapturedAspect))
             return true;
         return Screen.width != lastCapturedScreenWidth || Screen.height != lastCapturedScreenHeight;
     }
 
     private void EnsureTextures()
     {
-        //获取屏幕的高低
         int width = Mathf.Max(1, Screen.width / Mathf.Max(1, downSample));
         int height = Mathf.Max(1, Screen.height / Mathf.Max(1, downSample));
-
         if (blurTexture != null && textureWidth == width && textureHeight == height)
             return;
 
         ReleaseTextures();
         textureWidth = width;
         textureHeight = height;
-
-        //给渲染图片赋值
-        sourceTexture = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32)
-        {
-            name = "UIBlur_Source",
-            filterMode = FilterMode.Bilinear,
-            useMipMap = false,
-            autoGenerateMips = false
-        };
-        temporaryTexture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32)
-        {
-            name = "UIBlur_Temporary",
-            filterMode = FilterMode.Bilinear,
-            useMipMap = false,
-            autoGenerateMips = false
-        };
-        blurTexture = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32)
-        {
-            name = "UIBlur_Result",
-            filterMode = FilterMode.Bilinear,
-            useMipMap = false,
-            autoGenerateMips = false
-        };
-
-        //Create：实际渲染出来
-        sourceTexture.Create();
-        temporaryTexture.Create();
-        blurTexture.Create();
+        sourceTexture = CreateTexture("UIBlur_Source", width, height, 24);
+        temporaryTexture = CreateTexture("UIBlur_Temporary", width, height, 0);
+        blurTexture = CreateTexture("UIBlur_Result", width, height, 0);
     }
 
-    private void RefreshMasks()
+    private static RenderTexture CreateTexture(string textureName, int width, int height, int depth)
     {
-        for (int index = masks.Count - 1; index >= 0; index--)
+        RenderTexture texture = new RenderTexture(width, height, depth, RenderTextureFormat.ARGB32)
         {
-            if (masks[index] == null)
-            {
-                masks.RemoveAt(index);
-                continue;
-            }
+            name = textureName,
+            filterMode = FilterMode.Bilinear,
+            useMipMap = false,
+            autoGenerateMips = false
+        };
+        texture.Create();
+        return texture;
+    }
 
-            masks[index].Apply(blurTexture, blurColor);
-        }
+    private void CancelCaptureAndRelease()
+    {
+        if (captureCoroutine != null)
+            StopCoroutine(captureCoroutine);
+        captureCoroutine = null;
+        captureQueued = false;
+        hasCapturedCamera = false;
+        capturedCamera = null;
+        ReleaseTextures();
     }
 
     private void ReleaseTextures()
     {
+        foreach (UIBlurMask mask in masks)
+        {
+            if (mask != null)
+                mask.Clear();
+        }
         ReleaseTexture(sourceTexture);
         ReleaseTexture(temporaryTexture);
         ReleaseTexture(blurTexture);
@@ -250,16 +334,28 @@ public class UIBlurManager : MonoBehaviour
 
     private static void ReleaseTexture(RenderTexture texture)
     {
-        if (texture == null) return;
-        if (texture.IsCreated()) texture.Release();
+        if (texture == null)
+            return;
+        if (texture.IsCreated())
+            texture.Release();
         Destroy(texture);
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+        CancelCaptureAndRelease();
+        if (Instance == this)
+        {
+            Instance = null;
+            InstanceChanged?.Invoke();
+        }
     }
 
     private void OnDestroy()
     {
-        if (captureCoroutine != null)
-            StopCoroutine(captureCoroutine);
-        if (Instance == this) Instance = null;
-        ReleaseTextures();
+        Unsubscribe();
+        CancelCaptureAndRelease();
+        masks.Clear();
     }
 }

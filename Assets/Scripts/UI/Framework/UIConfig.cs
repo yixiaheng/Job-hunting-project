@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.UI
 {
@@ -11,6 +11,8 @@ namespace Game.UI
 
         [Header("Placement")]
         public UILayer layer = UILayer.Window;
+        [Tooltip("Screen 挂到屏幕 UI 层；World 保留预制体的世界空间 Canvas 和坐标。")]
+        public UISpace space = UISpace.Screen;
 
         [Header("Instance")]
         public UIInstanceMode instanceMode = UIInstanceMode.Single;

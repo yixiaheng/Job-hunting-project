@@ -1,8 +1,11 @@
-﻿using Game.UI;
+using Game.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// UI运行时引导
+/// </summary>
 public static class UIRuntimeBootstrap
 {
     private const string ConfigPath = "Bootstrap/UIBootstrapConfig";
@@ -13,6 +16,10 @@ public static class UIRuntimeBootstrap
         SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 
+
+    /// <summary>
+    /// 在场景加载之前自动调用
+    /// </summary>
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {

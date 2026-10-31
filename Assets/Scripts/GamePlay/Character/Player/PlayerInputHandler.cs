@@ -31,9 +31,6 @@ public class PlayerInputHandler : MonoBehaviour
     private bool cursorOverridden;
     private bool previousCursorVisible;
     private CursorLockMode previousCursorLock;
-    //场景组件
-    private DialogueUIController _dialogueUI;
-
     CinemachineInputAxisController _cameraInput;
 
     void Awake()
@@ -44,7 +41,6 @@ public class PlayerInputHandler : MonoBehaviour
     void Start()
     {
         Bind();
-        _dialogueUI = FindFirstObjectByType<DialogueUIController>();
         _cameraInput = FindFirstObjectByType<CinemachineInputAxisController>();
     }
 
@@ -53,38 +49,6 @@ public class PlayerInputHandler : MonoBehaviour
         Bind();
         RefreshControls();
         InventoryUIInput();
-        DialogueInteract();
-    }
-
-    /// <summary>
-    /// 对话交互处理
-    /// </summary>
-    private void DialogueInteract()
-    {
-        var runner = DialogueRunner.Instance;
-        if (runner == null || !runner.isDialoguing)
-            return;
-        if ((boundUI != null && boundUI.Input.Current.BlockCamera)
-            || Mouse.current == null || !Mouse.current.leftButton.wasPressedThisFrame)
-            return;
-
-        if (_dialogueUI == null)
-            _dialogueUI = FindFirstObjectByType<DialogueUIController>();
-        if (_dialogueUI == null || _dialogueUI.DialogueContext == null)
-            return;
-
-        var clickArea = _dialogueUI.DialogueContext.transform as RectTransform;
-        if (clickArea == null)
-            return;
-
-        Canvas canvas = clickArea.GetComponentInParent<Canvas>();
-        Camera eventCamera = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay
-            ? canvas.worldCamera
-            : null;
-
-        Vector2 pointerPosition = Mouse.current.position.ReadValue();
-        if (RectTransformUtility.RectangleContainsScreenPoint(clickArea, pointerPosition, eventCamera))
-            runner.Advance();
     }
 
     /// <summary>
@@ -215,7 +179,7 @@ public class PlayerInputHandler : MonoBehaviour
     /// <param name="state"></param>
     void HandleUIInput(UIInputState state)
     {
-        // UIManager owns the UI cursor request; dialogue keeps its own cursor source.
+        // UIManager 统一管理界面光标，玩家输入只合并移动和相机限制。
         SetInputRestriction(uiSource, state.BlockMovement, state.BlockCamera, false);
     }
 
@@ -242,8 +206,7 @@ public class PlayerInputHandler : MonoBehaviour
     /// <param name="locked"></param>
     void HandleDialogueLock(bool locked)
     {   
-        //一般三个全锁/开
-        SetInputRestriction(dialogueSource, locked, locked, locked);
+        SetInputRestriction(dialogueSource, locked, locked, false);
     }
 
     //旧接口

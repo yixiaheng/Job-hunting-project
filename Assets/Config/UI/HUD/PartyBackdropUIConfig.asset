@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b064ed19ca3eba041bc0a5273ea5d26b, type: 3}
+  m_Name: PartyBackdropUIConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIConfig
+  id: 15
+  prefab: {fileID: 900002002, guid: 77517e81272b4744af7ee7138eff7d66, type: 3}
+  layer: 0
+  space: 1
+  instanceMode: 0
+  cacheMode: 1
+  lifetime: 1
+  handlesBack: 0
+  hideLowerWindows: 0
+  showCursor: 0
+  blockMovement: 0
+  blockCamera: 0
+  modal: 0
+  closeWhenClickMask: 0
+  blurBackground: 0

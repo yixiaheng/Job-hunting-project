@@ -4,16 +4,16 @@ using UnityEngine;
 public sealed class BattleSession
 {
     public BattleLaunchData LaunchData { get; }
-    public string BattleSceneName { get; }
-    public string ExitSceneName { get; }
+    public SceneId BattleScene { get; }
+    public SceneId ExitScene { get; }
     public bool IsReforming { get; }
 
-    internal BattleSession(BattleLaunchData data, string battleSceneName,
-        string exitSceneName, bool isReforming = false)
+    internal BattleSession(BattleLaunchData data, SceneId battleScene,
+        SceneId exitScene, bool isReforming = false)
     {
         LaunchData = data ?? throw new ArgumentNullException(nameof(data));
-        BattleSceneName = battleSceneName;
-        ExitSceneName = exitSceneName;
+        BattleScene = battleScene;
+        ExitScene = exitScene;
         IsReforming = isReforming;
     }
 }
@@ -23,12 +23,13 @@ public static class BattleSessionContext
 {
     public static BattleSession Current { get; private set; }
 
-    public static void Begin(BattleLaunchData data, string battleSceneName, string exitSceneName)
+    public static void Begin(BattleLaunchData data, SceneId battleScene, SceneId exitScene)
     {
-        if (string.IsNullOrWhiteSpace(battleSceneName) || string.IsNullOrWhiteSpace(exitSceneName))
-            throw new ArgumentException("Battle and exit scene names must be configured.");
+        if (battleScene == SceneId.None || exitScene == SceneId.None
+            || !Enum.IsDefined(typeof(SceneId), battleScene) || !Enum.IsDefined(typeof(SceneId), exitScene))
+            throw new ArgumentException("Battle and exit scene IDs must be configured.");
 
-        Current = new BattleSession(data, battleSceneName, exitSceneName);
+        Current = new BattleSession(data, battleScene, exitScene);
     }
 
     public static void SetReforming(bool value)
@@ -37,7 +38,7 @@ public static class BattleSessionContext
             throw new InvalidOperationException("There is no active battle session.");
 
         Current = new BattleSession(Current.LaunchData,
-            Current.BattleSceneName, Current.ExitSceneName, value);
+            Current.BattleScene, Current.ExitScene, value);
     }
 
     internal static void Restore(BattleSession session)

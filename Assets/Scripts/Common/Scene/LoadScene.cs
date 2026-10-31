@@ -1,17 +1,20 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class LoadScene : MonoBehaviour
 {
     public SceneId sceneId;
-    public LoadSceneMode mode;
+    public SceneTransitionMode mode;
 
     public void OnClick_LoadScene()
     {
-        string name = GameSceneManager.SceneNames[(int)sceneId];
-        if(mode == LoadSceneMode.Immediate)
-            GameSceneManager.Instance.Load(name);
-        else
-            GameSceneManager.Instance.LoadSync(name, GameSceneManager.Instance.fadeDuration);
+        GameSceneManager manager = GameSceneManager.Instance;
+        if (manager == null)
+        {
+            Debug.LogError("场景加载器尚未初始化。", this);
+            return;
+        }
+
+        if (!manager.TryLoad(sceneId, out string error, mode))
+            Debug.LogError(error, this);
     }
 }

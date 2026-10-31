@@ -2,6 +2,7 @@
 using Battle.Logic;
 using Battle.Events;
 using Game;
+using System;
 using Game.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -26,15 +27,16 @@ public class BattleManager : MonoBehaviour
     //pos由BattleManager中自己设置
     public Transform[] allyPos;
     public Transform[] enemyPos;
-    public BattleFlow battleFlow{get; private set;}
+    public BattleFlow battleFlow { get; private set;}
     private readonly List<BattleUnit> spawnedUnits = new();
     private UnitConfig[] launchAllies;
     private bool resultPublished;
     private UIManager battleUIManager;
     private UIHandle alliesStatusHandle;
     private UIHandle enemiesStatusHandle;
+    private UIHandle commandsHandle;
 
-    public event System.Action<BattleFlow> BattleStarted;
+    public event Action<BattleFlow> BattleStarted;
 
     private void Awake() 
     {
@@ -61,7 +63,7 @@ public class BattleManager : MonoBehaviour
         if (Instance != this)
             return;
 
-        CloseStatusPanels();
+        CloseBattlePanels();
 
         if (battleFlow != null)
             battleFlow.GameOverEvent -= HandleBattleEnded;
@@ -95,7 +97,7 @@ public class BattleManager : MonoBehaviour
 
         if (units.Count == 0)
         {
-            CloseStatusPanels();
+            CloseBattlePanels();
             Debug.LogError("没有单位：把 UnitConfig 拖到 Allies / Enemies");
             return;
         }
@@ -108,6 +110,8 @@ public class BattleManager : MonoBehaviour
         enemiesStatusHandle = battleUIManager.Open(UIId.BattleEnemiesStatus,
             new BattleEnemiesUIContext(units.FindAll(unit => unit.faction == Faction.Enemy),
                 battleCamera != null ? battleCamera : Camera.main));
+        commandsHandle = battleUIManager.Open(UIId.BattleCommands,
+            new BattleCommandsUIContext(this));
         battleFlow.Ready();
         BattleStarted?.Invoke(battleFlow);
         RefreshAll();
@@ -127,6 +131,7 @@ public class BattleManager : MonoBehaviour
             return;
 
         resultPublished = true;
+        RefreshAll();
         GameEvents.Battle.Publish(new BattleEndedEvent(battleFlow.BattleId, result, battleFlow.TurnCount));
     }
 
@@ -170,7 +175,7 @@ public class BattleManager : MonoBehaviour
         spawnedUnits.Clear();
     }
 
-    private void CloseStatusPanels()
+    private void CloseBattlePanels()
     {
         if (battleUIManager != null)
         {
@@ -178,9 +183,12 @@ public class BattleManager : MonoBehaviour
                 battleUIManager.Close(alliesStatusHandle);
             if (enemiesStatusHandle.IsValid)
                 battleUIManager.Close(enemiesStatusHandle);
+            if (commandsHandle.IsValid)
+                battleUIManager.Close(commandsHandle);
         }
         alliesStatusHandle = default;
         enemiesStatusHandle = default;
+        commandsHandle = default;
     }
 
     private void SpawnUnits(
@@ -317,6 +325,12 @@ public class BattleManager : MonoBehaviour
             && battleUIManager.TryGetPanel(enemiesStatusHandle, out BattleEnemiesStatusPanel enemiesPanel))
         {
             enemiesPanel.Refresh(battleFlow?.CurrentUnit);
+        }
+
+        if (battleUIManager != null
+            && battleUIManager.TryGetPanel(commandsHandle, out BattleUIController commandsPanel))
+        {
+            commandsPanel.Refresh();
         }
     }
     
