@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaafcf29e74a1b74588f6e8737845484, type: 3}
+  m_Name: Set_2
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Characters.RelicSetConfig
+  id: set_2
+  displayName: "\u751F\u547D\u4E4B\u73AF"
+  planar: 1
+  twoPieceStat: 1
+  twoPieceBonus: 0.12
+  fourPieceDamageBonus: 0
+  fourPieceOpeningShield: 0

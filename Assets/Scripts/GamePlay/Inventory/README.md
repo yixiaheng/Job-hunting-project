@@ -1,4 +1,4 @@
-# 背包系统
+﻿# 背包系统
 
 背包现在也通过 `Game.GameEvents.Inventory` 发布 `InventoryChangedEvent`，原 `Service.Changed` 保留兼容。接入方选择一个来源监听，避免重复刷新。公共机制见 [事件系统说明](../../Common/Events/README.md)。
 
@@ -46,17 +46,17 @@ bool consumed = service.TryConsume(new[]
 
 ## 后续接口
 
-食物的真实效果、养成逻辑、装备穿戴还未接入。点击未接入的功能会显示提示，**不会伪造使用成功，也不会扣除物品**。
+角色养成与装备穿戴已经接入全局 `PlayerRuntime` 和 `CharacterProgressionService`，详见 [角色养成系统](../../../../Docs/CharacterProgression.md)。食物效果仍由实际处理器接入；未接入时不扣物品。
 
 - 实现 `IItemUseHandler`，用 `RegisterUseHandler(ItemUseKind, handler)` 注册复苏、治疗、秘技点、战前攻击增益等处理器。`CanUse` 只做查询，`TryUse` 成功后才能返回 true。处理器不能回调修改背包；物品由 Service 在效果成功后统一扣除。多份使用的效果应由处理器按 `Quantity` 校验并一次应用，失败时不应留下部分效果。
 - `InventoryManager.UseRequested`：需要选择角色 / 装备时打开目标界面；选定后调用 `TryUse(configId, quantity, targetId, out reason)`。
 - `InventoryManager.EquipRequested`：参数是装备实例 ID，打开角色选择 / 穿戴界面。通过 `Service.EquipmentUsage` 提供 `IEquipmentUsageProvider`，即可显示穿戴者并禁止移除穿戴中的装备。
-- `InventoryManager.ProgressionRequested`：堆叠材料传配置 ID，独立装备传实例 ID。养成界面选择目标、计算消耗，通过 Service 扣材料，并使用 `TrySetEquipmentProgress` 更新装备进度。
+- `InventoryManager.ProgressionRequested`：堆叠材料传配置 ID，独立装备传实例 ID。导航桥打开养成界面，通过 `CharacterProgressionService.Preview/TryCommit` 统一校验、保存与扣材料；连接养成服务后不再调用旧 `TrySetEquipmentProgress`。
 - `Changed`：用于刷新其他 UI。对外读取的装备和快照是副本，修改副本不会修改背包。
 
 ## 存档
 
-使用项目已有的 SaveSystem，单独注册 `player_inventory`，文件为 `Application.persistentDataPath/Saves/slot_0/player_inventory.json`，不替换旧示例的 `inventory.json`，也不影响战斗队伍存档。
+正式玩家运行时使用项目 SaveSystem 的 `player_profile.json`，将角色与背包成组保存、成组恢复。旧 `player_inventory.json` 只用于首次迁移，保留装备实例 ID 和其他模块文件。未连接全局运行时的旧独立背包仍保留原存档路径。
 
 仅首次找不到存档时发放 `InventoryManager.startingItems`；再次启动直接读取，不重复发放。数据变化在 LateUpdate 保存，同帧修改合并；也可点击保存，关闭背包、应用暂停和退出时保存。保存失败保留待保存状态，自动重试间隔 5 秒。
 

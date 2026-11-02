@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MageUlt
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 112
-  Name: 永冬星陨
+  Name: "\u6C38\u51AC\u661F\u9668"
   kind: 2
   element: 1
   skillPointCost: 0
@@ -22,14 +22,26 @@ MonoBehaviour:
   targetRule: 2
   targetSide: 1
   effectConfigs:
-  - effectType: 0
+  - origin: 0
+    key: FrostNova.Ultimate.Damage
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
     value: 1.35
     scaleStat: 0
     target: 2
     buffId: 0
     buff: {fileID: 0}
     stack: 0
-  - effectType: 5
+  - origin: 0
+    key: FrostNova.Ultimate.AdvanceAction
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 5
     value: -0.2
     scaleStat: 2
     target: 2

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Battle.Logic
 {
@@ -22,6 +22,8 @@ namespace Battle.Logic
     public readonly struct AttackResult
     {
         public BattleUnit Attacker { get; }
+        public EffectOrigin Origin { get; }
+        public string EffectKey { get; }
         public BattleUnit Target { get; }
         public int RawDamage { get; }
         public int FinalDamage { get; }
@@ -31,8 +33,10 @@ namespace Battle.Logic
         public int CurrentHealth { get; }
         public bool IsDead => CurrentHealth <= 0;
 
-        public AttackResult(BattleUnit attacker, BattleUnit target, int rawDamage, int finalDamage, DamageApplication application)
+        public AttackResult(BattleUnit attacker, BattleUnit target, int rawDamage, int finalDamage, DamageApplication application,
+            EffectOrigin origin = EffectOrigin.ActiveSkill, string effectKey = null)
         {
+            Origin = origin; EffectKey = effectKey;
             Attacker = attacker;
             Target = target;
             RawDamage = rawDamage;
@@ -52,11 +56,11 @@ namespace Battle.Logic
             if (target == null) throw new System.ArgumentNullException(nameof(target));
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
 
-            int rawDamage = Mathf.Max(0, Mathf.RoundToInt(attacker.GetStat(effect.scaleStat) * effect.value));
+            int rawDamage = Mathf.Max(0, Mathf.RoundToInt(attacker.GetStat(effect.scaleStat) * effect.value * (1f + attacker.damageBonus)));
             int defence = target.GetStat(StatType.Defence);
             int finalDamage = Mathf.Max(1, rawDamage - Mathf.Max(0, defence));
             DamageApplication application = target.ApplyDamage(finalDamage);
-            var result = new AttackResult(attacker, target, rawDamage, finalDamage, application);
+            var result = new AttackResult(attacker, target, rawDamage, finalDamage, application, effect.origin, effect.key);
 
             Debug.Log($"    伤害 {Name(target)}  -{result.HealthDamage}  HP {result.PreviousHealth}→{result.CurrentHealth}/{target.maxHealth}  防御{defence}{(result.IsDead ? "  倒下" : "")}");
             return result;

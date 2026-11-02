@@ -33,8 +33,8 @@
   <Project Path="PPv2URPConverters.csproj" />
   <Project Path="MagicaClothV2.Editor.csproj" />
   <Project Path="Unity.Searcher.Editor.csproj" />
-  <Project Path="Unity.ProBuilder.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Unity.ProBuilder.Editor.csproj" />
   <Project Path="UnityEditor.TestRunner.csproj" />
   <Project Path="Unity.VisualScripting.Core.csproj" />
   <Project Path="Unity.RenderPipelines.Universal.Runtime.csproj" />

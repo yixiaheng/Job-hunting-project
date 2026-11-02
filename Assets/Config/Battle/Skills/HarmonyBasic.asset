@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HarmonyBasic
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 116
-  Name: 弦光
+  Name: "\u5F26\u5149"
   kind: 0
   element: 5
   skillPointCost: 0
@@ -22,8 +22,14 @@ MonoBehaviour:
   targetRule: 0
   targetSide: 1
   effectConfigs:
-  - effectType: 0
-    value: 1.0
+  - origin: 0
+    key: AstralChord.Basic.Damage
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
+    value: 1
     scaleStat: 0
     target: 0
     buffId: 0

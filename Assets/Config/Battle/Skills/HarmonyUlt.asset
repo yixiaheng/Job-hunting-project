@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HarmonyUlt
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 118
-  Name: 星海共鸣
+  Name: "\u661F\u6D77\u5171\u9E23"
   kind: 2
   element: 5
   skillPointCost: 0
@@ -22,14 +22,26 @@ MonoBehaviour:
   targetRule: 2
   targetSide: 0
   effectConfigs:
-  - effectType: 4
+  - origin: 0
+    key: AstralChord.Ultimate.GainEnergy
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 4
     value: 25
     scaleStat: 0
     target: 0
     buffId: 0
     buff: {fileID: 0}
     stack: 0
-  - effectType: 5
+  - origin: 0
+    key: AstralChord.Ultimate.AdvanceAction
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 5
     value: 0.25
     scaleStat: 2
     target: 2

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Battle.Events;
 using Battle.SaveData;
@@ -14,7 +14,9 @@ public class BattlePartyManager : MonoBehaviour
     private BattleFormation formation = new();
 
     //可选的上场角色，默认是全部，后续做成读取玩家现有情况
-    public IReadOnlyList<UnitConfig> AvailableAllies => unitCatalog != null
+    public IReadOnlyList<UnitConfig> AvailableAllies => Game.Characters.PlayerRuntime.Instance != null
+        ? Game.Characters.PlayerRuntime.Instance.IsReady ? Game.Characters.PlayerRuntime.Instance.Characters.OwnedCharacters : Array.Empty<UnitConfig>()
+        : unitCatalog != null
         ? unitCatalog.Units
         : Array.Empty<UnitConfig>();
 
@@ -54,6 +56,7 @@ public class BattlePartyManager : MonoBehaviour
 
     public UnitConfig FindConfig(string unitId)
     {
+        if (Game.Characters.PlayerRuntime.Instance != null && (!Game.Characters.PlayerRuntime.Instance.IsReady || !Game.Characters.PlayerRuntime.Instance.Characters.Owns(unitId))) return null;
         return unitCatalog != null ? unitCatalog.FindById(unitId) : null;
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HarmonySkill
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 117
-  Name: 协奏
+  Name: "\u534F\u594F"
   kind: 1
   element: 5
   skillPointCost: 1
@@ -22,17 +22,29 @@ MonoBehaviour:
   targetRule: 2
   targetSide: 0
   effectConfigs:
-  - effectType: 3
+  - origin: 0
+    key: AstralChord.Skill.ApplyBuff
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 3
     value: 0
     scaleStat: 0
     target: 2
     buffId: 201
-    buff: {fileID: 11400000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 2}
+    buff: {fileID: 11400000, guid: 1098f1a22d20bf44e8722d108fdd65a8, type: 2}
     stack: 1
-  - effectType: 3
+  - origin: 0
+    key: AstralChord.Skill.ApplyBuff.2
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 3
     value: 0
     scaleStat: 2
     target: 2
     buffId: 203
-    buff: {fileID: 11400000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 2}
+    buff: {fileID: 11400000, guid: 2cb62f396bbfe3146a1357dee8f48b55, type: 2}
     stack: 1

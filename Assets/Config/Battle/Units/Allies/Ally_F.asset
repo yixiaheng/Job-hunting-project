@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Ally_F
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
   id: AstralChord
-  displayName: 星弦指挥家
+  displayName: "\u661F\u5F26\u6307\u6325\u5BB6"
+  icon: {fileID: -4439682808594443484, guid: d57c193618780784c881f7d235297757, type: 3}
+  growth: {fileID: 11400000, guid: d4c359b65c817da4395cc2d3fdd14cbe, type: 2}
   element: 5
   path: 5
   maxHealth: 175

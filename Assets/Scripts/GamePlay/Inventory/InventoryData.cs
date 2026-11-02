@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Game.Inventory
@@ -23,6 +23,7 @@ namespace Game.Inventory
         public int level = 1;
         public int experience;
         public int ascension;
+        public int superimposition = 1;
         public bool isLocked;
     }
 

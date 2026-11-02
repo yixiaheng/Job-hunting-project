@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Ally_A
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
   id: Aegis
-  displayName: 岩壁守卫
+  displayName: "\u5CA9\u58C1\u5B88\u536B"
+  icon: {fileID: -5680690562175239864, guid: 50265de48366e8d4fa863ba03af64303, type: 3}
+  growth: {fileID: 11400000, guid: 3498dc7771a25eb4b97882d89240dc7c, type: 2}
   element: 0
   path: 0
   maxHealth: 260

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Ally_B
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
   id: Verdant
-  displayName: 春风医者
+  displayName: "\u6625\u98CE\u533B\u8005"
+  icon: {fileID: -5654733636407593216, guid: 92c84b1d287ed854587997ae914973b3, type: 3}
+  growth: {fileID: 11400000, guid: 0877620af7888bc408cd54c04c6384d0, type: 2}
   element: 3
   path: 1
   maxHealth: 190

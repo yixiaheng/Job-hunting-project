@@ -17,6 +17,7 @@ namespace Battle.Logic
         public System.Guid BattleId { get; } = System.Guid.NewGuid();
         public BattleResult Result { get; private set; } = BattleResult.None;
         public int TurnCount { get; private set; }
+        public ActionResolution LastResolution { get; private set; }
         private readonly IActionDecider decider;
         private BattleUnit currentUnit;
         public BattleUnit CurrentUnit => currentUnit;
@@ -66,13 +67,20 @@ namespace Battle.Logic
                 return false;
             }
 
-            queue.BeginTurn(currentUnit);
-            if(Act(currentUnit, action) == false)
-            {
+            if (action?.skill == null || action.skill.energyCost > currentUnit.currentEnergy
+                || action.skill.effectConfigs == null
+                || selector.Select(currentUnit, action.skill.targetSide, action.skill.targetRule, action.mainTarget).Count == 0)
                 return false;
-            }
+            queue.BeginTurn(currentUnit);
+            BattleTalentResolver.OnTurnStart(currentUnit, units);
+            var resolution = new ActionResolution();
+            Act(currentUnit, action, resolution);
             TickBuffs(currentUnit);
+            // Resolve speed changes first; apply deferred self-advance to the new interval.
             queue.EndTurn(currentUnit);
+            queue.ModifyAction(currentUnit, 1f - resolution.SelfActionMultiplier);
+            BattleTalentResolver.AfterAction(currentUnit, action.skill, resolution, units, queue);
+            LastResolution = resolution;
             TurnCount++;
             CompleteIfEnded();
 
@@ -120,7 +128,7 @@ namespace Battle.Logic
             Debug.Log(ResultText(result));
         }
 
-        private bool Act(BattleUnit caster, BattleAction action)
+        private bool Act(BattleUnit caster, BattleAction action, ActionResolution resolution)
         {
             if (action == null || action.skill == null)
             {
@@ -164,11 +172,15 @@ namespace Battle.Logic
             foreach (EffectConfig effect in skill.effectConfigs)
             {
                 
-                effectService.Execute(caster, targets, effect);
+                if (effect == null) continue;
+                var effectTargets = effect.overrideTarget
+                    ? selector.Select(caster, effect.targetSide, effect.target, action.mainTarget)
+                    : targets;
+                effectService.Execute(caster, effectTargets, effect, resolution);
             }
 
             int energyBefore = caster.currentEnergy;
-            caster.currentEnergy += skill.energyGain;
+            caster.currentEnergy = Mathf.Clamp(caster.currentEnergy + skill.energyGain, 0, caster.maxEnergy);
 
             if (skill.energyGain != 0)
                 Debug.Log($"    {Name(caster)} energy {energyBefore}->{caster.currentEnergy}");
@@ -195,11 +207,13 @@ namespace Battle.Logic
             for (int i = u.buffs.Count - 1; i >= 0; i--)
             {
                 var b = u.buffs[i];
+                if (b.skipNextOwnerTick) { b.skipNextOwnerTick = false; continue; }
                 b.remainingTurns--;
                 if (b.remainingTurns <= 0)
                 {
                     string n = b.config != null ? b.config.Name : "Buff";
                     u.buffs.RemoveAt(i);
+                    if (b.ownsConfig && b.config != null) Object.Destroy(b.config);
                     Debug.Log($"    {Name(u)}'s [{n}] expired.");
                 }
             }

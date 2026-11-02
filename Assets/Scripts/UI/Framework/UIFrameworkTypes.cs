@@ -19,7 +19,10 @@ namespace Game.UI
         Dialogue = 12,
         DialogueInteractions = 13,
         ExplorationHUD = 14,
-        PartyBackdrop = 15
+        PartyBackdrop = 15,
+        CharacterMaterials = 16,
+        CharacterEquipment = 17,
+        CharacterConfirm = 18
     }
 
     public enum UILayer

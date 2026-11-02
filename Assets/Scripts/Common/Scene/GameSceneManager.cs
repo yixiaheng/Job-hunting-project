@@ -72,7 +72,7 @@ public sealed class GameSceneManager : MonoBehaviour
     {
         if (!isActiveAndEnabled)
             error = "场景加载器尚未启用。";
-        else if (isLoading)
+        else if (isLoading || Game.Characters.CharacterSceneNavigator.IsActive)
             error = "场景正在加载，请勿重复切换。";
         else if (catalog == null || !catalog.TryGetPath(id, out string path))
             error = $"SceneCatalog 中未正确登记场景：{id}。";

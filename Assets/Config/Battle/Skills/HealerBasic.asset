@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealerBasic
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 104
-  Name: 回旋叶刃
+  Name: "\u56DE\u65CB\u53F6\u5203"
   kind: 0
   element: 3
   skillPointCost: 0
@@ -22,8 +22,14 @@ MonoBehaviour:
   targetRule: 0
   targetSide: 1
   effectConfigs:
-  - effectType: 0
-    value: 1.0
+  - origin: 0
+    key: Verdant.Basic.Damage
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
+    value: 1
     scaleStat: 0
     target: 0
     buffId: 0

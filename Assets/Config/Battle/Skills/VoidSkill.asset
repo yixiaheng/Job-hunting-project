@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: VoidSkill
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 114
-  Name: 虚弱刻印
+  Name: "\u865A\u5F31\u523B\u5370"
   kind: 1
   element: 4
   skillPointCost: 1
@@ -22,17 +22,29 @@ MonoBehaviour:
   targetRule: 0
   targetSide: 1
   effectConfigs:
-  - effectType: 0
+  - origin: 0
+    key: UmbralHex.Skill.Damage
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
     value: 1.15
     scaleStat: 0
     target: 0
     buffId: 0
     buff: {fileID: 0}
     stack: 0
-  - effectType: 3
+  - origin: 0
+    key: UmbralHex.Skill.ApplyBuff
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 3
     value: 0
     scaleStat: 3
     target: 0
     buffId: 202
-    buff: {fileID: 11400000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 2}
+    buff: {fileID: 11400000, guid: 4a48264d81fa95b4c81c9e05947dd295, type: 2}
     stack: 1

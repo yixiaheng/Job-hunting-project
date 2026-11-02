@@ -4,7 +4,8 @@ public enum SceneId
     None = -1,
     Sample = 0,
     Battle = 1,
-    Party = 2
+    Party = 2,
+    Character = 3
 }
 
 public enum SceneTransitionMode

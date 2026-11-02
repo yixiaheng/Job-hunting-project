@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Ally_E
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
   id: UmbralHex
-  displayName: 暮影诅咒师
+  displayName: "\u66AE\u5F71\u8BC5\u5492\u5E08"
+  icon: {fileID: 1786050032166061864, guid: d0d8cd04c8d48114eb48eba8151fc4f8, type: 3}
+  growth: {fileID: 11400000, guid: a246a15340e7e9745af359bafeaac16a, type: 2}
   element: 4
   path: 4
   maxHealth: 200

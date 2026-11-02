@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Game.UI
@@ -21,7 +21,7 @@ namespace Game.UI
             for (int index = 0; index < openedPanels.Count; index++)
             {
                 UIInstanceRecord instance = openedPanels[index];
-                if (instance.Panel.State == UIState.Destroyed)
+                if (instance.Suspended || instance.Panel.State == UIState.Destroyed)
                     continue;
 
                 showCursor |= instance.Config.showCursor;

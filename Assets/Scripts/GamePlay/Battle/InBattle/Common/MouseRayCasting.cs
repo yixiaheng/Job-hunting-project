@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
@@ -15,6 +15,7 @@ public class MouseRayCasting : MonoBehaviour
 
     void Update()
     {
+        if (Game.Characters.CharacterSceneNavigator.IsActive) return;
         if (Mouse.current == null) return;
         if (!Mouse.current.leftButton.wasPressedThisFrame) return;
         if (IsPointerOverUI()) return;

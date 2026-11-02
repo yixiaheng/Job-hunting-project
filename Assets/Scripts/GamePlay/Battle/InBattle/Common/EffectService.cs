@@ -28,27 +28,44 @@ namespace Battle.Logic
         public void Execute(
             BattleUnit caster,
             IReadOnlyList<BattleUnit> targets,
-            EffectConfig effect)
+            EffectConfig effect, ActionResolution resolution = null)
         {
             if (caster == null || targets == null || effect == null) return;
 
             foreach (BattleUnit target in targets)
             {
-                if (target == null) continue;
+                if (target == null || !target.IsActive) continue;
+                if (target.faction == caster.faction && effect.effectType != EffectType.Damage
+                    && effect.effectType != EffectType.ApplyBuff)
+                    if (resolution != null) resolution.AffectedAlly = true;
 
                 switch (effect.effectType)
                 {
                     case EffectType.Damage:
-                        if (target.IsActive) attackService.Execute(caster, target, effect);
+                        if (target.IsActive)
+                        {
+                            attackService.Execute(caster, target, effect);
+                            if (target.faction != caster.faction && resolution != null)
+                            { resolution.Damaged.Add(target); resolution.Killed |= !target.IsActive; }
+                        }
                         break;
                     case EffectType.Heal:
-                        if (target.IsActive) healService.Execute(caster, target, effect);
+                        if (target.IsActive && healService.Execute(caster, target, effect) > 0) resolution?.Healed.Add(target);
                         break;
                     case EffectType.GainEnergy:
                         if (target.IsActive) energyService.Execute(target, effect);
                         break;
                     case EffectType.ApplyBuff:
-                        buffService.Execute(target, effect);
+                        if (buffService.Execute(target, effect) && resolution != null)
+                        {
+                            if (target == caster)
+                            {
+                                var applied = target.buffs.Find(b => b.config != null && b.config.id == effect.buff.id);
+                                if (applied != null) applied.skipNextOwnerTick = true;
+                            }
+                            resolution.AppliedDebuff |= effect.buff.isDebuff && target.faction != caster.faction;
+                            resolution.AffectedAlly |= !effect.buff.isDebuff && target.faction == caster.faction;
+                        }
                         break;
                     case EffectType.AddShield:
                         if (target.IsActive)
@@ -66,7 +83,9 @@ namespace Battle.Logic
                         RemoveStatuses(target, true);
                         break;
                     case EffectType.AdvanceAction:
-                        actionQueue?.ModifyAction(target, effect.value);
+                        if (target == caster && resolution != null)
+                            resolution.SelfActionMultiplier *= Mathf.Max(0f, 1f - effect.value);
+                        else actionQueue?.ModifyAction(target, effect.value);
                         break;
                 }
             }
@@ -79,7 +98,10 @@ namespace Battle.Logic
                 BuffInstance instance = target.buffs[i];
                 if (instance?.config == null) continue;
                 if (!debuffsOnly || instance.config.isDebuff)
+                {
                     target.buffs.RemoveAt(i);
+                    if (instance.ownsConfig) Object.Destroy(instance.config);
+                }
             }
         }
     }

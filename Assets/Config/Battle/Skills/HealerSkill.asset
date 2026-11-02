@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealerSkill
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 105
-  Name: 清风疗愈
+  Name: "\u6E05\u98CE\u7597\u6108"
   kind: 1
   element: 3
   skillPointCost: 1
@@ -22,14 +22,26 @@ MonoBehaviour:
   targetRule: 0
   targetSide: 0
   effectConfigs:
-  - effectType: 1
+  - origin: 0
+    key: Verdant.Skill.Heal
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 1
     value: 1.2
     scaleStat: 0
     target: 0
     buffId: 0
     buff: {fileID: 0}
     stack: 0
-  - effectType: 6
+  - origin: 0
+    key: Verdant.Skill.RemoveDeBuff
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 6
     value: 0
     scaleStat: 0
     target: 0

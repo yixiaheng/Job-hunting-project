@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Ally_C
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
   id: VoltHunt
-  displayName: 雷鸣猎手
+  displayName: "\u96F7\u9E23\u730E\u624B"
+  icon: {fileID: 8896493868559271656, guid: 5f577aded9c70de44afe83ad8e491336, type: 3}
+  growth: {fileID: 11400000, guid: 9365e114d3296834797af8777fcda93c, type: 2}
   element: 2
   path: 2
   maxHealth: 170

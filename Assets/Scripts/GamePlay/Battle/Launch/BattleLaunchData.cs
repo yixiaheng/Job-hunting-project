@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Battle.SaveData;
+using Game.Characters;
+using Battle.Logic;
 
 /// <summary>
 /// A snapshot of the confirmed allies. Each index is the original formation slot.
@@ -8,6 +10,7 @@ using Battle.SaveData;
 public sealed class BattleLaunchData
 {
     private readonly UnitConfig[] allies;
+    private readonly BattleCharacterSnapshot[] progression;
 
     public IReadOnlyList<UnitConfig> Allies { get; }
 
@@ -15,6 +18,14 @@ public sealed class BattleLaunchData
     {
         this.allies = allies;
         Allies = Array.AsReadOnly(allies);
+        progression = new BattleCharacterSnapshot[allies.Length];
+        PlayerRuntime runtime = PlayerRuntime.Instance;
+        if (runtime != null && runtime.IsReady)
+        {
+            for (int i = 0; i < allies.Length; i++)
+                if (allies[i] != null)
+                    progression[i] = new BattleCharacterSnapshot(allies[i], runtime.Characters.GetCharacter(allies[i].id), runtime.Inventory);
+        }
     }
 
     public static bool TryCreate(IReadOnlyList<UnitConfig> slotUnits,
@@ -22,6 +33,8 @@ public sealed class BattleLaunchData
     {
         data = null;
         error = null;
+        if (PlayerRuntime.Instance != null && !PlayerRuntime.Instance.IsReady)
+        { error = "玩家养成数据未成功读取，不能开始战斗。"; return false; }
 
         if (slotUnits == null || slotUnits.Count > BattleFormation.MaxMembers)
         {
@@ -50,6 +63,8 @@ public sealed class BattleLaunchData
             }
 
             snapshot[position] = config;
+            if (PlayerRuntime.Instance != null && !PlayerRuntime.Instance.Characters.Owns(config.id))
+            { error = "尚未拥有角色：" + config.displayName; return false; }
         }
 
         if (unitIds.Count == 0)
@@ -66,4 +81,8 @@ public sealed class BattleLaunchData
     {
         return (UnitConfig[])allies.Clone();
     }
+
+    public BattleUnit CreateAlly(int position, int tieBreaker) => progression[position] != null
+        ? progression[position].CreateUnit(position, tieBreaker)
+        : BattleDataMaping.ToUnit(allies[position], Faction.OurSide, position, tieBreaker);
 }

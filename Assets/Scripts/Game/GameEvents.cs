@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using Game.Characters;
 using Battle.Events;
 using Game.Inventory.Events;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace Game
                 = new BattleEventBus(ReportException, ReportPublish);
         public static InventoryEventBus Inventory { get; } 
                 = new InventoryEventBus(ReportException, ReportPublish);
+        public static CharacterEventBus Character { get; }
+                = new CharacterEventBus(ReportException, ReportPublish);
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void Initialize()
@@ -18,12 +21,14 @@ namespace Game
             ClearForNewSession();
             Battle.EnableLogging = false;
             Inventory.EnableLogging = false;
+            Character.EnableLogging = false;
         }
 
         public static void ClearForNewSession()
         {
             Battle.Clear();
             Inventory.Clear();
+            Character.Clear();
         }
 
         private static void ReportException(Exception exception, Type eventType, Delegate handler)

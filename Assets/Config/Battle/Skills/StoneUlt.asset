@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StoneUlt
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 103
-  Name: 地火镇界
+  Name: "\u5730\u706B\u9547\u754C"
   kind: 2
   element: 0
   skillPointCost: 0
@@ -22,14 +22,26 @@ MonoBehaviour:
   targetRule: 2
   targetSide: 1
   effectConfigs:
-  - effectType: 0
+  - origin: 0
+    key: Aegis.Ultimate.Damage
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
     value: 1.1
     scaleStat: 0
     target: 2
     buffId: 0
     buff: {fileID: 0}
     stack: 0
-  - effectType: 2
+  - origin: 0
+    key: Aegis.Ultimate.AddShield
+    growsWithSkill: 1
+    overrideTarget: 1
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 2
     value: 0.5
     scaleStat: 3
     target: 2

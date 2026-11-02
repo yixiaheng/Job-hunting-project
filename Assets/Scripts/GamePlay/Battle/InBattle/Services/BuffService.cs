@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Battle.Logic
 {
@@ -18,6 +18,7 @@ namespace Battle.Logic
                 if (instance.config == null || instance.config.id != config.id) continue;
                 instance.stacks = Mathf.Min(maxStack, instance.stacks + addStacks);
                 instance.remainingTurns = config.durationTimes;
+                instance.valueMultiplier = effect.buffValueMultiplier;
                 Debug.Log($"    Buff {Name(target)} 获得【{config.Name}】 {instance.stacks}层/{maxStack}  持续{instance.remainingTurns}回合  {StatText(target, config.stat)}");
                 return true;
             }
@@ -26,7 +27,8 @@ namespace Battle.Logic
             {
                 config = config,
                 stacks = Mathf.Min(maxStack, addStacks),
-                remainingTurns = config.durationTimes
+                remainingTurns = config.durationTimes,
+                valueMultiplier = effect.buffValueMultiplier
             };
             target.buffs.Add(created);
             Debug.Log($"    Buff {Name(target)} 获得【{config.Name}】 {created.stacks}层/{maxStack}  持续{created.remainingTurns}回合  {StatText(target, config.stat)}");

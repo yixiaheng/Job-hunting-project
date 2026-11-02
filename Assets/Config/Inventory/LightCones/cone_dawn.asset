@@ -15,14 +15,30 @@ MonoBehaviour:
   id: cone_dawn
   displayName: "\u9ECE\u660E\u4E4B\u524D"
   icon: {fileID: -1032669254547222337, guid: 572aaeccb3551e7408fe5a30b9c9cdd8, type: 3}
-  description: "\u72EC\u7ACB\u5149\u9525\u88C5\u5907\uFF0C\u6BCF\u4E00\u4EFD\u62E5\u6709\u72EC\u7ACB\u7B49\u7EA7\u3001\u7ECF\u9A8C\u3001\u7A81\u7834\u4E0E\u9501\u5B9A\u72B6\u6001\u3002\n\u5F53\u524D\u5C55\u793A\u57FA\u7840\u5C5E\u6027\uFF1B\u7A7F\u6234\u4E0E\u88AB\u52A8\u6548\u679C\u7531\u89D2\u8272\u88C5\u5907\u7CFB\u7EDF\u63A5\u5165\u3002"
+  description: "\u4EC5\u540C\u547D\u9014\u53EF\u7A7F\u6234\u3002\u88AB\u52A8\uFF1AAttack\u63D0\u9AD88%\uFF0C\u6BCF\u6B21\u5408\u5E76\u989D\u5916\u63D0\u9AD82%\u3002"
   category: 2
-  rarity: 3
+  rarity: 2
   useKind: 0
   effectValue: 0
   effectRatio: 0
   requiresTarget: 0
   equipmentKind: 0
+  path: 3
+  slot: 0
+  relicSet: {fileID: 0}
+  percentStat: 0
+  basePercent: 0
+  percentPerLevel: 0
+  levelCaps: 14000000280000003c00000050000000
+  ascensionCosts: 020000000400000008000000
+  experienceBase: 200
+  experiencePerLevel: 40
+  experienceMaterial: equipment_exp
+  ascensionMaterial: equipment_ascension
+  maxSuperimposition: 5
+  passiveStat: 0
+  passiveBase: 0.08
+  passivePerRank: 0.02
   maxLevel: 80
   baseStats:
     health: 120
@@ -36,4 +52,4 @@ MonoBehaviour:
     defence: 2
     speed: 0
     damageBonus: 0
-  passiveEffectId: 
+  passiveEffectId:

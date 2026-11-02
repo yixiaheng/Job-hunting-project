@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db303df0115d28247aa415e44b6cdccd, type: 3}
+  m_Name: PlayerRuntimeConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Characters.PlayerRuntimeConfig
+  units: {fileID: 11400000, guid: 93855737b49ab4d42a7a9c79b549ec8b, type: 2}
+  items: {fileID: 11400000, guid: 508c54d51b3bbce4fa0d91b6e7192cb7, type: 2}
+  uiFont: {fileID: 11400000, guid: ef0cfcb4f8436af4dad91b1b7cc53e27, type: 2}
+  saveSlot: slot_0
+  startingCharacters:
+  - Aegis
+  - Verdant
+  - VoltHunt
+  - FrostNova
+  - UmbralHex
+  - AstralChord
+  startingItems:
+  - configId: character_exp
+    quantity: 20
+  - configId: equipment_exp
+    quantity: 20
+  - configId: character_ascension
+    quantity: 20
+  - configId: equipment_ascension
+    quantity: 20
+  - configId: food_revive
+    quantity: 5
+  - configId: food_technique
+    quantity: 5
+  - configId: food_heal
+    quantity: 5
+  - configId: food_attack
+    quantity: 5
+  - configId: cone_dawn
+    quantity: 1
+  - configId: cone_guard
+    quantity: 1
+  - configId: cone_wind
+    quantity: 1
+  - configId: cone_memory
+    quantity: 1
+  - configId: shard_Aegis
+    quantity: 30
+  - configId: shard_Verdant
+    quantity: 30
+  - configId: shard_VoltHunt
+    quantity: 30
+  - configId: shard_FrostNova
+    quantity: 30
+  - configId: shard_UmbralHex
+    quantity: 30
+  - configId: shard_AstralChord
+    quantity: 30
+  - configId: skill_manual
+    quantity: 40
+  - configId: cone_abundance
+    quantity: 1
+  - configId: cone_hunt
+    quantity: 1
+  - configId: relic_0_1
+    quantity: 1
+  - configId: relic_0_2
+    quantity: 1
+  - configId: relic_0_3
+    quantity: 1
+  - configId: relic_0_4
+    quantity: 1
+  - configId: relic_1_1
+    quantity: 1
+  - configId: relic_1_2
+    quantity: 1
+  - configId: relic_1_3
+    quantity: 1
+  - configId: relic_1_4
+    quantity: 1
+  - configId: relic_2_5
+    quantity: 1
+  - configId: relic_2_6
+    quantity: 1
+  - configId: relic_3_5
+    quantity: 1
+  - configId: relic_3_6
+    quantity: 1

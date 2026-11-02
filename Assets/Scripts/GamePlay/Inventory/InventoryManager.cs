@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using Game.Characters;
 using System.Collections.Generic;
 using TapTap21.SaveSystem.dyh;
 using UnityEngine;
@@ -36,11 +37,17 @@ namespace Game.Inventory
         {
             if (Instance != null && Instance != this)
             {
-                Destroy(gameObject);
+                Destroy(this);
                 return;
             }
             Instance = this;
             if (persistAcrossScenes) DontDestroyOnLoad(gameObject);
+            if (PlayerRuntime.Instance != null && PlayerRuntime.Instance.Inventory != null)
+            {
+                Service = PlayerRuntime.Instance.Inventory;
+                canSave = PlayerRuntime.Instance.IsReady;
+                return;
+            }
             try
             {
                 Service = new InventoryService(catalog);
@@ -57,6 +64,7 @@ namespace Game.Inventory
         //加载背包资源
         public bool LoadInventory()
         {
+            if (PlayerRuntime.Instance != null) return PlayerRuntime.Instance.IsReady;
             if (Service == null) return false;
             canSave = false;
             dirty = false;
@@ -101,6 +109,7 @@ namespace Game.Inventory
         //保存背包资源
         public bool SaveInventory()
         {
+            if (PlayerRuntime.Instance != null) return PlayerRuntime.Instance.Save(out _);
             if (Service == null || !canSave) return Fail("背包未成功读取，暂不覆盖存档。");
 
             //数据保存到具体的存档中，传入的数据为背包数据的快照
@@ -126,6 +135,10 @@ namespace Game.Inventory
         /// <returns></returns>
         public bool TryUse(string configId, int quantity, string targetId, out string reason)
         {
+            if (PlayerRuntime.Instance != null && Service != null && Service.TryGetConfig(configId, out var item)
+                && (item.useKind == ItemUseKind.CharacterExperience || item.useKind == ItemUseKind.CharacterAscension
+                    || item.useKind == ItemUseKind.EquipmentExperience || item.useKind == ItemUseKind.EquipmentAscension))
+                return PlayerRuntime.Instance.TryUseGrowthItem(configId, quantity, targetId, out reason);
             reason = "背包尚未初始化。";
             //检查InventorySerive是否为空
             if (Service == null) 
@@ -164,6 +177,13 @@ namespace Game.Inventory
                 return false;
             }
             //UseRequest是一个可以被订阅的事件，也就是将物品是实际使用和作用效果，交给外部有监听的部分
+            if (config.useKind == ItemUseKind.CharacterExperience || config.useKind == ItemUseKind.CharacterAscension
+                || config.useKind == ItemUseKind.EquipmentExperience || config.useKind == ItemUseKind.EquipmentAscension)
+            {
+                bool opened = RequestProgression(configId);
+                reason = opened ? null : "当前无法打开养成界面。";
+                return opened;
+            }
             if (UseRequested == null) 
                 return false;
 

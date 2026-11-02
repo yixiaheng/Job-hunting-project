@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HunterSkill
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 108
-  Name: 追猎标记
+  Name: "\u8FFD\u730E\u6807\u8BB0"
   kind: 1
   element: 2
   skillPointCost: 1
@@ -22,14 +22,26 @@ MonoBehaviour:
   targetRule: 0
   targetSide: 1
   effectConfigs:
-  - effectType: 0
+  - origin: 0
+    key: VoltHunt.Skill.Damage
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
     value: 1.5
     scaleStat: 0
     target: 0
     buffId: 0
     buff: {fileID: 0}
     stack: 0
-  - effectType: 5
+  - origin: 0
+    key: VoltHunt.Skill.AdvanceAction
+    growsWithSkill: 0
+    overrideTarget: 1
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 5
     value: 0.25
     scaleStat: 2
     target: 3

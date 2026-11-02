@@ -135,7 +135,7 @@ namespace Game.UI
         /// <param name="context"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public UIHandle Open(UIId id, IUIContext context = null, UIHandle? parent = null)
+        public UIHandle Open(UIId id, IUIContext context = null, UIHandle? parent = null, int? ownerSceneHandle = null)
         {
             //查找UIConfig
             if (!TryGetConfig(id, out UIConfig config))
@@ -148,7 +148,7 @@ namespace Game.UI
             }
 
             //有就取出，没有就创建
-            UIInstanceRecord instance = GetOrCreate(config);
+            UIInstanceRecord instance = GetOrCreate(config, ownerSceneHandle);
             //设置父节点
             SetParent(instance, parent);
             
@@ -212,10 +212,10 @@ namespace Game.UI
             for (int index = openedPanels.Count - 1; index >= 0; index--)
             {
                 UIInstanceRecord instance = openedPanels[index];
-                if (!instance.Config.handlesBack || !instance.Panel.CanCloseFromBack())
+                if (instance.Suspended || !instance.Config.handlesBack || !instance.Panel.CanCloseFromBack())
                     continue;
 
-                Close(instance.Handle);
+                if (!instance.Panel.HandleBack()) Close(instance.Handle);
                 return true;
             }
 
@@ -229,11 +229,10 @@ namespace Game.UI
                 RequestCloseTree(copy[index]);
         }
 
-        public void ReleaseSceneUI(int sceneHandle = -1)
+        public void ReleaseSceneUI(int? sceneHandle = null)
         {
-            int targetSceneHandle = sceneHandle < 0
-                ? SceneManager.GetActiveScene().handle
-                : sceneHandle;
+            // Unity scene handles may be negative in the Editor; only null means current.
+            int targetSceneHandle = sceneHandle ?? SceneManager.GetActiveScene().handle;
 
             UIInstanceRecord[] copy = new List<UIInstanceRecord>(instances.Values).ToArray();
             for (int index = 0; index < copy.Length; index++)
@@ -267,7 +266,7 @@ namespace Game.UI
             DestroyInstance(instance);
         }
 
-        private UIInstanceRecord GetOrCreate(UIConfig config)
+        private UIInstanceRecord GetOrCreate(UIConfig config, int? ownerSceneHandle)
         {
             if (config.instanceMode == UIInstanceMode.Single
                 && singleInstances.TryGetValue(config.id, out UIInstanceRecord existing))
@@ -277,11 +276,17 @@ namespace Game.UI
 
             Transform parent = GetPanelRoot(config);
 
-            UIPanel panel = Instantiate(config.prefab, parent, false);
+            // A separate group gates presentation without fighting the panel transition alpha.
+            var presentation = new GameObject(config.id + "_Presentation", typeof(RectTransform), typeof(CanvasGroup));
+            var presentationRect = (RectTransform)presentation.transform;
+            presentationRect.SetParent(parent, false);
+            presentationRect.anchorMin = Vector2.zero; presentationRect.anchorMax = Vector2.one;
+            presentationRect.offsetMin = presentationRect.offsetMax = Vector2.zero;
+            UIPanel panel = Instantiate(config.prefab, presentationRect, false);
             panel.gameObject.SetActive(false);
 
             UIHandle handle = new(nextInstanceId++);
-            UIInstanceRecord instance = new(handle, config, panel, SceneManager.GetActiveScene().handle);
+            UIInstanceRecord instance = new(handle, config, panel, ownerSceneHandle ?? SceneManager.GetActiveScene().handle);
             instances.Add(handle.Value, instance);
 
             if (config.instanceMode == UIInstanceMode.Single)
@@ -443,12 +448,48 @@ namespace Game.UI
 
         private void BringToFront(UIInstanceRecord instance)
         {
-            instance.Panel.transform.SetAsLastSibling();
+            instance.Panel.transform.parent.SetAsLastSibling();
 
             if (openedPanels.Remove(instance))
                 openedPanels.Add(instance);
 
             instance.OpenOrder = ++openOrder;
+        }
+
+        /// <summary>Hide existing instances without closing, disabling or discarding contexts.</summary>
+        public System.IDisposable SuspendPresentation()
+        {
+            var held = new List<UIInstanceRecord>(instances.Values);
+            foreach (var record in held)
+            {
+                record.SuspendCount++;
+                record.Panel.SetPresentationSuspended(true);
+                backgroundController.Release(record.Handle);
+            }
+            RefreshFrameworkState();
+            return new PresentationLease(this, held);
+        }
+
+        private sealed class PresentationLease : System.IDisposable
+        {
+            private UIManager manager;
+            private readonly List<UIInstanceRecord> held;
+            public PresentationLease(UIManager manager, List<UIInstanceRecord> held)
+            { this.manager = manager; this.held = held; }
+            public void Dispose()
+            {
+                if (manager == null) return;
+                foreach (var record in held)
+                {
+                    if (!manager.instances.ContainsKey(record.Handle.Value)) continue;
+                    record.SuspendCount = Mathf.Max(0, record.SuspendCount - 1);
+                    record.Panel.SetPresentationSuspended(record.Suspended);
+                    if (!record.Suspended && manager.openedPanels.Contains(record))
+                        manager.backgroundController.Acquire(record.Handle, record.Config);
+                }
+                manager.RefreshFrameworkState();
+                manager = null;
+            }
         }
 
         private void RefreshFrameworkState()
@@ -487,6 +528,7 @@ namespace Game.UI
                 bool covered = false;
                 for (int higherIndex = lowerIndex + 1; higherIndex < openedPanels.Count; higherIndex++)
                 {
+                    if (openedPanels[higherIndex].Suspended) continue;
                     UIConfig higherConfig = openedPanels[higherIndex].Config;
                     if (higherConfig.modal || higherConfig.hideLowerWindows)
                     {
@@ -516,7 +558,7 @@ namespace Game.UI
         {
             RemoveInstance(instance);
             instance.Panel.MarkDestroyed();
-            Destroy(instance.Panel.gameObject);
+            Destroy(instance.Panel.transform.parent.gameObject);
         }
 
         private bool TryGetConfig(UIId id, out UIConfig config)
@@ -569,5 +611,7 @@ namespace Game.UI
         public bool Processing { get; set; }
         public Coroutine Routine { get; set; }
         public long OpenOrder { get; set; }
+        public int SuspendCount { get; set; }
+        public bool Suspended => SuspendCount > 0;
     }
 }

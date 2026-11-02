@@ -16,6 +16,9 @@ namespace Game.UI
         private CanvasGroup canvasGroup;
         private bool initialized;
         private bool covered;
+        private bool suspended;
+        private CanvasGroup presentationGroup;
+        public bool IsPresentationSuspended => suspended;
         public bool IsOpen => State == UIState.Open || State == UIState.Opening;
         protected UIManager Owner => owner;
 
@@ -28,6 +31,7 @@ namespace Game.UI
             Handle = handle;
             Config = config;
             canvasGroup = GetComponent<CanvasGroup>();
+            presentationGroup = transform.parent != null ? transform.parent.GetComponent<CanvasGroup>() : null;
             transition = GetComponent<UITransition>();
             initialized = true;
 
@@ -106,6 +110,20 @@ namespace Game.UI
             State = UIState.Destroyed;
         }
 
+        internal void SetPresentationSuspended(bool value)
+        {
+            if (suspended == value) return;
+            suspended = value;
+            if (presentationGroup != null)
+            {
+                presentationGroup.alpha = value ? 0f : 1f;
+                presentationGroup.interactable = !value;
+                presentationGroup.blocksRaycasts = !value;
+            }
+            SetInteractable(!covered && State == UIState.Open);
+        }
+
+        public virtual bool HandleBack() => false;
         public virtual bool CanCloseFromBack() => true;
 
         protected virtual void OnInitialize() { }
@@ -127,8 +145,8 @@ namespace Game.UI
             if (canvasGroup == null)
                 return;
 
-            canvasGroup.interactable = value;
-            canvasGroup.blocksRaycasts = value;
+            canvasGroup.interactable = value && !suspended;
+            canvasGroup.blocksRaycasts = value && !suspended;
         }
     }
 }

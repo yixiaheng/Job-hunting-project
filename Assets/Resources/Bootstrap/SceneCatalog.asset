@@ -22,3 +22,6 @@ MonoBehaviour:
   - id: 2
     scene: {fileID: 102900000, guid: c2bb855d06428134695271f9c84502fc, type: 3}
     scenePath: Assets/Scenes/PartyScreen.unity
+  - id: 3
+    scene: {fileID: 102900000, guid: 5f4f6784792c4514591d472518e89c85, type: 3}
+    scenePath: Assets/Scenes/CharacterScene.unity

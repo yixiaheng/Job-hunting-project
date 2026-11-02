@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealerUlt
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 106
-  Name: 万物回春
+  Name: "\u4E07\u7269\u56DE\u6625"
   kind: 2
   element: 3
   skillPointCost: 0
@@ -22,14 +22,26 @@ MonoBehaviour:
   targetRule: 2
   targetSide: 0
   effectConfigs:
-  - effectType: 1
+  - origin: 0
+    key: Verdant.Ultimate.Heal
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 1
     value: 0.75
     scaleStat: 0
     target: 0
     buffId: 0
     buff: {fileID: 0}
     stack: 0
-  - effectType: 6
+  - origin: 0
+    key: Verdant.Ultimate.RemoveDeBuff
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 6
     value: 0
     scaleStat: 0
     target: 2

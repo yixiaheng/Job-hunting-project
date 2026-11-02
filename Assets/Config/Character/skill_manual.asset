@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2fea347c63b1341b843d40fe48e24b, type: 3}
+  m_Name: skill_manual
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.ItemConfig
+  id: skill_manual
+  displayName: "\u6280\u80FD\u7814\u4E60\u624B\u518C"
+  icon: {fileID: 0}
+  description: "\u4E09\u9879\u4E3B\u52A8\u6280\u80FD\u5206\u522B\u5347\u7EA7\u4F7F\u7528\u7684\u6750\u6599\u3002"
+  category: 0
+  rarity: 1
+  useKind: 0
+  effectValue: 0
+  effectRatio: 0
+  requiresTarget: 0

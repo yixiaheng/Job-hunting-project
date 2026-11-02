@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Ally_D
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
   id: FrostNova
-  displayName: 寒星术士
+  displayName: "\u5BD2\u661F\u672F\u58EB"
+  icon: {fileID: -4177428740585232767, guid: a7df8b20aebe3094aa81b7e1158418df, type: 3}
+  growth: {fileID: 11400000, guid: bc50764d04da09942879f4e3dae1fc11, type: 2}
   element: 1
   path: 3
   maxHealth: 180

@@ -48,7 +48,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         Bind();
         RefreshControls();
-        InventoryUIInput();
+        if (!Game.Characters.CharacterSceneNavigator.IsActive) InventoryUIInput();
     }
 
     /// <summary>

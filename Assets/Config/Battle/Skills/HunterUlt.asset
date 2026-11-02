@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HunterUlt
   m_EditorClassIdentifier: Assembly-CSharp::SkillConfig
   id: 109
-  Name: 雷影穿杀
+  Name: "\u96F7\u5F71\u7A7F\u6740"
   kind: 2
   element: 2
   skillPointCost: 0
@@ -22,7 +22,13 @@ MonoBehaviour:
   targetRule: 0
   targetSide: 1
   effectConfigs:
-  - effectType: 0
+  - origin: 0
+    key: VoltHunt.Ultimate.Damage
+    growsWithSkill: 1
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
     value: 2.8
     scaleStat: 0
     target: 0

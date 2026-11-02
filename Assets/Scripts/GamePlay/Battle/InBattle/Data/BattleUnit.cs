@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Battle.Events;
 using Battle.Logic;
 using Game;
@@ -22,6 +22,13 @@ public class BattleUnit
     public int attack;
     public int defence;
     public int speed;
+    public float damageBonus;
+    public Game.Characters.CharacterTalent talent;
+    public float talentValue;
+    public float talentSecondary;
+    public int talentEnergy;
+    public int talentDuration;
+    public bool ownsRuntimeSkills;
     public int currentEnergy;
     public int maxEnergy = 100;
     public double nextActionTime;   // 下次行动的时刻（绝对时间戳）
@@ -86,7 +93,7 @@ public class BattleUnit
         foreach (var b in buffs)
         {
             if (b.config != null && b.config.stat == stat)
-                mod += b.config.value * b.stacks;
+                mod += b.config.value * b.stacks * b.valueMultiplier;
         }
         return Mathf.Max(0, Mathf.RoundToInt(baseStat * (1f + mod)));
     }

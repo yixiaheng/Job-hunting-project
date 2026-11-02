@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
@@ -9,6 +9,8 @@ public class UnitConfig : ScriptableObject
 {
     public string id;
     public string displayName;
+    public Sprite icon;
+    public Game.Characters.CharacterGrowthConfig growth;
     public ElementType element;
     public PathType path;
     public int maxHealth;

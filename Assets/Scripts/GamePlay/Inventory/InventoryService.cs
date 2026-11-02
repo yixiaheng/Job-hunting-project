@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Game.Inventory.Events;
 
@@ -24,6 +24,10 @@ namespace Game.Inventory
         private readonly Dictionary<ItemUseKind, IItemUseHandler> useHandlers = new Dictionary<ItemUseKind, IItemUseHandler>();
         //标志位
         private bool executingUse;
+        private bool notifying;
+        public bool IsReadOnly { get; internal set; }
+        private readonly bool publishEvents;
+        public long Revision { get; private set; }
 
         //变更Action
         public event Action Changed;
@@ -31,10 +35,11 @@ namespace Game.Inventory
         public IEquipmentUsageProvider EquipmentUsage { get; set; }
 
         //初始化
-        public InventoryService(ItemCatalog catalog)
+        public InventoryService(ItemCatalog catalog, bool publishEvents = true)
         {
             if (catalog == null) throw new ArgumentNullException(nameof(catalog));
             configs = catalog.BuildIndex();
+            this.publishEvents = publishEvents;
         }
 
         //访问字典，获取物品信息
@@ -81,6 +86,8 @@ namespace Game.Inventory
                     for (int index = 0; index < amount.Value; index++)
                     {
                         var instance = new EquipmentInstance { instanceId = Guid.NewGuid().ToString("N"), configId = amount.Key };
+                        if (((EquipmentConfig)configs[amount.Key]).equipmentKind == EquipmentKind.Instrument)
+                            instance.level = 0;
                         equipment.Add(instance.instanceId, instance);
                     }
                 }
@@ -167,6 +174,7 @@ namespace Game.Inventory
         public bool TrySetEquipmentProgress(string instanceId, int level, int experience, int ascension, out string reason)
         {
             reason = null;
+            if (EquipmentUsage != null) { reason = "装备培养请使用统一养成服务。"; return false; }
             if (!CanMutate(out reason)) return false;
             if (instanceId == null || !equipment.TryGetValue(instanceId, out var instance))
             {
@@ -174,7 +182,8 @@ namespace Game.Inventory
                 return false;
             }
             var config = (EquipmentConfig)configs[instance.configId];
-            if (level < 1 || level > config.maxLevel || experience < 0 || ascension < 0)
+            int minimum = config.equipmentKind == EquipmentKind.Instrument ? 0 : 1;
+            if (level < minimum || level > config.maxLevel || experience < 0 || ascension < 0)
             {
                 reason = "装备养成数据无效。";
                 return false;
@@ -280,7 +289,7 @@ namespace Game.Inventory
             return data;
         }
 
-        public bool TryRestore(InventoryData data, out string reason)
+        public bool TryRestore(InventoryData data, out string reason, bool notify = true)
         {
             reason = null;
             if (!CanMutate(out reason)) return false;
@@ -304,8 +313,11 @@ namespace Game.Inventory
             {
                 if (instance == null || string.IsNullOrWhiteSpace(instance.instanceId)
                     || !TryGetConfig(instance.configId, out var config) || !(config is EquipmentConfig equipmentConfig)
-                    || instance.level < 1 || instance.level > equipmentConfig.maxLevel || instance.experience < 0
-                    || instance.ascension < 0 || !restoredEquipment.TryAdd(instance.instanceId, Copy(instance)))
+                    || instance.level < (equipmentConfig.equipmentKind == EquipmentKind.Instrument ? 0 : 1)
+                    || instance.level > equipmentConfig.maxLevel || instance.experience < 0
+                    || instance.superimposition < 1 || instance.superimposition > equipmentConfig.maxSuperimposition
+                    || !ValidEquipmentProgress(instance, equipmentConfig)
+                    || !restoredEquipment.TryAdd(instance.instanceId, Copy(instance)))
                 {
                     reason = "背包存档含有无效或重复的装备实例。";
                     return false;
@@ -315,9 +327,11 @@ namespace Game.Inventory
             equipment.Clear();
             foreach (KeyValuePair<string, int> stack in restoredStacks) stacks.Add(stack.Key, stack.Value);
             foreach (KeyValuePair<string, EquipmentInstance> instance in restoredEquipment) equipment.Add(instance.Key, instance.Value);
-            NotifyChanged();
+            if (notify) NotifyChanged();
             return true;
         }
+
+        internal void PublishCommitted() => NotifyChanged();
 
         private bool TryAggregate(IEnumerable<ItemAmount> items, out Dictionary<string, int> amounts, out string reason)
         {
@@ -350,14 +364,32 @@ namespace Game.Inventory
 
         private void NotifyChanged()
         {
-            global::Game.GameEvents.Inventory.Publish(new InventoryChangedEvent(this));
-            Changed?.Invoke();
+            Revision++;
+            notifying = true;
+            try
+            {
+                if (publishEvents) global::Game.GameEvents.Inventory.Publish(new InventoryChangedEvent(this));
+                if (Changed != null) foreach (Action listener in Changed.GetInvocationList())
+                    try { listener(); } catch (Exception exception) { UnityEngine.Debug.LogException(exception); }
+            }
+            finally { notifying = false; }
         }
 
-        private bool CanMutate(out string reason)
+        internal bool CanMutate(out string reason)
         {
-            reason = executingUse ? "物品使用过程中不能再次修改背包。" : null;
-            return !executingUse;
+            reason = IsReadOnly ? "存档处于只读保护状态。" : notifying ? "状态通知期间不能再次修改背包。"
+                : executingUse ? "物品使用过程中不能再次修改背包。" : null;
+            return reason == null;
+        }
+
+        private static bool ValidEquipmentProgress(EquipmentInstance instance, EquipmentConfig config)
+        {
+            if (instance.ascension < 0 || config.levelCaps == null) return false;
+            bool relic = config.equipmentKind == EquipmentKind.Instrument;
+            if (relic && instance.ascension != 0 || !relic && instance.ascension >= config.levelCaps.Length) return false;
+            int cap = relic ? config.maxLevel : config.levelCaps[instance.ascension];
+            long next = (long)config.experienceBase + (long)config.experiencePerLevel * instance.level;
+            return instance.level <= cap && instance.experience < next && (instance.level != cap || instance.experience == 0);
         }
 
         private void RemoveStack(string configId, int quantity)
@@ -372,7 +404,8 @@ namespace Game.Inventory
             return new EquipmentInstance
             {
                 instanceId = instance.instanceId, configId = instance.configId, level = instance.level,
-                experience = instance.experience, ascension = instance.ascension, isLocked = instance.isLocked
+                experience = instance.experience, ascension = instance.ascension, isLocked = instance.isLocked,
+                superimposition = instance.superimposition
             };
         }
     }

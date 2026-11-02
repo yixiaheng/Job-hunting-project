@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using LitJson;
@@ -35,7 +35,10 @@ namespace TapTap21.SaveSystem.dyh
                 var envelope = CreateEnvelope(definition, dataJson);
                 File.WriteAllText(temp, JsonMapper.ToJson(envelope));
                 ReplaceFile(temp, path, backup);
-                UpdateMetadata(slotId, slotPath);
+                // The authoritative item has committed. A metadata-index failure must not
+                // report transaction failure after durable player data has already changed.
+                try { UpdateMetadata(slotId, slotPath); }
+                catch (Exception metadataException) { Debug.LogWarning("存档已提交，但槽位索引更新失败：" + metadataException.Message); }
                 return SaveResult.Ok();
             }
             catch (Exception ex) { return SaveResult.Fail(ClassifyWriteError(ex), ex.Message); }

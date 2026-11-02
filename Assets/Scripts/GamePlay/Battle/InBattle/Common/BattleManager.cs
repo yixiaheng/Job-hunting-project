@@ -30,6 +30,7 @@ public class BattleManager : MonoBehaviour
     public BattleFlow battleFlow { get; private set;}
     private readonly List<BattleUnit> spawnedUnits = new();
     private UnitConfig[] launchAllies;
+    private BattleLaunchData launchSnapshot;
     private bool resultPublished;
     private UIManager battleUIManager;
     private UIHandle alliesStatusHandle;
@@ -48,7 +49,10 @@ public class BattleManager : MonoBehaviour
         Instance = this;    
 
         if (BattleLaunchContext.TryConsume(out BattleLaunchData data))
+        {
+            launchSnapshot = data;
             launchAllies = data.CopyAllies();
+        }
 
     }
 
@@ -83,6 +87,8 @@ public class BattleManager : MonoBehaviour
         UnitConfig[] allyConfigs = launchAllies ?? allies;
         if (!ValidateAllies(allyConfigs))
             return;
+        if (launchSnapshot == null && !BattleLaunchData.TryCreate(allyConfigs, out launchSnapshot, out string launchError))
+        { Debug.LogError(launchError, this); return; }
 
         if (battleFlow != null)
             battleFlow.GameOverEvent -= HandleBattleEnded;
@@ -122,6 +128,7 @@ public class BattleManager : MonoBehaviour
 
     public bool TryCreateLaunchData(out BattleLaunchData data, out string error)
     {
+        if (launchSnapshot != null) { data = launchSnapshot; error = null; return true; }
         return BattleLaunchData.TryCreate(launchAllies ?? allies, out data, out error);
     }
 
@@ -169,6 +176,10 @@ public class BattleManager : MonoBehaviour
 
         foreach (BattleUnit unit in spawnedUnits)
         {
+            if (unit.ownsRuntimeSkills)
+                foreach (SkillConfig skill in unit.skills) if (skill != null) Destroy(skill);
+            foreach (BuffInstance buff in unit.buffs)
+                if (buff.ownsConfig && buff.config != null) Destroy(buff.config);
             if (unit.gameObject != null)
                 Destroy(unit.gameObject);
         }
@@ -214,7 +225,8 @@ public class BattleManager : MonoBehaviour
             }
 
             // 这里的 i 代表在场地上的序号
-            var u = BattleDataMaping.ToUnit(configs[i], faction, i, tie++);
+            var u = faction == Faction.OurSide && launchSnapshot != null
+                ? launchSnapshot.CreateAlly(i, tie++) : BattleDataMaping.ToUnit(configs[i], faction, i, tie++);
             if (u == null) continue;
 
             units.Add(u);

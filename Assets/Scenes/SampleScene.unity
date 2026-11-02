@@ -1670,6 +1670,31 @@ MonoBehaviour:
   boneColor: {r: 0, g: 0, b: 1, a: 0.5}
   m_Transforms:
   - {fileID: 832575519}
+--- !u!114 &900001008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263779224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ea7b346af34db1a213f20d0c351517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.DialogueUIPresenter
+--- !u!114 &900001009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263779224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d7459c4c9e41fd9544779a7880e4aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneUIPresenter
+  panels: 0e000000
 --- !u!1 &970607538
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,7 +3159,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1899868154}
-  - component: {fileID: 1899868153}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -3142,46 +3166,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1899868153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1899868152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4254ebb504d5b1347b0a458700044322, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.InventoryManager
-  catalog: {fileID: 11400000, guid: 508c54d51b3bbce4fa0d91b6e7192cb7, type: 2}
-  persistAcrossScenes: 1
-  saveSlot: slot_0
-  startingItems:
-  - configId: character_exp
-    quantity: 20
-  - configId: equipment_exp
-    quantity: 20
-  - configId: character_ascension
-    quantity: 20
-  - configId: equipment_ascension
-    quantity: 20
-  - configId: food_revive
-    quantity: 5
-  - configId: food_technique
-    quantity: 5
-  - configId: food_heal
-    quantity: 5
-  - configId: food_attack
-    quantity: 5
-  - configId: cone_dawn
-    quantity: 1
-  - configId: cone_guard
-    quantity: 1
-  - configId: cone_wind
-    quantity: 1
-  - configId: cone_memory
-    quantity: 1
 --- !u!4 &1899868154
 Transform:
   m_ObjectHideFlags: 0
@@ -3457,28 +3441,3 @@ SceneRoots:
   - {fileID: 263779226}
   - {fileID: 1899868154}
   - {fileID: 2066967969}
---- !u!114 &900001008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263779224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1ea7b346af34db1a213f20d0c351517, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.DialogueUIPresenter
---- !u!114 &900001009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263779224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d7459c4c9e41fd9544779a7880e4aa, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::SceneUIPresenter
-  panels: 0e000000
