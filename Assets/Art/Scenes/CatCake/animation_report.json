@@ -1,0 +1,24 @@
+{
+  "fps": 30,
+  "bones": 92,
+  "animations": [
+    {
+      "name": "Bounce",
+      "source": "猫糕弹弹.vmd",
+      "frames": [
+        1.0,
+        176.0
+      ],
+      "curves": 119
+    },
+    {
+      "name": "Idle",
+      "source": "猫糕待机.vmd",
+      "frames": [
+        1.0,
+        168.0
+      ],
+      "curves": 119
+    }
+  ]
+}

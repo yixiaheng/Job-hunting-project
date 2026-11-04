@@ -1,4 +1,4 @@
-// For more information, visit -> https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample
+﻿// For more information, visit -> https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample
 
 // #pragma once is a safe guard best practice in almost every .hlsl (need Unity2020 or up), 
 // doing this can make sure your .hlsl's user can include this .hlsl anywhere anytime without producing any multi include conflict
@@ -16,6 +16,7 @@
 // (https://docs.unity3d.com/Manual/SL-UnityShaderVariables.html
 // It will also include many utilitary functions. 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/LODCrossFade.hlsl"
 
 // Include this if you are doing a lit shader. This includes lighting shader variables,
 // lighting and shadow functions

@@ -1,0 +1,3241 @@
+{
+  "blender_version": "3.6.23",
+  "source_archive": "《崩坏：星穹铁道》雅利洛Ⅵ-贝洛伯格-上层区.7z",
+  "pmx_import_scale": 0.08,
+  "models": [
+    {
+      "name": "BelobogUpperDistrict",
+      "source": "Belobog.pmx",
+      "mesh_objects": 1,
+      "vertices": 1850657,
+      "polygons": 1206598,
+      "triangles": 1206598,
+      "uv_layers": [
+        1
+      ],
+      "bones": 1,
+      "shape_keys": 0,
+      "materials": [
+        {
+          "name": "BelobogUpperDistrict_M0000",
+          "source_name": "材質1",
+          "texture": "Textures/Tex/Tex_0164.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0001",
+          "source_name": "材質10",
+          "texture": "Textures/Tex/Tex_0061.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0002",
+          "source_name": "材質100",
+          "texture": "Textures/Tex/Tex_0205_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0003",
+          "source_name": "材質101",
+          "texture": "Textures/Tex/Tex_0066.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0004",
+          "source_name": "材質102",
+          "texture": "Textures/Tex/Tex_0046.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0005",
+          "source_name": "材質103",
+          "texture": "Textures/Tex/Tex_0206.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0006",
+          "source_name": "材質104",
+          "texture": "Textures/Tex/Tex_0207.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0007",
+          "source_name": "材質105",
+          "texture": "Textures/Tex/Tex_0208.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0008",
+          "source_name": "材質106",
+          "texture": "Textures/Tex/Tex_0209.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0009",
+          "source_name": "材質107",
+          "texture": "Textures/Tex/Tex_0108.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0010",
+          "source_name": "材質108",
+          "texture": "Textures/Tex/Tex_0106.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0011",
+          "source_name": "材質109",
+          "texture": "Textures/Tex/Tex_0107.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0012",
+          "source_name": "材質11",
+          "texture": "Textures/Tex/Tex_0065.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0013",
+          "source_name": "材質110",
+          "texture": "Textures/Tex/Tex_0079.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0014",
+          "source_name": "材質111",
+          "texture": "Textures/Tex/Tex_0210.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0015",
+          "source_name": "材質112",
+          "texture": "Textures/Tex/Tex_0211.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0016",
+          "source_name": "材質113",
+          "texture": "Textures/Tex/Tex_0181.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0017",
+          "source_name": "材質114",
+          "texture": "Textures/Tex/Tex_0151_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0018",
+          "source_name": "材質115",
+          "texture": "Textures/Tex/Tex_0184.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0019",
+          "source_name": "材質116",
+          "texture": "Textures/Tex/Tex_0051.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0020",
+          "source_name": "材質117",
+          "texture": "Textures/Tex/Tex_0154.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0021",
+          "source_name": "材質118",
+          "texture": "Textures/Tex/Tex_0045.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0022",
+          "source_name": "材質119",
+          "texture": "Textures/Tex/Tex_0070.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0023",
+          "source_name": "材質12",
+          "texture": "Textures/Tex/Tex_0043.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0024",
+          "source_name": "材質120",
+          "texture": "Textures/Tex/Tex_0157.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0025",
+          "source_name": "材質121",
+          "texture": "Textures/Tex/Tex_0158.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0026",
+          "source_name": "材質122",
+          "texture": "Textures/Tex/Tex_0027_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0027",
+          "source_name": "材質123",
+          "texture": "Textures/Tex/Tex_0159.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0028",
+          "source_name": "材質124",
+          "texture": "Textures/Tex/Tex_0160.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0029",
+          "source_name": "材質125",
+          "texture": "Textures/Tex/Tex_0161.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0030",
+          "source_name": "材質126",
+          "texture": "Textures/Tex/Tex_0162.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0031",
+          "source_name": "材質127",
+          "texture": "Textures/Tex/Tex_0163.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0032",
+          "source_name": "材質128",
+          "texture": "Textures/Tex/Tex_0069.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0033",
+          "source_name": "材質129",
+          "texture": "Textures/Tex/Tex_0165.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0034",
+          "source_name": "材質13",
+          "texture": "Textures/Tex/Tex_0034_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0035",
+          "source_name": "材質130",
+          "texture": "Textures/Tex/Tex_0166.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0036",
+          "source_name": "材質131",
+          "texture": "Textures/Tex/Tex_0167.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0037",
+          "source_name": "材質132",
+          "texture": "Textures/Tex/Tex_0168.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0038",
+          "source_name": "材質133",
+          "texture": "Textures/Tex/Tex_0016_3.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0039",
+          "source_name": "材質134",
+          "texture": "Textures/Tex/Tex_0064_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0040",
+          "source_name": "材質135",
+          "texture": "Textures/Tex/Tex_0064_3.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0041",
+          "source_name": "材質136",
+          "texture": "Textures/Tex/Tex_0072.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0042",
+          "source_name": "材質137",
+          "texture": "Textures/Tex/Tex_0072_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0043",
+          "source_name": "材質138",
+          "texture": "Textures/Tex/Tex_0153.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0044",
+          "source_name": "材質139",
+          "texture": "Textures/Tex/Tex_0169.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0045",
+          "source_name": "材質14",
+          "texture": "Textures/Tex/Tex_0155.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0046",
+          "source_name": "材質140",
+          "texture": "Textures/Tex/Tex_0084.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0047",
+          "source_name": "材質141",
+          "texture": "Textures/Tex/Tex_0170.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0048",
+          "source_name": "材質142",
+          "texture": "Textures/Tex/Tex_0171.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0049",
+          "source_name": "材質143",
+          "texture": "Textures/Tex/Tex_0012_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0050",
+          "source_name": "材質144",
+          "texture": "Textures/Tex/Tex_0111.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0051",
+          "source_name": "材質145",
+          "texture": "Textures/Tex/Tex_0083.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0052",
+          "source_name": "材質146",
+          "texture": "Textures/Tex/Tex_0136.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0053",
+          "source_name": "材質147",
+          "texture": "Textures/Tex/Tex_0227.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0054",
+          "source_name": "材質148",
+          "texture": "Textures/Tex/Tex_0176.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0055",
+          "source_name": "材質149",
+          "texture": "Textures/Tex/Tex_0016_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0056",
+          "source_name": "材質15",
+          "texture": "Textures/Tex/Tex_0050.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0057",
+          "source_name": "材質150",
+          "texture": "Textures/Tex/Tex_0040.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0058",
+          "source_name": "材質151",
+          "texture": "Textures/Tex/Tex_0088.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0059",
+          "source_name": "材質152",
+          "texture": "Textures/Tex/Tex_0097_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0060",
+          "source_name": "材質153",
+          "texture": "Textures/Tex/Tex_0125.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0061",
+          "source_name": "材質154",
+          "texture": "Textures/Tex/Tex_0179.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0062",
+          "source_name": "材質155",
+          "texture": "Textures/Tex/Tex_0180.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0063",
+          "source_name": "材質156",
+          "texture": "Textures/Tex/Tex_0127.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0064",
+          "source_name": "材質157",
+          "texture": "Textures/Tex/Tex_0109.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0065",
+          "source_name": "材質158",
+          "texture": "Textures/Tex/Tex_0025.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0066",
+          "source_name": "材質159",
+          "texture": "Textures/Tex/Tex_0137.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0067",
+          "source_name": "材質16",
+          "texture": "Textures/Tex/Tex_0001.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0068",
+          "source_name": "材質160",
+          "texture": "Textures/Tex/Tex_0139.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0069",
+          "source_name": "材質161",
+          "texture": "Textures/Tex/Tex_0142.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0070",
+          "source_name": "材質162",
+          "texture": "Textures/Tex/Tex_0143.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0071",
+          "source_name": "材質163",
+          "texture": "Textures/Tex/Tex_0144.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0072",
+          "source_name": "材質164",
+          "texture": "Textures/Tex/Tex_0145.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0073",
+          "source_name": "材質165",
+          "texture": "Textures/Tex/Tex_0147.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0074",
+          "source_name": "材質166",
+          "texture": "Textures/Tex/Tex_0148.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0075",
+          "source_name": "材質167",
+          "texture": "Textures/Tex/Tex_0017.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0076",
+          "source_name": "材質168",
+          "texture": "Textures/Tex/Tex_0152.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0077",
+          "source_name": "材質169",
+          "texture": "Textures/Tex/Tex_0119.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0078",
+          "source_name": "材質17",
+          "texture": "Textures/Tex/Tex_0225.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0079",
+          "source_name": "材質170",
+          "texture": "Textures/Tex/Tex_0226.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0080",
+          "source_name": "材質171",
+          "texture": "Textures/Tex/Tex_0081.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0081",
+          "source_name": "材質172",
+          "texture": "Textures/Tex/Tex_0056.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0082",
+          "source_name": "材質173",
+          "texture": "Textures/Tex/Tex_0082.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0083",
+          "source_name": "材質174",
+          "texture": "Textures/Tex/Tex_0071.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0084",
+          "source_name": "材質175",
+          "texture": "Textures/Tex/Tex_0020.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0085",
+          "source_name": "材質176",
+          "texture": "Textures/Tex/Tex_0039.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0086",
+          "source_name": "材質177",
+          "texture": "Textures/Tex/Tex_0067.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0087",
+          "source_name": "材質178",
+          "texture": "Textures/Tex/Tex_0057.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0088",
+          "source_name": "材質179",
+          "texture": "Textures/Tex/Tex_0110.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0089",
+          "source_name": "材質18",
+          "texture": "Textures/Tex/Tex_0003.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0090",
+          "source_name": "材質180",
+          "texture": "Textures/Tex/Tex_0011.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0091",
+          "source_name": "材質181",
+          "texture": "Textures/Tex/Tex_0011_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0092",
+          "source_name": "材質182",
+          "texture": "Textures/Tex/Tex_0112.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0093",
+          "source_name": "材質183",
+          "texture": "Textures/Tex/Tex_0113.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0094",
+          "source_name": "材質184",
+          "texture": "Textures/Tex/Tex_0114.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0095",
+          "source_name": "材質185",
+          "texture": "Textures/Tex/Tex_0063_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0096",
+          "source_name": "材質186",
+          "texture": "Textures/Tex/Tex_0115.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0097",
+          "source_name": "材質187",
+          "texture": "Textures/Tex/Tex_0116.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0098",
+          "source_name": "材質188",
+          "texture": "Textures/Tex/Tex_0117.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0099",
+          "source_name": "材質189",
+          "texture": "Textures/Tex/Tex_0118.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0100",
+          "source_name": "材質19",
+          "texture": "Textures/Tex/Tex_0004.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0101",
+          "source_name": "材質190",
+          "texture": "Textures/Tex/Tex_0120.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0102",
+          "source_name": "材質191",
+          "texture": "Textures/Tex/Tex_0121.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0103",
+          "source_name": "材質192",
+          "texture": "Textures/Tex/Tex_0123.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0104",
+          "source_name": "材質193",
+          "texture": "Textures/Tex/Tex_0093.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0105",
+          "source_name": "材質194",
+          "texture": "Textures/Tex/Tex_0094.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0106",
+          "source_name": "材質195",
+          "texture": "Textures/Tex/Tex_0095.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0107",
+          "source_name": "材質196",
+          "texture": "Textures/Tex/Tex_0101_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0108",
+          "source_name": "材質197",
+          "texture": "Textures/Tex/Tex_0102_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0109",
+          "source_name": "材質198",
+          "texture": "Textures/Tex/Tex_0124.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0110",
+          "source_name": "材質199",
+          "texture": "Textures/Tex/Tex_0126.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0111",
+          "source_name": "材質2",
+          "texture": "Textures/Tex/Tex_0044_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0112",
+          "source_name": "材質20",
+          "texture": "Textures/Tex/Tex_0005.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0113",
+          "source_name": "材質200",
+          "texture": "Textures/Tex/Tex_0128.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0114",
+          "source_name": "材質201",
+          "texture": "Textures/Tex/Tex_0129.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0115",
+          "source_name": "材質202",
+          "texture": "Textures/Tex/Tex_0014.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0116",
+          "source_name": "材質203",
+          "texture": "Textures/Tex/Tex_0018.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0117",
+          "source_name": "材質204",
+          "texture": "Textures/Tex/Tex_0021.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0118",
+          "source_name": "材質205",
+          "texture": "Textures/Tex/Tex_0022.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0119",
+          "source_name": "材質206",
+          "texture": "Textures/Tex/Tex_0023.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0120",
+          "source_name": "材質207",
+          "texture": "Textures/Tex/Tex_0024.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0121",
+          "source_name": "材質208",
+          "texture": "Textures/Tex/Tex_0026.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0122",
+          "source_name": "材質209",
+          "texture": "Textures/Tex/Tex_0027.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0123",
+          "source_name": "材質21",
+          "texture": "Textures/Tex/Tex_0053.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0124",
+          "source_name": "材質210",
+          "texture": "Textures/Tex/Tex_0028.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0125",
+          "source_name": "材質211",
+          "texture": "Textures/Tex/Tex_0029.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0126",
+          "source_name": "材質212",
+          "texture": "Textures/Tex/Tex_0030.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0127",
+          "source_name": "材質213",
+          "texture": "Textures/Tex/Tex_0031.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0128",
+          "source_name": "材質214",
+          "texture": "Textures/Tex/Tex_0032.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0129",
+          "source_name": "材質215",
+          "texture": "Textures/Tex/Tex_0033.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0130",
+          "source_name": "材質216",
+          "texture": "Textures/Tex/Tex_0035.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0131",
+          "source_name": "材質217",
+          "texture": "Textures/Tex/Tex_0041.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0132",
+          "source_name": "材質218",
+          "texture": "Textures/Tex/Tex_0042.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0133",
+          "source_name": "材質219",
+          "texture": "Textures/Tex/Tex_0047.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0134",
+          "source_name": "材質22",
+          "texture": "Textures/Tex/Tex_0052.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0135",
+          "source_name": "材質220",
+          "texture": "Textures/Tex/Tex_0048.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0136",
+          "source_name": "材質221",
+          "texture": "Textures/Tex/Tex_0049.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0137",
+          "source_name": "材質222",
+          "texture": "Textures/Tex/Tex_0054.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0138",
+          "source_name": "材質223",
+          "texture": "Textures/Tex/Tex_0058.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0139",
+          "source_name": "材質224",
+          "texture": "Textures/Tex/Tex_0059.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0140",
+          "source_name": "材質225",
+          "texture": "Textures/Tex/Tex_0073.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0141",
+          "source_name": "材質226",
+          "texture": "Textures/Tex/Tex_0075.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0142",
+          "source_name": "材質227",
+          "texture": "Textures/Tex/Tex_0076.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0143",
+          "source_name": "材質228",
+          "texture": "Textures/Tex/Tex_0077.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0144",
+          "source_name": "材質229",
+          "texture": "Textures/Tex/Tex_0080.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0145",
+          "source_name": "材質23",
+          "texture": "Textures/Tex/Tex_0060.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0146",
+          "source_name": "材質230",
+          "texture": "Textures/Tex/Tex_0085.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0147",
+          "source_name": "材質231",
+          "texture": "Textures/Tex/Tex_0086.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0148",
+          "source_name": "材質232",
+          "texture": "Textures/Tex/Tex_0089.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0149",
+          "source_name": "材質233",
+          "texture": "Textures/Tex/Tex_0090.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0150",
+          "source_name": "材質234",
+          "texture": "Textures/Tex/Tex_0091.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0151",
+          "source_name": "材質235",
+          "texture": "Textures/Tex/Tex_0092.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0152",
+          "source_name": "材質236",
+          "texture": "Textures/Tex/Tex_0096.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0153",
+          "source_name": "材質237",
+          "texture": "Textures/Tex/Tex_0098.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0154",
+          "source_name": "材質238",
+          "texture": "Textures/Tex/Tex_0099.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0155",
+          "source_name": "材質239",
+          "texture": "Textures/Tex/Tex_0100.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0156",
+          "source_name": "材質24",
+          "texture": "Textures/Tex/Tex_0064.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0157",
+          "source_name": "材質25",
+          "texture": "Textures/Tex/Tex_0019.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0158",
+          "source_name": "材質26",
+          "texture": "Textures/Tex/Tex_0122.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0159",
+          "source_name": "材質27",
+          "texture": "Textures/Tex/Tex_0103.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0160",
+          "source_name": "材質28",
+          "texture": "Textures/Tex/Tex_0172_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0161",
+          "source_name": "材質29",
+          "texture": "Textures/Tex/Tex_0132.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0162",
+          "source_name": "材質3",
+          "texture": "Textures/Tex/Tex_0013_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0163",
+          "source_name": "材質30",
+          "texture": "Textures/Tex/Tex_0133.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0164",
+          "source_name": "材質31",
+          "texture": "Textures/Tex/Tex_0062.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0165",
+          "source_name": "材質32",
+          "texture": "Textures/Tex/Tex_0036.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0166",
+          "source_name": "材質33",
+          "texture": "Textures/Tex/Tex_0212_3.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0167",
+          "source_name": "材質34",
+          "texture": "Textures/Tex/Tex_0135.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0168",
+          "source_name": "材質35",
+          "texture": "Textures/Tex/Tex_0213.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0169",
+          "source_name": "材質36",
+          "texture": "Textures/Tex/Tex_0182.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0170",
+          "source_name": "材質37",
+          "texture": "Textures/Tex/Tex_0009.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0171",
+          "source_name": "材質38",
+          "texture": "Textures/Tex/Tex_0055.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0172",
+          "source_name": "材質39",
+          "texture": "Textures/Tex/Tex_0214.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0173",
+          "source_name": "材質4",
+          "texture": "Textures/Tex/Tex_0007.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0174",
+          "source_name": "材質40",
+          "texture": "Textures/Tex/Tex_0215.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0175",
+          "source_name": "材質41",
+          "texture": "Textures/Tex/Tex_0216.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0176",
+          "source_name": "材質42",
+          "texture": "Textures/Tex/Tex_0217.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0177",
+          "source_name": "材質43",
+          "texture": "Textures/Tex/Tex_0218.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0178",
+          "source_name": "材質44",
+          "texture": "Textures/Tex/Tex_0219.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0179",
+          "source_name": "材質45",
+          "texture": "Textures/Tex/Tex_0220.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0180",
+          "source_name": "材質46",
+          "texture": "Textures/Tex/Tex_0034.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0181",
+          "source_name": "材質47",
+          "texture": "Textures/Tex/Tex_0146.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0182",
+          "source_name": "材質48",
+          "texture": "Textures/Tex/Tex_0221.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0183",
+          "source_name": "材質49",
+          "texture": "Textures/Tex/Tex_0222.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0184",
+          "source_name": "材質5",
+          "texture": "Textures/Tex/Tex_0150.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0185",
+          "source_name": "材質50",
+          "texture": "Textures/Tex/Tex_0015.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0186",
+          "source_name": "材質51",
+          "texture": "Textures/Tex/Tex_0175.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0187",
+          "source_name": "材質52",
+          "texture": "Textures/Tex/Tex_0131.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0188",
+          "source_name": "材質53",
+          "texture": "Textures/Tex/Tex_0015_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0189",
+          "source_name": "材質54",
+          "texture": "Textures/Tex/Tex_0134.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0190",
+          "source_name": "材質55",
+          "texture": "Textures/Tex/Tex_0012.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0191",
+          "source_name": "材質56",
+          "texture": "Textures/Tex/Tex_0012_3.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0192",
+          "source_name": "材質57",
+          "texture": "Textures/Tex/Tex_0223.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0193",
+          "source_name": "材質58",
+          "texture": "Textures/Tex/Tex_0141.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0194",
+          "source_name": "材質59",
+          "texture": "Textures/Tex/Tex_0037.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0195",
+          "source_name": "材質6",
+          "texture": "Textures/Tex/Tex_0002_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0196",
+          "source_name": "材質60",
+          "texture": "Textures/Tex/Tex_0212_4.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0197",
+          "source_name": "材質61",
+          "texture": "Textures/Tex/Tex_0183.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0198",
+          "source_name": "材質62",
+          "texture": "Textures/Tex/Tex_0149.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0199",
+          "source_name": "材質63",
+          "texture": "Textures/Tex/Tex_0008_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0200",
+          "source_name": "材質64",
+          "texture": "Textures/Tex/Tex_0010.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0201",
+          "source_name": "材質65",
+          "texture": "Textures/Tex/Tex_0185.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0202",
+          "source_name": "材質66",
+          "texture": "Textures/Tex/Tex_0038.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0203",
+          "source_name": "材質67",
+          "texture": "Textures/Tex/Tex_0140.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0204",
+          "source_name": "材質68",
+          "texture": "Textures/Tex/Tex_0072_3.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0205",
+          "source_name": "材質69",
+          "texture": "Textures/Tex/Tex_0063.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0206",
+          "source_name": "材質7",
+          "texture": "Textures/Tex/Tex_0068.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0207",
+          "source_name": "材質70",
+          "texture": "Textures/Tex/Tex_0177.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0208",
+          "source_name": "材質71",
+          "texture": "Textures/Tex/Tex_0178.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0209",
+          "source_name": "材質72",
+          "texture": "Textures/Tex/Tex_0016.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0210",
+          "source_name": "材質73",
+          "texture": "Textures/Tex/Tex_0138.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0211",
+          "source_name": "材質74",
+          "texture": "Textures/Tex/Tex_0173.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0212",
+          "source_name": "材質75",
+          "texture": "Textures/Tex/Tex_0087.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0213",
+          "source_name": "材質76",
+          "texture": "Textures/Tex/Tex_0174.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0214",
+          "source_name": "材質77",
+          "texture": "Textures/Tex/Tex_0104.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0215",
+          "source_name": "材質78",
+          "texture": "Textures/Tex/Tex_0224.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0216",
+          "source_name": "材質79",
+          "texture": "Textures/Tex/Tex_0156.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0217",
+          "source_name": "材質8",
+          "texture": "Textures/Tex/Tex_0074.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0218",
+          "source_name": "材質80",
+          "texture": "Textures/Tex/Tex_0006.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0219",
+          "source_name": "材質81",
+          "texture": "Textures/Tex/Tex_0186.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0220",
+          "source_name": "材質82",
+          "texture": "Textures/Tex/Tex_0187_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0221",
+          "source_name": "材質83",
+          "texture": "Textures/Tex/Tex_0188_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0222",
+          "source_name": "材質84",
+          "texture": "Textures/Tex/Tex_0189_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0223",
+          "source_name": "材質85",
+          "texture": "Textures/Tex/Tex_0190_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0224",
+          "source_name": "材質86",
+          "texture": "Textures/Tex/Tex_0191_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0225",
+          "source_name": "材質87",
+          "texture": "Textures/Tex/Tex_0192.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0226",
+          "source_name": "材質88",
+          "texture": "Textures/Tex/Tex_0193_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0227",
+          "source_name": "材質89",
+          "texture": "Textures/Tex/Tex_0194_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0228",
+          "source_name": "材質9",
+          "texture": "Textures/Tex/Tex_0078.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0229",
+          "source_name": "材質90",
+          "texture": "Textures/Tex/Tex_0195_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0230",
+          "source_name": "材質91",
+          "texture": "Textures/Tex/Tex_0196_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0231",
+          "source_name": "材質92",
+          "texture": "Textures/Tex/Tex_0197_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0232",
+          "source_name": "材質93",
+          "texture": "Textures/Tex/Tex_0198_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0233",
+          "source_name": "材質94",
+          "texture": "Textures/Tex/Tex_0199_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0234",
+          "source_name": "材質95",
+          "texture": "Textures/Tex/Tex_0200_2.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "BLEND",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0235",
+          "source_name": "材質96",
+          "texture": "Textures/Tex/Tex_0201.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0236",
+          "source_name": "材質97",
+          "texture": "Textures/Tex/Tex_0202.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0237",
+          "source_name": "材質98",
+          "texture": "Textures/Tex/Tex_0203.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "BelobogUpperDistrict_M0238",
+          "source_name": "材質99",
+          "texture": "Textures/Tex/Tex_0204.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        }
+      ],
+      "missing_base_textures": [],
+      "bounds_m": {
+        "min": [
+          -1648.017578125,
+          -2353.114990234375,
+          -159.4743194580078
+        ],
+        "max": [
+          2214.6962890625,
+          1848.3446044921875,
+          605.388671875
+        ]
+      },
+      "fbx_bytes": 180552444
+    },
+    {
+      "name": "Tramcar",
+      "source": "Tramcar.pmx",
+      "mesh_objects": 1,
+      "vertices": 22370,
+      "polygons": 17977,
+      "triangles": 17977,
+      "uv_layers": [
+        1
+      ],
+      "bones": 1,
+      "shape_keys": 0,
+      "materials": [
+        {
+          "name": "Tramcar_M0000",
+          "source_name": "材質1",
+          "texture": "Textures/Tex/Tex_0107.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "Tramcar_M0001",
+          "source_name": "材質2",
+          "texture": "Textures/Tex/Tex_0108.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "Tramcar_M0002",
+          "source_name": "材質3",
+          "texture": "Textures/Tex/Tex_0105.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "Tramcar_M0003",
+          "source_name": "材質4",
+          "texture": "Textures/Tex/Tex_0130.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        },
+        {
+          "name": "Tramcar_M0004",
+          "source_name": "材質5",
+          "texture": "Textures/Tex/Tex_0106.png",
+          "base_color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "alpha": 1.0,
+          "alpha_mode": "OPAQUE",
+          "double_sided": true
+        }
+      ],
+      "missing_base_textures": [],
+      "bounds_m": {
+        "min": [
+          -4.47928524017334,
+          -1.3265408277511597,
+          0.0025688456371426582
+        ],
+        "max": [
+          4.47928524017334,
+          1.3178658485412598,
+          4.072781085968018
+        ]
+      },
+      "fbx_bytes": 3485980
+    }
+  ],
+  "texture_files": 893,
+  "conversion_notes": [
+    "Basic diffuse/alpha material conversion; MMD toon, sphere maps, edge rendering and physics are not reproduced."
+  ]
+}

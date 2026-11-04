@@ -1,0 +1,10 @@
+{
+  "scene": "Assets/Scenes/BelobogOptimization/Belobog_Optimized.unity",
+  "lodGroups": 164,
+  "lod0Triangles": 836065,
+  "missingMaterials": 0,
+  "colliders": 614,
+  "collisionTriangles": 932089,
+  "player": true,
+  "originalSceneStillOpen": false
+}

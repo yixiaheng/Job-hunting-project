@@ -2,11 +2,12 @@
 
 ## 入口与资源
 
-- 探索 HUD、配队主面板的“角色培养”按钮，以及背包的装备/培养入口，进入同一个养成场景。
+- “角色培养”按钮仅安装在探索主界面的 ExplorationHUD；配队窗口不再提供此按钮。打开窗口、弹窗或叠加界面时，入口订阅 UIManager 的 PresentationStateChanged 并隐藏、停止射线交互，回到主界面恢复。背包内部的装备/培养业务导航仍可进入同一个养成场景。
 - 场景：`Assets/Scenes/CharacterScene.unity`，身份 `SceneId.Character`。
 - 主面板：`UIId.CharacterDetail`；配置位于 `Assets/Config/UI/Window/`。
 - 材料、装备、确认窗口：`CharacterMaterials / CharacterEquipment / CharacterConfirm`；配置位于 `Assets/Config/UI/Popup/`。
 - 所有登记引用在 `Assets/Config/UI/UIRegistry.asset`。
+- 主面板预制体：`Assets/Prefabs/UIPrefabs/Window/Character/`；三个弹窗预制体：`Assets/Prefabs/UIPrefabs/Popup/Character/`。
 - 玩家运行时入口：`Assets/Resources/Bootstrap/PlayerRuntimeConfig.asset`。
 - 成长、碎片、天赋、遗器和套装开发配置：`Assets/Config/Character/`。原角色、技能和光锥资源保留原 GUID。
 
@@ -85,3 +86,11 @@ UIManager 的 `SuspendPresentation()` 返回可释放的租约。每个面板使
 - 中文字体与胶囊展示已通过实际截图检查；所有新增 UIConfig 按 Window/Popup 分类并登记。
 
 后续新增角色须配置专属碎片、命途、稳定效果键与成长映射；新增装备须登记 ItemCatalog；新增 UIConfig 仍按 UILayer 分类。
+
+### 2026-11-04 导航与主界面入口修复
+
+- 摄像机输入轴的启停只由 PlayerInputHandler 的来源锁集合管理。CharacterSceneNavigator 仍保存相机渲染组件和 AudioListener 状态，但不再独立 Hold CinemachineInputAxisController，避免玩家锁记住已禁用状态并在返回时错误恢复。
+- UIManager.IsUnobstructedHUD(handle) 检查所属 HUD 已打开、未挂起且没有前台非 HUD 面板；CharacterEntryButton 用 CanvasGroup 同时控制显示、交互与射线，OnDisable 解除订阅。
+- CharacterProgressionSetup 同步移除配队入口，保留原 prefab/.meta/GUID。旧完整验收工具调整为检查配队窗口无入口，再验证已有窗口的导航恢复。
+- `Tools/Characters/Verify Navigation and HUD` 在当前场景进行 Play Mode 回归，不执行培养或写入角色进度。测试前将未保存场景复制到 Temp/CharacterNavigationRegression/BeforeTest.unity；结果写入同目录 results.json。
+- 本次回归通过 20 项检查：主界面按钮进入、UIManager.Back 返回、来源背包继续锁相机、关闭背包恢复、配队入口缺失/底层入口隐藏、预先禁用相机的状态保留、多次进出后输入恢复。检查摄像机输入组件和 UI 锁状态，不代替人工鼠标手感测试。

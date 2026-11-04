@@ -1,0 +1,4467 @@
+{
+  "Tex/Tex_0001.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0001_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0001_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0001_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0001_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0002.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0002_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0002_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0002_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0002_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0002_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0003.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0003_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0003_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0003_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0004.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0004_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0004_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0004_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0005.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0005_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0005_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0005_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0006.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0006_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0006_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0006_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0007.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0007_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0007_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0007_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0008.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0008_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0008_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0008_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0008_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0008_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0009.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0009_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0009_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0009_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0010.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0010_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0010_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0010_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0011.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0011_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0011_A1.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0011_A2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0011_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0011_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0011_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0012.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0012_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0012_3.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0012_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0012_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0012_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0013.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0013_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0013_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0013_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0013_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0013_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0014.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0014_A1.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0014_A2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0014_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0014_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0014_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0015.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0015_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0015_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0015_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0015_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0016.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0016_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0016_3.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0016_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0016_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0016_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0017.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0017_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0017_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0017_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0018.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0018_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0018_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0018_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0019.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0019_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0019_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0019_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0019_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0020.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0020_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0020_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0020_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0020_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0021.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0021_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0021_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0021_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0022.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0022_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0022_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0022_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0023.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0023_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0023_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0023_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0024.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0024_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0024_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0024_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0025.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0025_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0025_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0025_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0026.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0026_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0026_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0026_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0027.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0027_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0027_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0027_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0027_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0028.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0028_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0028_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0028_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0028_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0029.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0029_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0029_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0029_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0030.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0030_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0030_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0030_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0031.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0031_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0031_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0031_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0032.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0032_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0032_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0032_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0033.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0033_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0034.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0034_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0034_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0034_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0034_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0035.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0035_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0035_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0035_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0036.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0036_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0036_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0036_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0037.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0037_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0037_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0037_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0038.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0038_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0038_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0038_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0038_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0039.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0039_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0039_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0039_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0039_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0040.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0040_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0040_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0040_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0040_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0041.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0041_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0041_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0041_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0042.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0042_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0042_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0042_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0043.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0043_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0043_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0043_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0044.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0044_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0044_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0044_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0044_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0044_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0045.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0045_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0045_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0045_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0046.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0046_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0046_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0046_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0047.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0047_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0047_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0047_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0048.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0048_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0048_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0048_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0049.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0049_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0050.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0050_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0051.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0051_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0051_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0051_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0052.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0052_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0052_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0052_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0053.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0053_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0053_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0053_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0054.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0054_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0054_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0054_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0055.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0055_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0056.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0056_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0056_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0056_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0056_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0057.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0057_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0057_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0057_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0058.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0058_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0058_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0058_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0058_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0059.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0059_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0059_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0059_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0060.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0060_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0060_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0060_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0061.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0061_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0061_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0061_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0061_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0062.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0062_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0062_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0062_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0063.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0063_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0063_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0063_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0063_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0064.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0064_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0064_3.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0064_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0064_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0064_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0065.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0065_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0065_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0065_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0066.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0066_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0066_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0066_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0067.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0067_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0067_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0067_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0068.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0068_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0068_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0068_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0069.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0069_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0069_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0069_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0070.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0070_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0070_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0070_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0071.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0071_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0071_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0071_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0071_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0072.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0072_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0072_3.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0072_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0072_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0072_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0073.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0073_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0073_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0073_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0074.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0074_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0075.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0075_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0076.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 32,
+    "height": 32
+  },
+  "Tex/Tex_0076_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 32,
+    "height": 32
+  },
+  "Tex/Tex_0077.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0077_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0077_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0077_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0078.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0078_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0078_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0078_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0079.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0079_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0079_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0079_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0079_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0080.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0080_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0080_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0080_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0081.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0081_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0081_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0081_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0082.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0082_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0082_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0082_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0082_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0083.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0083_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0083_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0083_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0084.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0084_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0084_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0084_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0085.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0085_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0085_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0085_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0086.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0086_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0086_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0086_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0087.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0087_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0087_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0087_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0088.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0088_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0088_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0088_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0089.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0089_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0089_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0089_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0090.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0090_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0090_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0090_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0091.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0091_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0091_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0091_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0092.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0092_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0092_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0092_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0093.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0093_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0093_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0093_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0094.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0094_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0094_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0094_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0095.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0095_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0095_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0095_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0096.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0096_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0096_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0096_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0097.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0097_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 2048,
+    "height": 2048
+  },
+  "Tex/Tex_0097_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0098.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0098_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0099.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0099_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0099_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0099_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0100.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0100_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0100_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0100_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0101.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0101_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0101_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0102.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0102_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0102_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0103.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0103_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0103_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0103_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0103_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0104.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0104_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0104_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0104_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0105.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0105_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0105_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0105_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0106.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0106_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0106_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0106_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0107.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0107_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0107_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0107_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0108.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0108_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0108_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0108_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0109.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0109_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0109_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0109_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0110.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0110_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0110_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0110_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0111.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0111_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0111_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0111_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0112.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0112_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0112_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0112_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0113.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0113_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0113_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0113_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0114.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0114_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0114_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0114_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0115.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0115_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0115_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0115_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0116.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0116_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0116_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0116_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0117.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0117_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0117_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0117_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0118.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0118_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0118_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0118_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0119.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 256
+  },
+  "Tex/Tex_0120.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0120_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0120_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0120_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0121.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0121_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0121_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0121_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0122.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0122_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0122_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0122_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0123.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0123_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0123_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0123_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0124.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0124_A1.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0124_A2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0125.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  },
+  "Tex/Tex_0126.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0127.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  },
+  "Tex/Tex_0128.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0129.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0130.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0130_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0130_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0130_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0131.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0131_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0131_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0131_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0132.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0132_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0132_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0132_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0133.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0133_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0133_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0133_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0134.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0134_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0134_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0134_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0135.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0135_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0135_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0135_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0136.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0136_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0136_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0136_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0137.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0137_A1.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0137_A2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0137_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0137_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0137_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0138.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0138_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0138_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0138_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0139.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0140.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0140_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0140_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0140_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0141.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0141_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0141_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0141_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0142.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0142_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0142_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0142_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0143.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0143_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0143_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0143_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0144.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0144_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0144_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0144_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0145.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0145_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0145_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0145_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0146.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0146_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0146_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0146_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0147.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0147_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0147_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0147_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0148.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0148_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0148_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0148_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0149.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0149_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0149_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0149_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0150.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0150_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0150_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0150_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0151.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0151_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0151_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0151_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0151_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0151_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0152.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0152_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0152_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0152_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0153.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0153_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0153_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0153_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0154.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0154_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0154_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0154_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0155.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0155_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0155_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0155_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0155_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0156.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0156_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0156_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0156_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0157.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0157_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0157_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0157_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0158.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0158_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0158_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0158_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0159.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0159_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0159_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0159_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0160.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0160_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0160_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0160_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0161.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0161_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0161_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0161_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0162.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0162_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0162_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0162_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0163.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0163_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0163_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0163_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0164.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0164_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0164_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0164_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0165.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0165_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0165_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0165_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0166.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0166_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0166_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0166_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 64,
+    "height": 64
+  },
+  "Tex/Tex_0167.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0167_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0167_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0167_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0168.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0168_A1.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0168_A2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0168_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0168_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0168_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0169.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0169_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0169_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0169_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0170.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0170_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0170_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0170_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0171.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0171_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0171_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0171_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0172.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0172_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0172_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0172_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0172_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0172_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0173.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0173_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0174.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0174_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0174_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0174_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0175.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0175_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0175_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0175_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0176.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0176_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0176_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0176_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0177.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0177_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0177_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0177_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0178.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0178_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0178_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0178_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0179.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  },
+  "Tex/Tex_0180.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  },
+  "Tex/Tex_0181.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0181_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0181_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0181_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0182.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0182_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0182_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0182_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0183.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0183_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0183_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0183_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0184.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0184_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0184_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0184_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0185.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0185_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0185_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0185_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0186.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0186_A1.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0186_A2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0186_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0186_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0186_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0187.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0187_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0187_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0187_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0188.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0188_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0188_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0188_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0189.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0189_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0189_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0189_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0190.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0190_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0190_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0190_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0191.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0191_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0191_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0191_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0192.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  },
+  "Tex/Tex_0193.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0193_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0193_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0193_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0194.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0194_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0194_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0194_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0195.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0195_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0195_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0195_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0196.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0196_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0196_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0196_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0197.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0197_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0197_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0197_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0198.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0198_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0198_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0198_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0199.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0199_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0199_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0199_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0200.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0200_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0200_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0200_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0201.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0201_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0201_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0201_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0202.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0202_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0202_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0202_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0203.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0203_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0203_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0203_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0204.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0204_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0204_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0204_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0205.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0205_2.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0205_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0206.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0206_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0206_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0206_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0207.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0207_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0207_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0207_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0208.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0208_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0208_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0208_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0209.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0209_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0209_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0209_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0210.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  },
+  "Tex/Tex_0211.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  },
+  "Tex/Tex_0212.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0212_2.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0212_3.png": {
+    "alpha_mode": "BLEND",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0212_4.png": {
+    "alpha_mode": "BLEND",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0212_A.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0212_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0212_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0212_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0213.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0213_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0213_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0213_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0214.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0214_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0214_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0214_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0215.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0215_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0215_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0215_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0216.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0216_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0216_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0216_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0217.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0217_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0217_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0217_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0218.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0218_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0218_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0218_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0219.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0219_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0219_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0219_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0220.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0220_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0220_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0220_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0221.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0221_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0221_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0221_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 256,
+    "height": 256
+  },
+  "Tex/Tex_0222.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0222_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 128,
+    "height": 128
+  },
+  "Tex/Tex_0223.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0223_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0223_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0223_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0224.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  },
+  "Tex/Tex_0225.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0225_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 512,
+    "height": 512
+  },
+  "Tex/Tex_0226.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0226_Gloss.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0226_Metalness.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0226_Normal.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 1024,
+    "height": 1024
+  },
+  "Tex/Tex_0227.png": {
+    "alpha_mode": "OPAQUE",
+    "width": 5,
+    "height": 5
+  }
+}

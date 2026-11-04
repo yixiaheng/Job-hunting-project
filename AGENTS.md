@@ -18,6 +18,15 @@
 - 移动 Unity 资源时必须保留原 `.meta` 和 GUID，保持 UIRegistry、prefab 及其他资源引用有效；不能为了整理目录重新创建配置资源。
 - 整理后检查目录与 `layer` 一致，并验证登记引用仍然有效。
 
+## UI 预制体目录分类
+
+- 所有通过 UIManager 打开的面板预制体统一放入 `Assets/Prefabs/UIPrefabs/`，按照对应 UIConfig 的 `layer` 分类到 `HUD`、`Window`、`Popup`、`Toast`、`Overlay` 五个目录。
+- 目录名称与 UILayer 枚举完全一致，使用单数 `Window`，不再新建 `Windows`。每层内部允许按业务建立子目录，如 `HUD/Battle`、`Window/Character`、`Popup/Character`。
+- 通用条目、角色卡片、对话选项等未直接注册到 UIManager 的子预制体放入 `Widgets/`；`UIManager.prefab` 作为框架入口保留在 UIPrefabs 根目录，不作为普通面板分类。
+- 以 `UILayer` 分类，不以 `UISpace` 分类；移动 World Space 面板不能修改 Canvas 模式、位置、尺寸和缩放。
+- 新增面板、修改 layer 或迁移预制体时，同步检查 UIConfig 目录、面板目录和编辑器生成工具中的路径。
+- 移动必须携带原 `.meta`，保留 GUID；核查 UIConfig、UIRegistry、场景和嵌套预制体引用，不通过重建资产来整理目录。
+
 ## UIManager 接入职责
 
 - UIManager 负责界面的创建、层级、打开关闭、输入请求及生命周期；业务规则继续由原业务系统负责。

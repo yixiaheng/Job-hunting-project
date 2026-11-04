@@ -362,6 +362,11 @@ public static class CharacterProgressionPlayVerification
             position = player.transform.position;
         if (scenario == 2)
             Check(Game.Inventory.InventoryManager.Instance.RequestProgression("character_exp"), "inventory progression entry connected");
+        else if (scenario == 1)
+        {
+            Check(originalPanel.GetComponentInChildren<CharacterEntryButton>(true) == null, "party window has no main HUD entry");
+            Check(CharacterSceneNavigator.TryEnter(), "navigation preserves an existing party window");
+        }
         else
         {
             var entry = originalPanel.GetComponentInChildren<CharacterEntryButton>();

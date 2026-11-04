@@ -1,0 +1,15 @@
+Date: 2026-11-03
+Export: Blender 2.93.18
+Runtime validation: Unity 6000.3.23f1, Built-in, Direct3D 12
+FBX round-trip: 3 files; original rig 91 bones; MMD rig 92 bones; geometry and UV retained.
+Cat textures: 62 PNG files. Default material: NPC_Special_RuanMadeCake_04_Color.png.
+Background: 2048x1024 HDR sky, 1920x1080 Blender still, sky dome + ground + camera FBX.
+Rendering: UnityPreview.png and UnityPreview_Original.png are actual Unity camera renders.
+Scope: Static baked sky; Unity ambient particles approximate the original Blender simulation.
+Scope: Ground reflects the baked environment; no realtime planar character reflection.
+URP/HDRP runtime: not tested. URP material rebuild menu included.
+CONVERTED_RESOURCES_BUILT Assets/ConvertedResources clips=Bounce:5.833333,Idle:5.566667
+ANIMATION_DEFORMATION Bounce maxVertexDeltaMetres=0.1947317
+ANIMATION_DEFORMATION Idle maxVertexDeltaMetres=0.02664731
+CONVERSION_VALIDATION_PASSED
+Delivered serialized GUID references: PASS; material assets: 36

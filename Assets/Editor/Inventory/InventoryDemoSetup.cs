@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Game.Inventory;
 using TMPro;
@@ -13,7 +13,7 @@ using Object = UnityEngine.Object;
 public static class InventoryDemoSetup
 {
     private const string ConfigPath = "Assets/Config/Inventory";
-    private const string PrefabPath = "Assets/UI/Prefab/Inventory/InventoryItem.prefab";
+    private const string PrefabPath = "Assets/Prefabs/UIPrefabs/Widgets/Inventory/InventoryItem.prefab";
     private static readonly Color PanelColor = new Color(0.055f, 0.075f, 0.115f, 0.94f);
     private static readonly Color CardColor = new Color(0.13f, 0.17f, 0.23f);
     private static readonly Color Gold = new Color(0.92f, 0.79f, 0.55f);
@@ -31,7 +31,7 @@ public static class InventoryDemoSetup
         EnsureFolder(ConfigPath + "/Foods");
         EnsureFolder(ConfigPath + "/LightCones");
         EnsureFolder("Assets/UI/Sprite/Inventory");
-        EnsureFolder("Assets/UI/Prefab/Inventory");
+        EnsureFolder("Assets/Prefabs/UIPrefabs/Widgets/Inventory");
         ItemCatalog catalog = CreateCatalog();
         InventoryItemView itemPrefab = CreateItemPrefab();
         InventoryManager manager = Object.FindFirstObjectByType<InventoryManager>(FindObjectsInactive.Include);

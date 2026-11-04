@@ -1,0 +1,6820 @@
+{
+  "source_triangles": 1206598,
+  "visual_groups": 260,
+  "lod_triangles": [
+    920534,
+    635750,
+    465608
+  ],
+  "collision_objects": 614,
+  "collision_triangles": 932089,
+  "groups": [
+    {
+      "name": "City_-05_-04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 237,
+      "planar_triangles": 223,
+      "lod_triangles": [
+        161,
+        80,
+        32
+      ]
+    },
+    {
+      "name": "City_-05_-04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 39,
+      "planar_triangles": 39,
+      "lod_triangles": [
+        39,
+        39,
+        39
+      ]
+    },
+    {
+      "name": "City_-05_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 286,
+      "planar_triangles": 272,
+      "lod_triangles": [
+        193,
+        96,
+        38
+      ]
+    },
+    {
+      "name": "City_-05_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 50,
+      "planar_triangles": 50,
+      "lod_triangles": [
+        50,
+        50,
+        50
+      ]
+    },
+    {
+      "name": "City_-05_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 275,
+      "planar_triangles": 261,
+      "lod_triangles": [
+        186,
+        93,
+        37
+      ]
+    },
+    {
+      "name": "City_-05_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 44,
+      "planar_triangles": 44,
+      "lod_triangles": [
+        44,
+        44,
+        44
+      ]
+    },
+    {
+      "name": "City_-05_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 284,
+      "planar_triangles": 270,
+      "lod_triangles": [
+        193,
+        95,
+        38
+      ]
+    },
+    {
+      "name": "City_-05_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 47,
+      "planar_triangles": 47,
+      "lod_triangles": [
+        47,
+        47,
+        47
+      ]
+    },
+    {
+      "name": "City_-05_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "City_-05_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1,
+      "planar_triangles": 1,
+      "lod_triangles": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "City_-04_-05_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 3,
+      "planar_triangles": 3,
+      "lod_triangles": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "City_-04_-05_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1,
+      "planar_triangles": 1,
+      "lod_triangles": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "City_-04_-04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 3,
+      "planar_triangles": 3,
+      "lod_triangles": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "City_-04_-04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1,
+      "planar_triangles": 1,
+      "lod_triangles": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "City_-04_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 16,
+      "planar_triangles": 16,
+      "lod_triangles": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "name": "City_-04_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "City_-04_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 7456,
+      "planar_triangles": 7365,
+      "lod_triangles": [
+        5070,
+        2535,
+        1014
+      ]
+    },
+    {
+      "name": "City_-04_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1092,
+      "planar_triangles": 1092,
+      "lod_triangles": [
+        1092,
+        1092,
+        1092
+      ]
+    },
+    {
+      "name": "City_-04_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 9287,
+      "planar_triangles": 9195,
+      "lod_triangles": [
+        6313,
+        3156,
+        1262
+      ]
+    },
+    {
+      "name": "City_-04_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1667,
+      "planar_triangles": 1667,
+      "lod_triangles": [
+        1667,
+        1667,
+        1667
+      ]
+    },
+    {
+      "name": "City_-04_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 9692,
+      "planar_triangles": 9621,
+      "lod_triangles": [
+        6590,
+        3295,
+        1317
+      ]
+    },
+    {
+      "name": "City_-04_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1448,
+      "planar_triangles": 1448,
+      "lod_triangles": [
+        1448,
+        1448,
+        1448
+      ]
+    },
+    {
+      "name": "City_-04_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2078,
+      "planar_triangles": 2078,
+      "lod_triangles": [
+        1412,
+        706,
+        282
+      ]
+    },
+    {
+      "name": "City_-04_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 280,
+      "planar_triangles": 280,
+      "lod_triangles": [
+        280,
+        280,
+        280
+      ]
+    },
+    {
+      "name": "City_-04_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 139,
+      "planar_triangles": 135,
+      "lod_triangles": [
+        93,
+        93,
+        93
+      ]
+    },
+    {
+      "name": "City_-04_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 18,
+      "planar_triangles": 18,
+      "lod_triangles": [
+        18,
+        18,
+        18
+      ]
+    },
+    {
+      "name": "City_-04_+04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 56,
+      "planar_triangles": 56,
+      "lod_triangles": [
+        56,
+        56,
+        56
+      ]
+    },
+    {
+      "name": "City_-04_+04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 8,
+      "planar_triangles": 8,
+      "lod_triangles": [
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "City_-03_-05_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 258,
+      "planar_triangles": 244,
+      "lod_triangles": [
+        174,
+        87,
+        34
+      ]
+    },
+    {
+      "name": "City_-03_-05_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 44,
+      "planar_triangles": 44,
+      "lod_triangles": [
+        44,
+        44,
+        44
+      ]
+    },
+    {
+      "name": "City_-03_-03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 263,
+      "planar_triangles": 249,
+      "lod_triangles": [
+        177,
+        88,
+        35
+      ]
+    },
+    {
+      "name": "City_-03_-03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 45,
+      "planar_triangles": 45,
+      "lod_triangles": [
+        45,
+        45,
+        45
+      ]
+    },
+    {
+      "name": "City_-03_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 15915,
+      "planar_triangles": 15754,
+      "lod_triangles": [
+        10821,
+        5410,
+        2164
+      ]
+    },
+    {
+      "name": "City_-03_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2882,
+      "planar_triangles": 2882,
+      "lod_triangles": [
+        2882,
+        2882,
+        2882
+      ]
+    },
+    {
+      "name": "City_-03_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 31397,
+      "planar_triangles": 30849,
+      "lod_triangles": [
+        21349,
+        10674,
+        4269
+      ]
+    },
+    {
+      "name": "City_-03_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 7415,
+      "planar_triangles": 7415,
+      "lod_triangles": [
+        7415,
+        7415,
+        7415
+      ]
+    },
+    {
+      "name": "City_-03_-01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 218,
+      "planar_triangles": 218,
+      "lod_triangles": [
+        218,
+        218,
+        218
+      ]
+    },
+    {
+      "name": "City_-03_-01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 46,
+      "planar_triangles": 46,
+      "lod_triangles": [
+        46,
+        46,
+        46
+      ]
+    },
+    {
+      "name": "City_-03_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 28677,
+      "planar_triangles": 27944,
+      "lod_triangles": [
+        19500,
+        9750,
+        3900
+      ]
+    },
+    {
+      "name": "City_-03_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 7968,
+      "planar_triangles": 7968,
+      "lod_triangles": [
+        7968,
+        7968,
+        7968
+      ]
+    },
+    {
+      "name": "City_-03_+00_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 1380,
+      "planar_triangles": 1380,
+      "lod_triangles": [
+        1380,
+        1380,
+        1380
+      ]
+    },
+    {
+      "name": "City_-03_+00_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 270,
+      "planar_triangles": 270,
+      "lod_triangles": [
+        270,
+        270,
+        270
+      ]
+    },
+    {
+      "name": "City_-03_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1955,
+      "planar_triangles": 1941,
+      "lod_triangles": [
+        1329,
+        663,
+        265
+      ]
+    },
+    {
+      "name": "City_-03_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 677,
+      "planar_triangles": 677,
+      "lod_triangles": [
+        677,
+        677,
+        677
+      ]
+    },
+    {
+      "name": "City_-03_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2844,
+      "planar_triangles": 2836,
+      "lod_triangles": [
+        1932,
+        966,
+        386
+      ]
+    },
+    {
+      "name": "City_-03_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 393,
+      "planar_triangles": 393,
+      "lod_triangles": [
+        393,
+        393,
+        393
+      ]
+    },
+    {
+      "name": "City_-03_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 79,
+      "planar_triangles": 79,
+      "lod_triangles": [
+        79,
+        79,
+        79
+      ]
+    },
+    {
+      "name": "City_-03_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 47,
+      "planar_triangles": 47,
+      "lod_triangles": [
+        47,
+        47,
+        47
+      ]
+    },
+    {
+      "name": "City_-03_+04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 3,
+      "planar_triangles": 3,
+      "lod_triangles": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "City_-02_-05_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 497,
+      "planar_triangles": 469,
+      "lod_triangles": [
+        337,
+        168,
+        67
+      ]
+    },
+    {
+      "name": "City_-02_-05_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 84,
+      "planar_triangles": 84,
+      "lod_triangles": [
+        84,
+        84,
+        84
+      ]
+    },
+    {
+      "name": "City_-02_-04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 262,
+      "planar_triangles": 248,
+      "lod_triangles": [
+        178,
+        89,
+        35
+      ]
+    },
+    {
+      "name": "City_-02_-04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 45,
+      "planar_triangles": 45,
+      "lod_triangles": [
+        45,
+        45,
+        45
+      ]
+    },
+    {
+      "name": "City_-02_-03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 474,
+      "planar_triangles": 456,
+      "lod_triangles": [
+        322,
+        161,
+        63
+      ]
+    },
+    {
+      "name": "City_-02_-03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 227,
+      "planar_triangles": 227,
+      "lod_triangles": [
+        227,
+        227,
+        227
+      ]
+    },
+    {
+      "name": "City_-02_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 9945,
+      "planar_triangles": 9819,
+      "lod_triangles": [
+        6761,
+        3380,
+        1352
+      ]
+    },
+    {
+      "name": "City_-02_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1898,
+      "planar_triangles": 1898,
+      "lod_triangles": [
+        1898,
+        1898,
+        1898
+      ]
+    },
+    {
+      "name": "City_-02_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 22096,
+      "planar_triangles": 21702,
+      "lod_triangles": [
+        15023,
+        7511,
+        3003
+      ]
+    },
+    {
+      "name": "City_-02_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 5785,
+      "planar_triangles": 5785,
+      "lod_triangles": [
+        5785,
+        5785,
+        5785
+      ]
+    },
+    {
+      "name": "City_-02_-01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 358,
+      "planar_triangles": 358,
+      "lod_triangles": [
+        358,
+        358,
+        358
+      ]
+    },
+    {
+      "name": "City_-02_-01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 98,
+      "planar_triangles": 98,
+      "lod_triangles": [
+        98,
+        98,
+        98
+      ]
+    },
+    {
+      "name": "City_-02_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 62499,
+      "planar_triangles": 60880,
+      "lod_triangles": [
+        42446,
+        21223,
+        8489
+      ]
+    },
+    {
+      "name": "City_-02_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 21419,
+      "planar_triangles": 21419,
+      "lod_triangles": [
+        21419,
+        21419,
+        21419
+      ]
+    },
+    {
+      "name": "City_-02_+00_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 15155,
+      "planar_triangles": 15155,
+      "lod_triangles": [
+        15155,
+        15155,
+        15155
+      ]
+    },
+    {
+      "name": "City_-02_+00_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 7304,
+      "planar_triangles": 7304,
+      "lod_triangles": [
+        7304,
+        7304,
+        7304
+      ]
+    },
+    {
+      "name": "City_-02_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 18449,
+      "planar_triangles": 18043,
+      "lod_triangles": [
+        12545,
+        6272,
+        2509
+      ]
+    },
+    {
+      "name": "City_-02_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 4044,
+      "planar_triangles": 4044,
+      "lod_triangles": [
+        4044,
+        4044,
+        4044
+      ]
+    },
+    {
+      "name": "City_-02_+01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 124,
+      "planar_triangles": 124,
+      "lod_triangles": [
+        124,
+        124,
+        124
+      ]
+    },
+    {
+      "name": "City_-02_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 809,
+      "planar_triangles": 809,
+      "lod_triangles": [
+        550,
+        275,
+        110
+      ]
+    },
+    {
+      "name": "City_-02_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 260,
+      "planar_triangles": 260,
+      "lod_triangles": [
+        260,
+        260,
+        260
+      ]
+    },
+    {
+      "name": "City_-02_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1423,
+      "planar_triangles": 1420,
+      "lod_triangles": [
+        967,
+        483,
+        193
+      ]
+    },
+    {
+      "name": "City_-02_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 686,
+      "planar_triangles": 686,
+      "lod_triangles": [
+        686,
+        686,
+        686
+      ]
+    },
+    {
+      "name": "City_-02_+04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 82,
+      "planar_triangles": 82,
+      "lod_triangles": [
+        82,
+        82,
+        82
+      ]
+    },
+    {
+      "name": "City_-02_+04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 33,
+      "planar_triangles": 33,
+      "lod_triangles": [
+        33,
+        33,
+        33
+      ]
+    },
+    {
+      "name": "City_-01_-05_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 6,
+      "planar_triangles": 6,
+      "lod_triangles": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "name": "City_-01_-05_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "City_-01_-04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 99,
+      "planar_triangles": 99,
+      "lod_triangles": [
+        99,
+        99,
+        99
+      ]
+    },
+    {
+      "name": "City_-01_-03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2141,
+      "planar_triangles": 2084,
+      "lod_triangles": [
+        1455,
+        727,
+        291
+      ]
+    },
+    {
+      "name": "City_-01_-03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 555,
+      "planar_triangles": 555,
+      "lod_triangles": [
+        555,
+        555,
+        555
+      ]
+    },
+    {
+      "name": "City_-01_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 6812,
+      "planar_triangles": 6328,
+      "lod_triangles": [
+        4631,
+        2315,
+        926
+      ]
+    },
+    {
+      "name": "City_-01_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1497,
+      "planar_triangles": 1497,
+      "lod_triangles": [
+        1497,
+        1497,
+        1497
+      ]
+    },
+    {
+      "name": "City_-01_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 51064,
+      "planar_triangles": 47132,
+      "lod_triangles": [
+        34705,
+        17352,
+        6940
+      ]
+    },
+    {
+      "name": "City_-01_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 19228,
+      "planar_triangles": 19228,
+      "lod_triangles": [
+        19228,
+        19228,
+        19228
+      ]
+    },
+    {
+      "name": "City_-01_-01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 2538,
+      "planar_triangles": 2538,
+      "lod_triangles": [
+        2538,
+        2538,
+        2538
+      ]
+    },
+    {
+      "name": "City_-01_-01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 902,
+      "planar_triangles": 902,
+      "lod_triangles": [
+        902,
+        902,
+        902
+      ]
+    },
+    {
+      "name": "City_-01_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 106948,
+      "planar_triangles": 101467,
+      "lod_triangles": [
+        72700,
+        36349,
+        14539
+      ]
+    },
+    {
+      "name": "City_-01_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 33751,
+      "planar_triangles": 33751,
+      "lod_triangles": [
+        33751,
+        33751,
+        33751
+      ]
+    },
+    {
+      "name": "City_-01_+00_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 23690,
+      "planar_triangles": 23690,
+      "lod_triangles": [
+        23690,
+        23690,
+        23690
+      ]
+    },
+    {
+      "name": "City_-01_+00_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 16360,
+      "planar_triangles": 16360,
+      "lod_triangles": [
+        16360,
+        16360,
+        16360
+      ]
+    },
+    {
+      "name": "City_-01_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 31049,
+      "planar_triangles": 30861,
+      "lod_triangles": [
+        21112,
+        10556,
+        4222
+      ]
+    },
+    {
+      "name": "City_-01_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 8155,
+      "planar_triangles": 8155,
+      "lod_triangles": [
+        8155,
+        8155,
+        8155
+      ]
+    },
+    {
+      "name": "City_-01_+01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 1626,
+      "planar_triangles": 1626,
+      "lod_triangles": [
+        1626,
+        1626,
+        1626
+      ]
+    },
+    {
+      "name": "City_-01_+01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 544,
+      "planar_triangles": 544,
+      "lod_triangles": [
+        544,
+        544,
+        544
+      ]
+    },
+    {
+      "name": "City_-01_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 6463,
+      "planar_triangles": 6371,
+      "lod_triangles": [
+        4394,
+        2197,
+        878
+      ]
+    },
+    {
+      "name": "City_-01_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1834,
+      "planar_triangles": 1834,
+      "lod_triangles": [
+        1834,
+        1834,
+        1834
+      ]
+    },
+    {
+      "name": "City_-01_+02_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 104,
+      "planar_triangles": 104,
+      "lod_triangles": [
+        104,
+        104,
+        104
+      ]
+    },
+    {
+      "name": "City_-01_+02_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 24,
+      "planar_triangles": 24,
+      "lod_triangles": [
+        24,
+        24,
+        24
+      ]
+    },
+    {
+      "name": "City_-01_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1748,
+      "planar_triangles": 1742,
+      "lod_triangles": [
+        1187,
+        593,
+        237
+      ]
+    },
+    {
+      "name": "City_-01_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 715,
+      "planar_triangles": 715,
+      "lod_triangles": [
+        715,
+        715,
+        715
+      ]
+    },
+    {
+      "name": "City_-01_+04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1277,
+      "planar_triangles": 1259,
+      "lod_triangles": [
+        867,
+        433,
+        173
+      ]
+    },
+    {
+      "name": "City_-01_+04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 387,
+      "planar_triangles": 387,
+      "lod_triangles": [
+        387,
+        387,
+        387
+      ]
+    },
+    {
+      "name": "City_-01_+05_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1,
+      "planar_triangles": 1,
+      "lod_triangles": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "City_+00_-05_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 6,
+      "planar_triangles": 6,
+      "lod_triangles": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "name": "City_+00_-05_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "City_+00_-04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 99,
+      "planar_triangles": 99,
+      "lod_triangles": [
+        99,
+        99,
+        99
+      ]
+    },
+    {
+      "name": "City_+00_-03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2118,
+      "planar_triangles": 2061,
+      "lod_triangles": [
+        1440,
+        720,
+        288
+      ]
+    },
+    {
+      "name": "City_+00_-03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 555,
+      "planar_triangles": 555,
+      "lod_triangles": [
+        555,
+        555,
+        555
+      ]
+    },
+    {
+      "name": "City_+00_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 6936,
+      "planar_triangles": 6483,
+      "lod_triangles": [
+        4716,
+        2358,
+        943
+      ]
+    },
+    {
+      "name": "City_+00_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1576,
+      "planar_triangles": 1576,
+      "lod_triangles": [
+        1576,
+        1576,
+        1576
+      ]
+    },
+    {
+      "name": "City_+00_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 48562,
+      "planar_triangles": 44659,
+      "lod_triangles": [
+        33021,
+        16510,
+        6604
+      ]
+    },
+    {
+      "name": "City_+00_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 18979,
+      "planar_triangles": 18979,
+      "lod_triangles": [
+        18979,
+        18979,
+        18979
+      ]
+    },
+    {
+      "name": "City_+00_-01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 3314,
+      "planar_triangles": 3314,
+      "lod_triangles": [
+        3314,
+        3314,
+        3314
+      ]
+    },
+    {
+      "name": "City_+00_-01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 1516,
+      "planar_triangles": 1516,
+      "lod_triangles": [
+        1516,
+        1516,
+        1516
+      ]
+    },
+    {
+      "name": "City_+00_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 70101,
+      "planar_triangles": 67416,
+      "lod_triangles": [
+        47653,
+        23826,
+        9529
+      ]
+    },
+    {
+      "name": "City_+00_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 23982,
+      "planar_triangles": 23982,
+      "lod_triangles": [
+        23982,
+        23982,
+        23982
+      ]
+    },
+    {
+      "name": "City_+00_+00_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 9393,
+      "planar_triangles": 9393,
+      "lod_triangles": [
+        9393,
+        9393,
+        9393
+      ]
+    },
+    {
+      "name": "City_+00_+00_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 4524,
+      "planar_triangles": 4524,
+      "lod_triangles": [
+        4524,
+        4524,
+        4524
+      ]
+    },
+    {
+      "name": "City_+00_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 30755,
+      "planar_triangles": 30491,
+      "lod_triangles": [
+        20913,
+        10456,
+        4182
+      ]
+    },
+    {
+      "name": "City_+00_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 8165,
+      "planar_triangles": 8165,
+      "lod_triangles": [
+        8165,
+        8165,
+        8165
+      ]
+    },
+    {
+      "name": "City_+00_+01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 1752,
+      "planar_triangles": 1752,
+      "lod_triangles": [
+        1752,
+        1752,
+        1752
+      ]
+    },
+    {
+      "name": "City_+00_+01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 582,
+      "planar_triangles": 582,
+      "lod_triangles": [
+        582,
+        582,
+        582
+      ]
+    },
+    {
+      "name": "City_+00_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 6360,
+      "planar_triangles": 6344,
+      "lod_triangles": [
+        4323,
+        2161,
+        864
+      ]
+    },
+    {
+      "name": "City_+00_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1540,
+      "planar_triangles": 1540,
+      "lod_triangles": [
+        1540,
+        1540,
+        1540
+      ]
+    },
+    {
+      "name": "City_+00_+02_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 138,
+      "planar_triangles": 138,
+      "lod_triangles": [
+        138,
+        138,
+        138
+      ]
+    },
+    {
+      "name": "City_+00_+02_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 32,
+      "planar_triangles": 32,
+      "lod_triangles": [
+        32,
+        32,
+        32
+      ]
+    },
+    {
+      "name": "City_+00_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1845,
+      "planar_triangles": 1839,
+      "lod_triangles": [
+        1254,
+        626,
+        250
+      ]
+    },
+    {
+      "name": "City_+00_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 682,
+      "planar_triangles": 682,
+      "lod_triangles": [
+        682,
+        682,
+        682
+      ]
+    },
+    {
+      "name": "City_+00_+04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1338,
+      "planar_triangles": 1334,
+      "lod_triangles": [
+        908,
+        454,
+        181
+      ]
+    },
+    {
+      "name": "City_+00_+04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 373,
+      "planar_triangles": 373,
+      "lod_triangles": [
+        373,
+        373,
+        373
+      ]
+    },
+    {
+      "name": "City_+01_-03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 474,
+      "planar_triangles": 456,
+      "lod_triangles": [
+        322,
+        161,
+        63
+      ]
+    },
+    {
+      "name": "City_+01_-03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 227,
+      "planar_triangles": 227,
+      "lod_triangles": [
+        227,
+        227,
+        227
+      ]
+    },
+    {
+      "name": "City_+01_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 4045,
+      "planar_triangles": 4016,
+      "lod_triangles": [
+        2750,
+        1375,
+        550
+      ]
+    },
+    {
+      "name": "City_+01_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 736,
+      "planar_triangles": 736,
+      "lod_triangles": [
+        736,
+        736,
+        736
+      ]
+    },
+    {
+      "name": "City_+01_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 27430,
+      "planar_triangles": 27088,
+      "lod_triangles": [
+        18626,
+        9312,
+        3725
+      ]
+    },
+    {
+      "name": "City_+01_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 6264,
+      "planar_triangles": 6264,
+      "lod_triangles": [
+        6264,
+        6264,
+        6264
+      ]
+    },
+    {
+      "name": "City_+01_-01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 200,
+      "planar_triangles": 200,
+      "lod_triangles": [
+        200,
+        200,
+        200
+      ]
+    },
+    {
+      "name": "City_+01_-01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 24,
+      "planar_triangles": 24,
+      "lod_triangles": [
+        24,
+        24,
+        24
+      ]
+    },
+    {
+      "name": "City_+01_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 58190,
+      "planar_triangles": 56801,
+      "lod_triangles": [
+        39569,
+        19784,
+        7913
+      ]
+    },
+    {
+      "name": "City_+01_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 21840,
+      "planar_triangles": 21840,
+      "lod_triangles": [
+        21840,
+        21840,
+        21840
+      ]
+    },
+    {
+      "name": "City_+01_+00_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 5276,
+      "planar_triangles": 5276,
+      "lod_triangles": [
+        5276,
+        5276,
+        5276
+      ]
+    },
+    {
+      "name": "City_+01_+00_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 1611,
+      "planar_triangles": 1611,
+      "lod_triangles": [
+        1611,
+        1611,
+        1611
+      ]
+    },
+    {
+      "name": "City_+01_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 41411,
+      "planar_triangles": 40600,
+      "lod_triangles": [
+        28159,
+        14079,
+        5631
+      ]
+    },
+    {
+      "name": "City_+01_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 10886,
+      "planar_triangles": 10886,
+      "lod_triangles": [
+        10886,
+        10886,
+        10886
+      ]
+    },
+    {
+      "name": "City_+01_+01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 5317,
+      "planar_triangles": 5317,
+      "lod_triangles": [
+        5317,
+        5317,
+        5317
+      ]
+    },
+    {
+      "name": "City_+01_+01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 937,
+      "planar_triangles": 937,
+      "lod_triangles": [
+        937,
+        937,
+        937
+      ]
+    },
+    {
+      "name": "City_+01_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 3782,
+      "planar_triangles": 3774,
+      "lod_triangles": [
+        2571,
+        1285,
+        514
+      ]
+    },
+    {
+      "name": "City_+01_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 718,
+      "planar_triangles": 718,
+      "lod_triangles": [
+        718,
+        718,
+        718
+      ]
+    },
+    {
+      "name": "City_+01_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 4071,
+      "planar_triangles": 4067,
+      "lod_triangles": [
+        2768,
+        1384,
+        553
+      ]
+    },
+    {
+      "name": "City_+01_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1051,
+      "planar_triangles": 1051,
+      "lod_triangles": [
+        1051,
+        1051,
+        1051
+      ]
+    },
+    {
+      "name": "City_+01_+04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 135,
+      "planar_triangles": 135,
+      "lod_triangles": [
+        91,
+        91,
+        91
+      ]
+    },
+    {
+      "name": "City_+01_+04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 31,
+      "planar_triangles": 31,
+      "lod_triangles": [
+        31,
+        31,
+        31
+      ]
+    },
+    {
+      "name": "City_+02_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2561,
+      "planar_triangles": 2538,
+      "lod_triangles": [
+        1741,
+        870,
+        348
+      ]
+    },
+    {
+      "name": "City_+02_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 538,
+      "planar_triangles": 538,
+      "lod_triangles": [
+        538,
+        538,
+        538
+      ]
+    },
+    {
+      "name": "City_+02_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 8733,
+      "planar_triangles": 8635,
+      "lod_triangles": [
+        5938,
+        2969,
+        1187
+      ]
+    },
+    {
+      "name": "City_+02_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1692,
+      "planar_triangles": 1692,
+      "lod_triangles": [
+        1692,
+        1692,
+        1692
+      ]
+    },
+    {
+      "name": "City_+02_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 13088,
+      "planar_triangles": 12688,
+      "lod_triangles": [
+        8898,
+        4449,
+        1778
+      ]
+    },
+    {
+      "name": "City_+02_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 3622,
+      "planar_triangles": 3622,
+      "lod_triangles": [
+        3622,
+        3622,
+        3622
+      ]
+    },
+    {
+      "name": "City_+02_+00_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 763,
+      "planar_triangles": 763,
+      "lod_triangles": [
+        763,
+        763,
+        763
+      ]
+    },
+    {
+      "name": "City_+02_+00_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 170,
+      "planar_triangles": 170,
+      "lod_triangles": [
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "City_+02_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 25526,
+      "planar_triangles": 24987,
+      "lod_triangles": [
+        17332,
+        8665,
+        3465
+      ]
+    },
+    {
+      "name": "City_+02_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 8357,
+      "planar_triangles": 8357,
+      "lod_triangles": [
+        8357,
+        8357,
+        8357
+      ]
+    },
+    {
+      "name": "City_+02_+01_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 1136,
+      "planar_triangles": 1136,
+      "lod_triangles": [
+        1136,
+        1136,
+        1136
+      ]
+    },
+    {
+      "name": "City_+02_+01_Alpha_Surface",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 210,
+      "planar_triangles": 210,
+      "lod_triangles": [
+        210,
+        210,
+        210
+      ]
+    },
+    {
+      "name": "City_+02_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 1167,
+      "planar_triangles": 1153,
+      "lod_triangles": [
+        793,
+        396,
+        157
+      ]
+    },
+    {
+      "name": "City_+02_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 396,
+      "planar_triangles": 396,
+      "lod_triangles": [
+        396,
+        396,
+        396
+      ]
+    },
+    {
+      "name": "City_+02_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 3499,
+      "planar_triangles": 3490,
+      "lod_triangles": [
+        2379,
+        1189,
+        475
+      ]
+    },
+    {
+      "name": "City_+02_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 652,
+      "planar_triangles": 652,
+      "lod_triangles": [
+        652,
+        652,
+        652
+      ]
+    },
+    {
+      "name": "City_+03_-04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 6,
+      "planar_triangles": 6,
+      "lod_triangles": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "name": "City_+03_-04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "City_+03_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 84,
+      "planar_triangles": 84,
+      "lod_triangles": [
+        84,
+        84,
+        84
+      ]
+    },
+    {
+      "name": "City_+03_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 64,
+      "planar_triangles": 64,
+      "lod_triangles": [
+        64,
+        64,
+        64
+      ]
+    },
+    {
+      "name": "City_+03_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 4326,
+      "planar_triangles": 4231,
+      "lod_triangles": [
+        2940,
+        1470,
+        588
+      ]
+    },
+    {
+      "name": "City_+03_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 731,
+      "planar_triangles": 731,
+      "lod_triangles": [
+        731,
+        731,
+        731
+      ]
+    },
+    {
+      "name": "City_+03_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 72,
+      "planar_triangles": 72,
+      "lod_triangles": [
+        72,
+        72,
+        72
+      ]
+    },
+    {
+      "name": "City_+03_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 55,
+      "planar_triangles": 55,
+      "lod_triangles": [
+        55,
+        55,
+        55
+      ]
+    },
+    {
+      "name": "City_+03_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 8474,
+      "planar_triangles": 8147,
+      "lod_triangles": [
+        5762,
+        2881,
+        1151
+      ]
+    },
+    {
+      "name": "City_+03_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 2045,
+      "planar_triangles": 2045,
+      "lod_triangles": [
+        2045,
+        2045,
+        2045
+      ]
+    },
+    {
+      "name": "City_+03_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 3419,
+      "planar_triangles": 3335,
+      "lod_triangles": [
+        2323,
+        1160,
+        464
+      ]
+    },
+    {
+      "name": "City_+03_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 828,
+      "planar_triangles": 828,
+      "lod_triangles": [
+        828,
+        828,
+        828
+      ]
+    },
+    {
+      "name": "City_+03_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 173,
+      "planar_triangles": 172,
+      "lod_triangles": [
+        117,
+        58,
+        23
+      ]
+    },
+    {
+      "name": "City_+03_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 101,
+      "planar_triangles": 101,
+      "lod_triangles": [
+        101,
+        101,
+        101
+      ]
+    },
+    {
+      "name": "City_+04_-05_Alpha_Structure",
+      "far": false,
+      "transparent": true,
+      "source_triangles": 1,
+      "planar_triangles": 1,
+      "lod_triangles": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "City_+04_-04_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 12,
+      "planar_triangles": 12,
+      "lod_triangles": [
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "name": "City_+04_-04_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 4,
+      "planar_triangles": 4,
+      "lod_triangles": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "City_+04_-03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 271,
+      "planar_triangles": 257,
+      "lod_triangles": [
+        183,
+        91,
+        36
+      ]
+    },
+    {
+      "name": "City_+04_-03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 49,
+      "planar_triangles": 49,
+      "lod_triangles": [
+        49,
+        49,
+        49
+      ]
+    },
+    {
+      "name": "City_+04_-02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 281,
+      "planar_triangles": 267,
+      "lod_triangles": [
+        191,
+        94,
+        38
+      ]
+    },
+    {
+      "name": "City_+04_-02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 46,
+      "planar_triangles": 46,
+      "lod_triangles": [
+        46,
+        46,
+        46
+      ]
+    },
+    {
+      "name": "City_+04_-01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 12,
+      "planar_triangles": 12,
+      "lod_triangles": [
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "name": "City_+04_-01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 4,
+      "planar_triangles": 4,
+      "lod_triangles": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "City_+04_+00_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 246,
+      "planar_triangles": 232,
+      "lod_triangles": [
+        167,
+        83,
+        33
+      ]
+    },
+    {
+      "name": "City_+04_+00_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 42,
+      "planar_triangles": 42,
+      "lod_triangles": [
+        42,
+        42,
+        42
+      ]
+    },
+    {
+      "name": "City_+04_+01_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 211,
+      "planar_triangles": 211,
+      "lod_triangles": [
+        143,
+        70,
+        34
+      ]
+    },
+    {
+      "name": "City_+04_+01_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 100,
+      "planar_triangles": 100,
+      "lod_triangles": [
+        100,
+        100,
+        100
+      ]
+    },
+    {
+      "name": "City_+04_+02_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 289,
+      "planar_triangles": 261,
+      "lod_triangles": [
+        196,
+        98,
+        39
+      ]
+    },
+    {
+      "name": "City_+04_+02_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 170,
+      "planar_triangles": 170,
+      "lod_triangles": [
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "City_+04_+03_Opaque_Structure",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 32,
+      "planar_triangles": 32,
+      "lod_triangles": [
+        32,
+        32,
+        32
+      ]
+    },
+    {
+      "name": "City_+04_+03_Opaque_Surface",
+      "far": false,
+      "transparent": false,
+      "source_triangles": 15,
+      "planar_triangles": 15,
+      "lod_triangles": [
+        15,
+        15,
+        15
+      ]
+    },
+    {
+      "name": "Far_-04_-01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 6,
+      "planar_triangles": 6,
+      "lod_triangles": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "name": "Far_-04_+00_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 11,
+      "planar_triangles": 11,
+      "lod_triangles": [
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "name": "Far_-04_+01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 1,
+      "planar_triangles": 1,
+      "lod_triangles": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Far_-03_-02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 9,
+      "planar_triangles": 9,
+      "lod_triangles": [
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "name": "Far_-03_-01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 9,
+      "planar_triangles": 9,
+      "lod_triangles": [
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "name": "Far_-03_+00_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 10,
+      "planar_triangles": 10,
+      "lod_triangles": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "name": "Far_-03_+01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 16,
+      "planar_triangles": 16,
+      "lod_triangles": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "name": "Far_-03_+02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 9,
+      "planar_triangles": 9,
+      "lod_triangles": [
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "name": "Far_-02_-03_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 8,
+      "planar_triangles": 8,
+      "lod_triangles": [
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "Far_-02_-02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 27,
+      "planar_triangles": 27,
+      "lod_triangles": [
+        27,
+        27,
+        27
+      ]
+    },
+    {
+      "name": "Far_-02_-01_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 21,
+      "planar_triangles": 21,
+      "lod_triangles": [
+        21,
+        21,
+        21
+      ]
+    },
+    {
+      "name": "Far_-02_-01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 38,
+      "planar_triangles": 38,
+      "lod_triangles": [
+        38,
+        38,
+        38
+      ]
+    },
+    {
+      "name": "Far_-02_+00_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 1,
+      "planar_triangles": 1,
+      "lod_triangles": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Far_-02_+00_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 27,
+      "planar_triangles": 27,
+      "lod_triangles": [
+        27,
+        27,
+        27
+      ]
+    },
+    {
+      "name": "Far_-02_+01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 19,
+      "planar_triangles": 19,
+      "lod_triangles": [
+        19,
+        19,
+        19
+      ]
+    },
+    {
+      "name": "Far_-02_+02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 18,
+      "planar_triangles": 18,
+      "lod_triangles": [
+        18,
+        18,
+        18
+      ]
+    },
+    {
+      "name": "Far_-01_-05_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 5,
+      "planar_triangles": 5,
+      "lod_triangles": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "name": "Far_-01_-04_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 12,
+      "planar_triangles": 12,
+      "lod_triangles": [
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "name": "Far_-01_-03_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 4,
+      "planar_triangles": 4,
+      "lod_triangles": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Far_-01_-02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 23,
+      "planar_triangles": 23,
+      "lod_triangles": [
+        23,
+        23,
+        23
+      ]
+    },
+    {
+      "name": "Far_-01_-01_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 2710,
+      "planar_triangles": 2571,
+      "lod_triangles": [
+        1138,
+        569,
+        375
+      ]
+    },
+    {
+      "name": "Far_-01_-01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 8,
+      "planar_triangles": 8,
+      "lod_triangles": [
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "Far_-01_+00_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 11636,
+      "planar_triangles": 11458,
+      "lod_triangles": [
+        4886,
+        2443,
+        977
+      ]
+    },
+    {
+      "name": "Far_-01_+00_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 3,
+      "planar_triangles": 3,
+      "lod_triangles": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "Far_-01_+01_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 3985,
+      "planar_triangles": 3954,
+      "lod_triangles": [
+        1673,
+        836,
+        604
+      ]
+    },
+    {
+      "name": "Far_-01_+01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 35,
+      "planar_triangles": 35,
+      "lod_triangles": [
+        35,
+        35,
+        35
+      ]
+    },
+    {
+      "name": "Far_-01_+02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 15,
+      "planar_triangles": 15,
+      "lod_triangles": [
+        15,
+        15,
+        15
+      ]
+    },
+    {
+      "name": "Far_-01_+03_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "Far_+00_-05_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 18,
+      "planar_triangles": 18,
+      "lod_triangles": [
+        18,
+        18,
+        18
+      ]
+    },
+    {
+      "name": "Far_+00_-02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 19,
+      "planar_triangles": 19,
+      "lod_triangles": [
+        19,
+        19,
+        19
+      ]
+    },
+    {
+      "name": "Far_+00_-01_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 1774,
+      "planar_triangles": 1685,
+      "lod_triangles": [
+        745,
+        371,
+        192
+      ]
+    },
+    {
+      "name": "Far_+00_-01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 3,
+      "planar_triangles": 3,
+      "lod_triangles": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "Far_+00_+00_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 13682,
+      "planar_triangles": 13442,
+      "lod_triangles": [
+        5746,
+        2873,
+        1149
+      ]
+    },
+    {
+      "name": "Far_+00_+00_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 5,
+      "planar_triangles": 5,
+      "lod_triangles": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "name": "Far_+00_+01_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 3923,
+      "planar_triangles": 3886,
+      "lod_triangles": [
+        1647,
+        823,
+        582
+      ]
+    },
+    {
+      "name": "Far_+00_+01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 15,
+      "planar_triangles": 15,
+      "lod_triangles": [
+        15,
+        15,
+        15
+      ]
+    },
+    {
+      "name": "Far_+00_+02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 20,
+      "planar_triangles": 20,
+      "lod_triangles": [
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "name": "Far_+00_+03_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 8,
+      "planar_triangles": 8,
+      "lod_triangles": [
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "Far_+01_-05_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 10,
+      "planar_triangles": 10,
+      "lod_triangles": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "name": "Far_+01_-04_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 7,
+      "planar_triangles": 7,
+      "lod_triangles": [
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "name": "Far_+01_-02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 5,
+      "planar_triangles": 5,
+      "lod_triangles": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "name": "Far_+01_-01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 20,
+      "planar_triangles": 20,
+      "lod_triangles": [
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "name": "Far_+01_+00_Opaque_Structure",
+      "far": true,
+      "transparent": false,
+      "source_triangles": 20,
+      "planar_triangles": 20,
+      "lod_triangles": [
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "name": "Far_+01_+00_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 18,
+      "planar_triangles": 18,
+      "lod_triangles": [
+        18,
+        18,
+        18
+      ]
+    },
+    {
+      "name": "Far_+01_+01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 11,
+      "planar_triangles": 11,
+      "lod_triangles": [
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "name": "Far_+01_+02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 14,
+      "planar_triangles": 14,
+      "lod_triangles": [
+        14,
+        14,
+        14
+      ]
+    },
+    {
+      "name": "Far_+01_+03_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 6,
+      "planar_triangles": 6,
+      "lod_triangles": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "name": "Far_+02_-05_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 9,
+      "planar_triangles": 9,
+      "lod_triangles": [
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "name": "Far_+02_-04_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "Far_+02_-03_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 8,
+      "planar_triangles": 8,
+      "lod_triangles": [
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "Far_+02_-02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 6,
+      "planar_triangles": 6,
+      "lod_triangles": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "name": "Far_+02_+00_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 4,
+      "planar_triangles": 4,
+      "lod_triangles": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "Far_+02_+01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 19,
+      "planar_triangles": 19,
+      "lod_triangles": [
+        19,
+        19,
+        19
+      ]
+    },
+    {
+      "name": "Far_+02_+02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 7,
+      "planar_triangles": 7,
+      "lod_triangles": [
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "name": "Far_+03_-05_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 3,
+      "planar_triangles": 3,
+      "lod_triangles": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "Far_+03_-04_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 10,
+      "planar_triangles": 10,
+      "lod_triangles": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "name": "Far_+03_-01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 7,
+      "planar_triangles": 7,
+      "lod_triangles": [
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "name": "Far_+03_+00_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "Far_+04_-04_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "Far_+04_-03_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 8,
+      "planar_triangles": 8,
+      "lod_triangles": [
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "name": "Far_+04_-02_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 10,
+      "planar_triangles": 10,
+      "lod_triangles": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "name": "Far_+04_-01_Alpha_Structure",
+      "far": true,
+      "transparent": true,
+      "source_triangles": 2,
+      "planar_triangles": 2,
+      "lod_triangles": [
+        2,
+        2,
+        2
+      ]
+    }
+  ],
+  "collision": [
+    {
+      "name": "COL_Buildings_-10_-07",
+      "category": "Buildings",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Roofs_-10_-07",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-10_-01",
+      "category": "Buildings",
+      "source_triangles": 279,
+      "triangles": 265
+    },
+    {
+      "name": "COL_Roofs_-10_-01",
+      "category": "Roofs",
+      "source_triangles": 48,
+      "triangles": 44
+    },
+    {
+      "name": "COL_Buildings_-10_+03",
+      "category": "Buildings",
+      "source_triangles": 275,
+      "triangles": 261
+    },
+    {
+      "name": "COL_Roofs_-10_+03",
+      "category": "Roofs",
+      "source_triangles": 44,
+      "triangles": 40
+    },
+    {
+      "name": "COL_Buildings_-10_+04",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_-10_+04",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_-09_-08",
+      "category": "Buildings",
+      "source_triangles": 234,
+      "triangles": 220
+    },
+    {
+      "name": "COL_Roofs_-09_-08",
+      "category": "Roofs",
+      "source_triangles": 38,
+      "triangles": 34
+    },
+    {
+      "name": "COL_Buildings_-09_-02",
+      "category": "Buildings",
+      "source_triangles": 5,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Roofs_-09_-02",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-09_-01",
+      "category": "Buildings",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Roofs_-09_-01",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-09_+05",
+      "category": "Buildings",
+      "source_triangles": 171,
+      "triangles": 167
+    },
+    {
+      "name": "COL_Roofs_-09_+05",
+      "category": "Roofs",
+      "source_triangles": 21,
+      "triangles": 21
+    },
+    {
+      "name": "COL_Buildings_-09_+06",
+      "category": "Buildings",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Roofs_-09_+06",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-08_-09",
+      "category": "Buildings",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Roofs_-08_-09",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-08_-08",
+      "category": "Buildings",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Roofs_-08_-08",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-08_-03",
+      "category": "Buildings",
+      "source_triangles": 13,
+      "triangles": 13
+    },
+    {
+      "name": "COL_Roofs_-08_-03",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-08_-02",
+      "category": "Buildings",
+      "source_triangles": 244,
+      "triangles": 230
+    },
+    {
+      "name": "COL_Roofs_-08_-02",
+      "category": "Roofs",
+      "source_triangles": 40,
+      "triangles": 36
+    },
+    {
+      "name": "COL_Ground_-08_-01",
+      "category": "Ground",
+      "source_triangles": 25,
+      "triangles": 25
+    },
+    {
+      "name": "COL_Buildings_-08_-01",
+      "category": "Buildings",
+      "source_triangles": 1212,
+      "triangles": 1150
+    },
+    {
+      "name": "COL_Roofs_-08_-01",
+      "category": "Roofs",
+      "source_triangles": 58,
+      "triangles": 58
+    },
+    {
+      "name": "COL_Ground_-08_+00",
+      "category": "Ground",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Buildings_-08_+00",
+      "category": "Buildings",
+      "source_triangles": 20,
+      "triangles": 20
+    },
+    {
+      "name": "COL_Roofs_-08_+00",
+      "category": "Roofs",
+      "source_triangles": 8,
+      "triangles": 8
+    },
+    {
+      "name": "COL_Buildings_-08_+01",
+      "category": "Buildings",
+      "source_triangles": 628,
+      "triangles": 622
+    },
+    {
+      "name": "COL_Roofs_-08_+01",
+      "category": "Roofs",
+      "source_triangles": 102,
+      "triangles": 102
+    },
+    {
+      "name": "COL_Buildings_-08_+02",
+      "category": "Buildings",
+      "source_triangles": 1465,
+      "triangles": 1394
+    },
+    {
+      "name": "COL_Roofs_-08_+02",
+      "category": "Roofs",
+      "source_triangles": 145,
+      "triangles": 134
+    },
+    {
+      "name": "COL_Buildings_-08_+03",
+      "category": "Buildings",
+      "source_triangles": 1476,
+      "triangles": 1400
+    },
+    {
+      "name": "COL_Roofs_-08_+03",
+      "category": "Roofs",
+      "source_triangles": 159,
+      "triangles": 138
+    },
+    {
+      "name": "COL_Buildings_-08_+04",
+      "category": "Buildings",
+      "source_triangles": 626,
+      "triangles": 620
+    },
+    {
+      "name": "COL_Roofs_-08_+04",
+      "category": "Roofs",
+      "source_triangles": 104,
+      "triangles": 104
+    },
+    {
+      "name": "COL_Buildings_-08_+06",
+      "category": "Buildings",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-08_+07",
+      "category": "Buildings",
+      "source_triangles": 28,
+      "triangles": 28
+    },
+    {
+      "name": "COL_Roofs_-08_+07",
+      "category": "Roofs",
+      "source_triangles": 4,
+      "triangles": 4
+    },
+    {
+      "name": "COL_Buildings_-07_-03",
+      "category": "Buildings",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Roofs_-07_-03",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Ground_-07_-02",
+      "category": "Ground",
+      "source_triangles": 547,
+      "triangles": 545
+    },
+    {
+      "name": "COL_Buildings_-07_-02",
+      "category": "Buildings",
+      "source_triangles": 4366,
+      "triangles": 4213
+    },
+    {
+      "name": "COL_Roofs_-07_-02",
+      "category": "Roofs",
+      "source_triangles": 218,
+      "triangles": 218
+    },
+    {
+      "name": "COL_Ground_-07_-01",
+      "category": "Ground",
+      "source_triangles": 125,
+      "triangles": 125
+    },
+    {
+      "name": "COL_Buildings_-07_-01",
+      "category": "Buildings",
+      "source_triangles": 1634,
+      "triangles": 1479
+    },
+    {
+      "name": "COL_Roofs_-07_-01",
+      "category": "Roofs",
+      "source_triangles": 79,
+      "triangles": 79
+    },
+    {
+      "name": "COL_Ground_-07_+00",
+      "category": "Ground",
+      "source_triangles": 47,
+      "triangles": 47
+    },
+    {
+      "name": "COL_Buildings_-07_+00",
+      "category": "Buildings",
+      "source_triangles": 2452,
+      "triangles": 2366
+    },
+    {
+      "name": "COL_Roofs_-07_+00",
+      "category": "Roofs",
+      "source_triangles": 389,
+      "triangles": 370
+    },
+    {
+      "name": "COL_Buildings_-07_+01",
+      "category": "Buildings",
+      "source_triangles": 6187,
+      "triangles": 5822
+    },
+    {
+      "name": "COL_Roofs_-07_+01",
+      "category": "Roofs",
+      "source_triangles": 1115,
+      "triangles": 1061
+    },
+    {
+      "name": "COL_Buildings_-07_+02",
+      "category": "Buildings",
+      "source_triangles": 5413,
+      "triangles": 5093
+    },
+    {
+      "name": "COL_Roofs_-07_+02",
+      "category": "Roofs",
+      "source_triangles": 905,
+      "triangles": 857
+    },
+    {
+      "name": "COL_Buildings_-07_+03",
+      "category": "Buildings",
+      "source_triangles": 1338,
+      "triangles": 1323
+    },
+    {
+      "name": "COL_Roofs_-07_+03",
+      "category": "Roofs",
+      "source_triangles": 239,
+      "triangles": 239
+    },
+    {
+      "name": "COL_Buildings_-07_+04",
+      "category": "Buildings",
+      "source_triangles": 1452,
+      "triangles": 1409
+    },
+    {
+      "name": "COL_Roofs_-07_+04",
+      "category": "Roofs",
+      "source_triangles": 176,
+      "triangles": 175
+    },
+    {
+      "name": "COL_Buildings_-07_+08",
+      "category": "Buildings",
+      "source_triangles": 8,
+      "triangles": 8
+    },
+    {
+      "name": "COL_Buildings_-06_-09",
+      "category": "Buildings",
+      "source_triangles": 255,
+      "triangles": 241
+    },
+    {
+      "name": "COL_Roofs_-06_-09",
+      "category": "Roofs",
+      "source_triangles": 43,
+      "triangles": 39
+    },
+    {
+      "name": "COL_Buildings_-06_-05",
+      "category": "Buildings",
+      "source_triangles": 170,
+      "triangles": 161
+    },
+    {
+      "name": "COL_Roofs_-06_-05",
+      "category": "Roofs",
+      "source_triangles": 25,
+      "triangles": 22
+    },
+    {
+      "name": "COL_Buildings_-06_-04",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_-06_-04",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Ground_-06_-03",
+      "category": "Ground",
+      "source_triangles": 650,
+      "triangles": 642
+    },
+    {
+      "name": "COL_Buildings_-06_-03",
+      "category": "Buildings",
+      "source_triangles": 5379,
+      "triangles": 5062
+    },
+    {
+      "name": "COL_Roofs_-06_-03",
+      "category": "Roofs",
+      "source_triangles": 376,
+      "triangles": 372
+    },
+    {
+      "name": "COL_Ground_-06_-02",
+      "category": "Ground",
+      "source_triangles": 978,
+      "triangles": 954
+    },
+    {
+      "name": "COL_Buildings_-06_-02",
+      "category": "Buildings",
+      "source_triangles": 8139,
+      "triangles": 7707
+    },
+    {
+      "name": "COL_Roofs_-06_-02",
+      "category": "Roofs",
+      "source_triangles": 547,
+      "triangles": 498
+    },
+    {
+      "name": "COL_Ground_-06_-01",
+      "category": "Ground",
+      "source_triangles": 819,
+      "triangles": 809
+    },
+    {
+      "name": "COL_Buildings_-06_-01",
+      "category": "Buildings",
+      "source_triangles": 8612,
+      "triangles": 8028
+    },
+    {
+      "name": "COL_Roofs_-06_-01",
+      "category": "Roofs",
+      "source_triangles": 1066,
+      "triangles": 1047
+    },
+    {
+      "name": "COL_Ground_-06_+00",
+      "category": "Ground",
+      "source_triangles": 817,
+      "triangles": 786
+    },
+    {
+      "name": "COL_Buildings_-06_+00",
+      "category": "Buildings",
+      "source_triangles": 13922,
+      "triangles": 13151
+    },
+    {
+      "name": "COL_Roofs_-06_+00",
+      "category": "Roofs",
+      "source_triangles": 2331,
+      "triangles": 2298
+    },
+    {
+      "name": "COL_Ground_-06_+01",
+      "category": "Ground",
+      "source_triangles": 40,
+      "triangles": 40
+    },
+    {
+      "name": "COL_Buildings_-06_+01",
+      "category": "Buildings",
+      "source_triangles": 319,
+      "triangles": 298
+    },
+    {
+      "name": "COL_Roofs_-06_+01",
+      "category": "Roofs",
+      "source_triangles": 99,
+      "triangles": 99
+    },
+    {
+      "name": "COL_Ground_-06_+02",
+      "category": "Ground",
+      "source_triangles": 7,
+      "triangles": 7
+    },
+    {
+      "name": "COL_Buildings_-06_+02",
+      "category": "Buildings",
+      "source_triangles": 24,
+      "triangles": 24
+    },
+    {
+      "name": "COL_Roofs_-06_+02",
+      "category": "Roofs",
+      "source_triangles": 12,
+      "triangles": 12
+    },
+    {
+      "name": "COL_Buildings_-06_+03",
+      "category": "Buildings",
+      "source_triangles": 513,
+      "triangles": 513
+    },
+    {
+      "name": "COL_Roofs_-06_+03",
+      "category": "Roofs",
+      "source_triangles": 107,
+      "triangles": 107
+    },
+    {
+      "name": "COL_Buildings_-06_+04",
+      "category": "Buildings",
+      "source_triangles": 1483,
+      "triangles": 1414
+    },
+    {
+      "name": "COL_Roofs_-06_+04",
+      "category": "Roofs",
+      "source_triangles": 155,
+      "triangles": 144
+    },
+    {
+      "name": "COL_Buildings_-05_-09",
+      "category": "Buildings",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Roofs_-05_-09",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-05_-06",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_-05_-06",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_-05_-05",
+      "category": "Buildings",
+      "source_triangles": 87,
+      "triangles": 87
+    },
+    {
+      "name": "COL_Roofs_-05_-05",
+      "category": "Roofs",
+      "source_triangles": 18,
+      "triangles": 18
+    },
+    {
+      "name": "COL_Ground_-05_-04",
+      "category": "Ground",
+      "source_triangles": 100,
+      "triangles": 98
+    },
+    {
+      "name": "COL_Buildings_-05_-04",
+      "category": "Buildings",
+      "source_triangles": 794,
+      "triangles": 780
+    },
+    {
+      "name": "COL_Roofs_-05_-04",
+      "category": "Roofs",
+      "source_triangles": 40,
+      "triangles": 40
+    },
+    {
+      "name": "COL_Ground_-05_-03",
+      "category": "Ground",
+      "source_triangles": 970,
+      "triangles": 958
+    },
+    {
+      "name": "COL_Buildings_-05_-03",
+      "category": "Buildings",
+      "source_triangles": 9736,
+      "triangles": 9195
+    },
+    {
+      "name": "COL_Roofs_-05_-03",
+      "category": "Roofs",
+      "source_triangles": 744,
+      "triangles": 679
+    },
+    {
+      "name": "COL_Ground_-05_-02",
+      "category": "Ground",
+      "source_triangles": 643,
+      "triangles": 557
+    },
+    {
+      "name": "COL_Buildings_-05_-02",
+      "category": "Buildings",
+      "source_triangles": 4661,
+      "triangles": 4357
+    },
+    {
+      "name": "COL_Roofs_-05_-02",
+      "category": "Roofs",
+      "source_triangles": 328,
+      "triangles": 301
+    },
+    {
+      "name": "COL_Ground_-05_-01",
+      "category": "Ground",
+      "source_triangles": 1623,
+      "triangles": 1429
+    },
+    {
+      "name": "COL_Buildings_-05_-01",
+      "category": "Buildings",
+      "source_triangles": 9525,
+      "triangles": 8807
+    },
+    {
+      "name": "COL_Roofs_-05_-01",
+      "category": "Roofs",
+      "source_triangles": 1275,
+      "triangles": 1236
+    },
+    {
+      "name": "COL_Ground_-05_+00",
+      "category": "Ground",
+      "source_triangles": 972,
+      "triangles": 942
+    },
+    {
+      "name": "COL_Buildings_-05_+00",
+      "category": "Buildings",
+      "source_triangles": 6448,
+      "triangles": 6067
+    },
+    {
+      "name": "COL_Roofs_-05_+00",
+      "category": "Roofs",
+      "source_triangles": 903,
+      "triangles": 895
+    },
+    {
+      "name": "COL_Ground_-05_+01",
+      "category": "Ground",
+      "source_triangles": 365,
+      "triangles": 344
+    },
+    {
+      "name": "COL_Buildings_-05_+01",
+      "category": "Buildings",
+      "source_triangles": 7474,
+      "triangles": 6853
+    },
+    {
+      "name": "COL_Roofs_-05_+01",
+      "category": "Roofs",
+      "source_triangles": 2319,
+      "triangles": 2237
+    },
+    {
+      "name": "COL_Ground_-05_+02",
+      "category": "Ground",
+      "source_triangles": 20,
+      "triangles": 20
+    },
+    {
+      "name": "COL_Buildings_-05_+02",
+      "category": "Buildings",
+      "source_triangles": 345,
+      "triangles": 335
+    },
+    {
+      "name": "COL_Roofs_-05_+02",
+      "category": "Roofs",
+      "source_triangles": 169,
+      "triangles": 169
+    },
+    {
+      "name": "COL_Ground_-05_+03",
+      "category": "Ground",
+      "source_triangles": 16,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Buildings_-05_+03",
+      "category": "Buildings",
+      "source_triangles": 1073,
+      "triangles": 1059
+    },
+    {
+      "name": "COL_Roofs_-05_+03",
+      "category": "Roofs",
+      "source_triangles": 346,
+      "triangles": 342
+    },
+    {
+      "name": "COL_Buildings_-05_+04",
+      "category": "Buildings",
+      "source_triangles": 1260,
+      "triangles": 1220
+    },
+    {
+      "name": "COL_Roofs_-05_+04",
+      "category": "Roofs",
+      "source_triangles": 180,
+      "triangles": 170
+    },
+    {
+      "name": "COL_Buildings_-05_+05",
+      "category": "Buildings",
+      "source_triangles": 101,
+      "triangles": 101
+    },
+    {
+      "name": "COL_Roofs_-05_+05",
+      "category": "Roofs",
+      "source_triangles": 58,
+      "triangles": 58
+    },
+    {
+      "name": "COL_Buildings_-05_+06",
+      "category": "Buildings",
+      "source_triangles": 79,
+      "triangles": 79
+    },
+    {
+      "name": "COL_Roofs_-05_+06",
+      "category": "Roofs",
+      "source_triangles": 47,
+      "triangles": 47
+    },
+    {
+      "name": "COL_Buildings_-04_-10",
+      "category": "Buildings",
+      "source_triangles": 240,
+      "triangles": 226
+    },
+    {
+      "name": "COL_Roofs_-04_-10",
+      "category": "Roofs",
+      "source_triangles": 41,
+      "triangles": 37
+    },
+    {
+      "name": "COL_Buildings_-04_-09",
+      "category": "Buildings",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_-04_-08",
+      "category": "Buildings",
+      "source_triangles": 5,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Roofs_-04_-08",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_-04_-07",
+      "category": "Buildings",
+      "source_triangles": 257,
+      "triangles": 243
+    },
+    {
+      "name": "COL_Roofs_-04_-07",
+      "category": "Roofs",
+      "source_triangles": 43,
+      "triangles": 39
+    },
+    {
+      "name": "COL_Ground_-04_-06",
+      "category": "Ground",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_-04_-06",
+      "category": "Buildings",
+      "source_triangles": 9,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Roofs_-04_-06",
+      "category": "Roofs",
+      "source_triangles": 14,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Ground_-04_-05",
+      "category": "Ground",
+      "source_triangles": 13,
+      "triangles": 13
+    },
+    {
+      "name": "COL_Buildings_-04_-05",
+      "category": "Buildings",
+      "source_triangles": 45,
+      "triangles": 45
+    },
+    {
+      "name": "COL_Roofs_-04_-05",
+      "category": "Roofs",
+      "source_triangles": 5,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Ground_-04_-04",
+      "category": "Ground",
+      "source_triangles": 48,
+      "triangles": 48
+    },
+    {
+      "name": "COL_Buildings_-04_-04",
+      "category": "Buildings",
+      "source_triangles": 1618,
+      "triangles": 1591
+    },
+    {
+      "name": "COL_Roofs_-04_-04",
+      "category": "Roofs",
+      "source_triangles": 209,
+      "triangles": 207
+    },
+    {
+      "name": "COL_Ground_-04_-03",
+      "category": "Ground",
+      "source_triangles": 237,
+      "triangles": 237
+    },
+    {
+      "name": "COL_Buildings_-04_-03",
+      "category": "Buildings",
+      "source_triangles": 3883,
+      "triangles": 3492
+    },
+    {
+      "name": "COL_Roofs_-04_-03",
+      "category": "Roofs",
+      "source_triangles": 680,
+      "triangles": 649
+    },
+    {
+      "name": "COL_Ground_-04_-02",
+      "category": "Ground",
+      "source_triangles": 145,
+      "triangles": 145
+    },
+    {
+      "name": "COL_Buildings_-04_-02",
+      "category": "Buildings",
+      "source_triangles": 1809,
+      "triangles": 1489
+    },
+    {
+      "name": "COL_Roofs_-04_-02",
+      "category": "Roofs",
+      "source_triangles": 203,
+      "triangles": 203
+    },
+    {
+      "name": "COL_Ground_-04_-01",
+      "category": "Ground",
+      "source_triangles": 1279,
+      "triangles": 1259
+    },
+    {
+      "name": "COL_Buildings_-04_-01",
+      "category": "Buildings",
+      "source_triangles": 7588,
+      "triangles": 7077
+    },
+    {
+      "name": "COL_Roofs_-04_-01",
+      "category": "Roofs",
+      "source_triangles": 966,
+      "triangles": 943
+    },
+    {
+      "name": "COL_Ground_-04_+00",
+      "category": "Ground",
+      "source_triangles": 5684,
+      "triangles": 5233
+    },
+    {
+      "name": "COL_Buildings_-04_+00",
+      "category": "Buildings",
+      "source_triangles": 14034,
+      "triangles": 13764
+    },
+    {
+      "name": "COL_Roofs_-04_+00",
+      "category": "Roofs",
+      "source_triangles": 762,
+      "triangles": 754
+    },
+    {
+      "name": "COL_Ground_-04_+01",
+      "category": "Ground",
+      "source_triangles": 1288,
+      "triangles": 1202
+    },
+    {
+      "name": "COL_Buildings_-04_+01",
+      "category": "Buildings",
+      "source_triangles": 9559,
+      "triangles": 9009
+    },
+    {
+      "name": "COL_Roofs_-04_+01",
+      "category": "Roofs",
+      "source_triangles": 1824,
+      "triangles": 1759
+    },
+    {
+      "name": "COL_Ground_-04_+02",
+      "category": "Ground",
+      "source_triangles": 248,
+      "triangles": 229
+    },
+    {
+      "name": "COL_Buildings_-04_+02",
+      "category": "Buildings",
+      "source_triangles": 3904,
+      "triangles": 3408
+    },
+    {
+      "name": "COL_Roofs_-04_+02",
+      "category": "Roofs",
+      "source_triangles": 888,
+      "triangles": 838
+    },
+    {
+      "name": "COL_Ground_-04_+03",
+      "category": "Ground",
+      "source_triangles": 4,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Buildings_-04_+03",
+      "category": "Buildings",
+      "source_triangles": 1195,
+      "triangles": 1045
+    },
+    {
+      "name": "COL_Roofs_-04_+03",
+      "category": "Roofs",
+      "source_triangles": 250,
+      "triangles": 248
+    },
+    {
+      "name": "COL_Buildings_-04_+04",
+      "category": "Buildings",
+      "source_triangles": 562,
+      "triangles": 562
+    },
+    {
+      "name": "COL_Roofs_-04_+04",
+      "category": "Roofs",
+      "source_triangles": 120,
+      "triangles": 120
+    },
+    {
+      "name": "COL_Buildings_-04_+05",
+      "category": "Buildings",
+      "source_triangles": 81,
+      "triangles": 81
+    },
+    {
+      "name": "COL_Roofs_-04_+05",
+      "category": "Roofs",
+      "source_triangles": 55,
+      "triangles": 55
+    },
+    {
+      "name": "COL_Buildings_-04_+06",
+      "category": "Buildings",
+      "source_triangles": 802,
+      "triangles": 787
+    },
+    {
+      "name": "COL_Roofs_-04_+06",
+      "category": "Roofs",
+      "source_triangles": 387,
+      "triangles": 380
+    },
+    {
+      "name": "COL_Buildings_-04_+07",
+      "category": "Buildings",
+      "source_triangles": 32,
+      "triangles": 32
+    },
+    {
+      "name": "COL_Roofs_-04_+07",
+      "category": "Roofs",
+      "source_triangles": 18,
+      "triangles": 18
+    },
+    {
+      "name": "COL_Buildings_-04_+08",
+      "category": "Buildings",
+      "source_triangles": 20,
+      "triangles": 20
+    },
+    {
+      "name": "COL_Roofs_-04_+08",
+      "category": "Roofs",
+      "source_triangles": 12,
+      "triangles": 12
+    },
+    {
+      "name": "COL_Buildings_-04_+09",
+      "category": "Buildings",
+      "source_triangles": 30,
+      "triangles": 30
+    },
+    {
+      "name": "COL_Roofs_-04_+09",
+      "category": "Roofs",
+      "source_triangles": 9,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Buildings_-03_-10",
+      "category": "Buildings",
+      "source_triangles": 255,
+      "triangles": 241
+    },
+    {
+      "name": "COL_Roofs_-03_-10",
+      "category": "Roofs",
+      "source_triangles": 43,
+      "triangles": 39
+    },
+    {
+      "name": "COL_Ground_-03_-06",
+      "category": "Ground",
+      "source_triangles": 7,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Buildings_-03_-06",
+      "category": "Buildings",
+      "source_triangles": 8,
+      "triangles": 8
+    },
+    {
+      "name": "COL_Roofs_-03_-06",
+      "category": "Roofs",
+      "source_triangles": 9,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Ground_-03_-05",
+      "category": "Ground",
+      "source_triangles": 63,
+      "triangles": 54
+    },
+    {
+      "name": "COL_Buildings_-03_-05",
+      "category": "Buildings",
+      "source_triangles": 235,
+      "triangles": 217
+    },
+    {
+      "name": "COL_Ground_-03_-04",
+      "category": "Ground",
+      "source_triangles": 16,
+      "triangles": 16
+    },
+    {
+      "name": "COL_Buildings_-03_-04",
+      "category": "Buildings",
+      "source_triangles": 883,
+      "triangles": 868
+    },
+    {
+      "name": "COL_Roofs_-03_-04",
+      "category": "Roofs",
+      "source_triangles": 116,
+      "triangles": 115
+    },
+    {
+      "name": "COL_Ground_-03_-03",
+      "category": "Ground",
+      "source_triangles": 146,
+      "triangles": 146
+    },
+    {
+      "name": "COL_Buildings_-03_-03",
+      "category": "Buildings",
+      "source_triangles": 3561,
+      "triangles": 3466
+    },
+    {
+      "name": "COL_Roofs_-03_-03",
+      "category": "Roofs",
+      "source_triangles": 446,
+      "triangles": 422
+    },
+    {
+      "name": "COL_Ground_-03_-02",
+      "category": "Ground",
+      "source_triangles": 94,
+      "triangles": 94
+    },
+    {
+      "name": "COL_Buildings_-03_-02",
+      "category": "Buildings",
+      "source_triangles": 2816,
+      "triangles": 2620
+    },
+    {
+      "name": "COL_Roofs_-03_-02",
+      "category": "Roofs",
+      "source_triangles": 338,
+      "triangles": 315
+    },
+    {
+      "name": "COL_Ground_-03_-01",
+      "category": "Ground",
+      "source_triangles": 1138,
+      "triangles": 1104
+    },
+    {
+      "name": "COL_Buildings_-03_-01",
+      "category": "Buildings",
+      "source_triangles": 9507,
+      "triangles": 8679
+    },
+    {
+      "name": "COL_Roofs_-03_-01",
+      "category": "Roofs",
+      "source_triangles": 1476,
+      "triangles": 1413
+    },
+    {
+      "name": "COL_Ground_-03_+00",
+      "category": "Ground",
+      "source_triangles": 2880,
+      "triangles": 2644
+    },
+    {
+      "name": "COL_Buildings_-03_+00",
+      "category": "Buildings",
+      "source_triangles": 26271,
+      "triangles": 25286
+    },
+    {
+      "name": "COL_Roofs_-03_+00",
+      "category": "Roofs",
+      "source_triangles": 5330,
+      "triangles": 5240
+    },
+    {
+      "name": "COL_Ground_-03_+01",
+      "category": "Ground",
+      "source_triangles": 1740,
+      "triangles": 1559
+    },
+    {
+      "name": "COL_Buildings_-03_+01",
+      "category": "Buildings",
+      "source_triangles": 9165,
+      "triangles": 8574
+    },
+    {
+      "name": "COL_Roofs_-03_+01",
+      "category": "Roofs",
+      "source_triangles": 697,
+      "triangles": 688
+    },
+    {
+      "name": "COL_Ground_-03_+02",
+      "category": "Ground",
+      "source_triangles": 719,
+      "triangles": 654
+    },
+    {
+      "name": "COL_Buildings_-03_+02",
+      "category": "Buildings",
+      "source_triangles": 10628,
+      "triangles": 9906
+    },
+    {
+      "name": "COL_Roofs_-03_+02",
+      "category": "Roofs",
+      "source_triangles": 1564,
+      "triangles": 1537
+    },
+    {
+      "name": "COL_Ground_-03_+03",
+      "category": "Ground",
+      "source_triangles": 38,
+      "triangles": 32
+    },
+    {
+      "name": "COL_Buildings_-03_+03",
+      "category": "Buildings",
+      "source_triangles": 2722,
+      "triangles": 2189
+    },
+    {
+      "name": "COL_Roofs_-03_+03",
+      "category": "Roofs",
+      "source_triangles": 333,
+      "triangles": 323
+    },
+    {
+      "name": "COL_Buildings_-03_+04",
+      "category": "Buildings",
+      "source_triangles": 44,
+      "triangles": 44
+    },
+    {
+      "name": "COL_Roofs_-03_+04",
+      "category": "Roofs",
+      "source_triangles": 21,
+      "triangles": 21
+    },
+    {
+      "name": "COL_Buildings_-03_+05",
+      "category": "Buildings",
+      "source_triangles": 122,
+      "triangles": 122
+    },
+    {
+      "name": "COL_Roofs_-03_+05",
+      "category": "Roofs",
+      "source_triangles": 64,
+      "triangles": 64
+    },
+    {
+      "name": "COL_Buildings_-03_+06",
+      "category": "Buildings",
+      "source_triangles": 534,
+      "triangles": 498
+    },
+    {
+      "name": "COL_Roofs_-03_+06",
+      "category": "Roofs",
+      "source_triangles": 248,
+      "triangles": 234
+    },
+    {
+      "name": "COL_Buildings_-03_+07",
+      "category": "Buildings",
+      "source_triangles": 55,
+      "triangles": 55
+    },
+    {
+      "name": "COL_Roofs_-03_+07",
+      "category": "Roofs",
+      "source_triangles": 33,
+      "triangles": 33
+    },
+    {
+      "name": "COL_Buildings_-03_+08",
+      "category": "Buildings",
+      "source_triangles": 11,
+      "triangles": 11
+    },
+    {
+      "name": "COL_Roofs_-03_+08",
+      "category": "Roofs",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Buildings_-03_+09",
+      "category": "Buildings",
+      "source_triangles": 18,
+      "triangles": 18
+    },
+    {
+      "name": "COL_Roofs_-03_+09",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_-02_-10",
+      "category": "Buildings",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Roofs_-02_-10",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Ground_-02_-06",
+      "category": "Ground",
+      "source_triangles": 10,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Buildings_-02_-06",
+      "category": "Buildings",
+      "source_triangles": 82,
+      "triangles": 82
+    },
+    {
+      "name": "COL_Ground_-02_-05",
+      "category": "Ground",
+      "source_triangles": 100,
+      "triangles": 84
+    },
+    {
+      "name": "COL_Buildings_-02_-05",
+      "category": "Buildings",
+      "source_triangles": 418,
+      "triangles": 392
+    },
+    {
+      "name": "COL_Buildings_-02_-04",
+      "category": "Buildings",
+      "source_triangles": 81,
+      "triangles": 81
+    },
+    {
+      "name": "COL_Ground_-02_-03",
+      "category": "Ground",
+      "source_triangles": 71,
+      "triangles": 71
+    },
+    {
+      "name": "COL_Buildings_-02_-03",
+      "category": "Buildings",
+      "source_triangles": 1714,
+      "triangles": 1677
+    },
+    {
+      "name": "COL_Roofs_-02_-03",
+      "category": "Roofs",
+      "source_triangles": 218,
+      "triangles": 211
+    },
+    {
+      "name": "COL_Ground_-02_-02",
+      "category": "Ground",
+      "source_triangles": 320,
+      "triangles": 284
+    },
+    {
+      "name": "COL_Buildings_-02_-02",
+      "category": "Buildings",
+      "source_triangles": 4194,
+      "triangles": 3863
+    },
+    {
+      "name": "COL_Roofs_-02_-02",
+      "category": "Roofs",
+      "source_triangles": 837,
+      "triangles": 683
+    },
+    {
+      "name": "COL_Ground_-02_-01",
+      "category": "Ground",
+      "source_triangles": 1414,
+      "triangles": 1318
+    },
+    {
+      "name": "COL_Buildings_-02_-01",
+      "category": "Buildings",
+      "source_triangles": 8164,
+      "triangles": 7629
+    },
+    {
+      "name": "COL_Roofs_-02_-01",
+      "category": "Roofs",
+      "source_triangles": 1367,
+      "triangles": 1226
+    },
+    {
+      "name": "COL_Ground_-02_+00",
+      "category": "Ground",
+      "source_triangles": 5774,
+      "triangles": 5437
+    },
+    {
+      "name": "COL_Buildings_-02_+00",
+      "category": "Buildings",
+      "source_triangles": 31500,
+      "triangles": 30284
+    },
+    {
+      "name": "COL_Roofs_-02_+00",
+      "category": "Roofs",
+      "source_triangles": 4547,
+      "triangles": 4411
+    },
+    {
+      "name": "COL_Ground_-02_+01",
+      "category": "Ground",
+      "source_triangles": 3765,
+      "triangles": 3614
+    },
+    {
+      "name": "COL_Buildings_-02_+01",
+      "category": "Buildings",
+      "source_triangles": 19563,
+      "triangles": 18917
+    },
+    {
+      "name": "COL_Roofs_-02_+01",
+      "category": "Roofs",
+      "source_triangles": 2084,
+      "triangles": 2050
+    },
+    {
+      "name": "COL_Ground_-02_+02",
+      "category": "Ground",
+      "source_triangles": 390,
+      "triangles": 358
+    },
+    {
+      "name": "COL_Buildings_-02_+02",
+      "category": "Buildings",
+      "source_triangles": 16146,
+      "triangles": 15752
+    },
+    {
+      "name": "COL_Roofs_-02_+02",
+      "category": "Roofs",
+      "source_triangles": 3274,
+      "triangles": 3210
+    },
+    {
+      "name": "COL_Buildings_-02_+03",
+      "category": "Buildings",
+      "source_triangles": 5263,
+      "triangles": 4715
+    },
+    {
+      "name": "COL_Roofs_-02_+03",
+      "category": "Roofs",
+      "source_triangles": 990,
+      "triangles": 977
+    },
+    {
+      "name": "COL_Buildings_-02_+04",
+      "category": "Buildings",
+      "source_triangles": 3955,
+      "triangles": 3495
+    },
+    {
+      "name": "COL_Roofs_-02_+04",
+      "category": "Roofs",
+      "source_triangles": 927,
+      "triangles": 907
+    },
+    {
+      "name": "COL_Buildings_-02_+05",
+      "category": "Buildings",
+      "source_triangles": 96,
+      "triangles": 96
+    },
+    {
+      "name": "COL_Roofs_-02_+05",
+      "category": "Roofs",
+      "source_triangles": 59,
+      "triangles": 58
+    },
+    {
+      "name": "COL_Buildings_-02_+06",
+      "category": "Buildings",
+      "source_triangles": 524,
+      "triangles": 489
+    },
+    {
+      "name": "COL_Roofs_-02_+06",
+      "category": "Roofs",
+      "source_triangles": 248,
+      "triangles": 234
+    },
+    {
+      "name": "COL_Buildings_-02_+07",
+      "category": "Buildings",
+      "source_triangles": 87,
+      "triangles": 87
+    },
+    {
+      "name": "COL_Roofs_-02_+07",
+      "category": "Roofs",
+      "source_triangles": 52,
+      "triangles": 52
+    },
+    {
+      "name": "COL_Buildings_-02_+08",
+      "category": "Buildings",
+      "source_triangles": 31,
+      "triangles": 31
+    },
+    {
+      "name": "COL_Roofs_-02_+08",
+      "category": "Roofs",
+      "source_triangles": 17,
+      "triangles": 17
+    },
+    {
+      "name": "COL_Buildings_-01_-10",
+      "category": "Buildings",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Roofs_-01_-10",
+      "category": "Roofs",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_-01_-08",
+      "category": "Buildings",
+      "source_triangles": 9,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Buildings_-01_-07",
+      "category": "Buildings",
+      "source_triangles": 81,
+      "triangles": 81
+    },
+    {
+      "name": "COL_Ground_-01_-06",
+      "category": "Ground",
+      "source_triangles": 14,
+      "triangles": 12
+    },
+    {
+      "name": "COL_Buildings_-01_-06",
+      "category": "Buildings",
+      "source_triangles": 404,
+      "triangles": 392
+    },
+    {
+      "name": "COL_Ground_-01_-05",
+      "category": "Ground",
+      "source_triangles": 159,
+      "triangles": 157
+    },
+    {
+      "name": "COL_Buildings_-01_-05",
+      "category": "Buildings",
+      "source_triangles": 866,
+      "triangles": 851
+    },
+    {
+      "name": "COL_Roofs_-01_-05",
+      "category": "Roofs",
+      "source_triangles": 30,
+      "triangles": 30
+    },
+    {
+      "name": "COL_Ground_-01_-04",
+      "category": "Ground",
+      "source_triangles": 5,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Buildings_-01_-04",
+      "category": "Buildings",
+      "source_triangles": 922,
+      "triangles": 777
+    },
+    {
+      "name": "COL_Roofs_-01_-04",
+      "category": "Roofs",
+      "source_triangles": 95,
+      "triangles": 91
+    },
+    {
+      "name": "COL_Ground_-01_-03",
+      "category": "Ground",
+      "source_triangles": 68,
+      "triangles": 68
+    },
+    {
+      "name": "COL_Buildings_-01_-03",
+      "category": "Buildings",
+      "source_triangles": 4094,
+      "triangles": 3538
+    },
+    {
+      "name": "COL_Roofs_-01_-03",
+      "category": "Roofs",
+      "source_triangles": 1040,
+      "triangles": 1006
+    },
+    {
+      "name": "COL_Ground_-01_-02",
+      "category": "Ground",
+      "source_triangles": 2884,
+      "triangles": 1988
+    },
+    {
+      "name": "COL_Buildings_-01_-02",
+      "category": "Buildings",
+      "source_triangles": 22036,
+      "triangles": 18757
+    },
+    {
+      "name": "COL_Roofs_-01_-02",
+      "category": "Roofs",
+      "source_triangles": 5177,
+      "triangles": 3118
+    },
+    {
+      "name": "COL_Ground_-01_-01",
+      "category": "Ground",
+      "source_triangles": 6031,
+      "triangles": 5416
+    },
+    {
+      "name": "COL_Buildings_-01_-01",
+      "category": "Buildings",
+      "source_triangles": 14024,
+      "triangles": 13409
+    },
+    {
+      "name": "COL_Roofs_-01_-01",
+      "category": "Roofs",
+      "source_triangles": 664,
+      "triangles": 658
+    },
+    {
+      "name": "COL_Ground_-01_+00",
+      "category": "Ground",
+      "source_triangles": 5350,
+      "triangles": 4887
+    },
+    {
+      "name": "COL_Buildings_-01_+00",
+      "category": "Buildings",
+      "source_triangles": 20292,
+      "triangles": 16935
+    },
+    {
+      "name": "COL_Roofs_-01_+00",
+      "category": "Roofs",
+      "source_triangles": 581,
+      "triangles": 555
+    },
+    {
+      "name": "COL_Ground_-01_+01",
+      "category": "Ground",
+      "source_triangles": 5657,
+      "triangles": 4923
+    },
+    {
+      "name": "COL_Buildings_-01_+01",
+      "category": "Buildings",
+      "source_triangles": 26822,
+      "triangles": 23720
+    },
+    {
+      "name": "COL_Roofs_-01_+01",
+      "category": "Roofs",
+      "source_triangles": 3489,
+      "triangles": 3301
+    },
+    {
+      "name": "COL_Ground_-01_+02",
+      "category": "Ground",
+      "source_triangles": 986,
+      "triangles": 929
+    },
+    {
+      "name": "COL_Buildings_-01_+02",
+      "category": "Buildings",
+      "source_triangles": 4903,
+      "triangles": 4810
+    },
+    {
+      "name": "COL_Roofs_-01_+02",
+      "category": "Roofs",
+      "source_triangles": 854,
+      "triangles": 746
+    },
+    {
+      "name": "COL_Ground_-01_+03",
+      "category": "Ground",
+      "source_triangles": 31,
+      "triangles": 31
+    },
+    {
+      "name": "COL_Buildings_-01_+03",
+      "category": "Buildings",
+      "source_triangles": 4049,
+      "triangles": 3937
+    },
+    {
+      "name": "COL_Roofs_-01_+03",
+      "category": "Roofs",
+      "source_triangles": 1370,
+      "triangles": 1362
+    },
+    {
+      "name": "COL_Ground_-01_+04",
+      "category": "Ground",
+      "source_triangles": 17,
+      "triangles": 17
+    },
+    {
+      "name": "COL_Buildings_-01_+04",
+      "category": "Buildings",
+      "source_triangles": 2285,
+      "triangles": 2215
+    },
+    {
+      "name": "COL_Roofs_-01_+04",
+      "category": "Roofs",
+      "source_triangles": 779,
+      "triangles": 772
+    },
+    {
+      "name": "COL_Buildings_-01_+05",
+      "category": "Buildings",
+      "source_triangles": 55,
+      "triangles": 42
+    },
+    {
+      "name": "COL_Roofs_-01_+05",
+      "category": "Roofs",
+      "source_triangles": 20,
+      "triangles": 20
+    },
+    {
+      "name": "COL_Buildings_-01_+06",
+      "category": "Buildings",
+      "source_triangles": 437,
+      "triangles": 420
+    },
+    {
+      "name": "COL_Roofs_-01_+06",
+      "category": "Roofs",
+      "source_triangles": 205,
+      "triangles": 203
+    },
+    {
+      "name": "COL_Buildings_-01_+07",
+      "category": "Buildings",
+      "source_triangles": 700,
+      "triangles": 655
+    },
+    {
+      "name": "COL_Roofs_-01_+07",
+      "category": "Roofs",
+      "source_triangles": 210,
+      "triangles": 198
+    },
+    {
+      "name": "COL_Buildings_-01_+08",
+      "category": "Buildings",
+      "source_triangles": 423,
+      "triangles": 376
+    },
+    {
+      "name": "COL_Roofs_-01_+08",
+      "category": "Roofs",
+      "source_triangles": 134,
+      "triangles": 121
+    },
+    {
+      "name": "COL_Buildings_-01_+09",
+      "category": "Buildings",
+      "source_triangles": 810,
+      "triangles": 781
+    },
+    {
+      "name": "COL_Roofs_-01_+09",
+      "category": "Roofs",
+      "source_triangles": 233,
+      "triangles": 233
+    },
+    {
+      "name": "COL_Buildings_+00_-10",
+      "category": "Buildings",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_+00_-09",
+      "category": "Buildings",
+      "source_triangles": 5,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Roofs_+00_-09",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+00_-08",
+      "category": "Buildings",
+      "source_triangles": 9,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Buildings_+00_-07",
+      "category": "Buildings",
+      "source_triangles": 81,
+      "triangles": 81
+    },
+    {
+      "name": "COL_Ground_+00_-06",
+      "category": "Ground",
+      "source_triangles": 14,
+      "triangles": 12
+    },
+    {
+      "name": "COL_Buildings_+00_-06",
+      "category": "Buildings",
+      "source_triangles": 398,
+      "triangles": 386
+    },
+    {
+      "name": "COL_Ground_+00_-05",
+      "category": "Ground",
+      "source_triangles": 159,
+      "triangles": 157
+    },
+    {
+      "name": "COL_Buildings_+00_-05",
+      "category": "Buildings",
+      "source_triangles": 849,
+      "triangles": 834
+    },
+    {
+      "name": "COL_Roofs_+00_-05",
+      "category": "Roofs",
+      "source_triangles": 30,
+      "triangles": 30
+    },
+    {
+      "name": "COL_Ground_+00_-04",
+      "category": "Ground",
+      "source_triangles": 5,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Buildings_+00_-04",
+      "category": "Buildings",
+      "source_triangles": 953,
+      "triangles": 815
+    },
+    {
+      "name": "COL_Roofs_+00_-04",
+      "category": "Roofs",
+      "source_triangles": 100,
+      "triangles": 96
+    },
+    {
+      "name": "COL_Ground_+00_-03",
+      "category": "Ground",
+      "source_triangles": 16,
+      "triangles": 16
+    },
+    {
+      "name": "COL_Buildings_+00_-03",
+      "category": "Buildings",
+      "source_triangles": 3974,
+      "triangles": 3417
+    },
+    {
+      "name": "COL_Roofs_+00_-03",
+      "category": "Roofs",
+      "source_triangles": 1165,
+      "triangles": 1115
+    },
+    {
+      "name": "COL_Ground_+00_-02",
+      "category": "Ground",
+      "source_triangles": 2616,
+      "triangles": 1749
+    },
+    {
+      "name": "COL_Buildings_+00_-02",
+      "category": "Buildings",
+      "source_triangles": 20640,
+      "triangles": 17381
+    },
+    {
+      "name": "COL_Roofs_+00_-02",
+      "category": "Roofs",
+      "source_triangles": 5060,
+      "triangles": 3000
+    },
+    {
+      "name": "COL_Ground_+00_-01",
+      "category": "Ground",
+      "source_triangles": 5902,
+      "triangles": 5237
+    },
+    {
+      "name": "COL_Buildings_+00_-01",
+      "category": "Buildings",
+      "source_triangles": 14035,
+      "triangles": 13428
+    },
+    {
+      "name": "COL_Roofs_+00_-01",
+      "category": "Roofs",
+      "source_triangles": 685,
+      "triangles": 679
+    },
+    {
+      "name": "COL_Ground_+00_+00",
+      "category": "Ground",
+      "source_triangles": 2956,
+      "triangles": 2641
+    },
+    {
+      "name": "COL_Buildings_+00_+00",
+      "category": "Buildings",
+      "source_triangles": 11819,
+      "triangles": 10339
+    },
+    {
+      "name": "COL_Roofs_+00_+00",
+      "category": "Roofs",
+      "source_triangles": 765,
+      "triangles": 677
+    },
+    {
+      "name": "COL_Ground_+00_+01",
+      "category": "Ground",
+      "source_triangles": 4730,
+      "triangles": 3952
+    },
+    {
+      "name": "COL_Buildings_+00_+01",
+      "category": "Buildings",
+      "source_triangles": 21775,
+      "triangles": 19496
+    },
+    {
+      "name": "COL_Roofs_+00_+01",
+      "category": "Roofs",
+      "source_triangles": 3012,
+      "triangles": 2838
+    },
+    {
+      "name": "COL_Ground_+00_+02",
+      "category": "Ground",
+      "source_triangles": 874,
+      "triangles": 834
+    },
+    {
+      "name": "COL_Buildings_+00_+02",
+      "category": "Buildings",
+      "source_triangles": 6827,
+      "triangles": 6569
+    },
+    {
+      "name": "COL_Roofs_+00_+02",
+      "category": "Roofs",
+      "source_triangles": 1572,
+      "triangles": 1458
+    },
+    {
+      "name": "COL_Ground_+00_+03",
+      "category": "Ground",
+      "source_triangles": 29,
+      "triangles": 29
+    },
+    {
+      "name": "COL_Buildings_+00_+03",
+      "category": "Buildings",
+      "source_triangles": 4106,
+      "triangles": 3982
+    },
+    {
+      "name": "COL_Roofs_+00_+03",
+      "category": "Roofs",
+      "source_triangles": 1353,
+      "triangles": 1344
+    },
+    {
+      "name": "COL_Ground_+00_+04",
+      "category": "Ground",
+      "source_triangles": 17,
+      "triangles": 17
+    },
+    {
+      "name": "COL_Buildings_+00_+04",
+      "category": "Buildings",
+      "source_triangles": 2065,
+      "triangles": 2001
+    },
+    {
+      "name": "COL_Roofs_+00_+04",
+      "category": "Roofs",
+      "source_triangles": 685,
+      "triangles": 678
+    },
+    {
+      "name": "COL_Buildings_+00_+05",
+      "category": "Buildings",
+      "source_triangles": 63,
+      "triangles": 50
+    },
+    {
+      "name": "COL_Roofs_+00_+05",
+      "category": "Roofs",
+      "source_triangles": 21,
+      "triangles": 21
+    },
+    {
+      "name": "COL_Buildings_+00_+06",
+      "category": "Buildings",
+      "source_triangles": 448,
+      "triangles": 431
+    },
+    {
+      "name": "COL_Roofs_+00_+06",
+      "category": "Roofs",
+      "source_triangles": 208,
+      "triangles": 206
+    },
+    {
+      "name": "COL_Buildings_+00_+07",
+      "category": "Buildings",
+      "source_triangles": 708,
+      "triangles": 663
+    },
+    {
+      "name": "COL_Roofs_+00_+07",
+      "category": "Roofs",
+      "source_triangles": 210,
+      "triangles": 198
+    },
+    {
+      "name": "COL_Buildings_+00_+08",
+      "category": "Buildings",
+      "source_triangles": 431,
+      "triangles": 384
+    },
+    {
+      "name": "COL_Roofs_+00_+08",
+      "category": "Roofs",
+      "source_triangles": 134,
+      "triangles": 121
+    },
+    {
+      "name": "COL_Buildings_+00_+09",
+      "category": "Buildings",
+      "source_triangles": 807,
+      "triangles": 792
+    },
+    {
+      "name": "COL_Roofs_+00_+09",
+      "category": "Roofs",
+      "source_triangles": 218,
+      "triangles": 218
+    },
+    {
+      "name": "COL_Ground_+01_-06",
+      "category": "Ground",
+      "source_triangles": 10,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Buildings_+01_-06",
+      "category": "Buildings",
+      "source_triangles": 84,
+      "triangles": 84
+    },
+    {
+      "name": "COL_Ground_+01_-05",
+      "category": "Ground",
+      "source_triangles": 100,
+      "triangles": 85
+    },
+    {
+      "name": "COL_Buildings_+01_-05",
+      "category": "Buildings",
+      "source_triangles": 416,
+      "triangles": 388
+    },
+    {
+      "name": "COL_Ground_+01_-04",
+      "category": "Ground",
+      "source_triangles": 20,
+      "triangles": 20
+    },
+    {
+      "name": "COL_Buildings_+01_-04",
+      "category": "Buildings",
+      "source_triangles": 737,
+      "triangles": 730
+    },
+    {
+      "name": "COL_Roofs_+01_-04",
+      "category": "Roofs",
+      "source_triangles": 78,
+      "triangles": 78
+    },
+    {
+      "name": "COL_Ground_+01_-03",
+      "category": "Ground",
+      "source_triangles": 22,
+      "triangles": 22
+    },
+    {
+      "name": "COL_Buildings_+01_-03",
+      "category": "Buildings",
+      "source_triangles": 1271,
+      "triangles": 1260
+    },
+    {
+      "name": "COL_Roofs_+01_-03",
+      "category": "Roofs",
+      "source_triangles": 170,
+      "triangles": 161
+    },
+    {
+      "name": "COL_Ground_+01_-02",
+      "category": "Ground",
+      "source_triangles": 213,
+      "triangles": 178
+    },
+    {
+      "name": "COL_Buildings_+01_-02",
+      "category": "Buildings",
+      "source_triangles": 2808,
+      "triangles": 2571
+    },
+    {
+      "name": "COL_Roofs_+01_-02",
+      "category": "Roofs",
+      "source_triangles": 676,
+      "triangles": 533
+    },
+    {
+      "name": "COL_Ground_+01_-01",
+      "category": "Ground",
+      "source_triangles": 1918,
+      "triangles": 1829
+    },
+    {
+      "name": "COL_Buildings_+01_-01",
+      "category": "Buildings",
+      "source_triangles": 9030,
+      "triangles": 8487
+    },
+    {
+      "name": "COL_Roofs_+01_-01",
+      "category": "Roofs",
+      "source_triangles": 1370,
+      "triangles": 1227
+    },
+    {
+      "name": "COL_Ground_+01_+00",
+      "category": "Ground",
+      "source_triangles": 2631,
+      "triangles": 2475
+    },
+    {
+      "name": "COL_Buildings_+01_+00",
+      "category": "Buildings",
+      "source_triangles": 5888,
+      "triangles": 5850
+    },
+    {
+      "name": "COL_Roofs_+01_+00",
+      "category": "Roofs",
+      "source_triangles": 257,
+      "triangles": 253
+    },
+    {
+      "name": "COL_Ground_+01_+01",
+      "category": "Ground",
+      "source_triangles": 5486,
+      "triangles": 5217
+    },
+    {
+      "name": "COL_Buildings_+01_+01",
+      "category": "Buildings",
+      "source_triangles": 24384,
+      "triangles": 23129
+    },
+    {
+      "name": "COL_Roofs_+01_+01",
+      "category": "Roofs",
+      "source_triangles": 2068,
+      "triangles": 2029
+    },
+    {
+      "name": "COL_Ground_+01_+02",
+      "category": "Ground",
+      "source_triangles": 358,
+      "triangles": 350
+    },
+    {
+      "name": "COL_Buildings_+01_+02",
+      "category": "Buildings",
+      "source_triangles": 11921,
+      "triangles": 11304
+    },
+    {
+      "name": "COL_Roofs_+01_+02",
+      "category": "Roofs",
+      "source_triangles": 2372,
+      "triangles": 2304
+    },
+    {
+      "name": "COL_Ground_+01_+03",
+      "category": "Ground",
+      "source_triangles": 7,
+      "triangles": 7
+    },
+    {
+      "name": "COL_Buildings_+01_+03",
+      "category": "Buildings",
+      "source_triangles": 7457,
+      "triangles": 6571
+    },
+    {
+      "name": "COL_Roofs_+01_+03",
+      "category": "Roofs",
+      "source_triangles": 1456,
+      "triangles": 1415
+    },
+    {
+      "name": "COL_Buildings_+01_+04",
+      "category": "Buildings",
+      "source_triangles": 4114,
+      "triangles": 3831
+    },
+    {
+      "name": "COL_Roofs_+01_+04",
+      "category": "Roofs",
+      "source_triangles": 765,
+      "triangles": 751
+    },
+    {
+      "name": "COL_Buildings_+01_+05",
+      "category": "Buildings",
+      "source_triangles": 46,
+      "triangles": 46
+    },
+    {
+      "name": "COL_Roofs_+01_+05",
+      "category": "Roofs",
+      "source_triangles": 20,
+      "triangles": 20
+    },
+    {
+      "name": "COL_Buildings_+01_+06",
+      "category": "Buildings",
+      "source_triangles": 484,
+      "triangles": 449
+    },
+    {
+      "name": "COL_Roofs_+01_+06",
+      "category": "Roofs",
+      "source_triangles": 220,
+      "triangles": 206
+    },
+    {
+      "name": "COL_Buildings_+01_+07",
+      "category": "Buildings",
+      "source_triangles": 205,
+      "triangles": 205
+    },
+    {
+      "name": "COL_Roofs_+01_+07",
+      "category": "Roofs",
+      "source_triangles": 44,
+      "triangles": 44
+    },
+    {
+      "name": "COL_Buildings_+01_+08",
+      "category": "Buildings",
+      "source_triangles": 85,
+      "triangles": 85
+    },
+    {
+      "name": "COL_Roofs_+01_+08",
+      "category": "Roofs",
+      "source_triangles": 17,
+      "triangles": 17
+    },
+    {
+      "name": "COL_Ground_+02_-06",
+      "category": "Ground",
+      "source_triangles": 7,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Buildings_+02_-06",
+      "category": "Buildings",
+      "source_triangles": 8,
+      "triangles": 8
+    },
+    {
+      "name": "COL_Roofs_+02_-06",
+      "category": "Roofs",
+      "source_triangles": 9,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Ground_+02_-05",
+      "category": "Ground",
+      "source_triangles": 63,
+      "triangles": 52
+    },
+    {
+      "name": "COL_Buildings_+02_-05",
+      "category": "Buildings",
+      "source_triangles": 236,
+      "triangles": 218
+    },
+    {
+      "name": "COL_Ground_+02_-04",
+      "category": "Ground",
+      "source_triangles": 27,
+      "triangles": 27
+    },
+    {
+      "name": "COL_Buildings_+02_-04",
+      "category": "Buildings",
+      "source_triangles": 823,
+      "triangles": 810
+    },
+    {
+      "name": "COL_Roofs_+02_-04",
+      "category": "Roofs",
+      "source_triangles": 104,
+      "triangles": 104
+    },
+    {
+      "name": "COL_Ground_+02_-03",
+      "category": "Ground",
+      "source_triangles": 56,
+      "triangles": 56
+    },
+    {
+      "name": "COL_Buildings_+02_-03",
+      "category": "Buildings",
+      "source_triangles": 1499,
+      "triangles": 1414
+    },
+    {
+      "name": "COL_Roofs_+02_-03",
+      "category": "Roofs",
+      "source_triangles": 194,
+      "triangles": 187
+    },
+    {
+      "name": "COL_Ground_+02_-02",
+      "category": "Ground",
+      "source_triangles": 200,
+      "triangles": 200
+    },
+    {
+      "name": "COL_Buildings_+02_-02",
+      "category": "Buildings",
+      "source_triangles": 4209,
+      "triangles": 3961
+    },
+    {
+      "name": "COL_Roofs_+02_-02",
+      "category": "Roofs",
+      "source_triangles": 584,
+      "triangles": 552
+    },
+    {
+      "name": "COL_Ground_+02_-01",
+      "category": "Ground",
+      "source_triangles": 1477,
+      "triangles": 1444
+    },
+    {
+      "name": "COL_Buildings_+02_-01",
+      "category": "Buildings",
+      "source_triangles": 10992,
+      "triangles": 10504
+    },
+    {
+      "name": "COL_Roofs_+02_-01",
+      "category": "Roofs",
+      "source_triangles": 1326,
+      "triangles": 1246
+    },
+    {
+      "name": "COL_Ground_+02_+00",
+      "category": "Ground",
+      "source_triangles": 3340,
+      "triangles": 2945
+    },
+    {
+      "name": "COL_Buildings_+02_+00",
+      "category": "Buildings",
+      "source_triangles": 9276,
+      "triangles": 9027
+    },
+    {
+      "name": "COL_Roofs_+02_+00",
+      "category": "Roofs",
+      "source_triangles": 1102,
+      "triangles": 1063
+    },
+    {
+      "name": "COL_Ground_+02_+01",
+      "category": "Ground",
+      "source_triangles": 3334,
+      "triangles": 2927
+    },
+    {
+      "name": "COL_Buildings_+02_+01",
+      "category": "Buildings",
+      "source_triangles": 7775,
+      "triangles": 7440
+    },
+    {
+      "name": "COL_Roofs_+02_+01",
+      "category": "Roofs",
+      "source_triangles": 758,
+      "triangles": 734
+    },
+    {
+      "name": "COL_Ground_+02_+02",
+      "category": "Ground",
+      "source_triangles": 1187,
+      "triangles": 1183
+    },
+    {
+      "name": "COL_Buildings_+02_+02",
+      "category": "Buildings",
+      "source_triangles": 12021,
+      "triangles": 11380
+    },
+    {
+      "name": "COL_Roofs_+02_+02",
+      "category": "Roofs",
+      "source_triangles": 1401,
+      "triangles": 1391
+    },
+    {
+      "name": "COL_Ground_+02_+03",
+      "category": "Ground",
+      "source_triangles": 229,
+      "triangles": 226
+    },
+    {
+      "name": "COL_Buildings_+02_+03",
+      "category": "Buildings",
+      "source_triangles": 5995,
+      "triangles": 5673
+    },
+    {
+      "name": "COL_Roofs_+02_+03",
+      "category": "Roofs",
+      "source_triangles": 823,
+      "triangles": 811
+    },
+    {
+      "name": "COL_Ground_+02_+04",
+      "category": "Ground",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_+02_+04",
+      "category": "Buildings",
+      "source_triangles": 2301,
+      "triangles": 2269
+    },
+    {
+      "name": "COL_Roofs_+02_+04",
+      "category": "Roofs",
+      "source_triangles": 381,
+      "triangles": 361
+    },
+    {
+      "name": "COL_Buildings_+02_+05",
+      "category": "Buildings",
+      "source_triangles": 9,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Roofs_+02_+05",
+      "category": "Roofs",
+      "source_triangles": 10,
+      "triangles": 10
+    },
+    {
+      "name": "COL_Buildings_+02_+06",
+      "category": "Buildings",
+      "source_triangles": 518,
+      "triangles": 495
+    },
+    {
+      "name": "COL_Roofs_+02_+06",
+      "category": "Roofs",
+      "source_triangles": 217,
+      "triangles": 207
+    },
+    {
+      "name": "COL_Buildings_+02_+07",
+      "category": "Buildings",
+      "source_triangles": 1034,
+      "triangles": 1015
+    },
+    {
+      "name": "COL_Roofs_+02_+07",
+      "category": "Roofs",
+      "source_triangles": 188,
+      "triangles": 184
+    },
+    {
+      "name": "COL_Buildings_+02_+08",
+      "category": "Buildings",
+      "source_triangles": 85,
+      "triangles": 85
+    },
+    {
+      "name": "COL_Roofs_+02_+08",
+      "category": "Roofs",
+      "source_triangles": 16,
+      "triangles": 16
+    },
+    {
+      "name": "COL_Buildings_+02_+09",
+      "category": "Buildings",
+      "source_triangles": 18,
+      "triangles": 18
+    },
+    {
+      "name": "COL_Roofs_+02_+09",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Ground_+03_-06",
+      "category": "Ground",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+03_-06",
+      "category": "Buildings",
+      "source_triangles": 9,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Roofs_+03_-06",
+      "category": "Roofs",
+      "source_triangles": 15,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Ground_+03_-05",
+      "category": "Ground",
+      "source_triangles": 13,
+      "triangles": 13
+    },
+    {
+      "name": "COL_Buildings_+03_-05",
+      "category": "Buildings",
+      "source_triangles": 44,
+      "triangles": 44
+    },
+    {
+      "name": "COL_Roofs_+03_-05",
+      "category": "Roofs",
+      "source_triangles": 4,
+      "triangles": 4
+    },
+    {
+      "name": "COL_Ground_+03_-04",
+      "category": "Ground",
+      "source_triangles": 23,
+      "triangles": 21
+    },
+    {
+      "name": "COL_Buildings_+03_-04",
+      "category": "Buildings",
+      "source_triangles": 17,
+      "triangles": 17
+    },
+    {
+      "name": "COL_Ground_+03_-03",
+      "category": "Ground",
+      "source_triangles": 130,
+      "triangles": 130
+    },
+    {
+      "name": "COL_Buildings_+03_-03",
+      "category": "Buildings",
+      "source_triangles": 1706,
+      "triangles": 1531
+    },
+    {
+      "name": "COL_Roofs_+03_-03",
+      "category": "Roofs",
+      "source_triangles": 202,
+      "triangles": 193
+    },
+    {
+      "name": "COL_Ground_+03_-02",
+      "category": "Ground",
+      "source_triangles": 282,
+      "triangles": 282
+    },
+    {
+      "name": "COL_Buildings_+03_-02",
+      "category": "Buildings",
+      "source_triangles": 4826,
+      "triangles": 4546
+    },
+    {
+      "name": "COL_Roofs_+03_-02",
+      "category": "Roofs",
+      "source_triangles": 672,
+      "triangles": 652
+    },
+    {
+      "name": "COL_Ground_+03_-01",
+      "category": "Ground",
+      "source_triangles": 646,
+      "triangles": 612
+    },
+    {
+      "name": "COL_Buildings_+03_-01",
+      "category": "Buildings",
+      "source_triangles": 7104,
+      "triangles": 6424
+    },
+    {
+      "name": "COL_Roofs_+03_-01",
+      "category": "Roofs",
+      "source_triangles": 968,
+      "triangles": 952
+    },
+    {
+      "name": "COL_Ground_+03_+00",
+      "category": "Ground",
+      "source_triangles": 396,
+      "triangles": 372
+    },
+    {
+      "name": "COL_Buildings_+03_+00",
+      "category": "Buildings",
+      "source_triangles": 9984,
+      "triangles": 9402
+    },
+    {
+      "name": "COL_Roofs_+03_+00",
+      "category": "Roofs",
+      "source_triangles": 2485,
+      "triangles": 2416
+    },
+    {
+      "name": "COL_Ground_+03_+01",
+      "category": "Ground",
+      "source_triangles": 5387,
+      "triangles": 5054
+    },
+    {
+      "name": "COL_Buildings_+03_+01",
+      "category": "Buildings",
+      "source_triangles": 22877,
+      "triangles": 21783
+    },
+    {
+      "name": "COL_Roofs_+03_+01",
+      "category": "Roofs",
+      "source_triangles": 2932,
+      "triangles": 2762
+    },
+    {
+      "name": "COL_Ground_+03_+02",
+      "category": "Ground",
+      "source_triangles": 4273,
+      "triangles": 4106
+    },
+    {
+      "name": "COL_Buildings_+03_+02",
+      "category": "Buildings",
+      "source_triangles": 18440,
+      "triangles": 17381
+    },
+    {
+      "name": "COL_Roofs_+03_+02",
+      "category": "Roofs",
+      "source_triangles": 1927,
+      "triangles": 1797
+    },
+    {
+      "name": "COL_Ground_+03_+03",
+      "category": "Ground",
+      "source_triangles": 90,
+      "triangles": 89
+    },
+    {
+      "name": "COL_Buildings_+03_+03",
+      "category": "Buildings",
+      "source_triangles": 2031,
+      "triangles": 1966
+    },
+    {
+      "name": "COL_Roofs_+03_+03",
+      "category": "Roofs",
+      "source_triangles": 255,
+      "triangles": 254
+    },
+    {
+      "name": "COL_Buildings_+03_+04",
+      "category": "Buildings",
+      "source_triangles": 1305,
+      "triangles": 1287
+    },
+    {
+      "name": "COL_Roofs_+03_+04",
+      "category": "Roofs",
+      "source_triangles": 247,
+      "triangles": 247
+    },
+    {
+      "name": "COL_Buildings_+03_+05",
+      "category": "Buildings",
+      "source_triangles": 167,
+      "triangles": 167
+    },
+    {
+      "name": "COL_Roofs_+03_+05",
+      "category": "Roofs",
+      "source_triangles": 79,
+      "triangles": 78
+    },
+    {
+      "name": "COL_Buildings_+03_+06",
+      "category": "Buildings",
+      "source_triangles": 1080,
+      "triangles": 1060
+    },
+    {
+      "name": "COL_Roofs_+03_+06",
+      "category": "Roofs",
+      "source_triangles": 436,
+      "triangles": 428
+    },
+    {
+      "name": "COL_Buildings_+03_+07",
+      "category": "Buildings",
+      "source_triangles": 1439,
+      "triangles": 1428
+    },
+    {
+      "name": "COL_Roofs_+03_+07",
+      "category": "Roofs",
+      "source_triangles": 210,
+      "triangles": 202
+    },
+    {
+      "name": "COL_Buildings_+03_+09",
+      "category": "Buildings",
+      "source_triangles": 30,
+      "triangles": 30
+    },
+    {
+      "name": "COL_Roofs_+03_+09",
+      "category": "Roofs",
+      "source_triangles": 9,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Ground_+04_-04",
+      "category": "Ground",
+      "source_triangles": 49,
+      "triangles": 49
+    },
+    {
+      "name": "COL_Buildings_+04_-04",
+      "category": "Buildings",
+      "source_triangles": 64,
+      "triangles": 64
+    },
+    {
+      "name": "COL_Ground_+04_-03",
+      "category": "Ground",
+      "source_triangles": 128,
+      "triangles": 128
+    },
+    {
+      "name": "COL_Buildings_+04_-03",
+      "category": "Buildings",
+      "source_triangles": 2152,
+      "triangles": 2038
+    },
+    {
+      "name": "COL_Roofs_+04_-03",
+      "category": "Roofs",
+      "source_triangles": 244,
+      "triangles": 226
+    },
+    {
+      "name": "COL_Ground_+04_-02",
+      "category": "Ground",
+      "source_triangles": 213,
+      "triangles": 213
+    },
+    {
+      "name": "COL_Buildings_+04_-02",
+      "category": "Buildings",
+      "source_triangles": 4369,
+      "triangles": 4204
+    },
+    {
+      "name": "COL_Roofs_+04_-02",
+      "category": "Roofs",
+      "source_triangles": 565,
+      "triangles": 542
+    },
+    {
+      "name": "COL_Ground_+04_-01",
+      "category": "Ground",
+      "source_triangles": 157,
+      "triangles": 157
+    },
+    {
+      "name": "COL_Buildings_+04_-01",
+      "category": "Buildings",
+      "source_triangles": 1917,
+      "triangles": 1639
+    },
+    {
+      "name": "COL_Roofs_+04_-01",
+      "category": "Roofs",
+      "source_triangles": 301,
+      "triangles": 288
+    },
+    {
+      "name": "COL_Ground_+04_+00",
+      "category": "Ground",
+      "source_triangles": 14,
+      "triangles": 14
+    },
+    {
+      "name": "COL_Buildings_+04_+00",
+      "category": "Buildings",
+      "source_triangles": 3217,
+      "triangles": 2903
+    },
+    {
+      "name": "COL_Roofs_+04_+00",
+      "category": "Roofs",
+      "source_triangles": 1180,
+      "triangles": 1065
+    },
+    {
+      "name": "COL_Ground_+04_+01",
+      "category": "Ground",
+      "source_triangles": 1001,
+      "triangles": 955
+    },
+    {
+      "name": "COL_Buildings_+04_+01",
+      "category": "Buildings",
+      "source_triangles": 5573,
+      "triangles": 5213
+    },
+    {
+      "name": "COL_Roofs_+04_+01",
+      "category": "Roofs",
+      "source_triangles": 589,
+      "triangles": 527
+    },
+    {
+      "name": "COL_Ground_+04_+02",
+      "category": "Ground",
+      "source_triangles": 2948,
+      "triangles": 2816
+    },
+    {
+      "name": "COL_Buildings_+04_+02",
+      "category": "Buildings",
+      "source_triangles": 12100,
+      "triangles": 11608
+    },
+    {
+      "name": "COL_Roofs_+04_+02",
+      "category": "Roofs",
+      "source_triangles": 1940,
+      "triangles": 1812
+    },
+    {
+      "name": "COL_Ground_+04_+03",
+      "category": "Ground",
+      "source_triangles": 16,
+      "triangles": 14
+    },
+    {
+      "name": "COL_Buildings_+04_+03",
+      "category": "Buildings",
+      "source_triangles": 3938,
+      "triangles": 3493
+    },
+    {
+      "name": "COL_Roofs_+04_+03",
+      "category": "Roofs",
+      "source_triangles": 664,
+      "triangles": 580
+    },
+    {
+      "name": "COL_Ground_+04_+04",
+      "category": "Ground",
+      "source_triangles": 5,
+      "triangles": 4
+    },
+    {
+      "name": "COL_Buildings_+04_+04",
+      "category": "Buildings",
+      "source_triangles": 156,
+      "triangles": 156
+    },
+    {
+      "name": "COL_Roofs_+04_+04",
+      "category": "Roofs",
+      "source_triangles": 86,
+      "triangles": 86
+    },
+    {
+      "name": "COL_Buildings_+04_+05",
+      "category": "Buildings",
+      "source_triangles": 9,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_+04_+05",
+      "category": "Roofs",
+      "source_triangles": 18,
+      "triangles": 9
+    },
+    {
+      "name": "COL_Buildings_+04_+06",
+      "category": "Buildings",
+      "source_triangles": 244,
+      "triangles": 240
+    },
+    {
+      "name": "COL_Roofs_+04_+06",
+      "category": "Roofs",
+      "source_triangles": 86,
+      "triangles": 77
+    },
+    {
+      "name": "COL_Buildings_+04_+07",
+      "category": "Buildings",
+      "source_triangles": 1358,
+      "triangles": 1350
+    },
+    {
+      "name": "COL_Roofs_+04_+07",
+      "category": "Roofs",
+      "source_triangles": 192,
+      "triangles": 184
+    },
+    {
+      "name": "COL_Ground_+05_-04",
+      "category": "Ground",
+      "source_triangles": 37,
+      "triangles": 37
+    },
+    {
+      "name": "COL_Buildings_+05_-04",
+      "category": "Buildings",
+      "source_triangles": 214,
+      "triangles": 207
+    },
+    {
+      "name": "COL_Roofs_+05_-04",
+      "category": "Roofs",
+      "source_triangles": 37,
+      "triangles": 36
+    },
+    {
+      "name": "COL_Buildings_+05_-03",
+      "category": "Buildings",
+      "source_triangles": 131,
+      "triangles": 118
+    },
+    {
+      "name": "COL_Roofs_+05_-03",
+      "category": "Roofs",
+      "source_triangles": 43,
+      "triangles": 32
+    },
+    {
+      "name": "COL_Ground_+05_-02",
+      "category": "Ground",
+      "source_triangles": 20,
+      "triangles": 20
+    },
+    {
+      "name": "COL_Buildings_+05_-02",
+      "category": "Buildings",
+      "source_triangles": 774,
+      "triangles": 747
+    },
+    {
+      "name": "COL_Roofs_+05_-02",
+      "category": "Roofs",
+      "source_triangles": 119,
+      "triangles": 111
+    },
+    {
+      "name": "COL_Buildings_+05_-01",
+      "category": "Buildings",
+      "source_triangles": 1673,
+      "triangles": 1594
+    },
+    {
+      "name": "COL_Roofs_+05_-01",
+      "category": "Roofs",
+      "source_triangles": 317,
+      "triangles": 286
+    },
+    {
+      "name": "COL_Buildings_+05_+00",
+      "category": "Buildings",
+      "source_triangles": 1629,
+      "triangles": 1619
+    },
+    {
+      "name": "COL_Roofs_+05_+00",
+      "category": "Roofs",
+      "source_triangles": 299,
+      "triangles": 297
+    },
+    {
+      "name": "COL_Buildings_+05_+01",
+      "category": "Buildings",
+      "source_triangles": 1373,
+      "triangles": 1361
+    },
+    {
+      "name": "COL_Roofs_+05_+01",
+      "category": "Roofs",
+      "source_triangles": 139,
+      "triangles": 139
+    },
+    {
+      "name": "COL_Ground_+05_+02",
+      "category": "Ground",
+      "source_triangles": 89,
+      "triangles": 75
+    },
+    {
+      "name": "COL_Buildings_+05_+02",
+      "category": "Buildings",
+      "source_triangles": 2635,
+      "triangles": 2379
+    },
+    {
+      "name": "COL_Roofs_+05_+02",
+      "category": "Roofs",
+      "source_triangles": 574,
+      "triangles": 571
+    },
+    {
+      "name": "COL_Ground_+05_+03",
+      "category": "Ground",
+      "source_triangles": 160,
+      "triangles": 135
+    },
+    {
+      "name": "COL_Buildings_+05_+03",
+      "category": "Buildings",
+      "source_triangles": 5486,
+      "triangles": 4751
+    },
+    {
+      "name": "COL_Roofs_+05_+03",
+      "category": "Roofs",
+      "source_triangles": 1410,
+      "triangles": 1232
+    },
+    {
+      "name": "COL_Ground_+05_+04",
+      "category": "Ground",
+      "source_triangles": 26,
+      "triangles": 26
+    },
+    {
+      "name": "COL_Buildings_+05_+04",
+      "category": "Buildings",
+      "source_triangles": 811,
+      "triangles": 770
+    },
+    {
+      "name": "COL_Roofs_+05_+04",
+      "category": "Roofs",
+      "source_triangles": 170,
+      "triangles": 168
+    },
+    {
+      "name": "COL_Buildings_+05_+05",
+      "category": "Buildings",
+      "source_triangles": 190,
+      "triangles": 190
+    },
+    {
+      "name": "COL_Roofs_+05_+05",
+      "category": "Roofs",
+      "source_triangles": 91,
+      "triangles": 90
+    },
+    {
+      "name": "COL_Buildings_+05_+06",
+      "category": "Buildings",
+      "source_triangles": 352,
+      "triangles": 346
+    },
+    {
+      "name": "COL_Roofs_+05_+06",
+      "category": "Roofs",
+      "source_triangles": 108,
+      "triangles": 106
+    },
+    {
+      "name": "COL_Buildings_+05_+07",
+      "category": "Buildings",
+      "source_triangles": 1545,
+      "triangles": 1525
+    },
+    {
+      "name": "COL_Roofs_+05_+07",
+      "category": "Roofs",
+      "source_triangles": 266,
+      "triangles": 258
+    },
+    {
+      "name": "COL_Ground_+06_-04",
+      "category": "Ground",
+      "source_triangles": 36,
+      "triangles": 36
+    },
+    {
+      "name": "COL_Buildings_+06_-04",
+      "category": "Buildings",
+      "source_triangles": 48,
+      "triangles": 48
+    },
+    {
+      "name": "COL_Ground_+06_-03",
+      "category": "Ground",
+      "source_triangles": 28,
+      "triangles": 28
+    },
+    {
+      "name": "COL_Buildings_+06_-03",
+      "category": "Buildings",
+      "source_triangles": 36,
+      "triangles": 36
+    },
+    {
+      "name": "COL_Ground_+06_-02",
+      "category": "Ground",
+      "source_triangles": 29,
+      "triangles": 29
+    },
+    {
+      "name": "COL_Buildings_+06_-02",
+      "category": "Buildings",
+      "source_triangles": 1884,
+      "triangles": 1794
+    },
+    {
+      "name": "COL_Roofs_+06_-02",
+      "category": "Roofs",
+      "source_triangles": 290,
+      "triangles": 279
+    },
+    {
+      "name": "COL_Ground_+06_-01",
+      "category": "Ground",
+      "source_triangles": 10,
+      "triangles": 10
+    },
+    {
+      "name": "COL_Buildings_+06_-01",
+      "category": "Buildings",
+      "source_triangles": 2442,
+      "triangles": 2293
+    },
+    {
+      "name": "COL_Roofs_+06_-01",
+      "category": "Roofs",
+      "source_triangles": 402,
+      "triangles": 375
+    },
+    {
+      "name": "COL_Ground_+06_+00",
+      "category": "Ground",
+      "source_triangles": 10,
+      "triangles": 10
+    },
+    {
+      "name": "COL_Buildings_+06_+00",
+      "category": "Buildings",
+      "source_triangles": 24,
+      "triangles": 24
+    },
+    {
+      "name": "COL_Roofs_+06_+00",
+      "category": "Roofs",
+      "source_triangles": 8,
+      "triangles": 8
+    },
+    {
+      "name": "COL_Ground_+06_+01",
+      "category": "Ground",
+      "source_triangles": 20,
+      "triangles": 20
+    },
+    {
+      "name": "COL_Buildings_+06_+01",
+      "category": "Buildings",
+      "source_triangles": 48,
+      "triangles": 48
+    },
+    {
+      "name": "COL_Roofs_+06_+01",
+      "category": "Roofs",
+      "source_triangles": 17,
+      "triangles": 17
+    },
+    {
+      "name": "COL_Ground_+06_+02",
+      "category": "Ground",
+      "source_triangles": 25,
+      "triangles": 24
+    },
+    {
+      "name": "COL_Buildings_+06_+02",
+      "category": "Buildings",
+      "source_triangles": 1686,
+      "triangles": 1407
+    },
+    {
+      "name": "COL_Roofs_+06_+02",
+      "category": "Roofs",
+      "source_triangles": 349,
+      "triangles": 339
+    },
+    {
+      "name": "COL_Ground_+06_+03",
+      "category": "Ground",
+      "source_triangles": 933,
+      "triangles": 812
+    },
+    {
+      "name": "COL_Buildings_+06_+03",
+      "category": "Buildings",
+      "source_triangles": 6789,
+      "triangles": 6067
+    },
+    {
+      "name": "COL_Roofs_+06_+03",
+      "category": "Roofs",
+      "source_triangles": 738,
+      "triangles": 693
+    },
+    {
+      "name": "COL_Ground_+06_+04",
+      "category": "Ground",
+      "source_triangles": 299,
+      "triangles": 299
+    },
+    {
+      "name": "COL_Buildings_+06_+04",
+      "category": "Buildings",
+      "source_triangles": 3238,
+      "triangles": 3095
+    },
+    {
+      "name": "COL_Roofs_+06_+04",
+      "category": "Roofs",
+      "source_triangles": 421,
+      "triangles": 400
+    },
+    {
+      "name": "COL_Buildings_+06_+05",
+      "category": "Buildings",
+      "source_triangles": 61,
+      "triangles": 60
+    },
+    {
+      "name": "COL_Roofs_+06_+05",
+      "category": "Roofs",
+      "source_triangles": 37,
+      "triangles": 35
+    },
+    {
+      "name": "COL_Buildings_+06_+06",
+      "category": "Buildings",
+      "source_triangles": 5,
+      "triangles": 4
+    },
+    {
+      "name": "COL_Roofs_+06_+06",
+      "category": "Roofs",
+      "source_triangles": 20,
+      "triangles": 17
+    },
+    {
+      "name": "COL_Buildings_+06_+07",
+      "category": "Buildings",
+      "source_triangles": 57,
+      "triangles": 57
+    },
+    {
+      "name": "COL_Roofs_+06_+07",
+      "category": "Roofs",
+      "source_triangles": 19,
+      "triangles": 19
+    },
+    {
+      "name": "COL_Buildings_+07_-08",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_+07_-08",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+07_+04",
+      "category": "Buildings",
+      "source_triangles": 24,
+      "triangles": 24
+    },
+    {
+      "name": "COL_Roofs_+07_+04",
+      "category": "Roofs",
+      "source_triangles": 13,
+      "triangles": 13
+    },
+    {
+      "name": "COL_Buildings_+07_+05",
+      "category": "Buildings",
+      "source_triangles": 96,
+      "triangles": 96
+    },
+    {
+      "name": "COL_Roofs_+07_+05",
+      "category": "Roofs",
+      "source_triangles": 58,
+      "triangles": 58
+    },
+    {
+      "name": "COL_Buildings_+07_+06",
+      "category": "Buildings",
+      "source_triangles": 74,
+      "triangles": 74
+    },
+    {
+      "name": "COL_Roofs_+07_+06",
+      "category": "Roofs",
+      "source_triangles": 47,
+      "triangles": 47
+    },
+    {
+      "name": "COL_Buildings_+07_+07",
+      "category": "Buildings",
+      "source_triangles": 37,
+      "triangles": 37
+    },
+    {
+      "name": "COL_Roofs_+07_+07",
+      "category": "Roofs",
+      "source_triangles": 15,
+      "triangles": 15
+    },
+    {
+      "name": "COL_Buildings_+08_-07",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_+08_-07",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+08_-05",
+      "category": "Buildings",
+      "source_triangles": 27,
+      "triangles": 27
+    },
+    {
+      "name": "COL_Roofs_+08_-05",
+      "category": "Roofs",
+      "source_triangles": 5,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Buildings_+08_-04",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_+08_-04",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+08_-03",
+      "category": "Buildings",
+      "source_triangles": 275,
+      "triangles": 261
+    },
+    {
+      "name": "COL_Roofs_+08_-03",
+      "category": "Roofs",
+      "source_triangles": 44,
+      "triangles": 40
+    },
+    {
+      "name": "COL_Buildings_+08_-02",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_+08_-02",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+08_-01",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_+08_-01",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+08_+00",
+      "category": "Buildings",
+      "source_triangles": 137,
+      "triangles": 131
+    },
+    {
+      "name": "COL_Roofs_+08_+00",
+      "category": "Roofs",
+      "source_triangles": 21,
+      "triangles": 19
+    },
+    {
+      "name": "COL_Ground_+08_+02",
+      "category": "Ground",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Buildings_+08_+02",
+      "category": "Buildings",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Ground_+08_+03",
+      "category": "Ground",
+      "source_triangles": 25,
+      "triangles": 25
+    },
+    {
+      "name": "COL_Buildings_+08_+03",
+      "category": "Buildings",
+      "source_triangles": 56,
+      "triangles": 56
+    },
+    {
+      "name": "COL_Roofs_+08_+03",
+      "category": "Roofs",
+      "source_triangles": 34,
+      "triangles": 34
+    },
+    {
+      "name": "COL_Ground_+08_+04",
+      "category": "Ground",
+      "source_triangles": 1,
+      "triangles": 1
+    },
+    {
+      "name": "COL_Buildings_+08_+04",
+      "category": "Buildings",
+      "source_triangles": 104,
+      "triangles": 96
+    },
+    {
+      "name": "COL_Roofs_+08_+04",
+      "category": "Roofs",
+      "source_triangles": 60,
+      "triangles": 53
+    },
+    {
+      "name": "COL_Buildings_+08_+05",
+      "category": "Buildings",
+      "source_triangles": 68,
+      "triangles": 66
+    },
+    {
+      "name": "COL_Roofs_+08_+05",
+      "category": "Roofs",
+      "source_triangles": 42,
+      "triangles": 41
+    },
+    {
+      "name": "COL_Buildings_+08_+06",
+      "category": "Buildings",
+      "source_triangles": 7,
+      "triangles": 7
+    },
+    {
+      "name": "COL_Roofs_+08_+06",
+      "category": "Roofs",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Buildings_+09_-07",
+      "category": "Buildings",
+      "source_triangles": 6,
+      "triangles": 6
+    },
+    {
+      "name": "COL_Roofs_+09_-07",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+09_-06",
+      "category": "Buildings",
+      "source_triangles": 7,
+      "triangles": 7
+    },
+    {
+      "name": "COL_Roofs_+09_-06",
+      "category": "Roofs",
+      "source_triangles": 3,
+      "triangles": 3
+    },
+    {
+      "name": "COL_Buildings_+09_-05",
+      "category": "Buildings",
+      "source_triangles": 237,
+      "triangles": 223
+    },
+    {
+      "name": "COL_Roofs_+09_-05",
+      "category": "Roofs",
+      "source_triangles": 41,
+      "triangles": 37
+    },
+    {
+      "name": "COL_Buildings_+09_+00",
+      "category": "Buildings",
+      "source_triangles": 104,
+      "triangles": 104
+    },
+    {
+      "name": "COL_Roofs_+09_+00",
+      "category": "Roofs",
+      "source_triangles": 19,
+      "triangles": 19
+    },
+    {
+      "name": "COL_Buildings_+09_+01",
+      "category": "Buildings",
+      "source_triangles": 5,
+      "triangles": 5
+    },
+    {
+      "name": "COL_Roofs_+09_+01",
+      "category": "Roofs",
+      "source_triangles": 2,
+      "triangles": 2
+    },
+    {
+      "name": "COL_Buildings_+09_+03",
+      "category": "Buildings",
+      "source_triangles": 154,
+      "triangles": 150
+    },
+    {
+      "name": "COL_Roofs_+09_+03",
+      "category": "Roofs",
+      "source_triangles": 38,
+      "triangles": 38
+    },
+    {
+      "name": "COL_Buildings_+09_+04",
+      "category": "Buildings",
+      "source_triangles": 59,
+      "triangles": 59
+    },
+    {
+      "name": "COL_Roofs_+09_+04",
+      "category": "Roofs",
+      "source_triangles": 29,
+      "triangles": 29
+    },
+    {
+      "name": "COL_Buildings_+09_+05",
+      "category": "Buildings",
+      "source_triangles": 58,
+      "triangles": 58
+    },
+    {
+      "name": "COL_Roofs_+09_+05",
+      "category": "Roofs",
+      "source_triangles": 38,
+      "triangles": 38
+    },
+    {
+      "name": "COL_Buildings_+09_+06",
+      "category": "Buildings",
+      "source_triangles": 25,
+      "triangles": 25
+    },
+    {
+      "name": "COL_Roofs_+09_+06",
+      "category": "Roofs",
+      "source_triangles": 12,
+      "triangles": 12
+    }
+  ],
+  "seconds": 244.55519366264343
+}

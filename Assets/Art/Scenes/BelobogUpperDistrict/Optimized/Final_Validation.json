@@ -1,0 +1,17 @@
+{
+  "missingMaterials": 0,
+  "untexturedSlots": 0,
+  "lodTriangles": [
+    920534,
+    635750,
+    465608
+  ],
+  "lodGroups": 260,
+  "duplicateLodOwners": 0,
+  "meshColliders": 615,
+  "collisionTriangles": 933733,
+  "playerLayer": 6,
+  "groundCollisionEnabled": true,
+  "wallCollisionEnabled": true,
+  "dynamicBuildingBodies": 0
+}

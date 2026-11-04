@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 
 public class GroundCheck : MonoBehaviour
 {
@@ -11,17 +10,21 @@ public class GroundCheck : MonoBehaviour
 
     public bool isGrounded()
     {
-        //Debug.Log("Checking if player is grounded");
+        return TryGetGroundHit(out _);
+    }
 
+    public bool TryGetGroundHit(out RaycastHit hit)
+    {
+        if (GroundCheckPoint == null) { hit = default; return false; }
         return Physics.SphereCast(
             GroundCheckPoint.position,
             GroundCheckRadius,
             Vector3.down,
-            out _,
+            out hit,
             GroundCheckDistance,
             groundLayer,
             QueryTriggerInteraction.Ignore
-        );
+        ) && hit.normal.y >= 0.55f;
     }
 
     void OnDrawGizmos()

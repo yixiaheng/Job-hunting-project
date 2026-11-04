@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    "PASS camera axis initially enabled",
+    "PASS entry visible on main HUD",
+    "PASS camera blocked while character UI open",
+    "PASS main entry suspended during character UI",
+    "PASS UIManager.Back handles character return",
+    "PASS camera and movement restored after Back",
+    "PASS main entry restored after Back",
+    "PASS entry hidden and not raycastable under backpack",
+    "PASS backpack keeps camera locked",
+    "PASS navigation from an existing window accepted",
+    "PASS return preserves source window camera lock",
+    "PASS entry stays hidden when source window restored",
+    "PASS closing final window restores camera and entry",
+    "PASS main entry hidden under party window",
+    "PASS party prefab has no character entry",
+    "PASS party close restores main state",
+    "PASS enter with pre-disabled camera",
+    "PASS pre-disabled camera remains disabled",
+    "PASS repeated enter return leaves no input lock",
+    "PASS time restored"
+  ]
+}

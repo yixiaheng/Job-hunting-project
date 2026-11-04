@@ -21,7 +21,7 @@ public static class CharacterProgressionSetup
     public const string RequestPath = "Temp/CharacterProgressionChecks/request.txt";
     public const string ResultPath = "Temp/CharacterProgressionChecks/result.txt";
     private const string Root = "Assets/Config/Character";
-    private const string Prefabs = "Assets/UI/Character";
+    private const string Prefabs = "Assets/Prefabs/UIPrefabs";
     static CharacterProgressionSetup()
     {
         EditorApplication.update += Poll;
@@ -61,7 +61,8 @@ public static class CharacterProgressionSetup
         if (EditorApplication.isPlayingOrWillChangePlaymode)
             throw new InvalidOperationException("请先退出运行模式。");
         EnsureFolder(Root);
-        EnsureFolder(Prefabs);
+        EnsureFolder(Prefabs + "/Window/Character");
+        EnsureFolder(Prefabs + "/Popup/Character");
         EnsureFolder("Assets/Config/UI/Window");
         EnsureFolder("Assets/Config/UI/Popup");
         var runtime = Asset<PlayerRuntimeConfig>("Assets/Resources/Bootstrap/PlayerRuntimeConfig.asset");
@@ -80,7 +81,7 @@ public static class CharacterProgressionSetup
         BuildPanels();
         BuildScene();
         InstallEntry(UIId.ExplorationHUD);
-        InstallEntry(UIId.BattleParty);
+        RemoveEntry(UIId.BattleParty);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         if (!SceneCatalogEditorUtility.ValidateRuntimeCatalog(true))
@@ -410,7 +411,7 @@ public static class CharacterProgressionSetup
         rect.offsetMin = rect.offsetMax = Vector2.zero;
         var panel = root.AddComponent<CharacterPanel>();
         panel.BuildLayout();
-        var prefab = PrefabUtility.SaveAsPrefabAsset(root, Prefabs + "/CharacterPanel.prefab");
+        var prefab = PrefabUtility.SaveAsPrefabAsset(root, Prefabs + "/Window/Character/CharacterPanel.prefab");
         Object.DestroyImmediate(root);
         Register(UIId.CharacterDetail, prefab.GetComponent<UIPanel>(), UILayer.Window);
         foreach (UIId id in new[]
@@ -429,7 +430,7 @@ public static class CharacterProgressionSetup
             rect.offsetMin = rect.offsetMax = Vector2.zero;
             var popup = root.AddComponent<CharacterPopupPanel>();
             popup.BuildLayout();
-            prefab = PrefabUtility.SaveAsPrefabAsset(root, Prefabs + "/" + id + ".prefab");
+            prefab = PrefabUtility.SaveAsPrefabAsset(root, Prefabs + "/Popup/Character/" + id + ".prefab");
             Object.DestroyImmediate(root);
             Register(id, prefab.GetComponent<UIPanel>(), UILayer.Popup);
         }
@@ -460,6 +461,23 @@ public static class CharacterProgressionSetup
         configs.GetArrayElementAtIndex(configs.arraySize - 1).objectReferenceValue = config;
         data.ApplyModifiedPropertiesWithoutUndo();
         registry.Rebuild();
+    }
+
+    private static void RemoveEntry(UIId id)
+    {
+        var registry = AssetDatabase.LoadAssetAtPath<UIRegistry>("Assets/Config/UI/UIRegistry.asset");
+        registry.Rebuild();
+        if (!registry.TryGet(id, out var config) || config.prefab == null) return;
+        string path = AssetDatabase.GetAssetPath(config.prefab);
+        var root = PrefabUtility.LoadPrefabContents(path);
+        try
+        {
+            var entry = root.transform.Find("CharacterEntry");
+            if (entry == null) return;
+            UnityEngine.Object.DestroyImmediate(entry.gameObject);
+            PrefabUtility.SaveAsPrefabAsset(root, path);
+        }
+        finally { PrefabUtility.UnloadPrefabContents(root); }
     }
 
     private static void InstallEntry(UIId id)

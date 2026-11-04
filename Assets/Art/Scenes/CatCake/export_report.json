@@ -1,0 +1,22 @@
+{
+  "meshes": [
+    {
+      "name": "Body",
+      "vertices": 2687,
+      "polygons": 3780,
+      "dimensions_m": [
+        0.49588897824287415,
+        0.2808521091938019,
+        0.5424237251281738
+      ],
+      "uv_layers": 1
+    }
+  ],
+  "armatures": [
+    {
+      "name": "Art_NPC_Special_RuanMadeCake_00",
+      "bones": 91
+    }
+  ],
+  "textures": 62
+}

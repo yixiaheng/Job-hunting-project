@@ -40,6 +40,18 @@ namespace Game.UI
         private CursorLockMode previousCursorLock;
         private Transform worldRoot;
 
+        public event System.Action PresentationStateChanged;
+
+        /// <summary>Whether a HUD entry may be shown without any foreground window/popup/overlay.</summary>
+        public bool IsUnobstructedHUD(UIHandle handle)
+        {
+            if (!TryGetInstance(handle, out var instance) || instance.Config.layer != UILayer.HUD
+                || instance.Suspended || !openedPanels.Contains(instance)) return false;
+            foreach (var panel in openedPanels)
+                if (!panel.Suspended && panel.Config.layer != UILayer.HUD) return false;
+            return true;
+        }
+
         public UIRegistry Registry => registry;
         public UIRoot Root => root;
         public UIInputCoordinator Input => inputCoordinator;
@@ -497,6 +509,7 @@ namespace Game.UI
             RefreshCoveredState();
             inputCoordinator.Refresh(openedPanels);
             RefreshCursorState();
+            PresentationStateChanged?.Invoke();
         }
 
         private void RefreshCursorState()

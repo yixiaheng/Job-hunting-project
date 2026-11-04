@@ -61,7 +61,12 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = rb.linearVelocity;
         Vector3 targetVelocity = direction * speed;
-        rb.linearVelocity = new Vector3(targetVelocity.x, velocity.y, targetVelocity.z);
+        if (direction != Vector3.zero && velocity.y < 0.5f && groundCheck.TryGetGroundHit(out RaycastHit groundHit))
+        {
+            targetVelocity = Vector3.ProjectOnPlane(targetVelocity, groundHit.normal).normalized * speed;
+            rb.linearVelocity = targetVelocity;
+        }
+        else rb.linearVelocity = new Vector3(targetVelocity.x, velocity.y, targetVelocity.z);
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);

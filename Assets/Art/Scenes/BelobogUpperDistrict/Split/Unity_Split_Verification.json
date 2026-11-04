@@ -1,0 +1,37 @@
+{
+  "fbx": "Assets/Art/Scenes/BelobogUpperDistrict/Split/BelobogUpperDistrict_Split.fbx",
+  "prefab": "Assets/Art/Scenes/BelobogUpperDistrict/Split/BelobogUpperDistrict_Split.prefab",
+  "meshes": 1886,
+  "triangles": 1206565,
+  "originalImportedTriangles": 1206565,
+  "vertices": 1943838,
+  "materialRemaps": 239,
+  "materialSlots": 6094,
+  "missingMaterials": 0,
+  "wrongMaterials": 0,
+  "uvMissing": 0,
+  "normalMissing": 0,
+  "colliders": 0,
+  "skinnedMeshes": 0,
+  "localBoundsCenter": [
+    -283.339355,
+    222.957,
+    252.385132
+  ],
+  "localBoundsSize": [
+    3862.71387,
+    764.8628,
+    4201.45947
+  ],
+  "sourceGuid": "5a381e013891c344fbe57974b032ad9a",
+  "placed": [
+    {
+      "name": "BelobogUpperDistrict_Split",
+      "oldRetainedInactive": "BelobogUpperDistrict",
+      "centerError": 0.000305175781,
+      "sizeError": 0.000610351563,
+      "instanceId": -424260
+    }
+  ],
+  "sceneSaved": false
+}

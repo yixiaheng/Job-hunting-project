@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.UI;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -94,8 +93,8 @@ namespace Game.Characters
                 Hold(camera);
             foreach (AudioListener listener in FindObjectsByType<AudioListener>(FindObjectsSortMode.None))
                 Hold(listener);
-            foreach (CinemachineInputAxisController axis in FindObjectsByType<CinemachineInputAxisController>(FindObjectsSortMode.None))
-                Hold(axis);
+            // PlayerInputHandler owns camera input restrictions and preserves the original enabled state.
+            // Do not also disable the axis here: that would be captured as its restore state.
             foreach (PlayerInputHandler player in FindObjectsByType<PlayerInputHandler>(FindObjectsSortMode.None))
             {
                 players.Add((player, player.inputActions.asset.enabled));

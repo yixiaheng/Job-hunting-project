@@ -1,0 +1,36 @@
+{
+  "blender_version": "3.6.23",
+  "models": [
+    {
+      "name": "BelobogUpperDistrict",
+      "fbx_version": 7400,
+      "vertices": 1850657,
+      "polygons": 1206598,
+      "uv_layers": 1,
+      "materials": 239,
+      "texture_nodes": 264,
+      "embedded_images": 239,
+      "embedded_image_bytes": 125460577,
+      "blend_loaded": true,
+      "used_image_nodes": 239,
+      "missing_image_paths": [],
+      "fbx_bytes": 180552444
+    },
+    {
+      "name": "Tramcar",
+      "fbx_version": 7400,
+      "vertices": 22370,
+      "polygons": 17977,
+      "uv_layers": 1,
+      "materials": 5,
+      "texture_nodes": 5,
+      "embedded_images": 5,
+      "embedded_image_bytes": 2689309,
+      "blend_loaded": true,
+      "used_image_nodes": 5,
+      "missing_image_paths": [],
+      "fbx_bytes": 3485980
+    }
+  ],
+  "unity_runtime_tested": false
+}

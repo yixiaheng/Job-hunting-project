@@ -1,0 +1,1309 @@
+fileFormatVersion: 2
+guid: b6df8b51563905543880babd4f01cf98
+ModelImporter:
+  serializedVersion: 24300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0000
+    second: {fileID: 2100000, guid: 387fb41b95b010c46ad38c5b38c6bfe1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0001
+    second: {fileID: 2100000, guid: 8e072ece421532c4fb2adc0dd97c9a8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0002
+    second: {fileID: 2100000, guid: 63f1398108986b94fa9cab9dc4a1c006, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0003
+    second: {fileID: 2100000, guid: be9eb0c7a024fb14480a8ffc1986fb77, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0004
+    second: {fileID: 2100000, guid: 610264d689abf904ea7dfaf6caa3b2e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0005
+    second: {fileID: 2100000, guid: f29958d3daf00094ba997a7b06aa2865, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0006
+    second: {fileID: 2100000, guid: 5b721d02aac39624e9598d39fa46f18c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0007
+    second: {fileID: 2100000, guid: ebb7251c1c14f4540b4ec1ac372c19e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0008
+    second: {fileID: 2100000, guid: 6f6ba4ff29eaa194ea5134c6ace735af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0009
+    second: {fileID: 2100000, guid: 199373ffd52daa0459306b5bfdf18f43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0010
+    second: {fileID: 2100000, guid: e1d6356c4a5c8f54da3b353203e671f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0011
+    second: {fileID: 2100000, guid: 0af8c39f4cb3e014e88e2a854397589e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0012
+    second: {fileID: 2100000, guid: fb575777577645e4dbaedf1a3f18529f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0013
+    second: {fileID: 2100000, guid: a1b8ccfef309c33429536f86de25230f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0014
+    second: {fileID: 2100000, guid: 660903c2cf8c0dd40a9590509d11139c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0015
+    second: {fileID: 2100000, guid: 1948c433191c68e4f8b21f3317dc3a92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0016
+    second: {fileID: 2100000, guid: ecfdd42d0c2e1af4d93b0f3c1d197028, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0017
+    second: {fileID: 2100000, guid: d101481e3e2ca104cbf34a23aeb0397f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0018
+    second: {fileID: 2100000, guid: 3cfb3c26c7daec347b30c977d7d2792a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0019
+    second: {fileID: 2100000, guid: 274eb8b69c2c4e94bbcf6ce871668bd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0020
+    second: {fileID: 2100000, guid: 072c254a6c0fb434c96e68a1e1e4f704, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0021
+    second: {fileID: 2100000, guid: d3d90153ab0736340a94ba9907b438b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0022
+    second: {fileID: 2100000, guid: b2f966ca56e38994e93903cd0f41be30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0023
+    second: {fileID: 2100000, guid: bc5ecc075a867204bbf86b95ba100106, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0024
+    second: {fileID: 2100000, guid: 91128a662c8d893419a7406b0cf00766, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0025
+    second: {fileID: 2100000, guid: f7d4596867aca69449291ede9d5bdf15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0026
+    second: {fileID: 2100000, guid: c8cc811fd1bc13c499884cb9d00fbda9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0027
+    second: {fileID: 2100000, guid: 9c8407eb5d1ba1d4ca1d905069693a1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0028
+    second: {fileID: 2100000, guid: 550de1a2b5ce45b40bdc9e2d5b399ebf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0029
+    second: {fileID: 2100000, guid: 466408ff33129d342946d97a9726fd79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0030
+    second: {fileID: 2100000, guid: f190129a762c0b34ea2bbdcaa5467dc5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0031
+    second: {fileID: 2100000, guid: 0b8cf81f8ed0324438db65ad1c2b84ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0032
+    second: {fileID: 2100000, guid: fd428153452682148950b1a7d5465460, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0033
+    second: {fileID: 2100000, guid: 251bcc9243fceff4789e91e70dd06bd7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0034
+    second: {fileID: 2100000, guid: 740eec8a6c8e4244c8cd7bb59067b6da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0035
+    second: {fileID: 2100000, guid: 7d4692e8e5474ff4d99f1b86f0fe016a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0036
+    second: {fileID: 2100000, guid: 07bd78184be54a249a703bbe49019d70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0037
+    second: {fileID: 2100000, guid: eac36036d836e054981bf707f51cd145, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0038
+    second: {fileID: 2100000, guid: 8b027c1aee324ce44be051c346f38685, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0039
+    second: {fileID: 2100000, guid: 43b4dc825fba6a148a464fdf4433f71b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0040
+    second: {fileID: 2100000, guid: 126d9ce37d3b01d46889e1065a7a020e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0041
+    second: {fileID: 2100000, guid: b3eb996afde851d49a2eb311d1aba5d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0042
+    second: {fileID: 2100000, guid: 7841ff3784f4be541a6d95f0c5b69f7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0043
+    second: {fileID: 2100000, guid: 04a9b018f34cfc34595155527e50e9d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0044
+    second: {fileID: 2100000, guid: fc2e2bab31ca8e241ba5c9e12901dd8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0045
+    second: {fileID: 2100000, guid: 1f748c9876b1b2348ba96f23a9ff068e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0046
+    second: {fileID: 2100000, guid: 0dc885d32b522764797c42b2b5cabd96, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0047
+    second: {fileID: 2100000, guid: 804c686d19380d242809f94d7ec541f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0048
+    second: {fileID: 2100000, guid: 865cb7c5d6bd0684c8373e1383639484, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0049
+    second: {fileID: 2100000, guid: 1f262465bf5dbf344ad6236ab5373823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0050
+    second: {fileID: 2100000, guid: 8d55586a9df3b3843bb1ff287a256273, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0051
+    second: {fileID: 2100000, guid: 1f244df4ff4889b4cb61556b0ba41b58, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0052
+    second: {fileID: 2100000, guid: a81138f47781b534b9d459814fe994fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0053
+    second: {fileID: 2100000, guid: 951c98536c73fa64d9f18feb33e90378, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0054
+    second: {fileID: 2100000, guid: a73d9bd6671a9fa4ca1986d86d5e589a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0055
+    second: {fileID: 2100000, guid: 2a2ad185ff93766489658e39a0f8f82f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0056
+    second: {fileID: 2100000, guid: 4517ad496956c23499ecd05c969a2a01, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0057
+    second: {fileID: 2100000, guid: 9192d6936fd8f8a40b11bab6dbd3d7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0058
+    second: {fileID: 2100000, guid: df69809ef6e7aaf4f90eba717c219b79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0059
+    second: {fileID: 2100000, guid: dcb310f6035cd5d4c8856a5df6ca63d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0060
+    second: {fileID: 2100000, guid: 8b6e4f518f5c13c4eb304735ed61427a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0061
+    second: {fileID: 2100000, guid: 851aac3837e433c43829ae86bbe94f5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0062
+    second: {fileID: 2100000, guid: c6d1355eb8ef98143b25c244b31bede8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0063
+    second: {fileID: 2100000, guid: dfcc09947e07cd94a8fbd698542f6906, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0064
+    second: {fileID: 2100000, guid: 6966d18659668db45be1e028f4b290a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0065
+    second: {fileID: 2100000, guid: 5efca97d9fd513b4cb3386db075b2797, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0066
+    second: {fileID: 2100000, guid: acdaf0cf03cb34b4dba21db73336f23c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0067
+    second: {fileID: 2100000, guid: b8cfd11ddb87c0b419751226b7a68e7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0068
+    second: {fileID: 2100000, guid: e485ccc2b8fd3ea43a6fde863166289b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0069
+    second: {fileID: 2100000, guid: 8906d4d6585054d4aace2ee95482dde6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0070
+    second: {fileID: 2100000, guid: 97a87113068c9e04895842ca766f9fa8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0071
+    second: {fileID: 2100000, guid: 0dec3976d79ed4142b6e258d97117fa3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0072
+    second: {fileID: 2100000, guid: 6daec1630e1a5554d80ef08734f9bc7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0073
+    second: {fileID: 2100000, guid: 864c77fbb633b534193e0f5f578b295c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0074
+    second: {fileID: 2100000, guid: beda00bc460ece242acf4c7d96c0b9a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0075
+    second: {fileID: 2100000, guid: e5d98f2052cd8d144952df0505d07deb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0076
+    second: {fileID: 2100000, guid: 9d9f7113c4b6dd5469e0708221a338e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0077
+    second: {fileID: 2100000, guid: 465072a1cf19e334a8002a1e0f6b85ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0078
+    second: {fileID: 2100000, guid: d3b80149f125ad949982097f6c0610c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0079
+    second: {fileID: 2100000, guid: def87812b03a36e48b10ceb9a505f8f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0080
+    second: {fileID: 2100000, guid: bf68d03fc8db80748a3f000b818b1eae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0081
+    second: {fileID: 2100000, guid: a83ffc612416e2d4a9e0e56fb2c02a73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0082
+    second: {fileID: 2100000, guid: 0b8457a3b2776eb4e99cd344e80780d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0083
+    second: {fileID: 2100000, guid: ae0e26e26ec6b2b4ab80dfe31f9ceeb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0084
+    second: {fileID: 2100000, guid: db722a2472e3e7642a5ac978ab0bf3a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0085
+    second: {fileID: 2100000, guid: bae8227213e072d46819605476b7b269, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0086
+    second: {fileID: 2100000, guid: 47c53381a4987e14ca15ab642c8c8444, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0087
+    second: {fileID: 2100000, guid: e9aa368df3986ca4a95dd52247ad07bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0088
+    second: {fileID: 2100000, guid: 0924723cc6a9f1a4e83b0ec88b2846c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0089
+    second: {fileID: 2100000, guid: 51532da59746db94095924dfa43d9bda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0090
+    second: {fileID: 2100000, guid: bbe5cfa5d51f82d4ab6e1801f9b6c038, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0091
+    second: {fileID: 2100000, guid: a86b1104694a31343b1be0574b14b915, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0092
+    second: {fileID: 2100000, guid: 29fab8991041aed41bb80e3d85272e6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0093
+    second: {fileID: 2100000, guid: 0f75218c86a5c47469d03037bb4e0a18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0094
+    second: {fileID: 2100000, guid: bf90ff19465f48446b9c088530c4eb50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0095
+    second: {fileID: 2100000, guid: b2c20e7bae6b0a64398795788331045f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0096
+    second: {fileID: 2100000, guid: 0173a1645c705f4408a426ddeb4d6135, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0097
+    second: {fileID: 2100000, guid: 01cd04009801ad949b0c3185165877e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0098
+    second: {fileID: 2100000, guid: 73c3d991552c44242960ab2143907bc8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0099
+    second: {fileID: 2100000, guid: 107b9fd8c8a62f74b855fd45fa0cafe2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0100
+    second: {fileID: 2100000, guid: ca7e55a4013ac9d43b098c753a2d495a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0101
+    second: {fileID: 2100000, guid: 52977e4eddbd7814fbb3ee3776b6570c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0102
+    second: {fileID: 2100000, guid: c61faecd14498d64283fc3e40e57f469, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0103
+    second: {fileID: 2100000, guid: 2aa1ab11547247840b9e8cb63f688447, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0104
+    second: {fileID: 2100000, guid: 7559224879e16874aade3451d38b9904, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0105
+    second: {fileID: 2100000, guid: 9206c20c90739af43872c40096581453, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0106
+    second: {fileID: 2100000, guid: ce195aa7f48958b43ab0bdf74875a282, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0107
+    second: {fileID: 2100000, guid: b3ea3df3dacaddb49ae6a924821d71a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0108
+    second: {fileID: 2100000, guid: 7f1da4df3f73a8141871cacd902831b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0109
+    second: {fileID: 2100000, guid: 8ace2798a9cda8c41a8267af090802ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0110
+    second: {fileID: 2100000, guid: 6fe225828666b784a944683e9a22e3bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0111
+    second: {fileID: 2100000, guid: de7ad3eb55b0bb94485f9dab6feb884f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0112
+    second: {fileID: 2100000, guid: 0a5ea39ef38e53b43aafa3cc83b60cd7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0113
+    second: {fileID: 2100000, guid: 79d3fd0d217989f4682fdac2322202b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0114
+    second: {fileID: 2100000, guid: 6e477a946ad9a4e41a87cdba0f2ed4e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0115
+    second: {fileID: 2100000, guid: 0572ce2f14128bc469c2e4e597f4a0a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0116
+    second: {fileID: 2100000, guid: d891d9a6e0f5c4d4a9b87bdc7b987f9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0117
+    second: {fileID: 2100000, guid: ab961ac203e701c489d62d3b3490a69f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0118
+    second: {fileID: 2100000, guid: 7229e6f359178934cbaf72bf69ea9ca7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0119
+    second: {fileID: 2100000, guid: 462e7ffc415955a4c85fc591ba8f18f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0120
+    second: {fileID: 2100000, guid: b4ddad538be20c645b3103b5c1d77567, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0121
+    second: {fileID: 2100000, guid: e4553a231801760449464359ee7e9c7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0122
+    second: {fileID: 2100000, guid: de8518f8389a3ad428bd52e520f9790d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0123
+    second: {fileID: 2100000, guid: 948ea0bd83e4e75499521f7183f7de4c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0124
+    second: {fileID: 2100000, guid: b5f3bef69a1f0b74d94ba82b2f2159c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0125
+    second: {fileID: 2100000, guid: c8a1165f64317d248aef47bf5adc378f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0126
+    second: {fileID: 2100000, guid: 8e074216beedef6429acaeea4e02a8ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0127
+    second: {fileID: 2100000, guid: f907ef736b82faf4c88fa1a8f75bd5b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0128
+    second: {fileID: 2100000, guid: cd4456f8d1180bb4b99214109280906e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0129
+    second: {fileID: 2100000, guid: edbdec0b28ce27d4282b26ce9135c73f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0130
+    second: {fileID: 2100000, guid: ad69f60921aadc24dac387c7fe413b71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0131
+    second: {fileID: 2100000, guid: 5a6315f779b2fbd4bbeeb879f4ab7026, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0132
+    second: {fileID: 2100000, guid: 97a25c4959ef758438a66f20205a7951, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0133
+    second: {fileID: 2100000, guid: ac152580742856c49b88f3c5dc5e7de6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0134
+    second: {fileID: 2100000, guid: 252e5980276ee5f49b9a0a44f0720762, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0135
+    second: {fileID: 2100000, guid: a2dd2eda2c74f76418e7362987017ed4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0136
+    second: {fileID: 2100000, guid: e6c406fe8a710784aba4bf388aa4bcc9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0137
+    second: {fileID: 2100000, guid: 4d9bb59cf39ce2e48a5579b3d6a49d3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0138
+    second: {fileID: 2100000, guid: b888eb888618b4b4eb19e9a4169838d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0139
+    second: {fileID: 2100000, guid: e222c3aae7bca194183a7c7fba27bacf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0140
+    second: {fileID: 2100000, guid: 6da99a8bb7b4031429d798f1c17110fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0141
+    second: {fileID: 2100000, guid: 09b36fa67610551499cf61da90e6bba0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0142
+    second: {fileID: 2100000, guid: bdfd439e5efeaa04a86558809def2f33, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0143
+    second: {fileID: 2100000, guid: dd072d9df24a81f4f9930fccda4bcae3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0144
+    second: {fileID: 2100000, guid: 21b00cf3a2b2aea45a1a4f6372bcbd2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0145
+    second: {fileID: 2100000, guid: ae176e00ec7d8fb4e894b845cc4d5696, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0146
+    second: {fileID: 2100000, guid: 9a791c9e8fd016c46a872af199c657e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0147
+    second: {fileID: 2100000, guid: 5c0a232a432cd8044b9af128d51b7b4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0148
+    second: {fileID: 2100000, guid: 7b02ce25e3102a84ba8415bbe09e7285, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0149
+    second: {fileID: 2100000, guid: 5f9c5160469ffd1459992fa86c84b55a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0150
+    second: {fileID: 2100000, guid: 293d7681c7444fc49a2f86dc60dd93c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0151
+    second: {fileID: 2100000, guid: 0dc73afdcfd748d44b862dfb9aeb0ffe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0152
+    second: {fileID: 2100000, guid: 01ab17710cf03504ea21a52f9754be8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0153
+    second: {fileID: 2100000, guid: ed7fdcff1af81eb458244c5df67e9d0d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0154
+    second: {fileID: 2100000, guid: 85ba06362902e1f418fab0fb5ec3901e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0155
+    second: {fileID: 2100000, guid: 0a0288927c26ca1418b486e48012b445, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0156
+    second: {fileID: 2100000, guid: f6891dacca668cc479dc9b4ae8334045, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0157
+    second: {fileID: 2100000, guid: 002e8d354318e6444aa1c14e320dbed0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0158
+    second: {fileID: 2100000, guid: ae475b4ca73f4f441ac998a14742df5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0159
+    second: {fileID: 2100000, guid: 20876330f81d67e45953d407fcbd0b67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0160
+    second: {fileID: 2100000, guid: 27fc577c339ef5448b3643a274d9f62f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0161
+    second: {fileID: 2100000, guid: c7a7d1c683e86e045a9a13e27d11a339, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0162
+    second: {fileID: 2100000, guid: 54dbbac51bfb10741bd2f8de79fa779d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0163
+    second: {fileID: 2100000, guid: 0cbd190ece72c2d4e9c2d9fc55c132ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0164
+    second: {fileID: 2100000, guid: 73a159a0d800e7f408895cef7797c48a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0165
+    second: {fileID: 2100000, guid: a5386908787f19846ac759004ce4e57e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0166
+    second: {fileID: 2100000, guid: 8afa26baa13232c4eb69df71ebe6047f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0167
+    second: {fileID: 2100000, guid: 113cb6b7d4e09954b97e8cdadd5b066f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0168
+    second: {fileID: 2100000, guid: b2631b264678c1a488a2d1565a803106, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0169
+    second: {fileID: 2100000, guid: f91796cbb93c7c948b8d3c868bbd5fd9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0170
+    second: {fileID: 2100000, guid: 72247b4beecef2b4985e8e1f49ea3d2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0171
+    second: {fileID: 2100000, guid: 5aa2d29eba9e8564b88b21fdb82e4ae9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0172
+    second: {fileID: 2100000, guid: 51a8711a790420b49a918b158e456415, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0173
+    second: {fileID: 2100000, guid: 8af332d5e3542c74092050aebc090755, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0174
+    second: {fileID: 2100000, guid: 12778d99587ac9048be9615147320851, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0175
+    second: {fileID: 2100000, guid: d0ea0061bd948774380e246e5c4861cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0176
+    second: {fileID: 2100000, guid: ed85011342068c248b6dfe107fa70728, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0177
+    second: {fileID: 2100000, guid: 91af9f87342523346a757df7d2f990b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0178
+    second: {fileID: 2100000, guid: c7f1c76f1551b8e4382c0a1811dd09a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0179
+    second: {fileID: 2100000, guid: 42cd1221ef8ab1e4bb54421721faadcb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0180
+    second: {fileID: 2100000, guid: df354deea69bfb14f95744991981f2d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0181
+    second: {fileID: 2100000, guid: 181160a5b40708e4b9219d36259ca700, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0182
+    second: {fileID: 2100000, guid: 0b909a5aad08c6e4f95ea1317b0ec5e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0183
+    second: {fileID: 2100000, guid: 15d7dc15549edd447b0b8914c50d7abb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0184
+    second: {fileID: 2100000, guid: a2f4c930745fbc54d89122ac97963296, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0185
+    second: {fileID: 2100000, guid: 3e2bf15d0045fc04c81e3717aeefa0df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0186
+    second: {fileID: 2100000, guid: ff6bf2728efdf1a4ab2f1e48b535d08f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0187
+    second: {fileID: 2100000, guid: 2a1b04831713e474bae2aa6c5db9d6d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0188
+    second: {fileID: 2100000, guid: 7110bba0b59bf4548a3342575e5e2d1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0189
+    second: {fileID: 2100000, guid: 328c504d6acdfaa499d3ec22c8788bd0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0190
+    second: {fileID: 2100000, guid: 4b84a15e36d7eb54e9651f35c3907f13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0191
+    second: {fileID: 2100000, guid: aadfec027a9ea2b4792106e0be4eb5da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0192
+    second: {fileID: 2100000, guid: 23cd4bb762c046a4b89c2a967f4343a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0193
+    second: {fileID: 2100000, guid: ad6570363adead14d95cc84ba3e493ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0194
+    second: {fileID: 2100000, guid: ad3597f5ebde15c489b4ebc3ac014345, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0195
+    second: {fileID: 2100000, guid: de3761a80234ba74ca193a74f994055e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0196
+    second: {fileID: 2100000, guid: fdc3ccee774935044a3e5180fc4cd119, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0197
+    second: {fileID: 2100000, guid: 985a60768f4ffc440bafd908631be4b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0198
+    second: {fileID: 2100000, guid: 7d20992126f78e64685e54c4dcb8b6ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0199
+    second: {fileID: 2100000, guid: 604da436194dc3b4998829af5312bb1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0200
+    second: {fileID: 2100000, guid: b3e8f2ba8b4f43149a8d695aeb759171, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0201
+    second: {fileID: 2100000, guid: 0a8d86916230746459e4afee2a22a32f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0202
+    second: {fileID: 2100000, guid: c21d54771ea6c5343b4e9679c25eb651, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0203
+    second: {fileID: 2100000, guid: ef09e81610b4dda4899aaf55235581e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0204
+    second: {fileID: 2100000, guid: ae191d6e8600c5f4dbca0d9a5b57ac91, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0205
+    second: {fileID: 2100000, guid: 788fa4c5f94057f41bd038c7518f8ee1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0206
+    second: {fileID: 2100000, guid: d4a177341b57f1345b7715bf9d937444, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0207
+    second: {fileID: 2100000, guid: 60b55b25e831a6940a141902747c17c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0208
+    second: {fileID: 2100000, guid: e89d303b2fca1984fbb43b0697d6eec7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0209
+    second: {fileID: 2100000, guid: 1aaad9f6856351c4b8b0752cbf47ef3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0210
+    second: {fileID: 2100000, guid: ac1537178574a554c880701baf8531ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0211
+    second: {fileID: 2100000, guid: 91fab2db43f083042b9278e44b51cb63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0212
+    second: {fileID: 2100000, guid: d0eb2fc008f950841840df18f2f89daa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0213
+    second: {fileID: 2100000, guid: ce5c69d7e34d8364c9374456ff61811a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0214
+    second: {fileID: 2100000, guid: a660aba6132241340ba3d99af02f33d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0215
+    second: {fileID: 2100000, guid: 343927e5432dc294e9af536dbb60aefb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0216
+    second: {fileID: 2100000, guid: 62c254b30651bac4997d8620fcfdce73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0217
+    second: {fileID: 2100000, guid: 9291ec06b41873e489e975a1f5034401, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0218
+    second: {fileID: 2100000, guid: f1870dc0514dafb43a9cff6453841ee6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0219
+    second: {fileID: 2100000, guid: 4aa13fae73672634882f8a0be50f2d4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0220
+    second: {fileID: 2100000, guid: c312d075f3e411a4fa25df948da3065a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0221
+    second: {fileID: 2100000, guid: 281dc2e3c4dc66f418443c4055d13f57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0222
+    second: {fileID: 2100000, guid: bfce777de76d9274a91da240248e0b40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0223
+    second: {fileID: 2100000, guid: a7a8c8907dafad94aa19078493b07a2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0224
+    second: {fileID: 2100000, guid: 58359ce76ca30974b9a24371bdf18582, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0225
+    second: {fileID: 2100000, guid: 017468060b25ffc4884a27991eca8d1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0226
+    second: {fileID: 2100000, guid: 8b7e27a829d0db0439d48c388294bcee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0227
+    second: {fileID: 2100000, guid: 22b71e3835bb4454dae9156c49bf073d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0228
+    second: {fileID: 2100000, guid: 3eedaed6ac7063c46b113acdc85c18ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0229
+    second: {fileID: 2100000, guid: 4f58d7f64195cb049bdca8b04d3857c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0230
+    second: {fileID: 2100000, guid: c1ca2aaa9d2272549bf4c4b60c215bd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0231
+    second: {fileID: 2100000, guid: af9a4ec245bb20d43b5289d627a1a433, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0232
+    second: {fileID: 2100000, guid: d2441e798dcb52247bda79be55d2a4c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0233
+    second: {fileID: 2100000, guid: ea090247bd6a4fa4194998aa61b42db6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0234
+    second: {fileID: 2100000, guid: 41059456d2012ef4695e5ad679f599a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0235
+    second: {fileID: 2100000, guid: 6ed310e69e7f65b41aecd22f761dcf77, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0236
+    second: {fileID: 2100000, guid: 668aaaa26e2edb94c9c0b978a5887107, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0237
+    second: {fileID: 2100000, guid: 020c057b8ff65c94aa18579fc20e95b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BelobogUpperDistrict_M0238
+    second: {fileID: 2100000, guid: f7681038ab8d6f04d8d49d72bd443887, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+    searchTexturesGlobally: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages:
+    - 0.25
+    - 0.125
+    - 0.01
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 0
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
