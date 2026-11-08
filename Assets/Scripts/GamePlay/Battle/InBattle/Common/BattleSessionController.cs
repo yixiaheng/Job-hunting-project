@@ -88,7 +88,7 @@ public sealed class BattleSessionController : MonoBehaviour
 
         endedBattleId = message.BattleId;
         resultHandle = uiManager.Open(UIId.BattleResult,
-            new BattleResultUIContext(message.BattleId, message.Result, message.TurnCount));
+            new BattleResultUIContext(message.BattleId, message.Result, message.TurnCount), ownerSceneHandle: gameObject.scene.handle);
     }
 
     private bool AcceptRequest(Guid battleId)
@@ -146,30 +146,21 @@ public sealed class BattleSessionController : MonoBehaviour
             return;
         }
 
-        if (!scenes.CanLoad(target, out string error))
-        {
-            Debug.LogError(error, this);
-            SetResultBusy(false);
-            return;
-        }
-
         BattleSession previous = BattleSessionContext.Current;
+        BattleLaunchData pending = BattleLaunchContext.Peek();
         navigating = true;
         SetResultBusy(true);
-        try
+        var operation = scenes.LoadAsync(target, new SceneLoadOptions
         {
-            prepare();
-            if (!scenes.TryLoad(target, out error))
-                throw new InvalidOperationException(error);
-        }
-        catch (Exception exception)
+            Prepare = prepare,
+            Rollback = () => { BattleLaunchContext.Restore(pending); BattleSessionContext.Restore(previous); }
+        });
+        operation.OnCompleted(result =>
         {
-            BattleLaunchContext.Clear();
-            BattleSessionContext.Restore(previous);
-            navigating = false;
-            SetResultBusy(false);
-            Debug.LogException(exception, this);
-        }
+            if (result.Succeeded) return;
+            if (this != null) { navigating = false; SetResultBusy(false); }
+            Debug.LogError(result.Error);
+        });
     }
 
     private void SetResultBusy(bool value)

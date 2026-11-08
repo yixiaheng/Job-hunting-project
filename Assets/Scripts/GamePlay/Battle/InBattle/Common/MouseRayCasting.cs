@@ -15,7 +15,8 @@ public class MouseRayCasting : MonoBehaviour
 
     void Update()
     {
-        if (Game.Characters.CharacterSceneNavigator.IsActive) return;
+        var scenes = GameSceneManager.Instance;
+        if (scenes != null && (scenes.IsLoading || scenes.IsSceneSuspended(gameObject.scene))) return;
         if (Mouse.current == null) return;
         if (!Mouse.current.leftButton.wasPressedThisFrame) return;
         if (IsPointerOverUI()) return;

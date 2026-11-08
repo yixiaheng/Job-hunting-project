@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneCatalog
   entries:
   - id: 0
-    scene: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+    scene: {fileID: 102900000, guid: 07430a34e0c973749a84bb6620d5e61c, type: 3}
     scenePath: Assets/Scenes/SampleScene.unity
   - id: 1
     scene: {fileID: 102900000, guid: ee2a4b0013b265f4b8a82622489b0146, type: 3}

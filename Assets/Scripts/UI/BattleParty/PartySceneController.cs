@@ -5,7 +5,7 @@ using Game;
 using Game.UI;
 using UnityEngine;
 
-public sealed class PartySceneController : MonoBehaviour
+public sealed class PartySceneController : MonoBehaviour, ISceneEntryPoint
 {
     [SerializeField] private BattlePartyManager partyManager;
     [SerializeField] private SceneId battleScene = SceneId.Battle;
@@ -18,20 +18,26 @@ public sealed class PartySceneController : MonoBehaviour
     private IDisposable formationSubscription;
     private UIManager uiManager;
     private UIHandle partyHandle;
-    private bool started;
     private bool isStartingBattle;
     private bool restoredReformation;
+    private SceneVisitHandle visit;
+    public ISceneVisitLifecycle VisitLifecycle => new ScenePresentationLifecycle<PartySceneController>();
 
     private void Start()
     {
-        started = true;
-        OpenParty();
+        if (GameSceneManager.Instance != null && GameSceneManager.Instance.IsScenePending(gameObject.scene)) return;
+        PartySceneNavigator.AdoptDirectScene(gameObject.scene);
     }
 
-    private void OnEnable()
+    public System.Collections.IEnumerator InitializeScene(SceneVisitHandle handle, object context)
     {
-        if (started)
-            OpenParty();
+        Game.Characters.PlayerRuntime.EnsureCreated();
+        if (!Game.Characters.PlayerRuntime.Instance.IsReady)
+            throw new InvalidOperationException(Game.Characters.PlayerRuntime.Instance.LastMessage);
+        visit = handle;
+        ConfigurePresentation();
+        OpenParty();
+        yield return ScenePresentationLifecycle<PartySceneController>.WaitForPanel(uiManager, partyHandle);
     }
 
     private void OpenParty()
@@ -39,8 +45,7 @@ public sealed class PartySceneController : MonoBehaviour
         uiManager = UIManager.Instance;
         if (partyManager == null || uiManager == null)
         {
-            Debug.LogError("PartySceneController requires a scene party manager and the global UI runtime.", this);
-            return;
+            throw new InvalidOperationException("PartySceneController requires a scene party manager and the global UI runtime.");
         }
 
         formationSubscription?.Dispose();
@@ -53,7 +58,8 @@ public sealed class PartySceneController : MonoBehaviour
                 Debug.LogWarning("The previous battle party contains unavailable characters. Select a valid party to continue.", this);
         }
         RefreshFormation();
-        partyHandle = uiManager.Open(UIId.BattleParty, new BattlePartyUIContext(partyManager, StartBattle));
+        partyHandle = uiManager.Open(UIId.BattleParty, new BattlePartyUIContext(partyManager, StartBattle, PartySceneNavigator.Return),
+            ownerSceneHandle: gameObject.scene.handle);
     }
 
     public void StartBattle()
@@ -78,26 +84,43 @@ public sealed class PartySceneController : MonoBehaviour
             return;
         }
 
-        if (!scenes.CanLoad(targetScene, out error))
-        {
-            Debug.LogError(error, this);
-            return;
-        }
-
         isStartingBattle = true;
-        try
+        SetBusy(true);
+        BattleLaunchData pending = BattleLaunchContext.Peek();
+        var options = new SceneLoadOptions
         {
-            BattleLaunchContext.Set(data);
-            BattleSessionContext.Begin(data, targetScene, destination);
-            if (!scenes.TryLoad(targetScene, out error))
-                throw new InvalidOperationException(error);
-        }
-        catch (Exception exception)
+            Prepare = () =>
+            {
+                BattleLaunchContext.Set(data);
+                BattleSessionContext.Begin(data, targetScene, destination);
+            },
+            Rollback = () => { BattleLaunchContext.Restore(pending); BattleSessionContext.Restore(previous); }
+        };
+        var operation = visit.IsValid ? scenes.ReplaceFromVisitAsync(visit, targetScene, options) : scenes.LoadAsync(targetScene, options);
+        operation.OnCompleted(result =>
         {
-            BattleLaunchContext.Clear();
-            BattleSessionContext.Restore(previous);
-            isStartingBattle = false;
-            Debug.LogException(exception, this);
+            if (result.Succeeded) return;
+            if (this != null) { isStartingBattle = false; SetBusy(false); }
+            Debug.LogError(result.Error);
+        });
+    }
+
+    private void SetBusy(bool value)
+    {
+        if (uiManager != null && uiManager.TryGetPanel<BattlePartyCanvasUI>(partyHandle, out var panel)) panel.SetBusy(value);
+    }
+
+    private void ConfigurePresentation()
+    {
+        foreach (var root in gameObject.scene.GetRootGameObjects())
+        {
+            foreach (var renderer in root.GetComponentsInChildren<Renderer>(true)) renderer.gameObject.layer = 9;
+            foreach (var camera in root.GetComponentsInChildren<Camera>(true))
+            {
+                camera.cullingMask = (1 << 9) | (1 << 5);
+                camera.clearFlags = CameraClearFlags.SolidColor;
+            }
+            foreach (var light in root.GetComponentsInChildren<Light>(true)) light.cullingMask = 1 << 9;
         }
     }
 
@@ -129,6 +152,9 @@ public sealed class PartySceneController : MonoBehaviour
             models[position].transform.localPosition = Vector3.zero;
             models[position].transform.localRotation = Quaternion.identity;
             models[position].transform.localScale *= modelScale;
+            foreach (var child in models[position].GetComponentsInChildren<Transform>(true)) child.gameObject.layer = 9;
+            foreach (var animator in models[position].GetComponentsInChildren<Animator>(true)) animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            foreach (var collider in models[position].GetComponentsInChildren<Collider>(true)) collider.enabled = false;
             shownConfigs[position] = config;
         }
     }

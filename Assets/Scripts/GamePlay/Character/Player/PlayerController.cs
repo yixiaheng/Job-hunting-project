@@ -9,7 +9,15 @@ public class PlayerController : MonoBehaviour
     public PlayerAnimation Animation { get; private set; }
     public PlayerMovementConfigSO playerMovementConfigSO;
     private GroundCheck groundCheck;
+    private Vector3 currentDirection;
     private float airborneTime;
+    private readonly HashSet<object> scenePauseSources = new();
+    public bool IsScenePaused => scenePauseSources.Count > 0;
+    public void SetScenePaused(object source, bool paused)
+    {
+        if (source == null) throw new System.ArgumentNullException(nameof(source));
+        if (paused) scenePauseSources.Add(source); else scenePauseSources.Remove(source);
+    }
     [Header("Coyote Time")] [SerializeField] private float coyoteTime = 0.12f;
 
     void Awake()
@@ -28,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (IsScenePaused) return;
         if (!InputHandler.CanMove && Animation.isGrounded)
         {
             if (playerMoveStateMachine.currentState is PlayerMoveState)
@@ -41,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (IsScenePaused) return;
         if (!InputHandler.CanMove)
         {
             Vector3 velocity = rb.linearVelocity;
@@ -58,20 +68,28 @@ public class PlayerController : MonoBehaviour
     {
         if (!InputHandler.CanMove)
             return;
+        
+        currentDirection = direction;
+        
+        SetSpeed(speed);
 
+        if (currentDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            rb.MoveRotation(targetRotation);
+        }
+    }
+
+    public void SetSpeed(float speed)
+    {
         Vector3 velocity = rb.linearVelocity;
-        Vector3 targetVelocity = direction * speed;
-        if (direction != Vector3.zero && velocity.y < 0.5f && groundCheck.TryGetGroundHit(out RaycastHit groundHit))
+        Vector3 targetVelocity = currentDirection * speed;
+        if (currentDirection != Vector3.zero && velocity.y < 0.5f && groundCheck.TryGetGroundHit(out RaycastHit groundHit))
         {
             targetVelocity = Vector3.ProjectOnPlane(targetVelocity, groundHit.normal).normalized * speed;
             rb.linearVelocity = targetVelocity;
         }
         else rb.linearVelocity = new Vector3(targetVelocity.x, velocity.y, targetVelocity.z);
-        if (direction != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            rb.MoveRotation(targetRotation);
-        }
     }
 
     private void UpdateStateData()

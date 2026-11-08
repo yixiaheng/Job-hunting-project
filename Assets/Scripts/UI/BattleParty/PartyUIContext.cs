@@ -6,11 +6,13 @@ public sealed class BattlePartyUIContext : IUIContext
 {
     public BattlePartyManager Manager { get; }
     public Action StartBattle { get; }
+    public Action Return { get; }
 
-    public BattlePartyUIContext(BattlePartyManager manager, Action startBattle = null)
+    public BattlePartyUIContext(BattlePartyManager manager, Action startBattle = null, Action returnToSource = null)
     {
         Manager = manager != null ? manager : throw new ArgumentNullException(nameof(manager));
         StartBattle = startBattle;
+        Return = returnToSource;
     }
 }
 

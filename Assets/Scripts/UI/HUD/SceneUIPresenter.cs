@@ -22,7 +22,7 @@ public sealed class SceneUIPresenter : MonoBehaviour
 
         foreach (UIId id in panels)
         {
-            UIHandle handle = manager.Open(id);
+            UIHandle handle = manager.Open(id, ownerSceneHandle: gameObject.scene.handle);
             if (handle.IsValid)
                 handles.Add(handle);
         }

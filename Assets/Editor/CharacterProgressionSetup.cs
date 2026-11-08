@@ -82,6 +82,7 @@ public static class CharacterProgressionSetup
         BuildScene();
         InstallEntry(UIId.ExplorationHUD);
         RemoveEntry(UIId.BattleParty);
+        SceneFlowSetup.ConfigureAssets();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         if (!SceneCatalogEditorUtility.ValidateRuntimeCatalog(true))

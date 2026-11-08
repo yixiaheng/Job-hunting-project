@@ -12,11 +12,11 @@ namespace Game.UI
 
         public event Action<UIInputState> StateChanged;
 
-        internal void Refresh(IReadOnlyList<UIInstanceRecord> openedPanels)
+        internal void Refresh(IReadOnlyList<UIInstanceRecord> openedPanels, bool transitionBlocked = false)
         {
-            bool showCursor = false;
-            bool blockMovement = false;
-            bool blockCamera = false;
+            bool showCursor = transitionBlocked;
+            bool blockMovement = transitionBlocked;
+            bool blockCamera = transitionBlocked;
 
             for (int index = 0; index < openedPanels.Count; index++)
             {

@@ -7,6 +7,8 @@ using UnityEngine;
 public static class BattleLaunchContext
 {
     private static BattleLaunchData pending;
+    internal static BattleLaunchData Peek() => pending;
+    internal static void Restore(BattleLaunchData data) { pending = data; }
 
     public static void Set(BattleLaunchData data)
     {

@@ -1,0 +1,51 @@
+﻿
+
+<linker>
+
+	<assembly fullname="UnityEngine.CoreModule">
+	    <type fullname="UnityEngine.GameObject" preserve="all"/>
+		<type fullname="UnityEngine.Component" preserve="all"/>
+		<type fullname="UnityEngine.Transform" preserve="all"/>
+		<type fullname="UnityEngine.RectTransform" preserve="all"/>
+		<type fullname="UnityEngine.Vector2" preserve="all"/>
+		<type fullname="UnityEngine.Vector3" preserve="all"/>
+		<type fullname="UnityEngine.Quaternion" preserve="all"/>
+		<type fullname="UnityEngine.Mathf" preserve="all"/>
+		<type fullname="UnityEngine.Events.UnityEvent" preserve="all"/>
+		
+	</assembly>
+
+	<assembly fullname="UnityEngine.UIModule">
+	    <type fullname="UnityEngine.CanvasGroup" preserve="all"/>
+		
+	</assembly>
+
+	<assembly fullname="UnityEngine.UI">
+	    <type fullname="UnityEngine.UI.Button" preserve="all"/>
+		<type fullname="UnityEngine.UI.Selectable" preserve="all"/>
+		<type fullname="UnityEngine.UI.Image" preserve="all"/>
+		<type fullname="UnityEngine.UI.Graphic" preserve="all"/>
+		
+	</assembly>
+
+	<assembly fullname="Unity.TextMeshPro">
+	    <type fullname="TMPro.TMP_Text" preserve="all"/>
+		
+	</assembly>
+
+	<assembly fullname="Assembly-CSharp">
+	    <type fullname="Game.UI.UIManager" preserve="all"/>
+		<type fullname="Game.UI.UIPanel" preserve="all"/>
+		<type fullname="Game.UI.UIHandle" preserve="all"/>
+		<type fullname="Game.UI.UIId" preserve="all"/>
+		<type fullname="Game.UI.UILayer" preserve="all"/>
+		<type fullname="Game.UI.UISpace" preserve="all"/>
+		<type fullname="Game.UI.UIState" preserve="all"/>
+		<type fullname="Game.UI.UIInstanceMode" preserve="all"/>
+		<type fullname="Game.UI.UICacheMode" preserve="all"/>
+		<type fullname="Game.UI.UILifetime" preserve="all"/>
+		<type fullname="Game.UI.IUIContext" preserve="all"/>
+		
+	</assembly>
+
+</linker>

@@ -39,6 +39,26 @@ namespace Game.UI
         private bool previousCursorVisible;
         private CursorLockMode previousCursorLock;
         private Transform worldRoot;
+        private int transitionInputs;
+
+        public System.IDisposable AcquireTransitionInput()
+        {
+            transitionInputs++;
+            RefreshFrameworkState();
+            return new TransitionInputLease(this);
+        }
+        private sealed class TransitionInputLease : System.IDisposable
+        {
+            private UIManager manager;
+            public TransitionInputLease(UIManager manager) { this.manager = manager; }
+            public void Dispose()
+            {
+                if (manager == null) return;
+                manager.transitionInputs = Mathf.Max(0, manager.transitionInputs - 1);
+                manager.RefreshFrameworkState();
+                manager = null;
+            }
+        }
 
         public event System.Action PresentationStateChanged;
 
@@ -221,6 +241,7 @@ namespace Game.UI
 
         public bool Back()
         {
+            if (transitionInputs > 0) return false;
             for (int index = openedPanels.Count - 1; index >= 0; index--)
             {
                 UIInstanceRecord instance = openedPanels[index];
@@ -470,8 +491,16 @@ namespace Game.UI
 
         /// <summary>Hide existing instances without closing, disabling or discarding contexts.</summary>
         public System.IDisposable SuspendPresentation()
+            => SuspendPresentationInternal(null);
+
+        public System.IDisposable SuspendScenePresentation(int sceneHandle)
+            => SuspendPresentationInternal(sceneHandle);
+
+        private System.IDisposable SuspendPresentationInternal(int? sceneHandle)
         {
-            var held = new List<UIInstanceRecord>(instances.Values);
+            var held = new List<UIInstanceRecord>();
+            foreach (var record in instances.Values)
+                if (!sceneHandle.HasValue || record.OwnerSceneHandle == sceneHandle.Value) held.Add(record);
             foreach (var record in held)
             {
                 record.SuspendCount++;
@@ -507,7 +536,7 @@ namespace Game.UI
         private void RefreshFrameworkState()
         {
             RefreshCoveredState();
-            inputCoordinator.Refresh(openedPanels);
+            inputCoordinator.Refresh(openedPanels, transitionInputs > 0);
             RefreshCursorState();
             PresentationStateChanged?.Invoke();
         }

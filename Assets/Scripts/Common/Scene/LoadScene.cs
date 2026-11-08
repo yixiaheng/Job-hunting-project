@@ -14,7 +14,7 @@ public class LoadScene : MonoBehaviour
             return;
         }
 
-        if (!manager.TryLoad(sceneId, out string error, mode))
-            Debug.LogError(error, this);
+        var operation = manager.LoadAsync(sceneId, new SceneLoadOptions { Transition = mode });
+        operation.OnCompleted(result => { if (!result.Succeeded) Debug.LogError(result.Error); });
     }
 }

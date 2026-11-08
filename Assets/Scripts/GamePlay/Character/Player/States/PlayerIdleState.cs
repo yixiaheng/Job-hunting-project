@@ -15,8 +15,10 @@ public class PlayerIdleState : IState
     {
         Debug.Log("进入IdleState");
         machine.player.Animation.animator.CrossFadeInFixedTime("Idle", 0.1f);
+        machine.player.SetSpeed(0f);
     }
 
+    
     public void Exit()
     {
         

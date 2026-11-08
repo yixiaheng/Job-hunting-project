@@ -81,10 +81,12 @@ public static class CharacterNavigationRegression
             if(CharacterSceneNavigator.IsActive)return;
             Check(ui.IsOpen(UIId.Backpack)&&!axis.enabled&&ui.Input.Current.BlockCamera,"return preserves source window camera lock");Check(!Visible(),"entry stays hidden when source window restored");ui.Close(window);Next(7);break;
         case 7:
-            Check(axis.enabled&&Visible(),"closing final window restores camera and entry");window=ui.Open(UIId.BattleParty);Next(8);break;
+            Check(axis.enabled&&Visible(),"closing final window restores camera and entry");Check(PartySceneNavigator.TryEnter(SceneTransitionMode.Immediate),"real additive party entry accepted");Next(8);break;
         case 8:
-            Check(!Visible(),"main entry hidden under party window");Check(ui.TryGetPanel<UIPanel>(window,out var party)&&party.GetComponentInChildren<CharacterEntryButton>(true)==null,"party prefab has no character entry");ui.Close(window);Next(9);break;
+            if(GameSceneManager.Instance.IsLoading)return;
+            Check(!Visible(),"main entry hidden under party window");var party=UnityEngine.Object.FindFirstObjectByType<BattlePartyCanvasUI>();Check(party!=null&&party.GetComponentInChildren<CharacterEntryButton>(true)==null,"party prefab has no character entry");PartySceneNavigator.Return();Next(9);break;
         case 9:
+            if(GameSceneManager.Instance.IsLoading)return;
             Check(axis.enabled&&Visible(),"party close restores main state");axis.enabled=false;Check(CharacterSceneNavigator.TryEnter(),"enter with pre-disabled camera");Next(10);break;
         case 10:
             if(!ui.IsOpen(UIId.CharacterDetail))return;CharacterSceneNavigator.Instance.Return();Next(11);break;

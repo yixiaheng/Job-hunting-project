@@ -16,6 +16,8 @@ public class BattlePartyCanvasUI : UIPanel
     private UnityAction[] buttonActions;
     private BattlePartyManager manager;
     private Action startBattle;
+    private Action returnToSource;
+    private bool busy;
     private IDisposable formationSubscription;
 
     protected override void OnInitialize()
@@ -57,6 +59,7 @@ public class BattlePartyCanvasUI : UIPanel
         BattlePartyUIContext partyContext = context as BattlePartyUIContext;
         manager = partyContext?.Manager;
         startBattle = partyContext?.StartBattle;
+        returnToSource = partyContext?.Return;
         if (manager == null)
             Debug.LogError("BattleParty requires a BattlePartyUIContext with a scene party manager.", this);
 
@@ -73,15 +76,24 @@ public class BattlePartyCanvasUI : UIPanel
     private void RefreshStartBattleButton()
     {
         if (startBattleButton != null)
-            startBattleButton.interactable = manager != null && startBattle != null
+            startBattleButton.interactable = !busy && manager != null && startBattle != null
                 && manager.Formation.members.Count > 0;
     }
 
     public void StartBattle()
     {
-        if (IsOpen && manager != null && manager.Formation.members.Count > 0)
+        if (!busy && IsOpen && manager != null && manager.Formation.members.Count > 0)
             startBattle?.Invoke();
     }
+
+    public void SetBusy(bool value) { busy = value; RefreshStartBattleButton(); }
+    public override bool HandleBack()
+    {
+        if (returnToSource == null) return false;
+        if (!busy) returnToSource();
+        return true;
+    }
+    public void Return() { HandleBack(); }
 
     public void AddOrReplaceAlly(int position)
     {
@@ -101,6 +113,8 @@ public class BattlePartyCanvasUI : UIPanel
     {
         StopListening();
         startBattle = null;
+        returnToSource = null;
+        busy = false;
         manager = null;
     }
 

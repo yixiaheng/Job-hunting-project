@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 351074343}
   - component: {fileID: 351074342}
   - component: {fileID: 351074341}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 431916465}
   - component: {fileID: 431916464}
   - component: {fileID: 431916463}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 673026399}
   - component: {fileID: 673026398}
   - component: {fileID: 673026397}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,6 +505,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900000100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109013737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c9164baebb428288e81ea702e2b51f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PartySceneController
+  partyManager: {fileID: 109013739}
+  battleScene: 1
+  exitScene: 0
+  alliesPosition:
+  - {fileID: 431916462}
+  - {fileID: 351074340}
+  - {fileID: 2135595458}
+  - {fileID: 1912081748}
+  modelScale: 7
+--- !u!114 &900002003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109013737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d7459c4c9e41fd9544779a7880e4aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneUIPresenter
+  panels: 0f000000
 --- !u!1 &1545222323
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +610,7 @@ Camera:
   m_GameObject: {fileID: 1580609690}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -606,7 +640,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 544
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -743,7 +777,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 512
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -816,7 +850,7 @@ GameObject:
   - component: {fileID: 1912081751}
   - component: {fileID: 1912081750}
   - component: {fileID: 1912081749}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +963,7 @@ GameObject:
   - component: {fileID: 2135595461}
   - component: {fileID: 2135595460}
   - component: {fileID: 2135595459}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1039,37 +1073,3 @@ SceneRoots:
   - {fileID: 673026400}
   - {fileID: 1545222324}
   - {fileID: 109013738}
---- !u!114 &900000100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109013737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c9164baebb428288e81ea702e2b51f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::PartySceneController
-  partyManager: {fileID: 109013739}
-  battleScene: 1
-  exitScene: 0
-  modelScale: 7
-  alliesPosition:
-  - {fileID: 431916462}
-  - {fileID: 351074340}
-  - {fileID: 2135595458}
-  - {fileID: 1912081748}
---- !u!114 &900002003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109013737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d7459c4c9e41fd9544779a7880e4aa, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::SceneUIPresenter
-  panels: 0f000000

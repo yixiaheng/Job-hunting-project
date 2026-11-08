@@ -1,0 +1,259 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.3.23f1
+CRC: 3667239874
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: df4b47d6746b21d1e520f73bc8151924
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3a109488b1f4b68cf8f872742d0d4fbd
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 0c2330b01e539204425b8d257dfdc540
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: d36f9b4898e566e49a75ec0875480c39, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 32da90c8d87fa2346aff97d54fbb83a9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1dd68c99e53c02042abe628f696aa2c7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 887f0a3691ca3cb4097d404832dbbfa9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dfac37248329f7e4aab17a7ddbfaee2b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3406ee7ab50f29a4a93c5a8d820e123c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2eabcc4772c318e40889d0706fed0c36, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 99ebf20e84e0ef04db6efad6f5f8477f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5a452ef61c9598746aa1b245de472607, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fa0be43937c649efb15839f9f69f5340, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1c763a94d902aa544a75eef0bbb9355a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 026e403bdfda4d32b1d694508ed56713, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 020d07ce02f0d244b9ae492fd401bea7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4758a1ef14b94ebd83675845ac7c069d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4f71b1de68ed4aa8b0ad5406d31bbab1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 99683e1acd3344a09d7320daf8e8f0a5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4161384266574dc1ac5d75c35c238f39, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b064ed19ca3eba041bc0a5273ea5d26b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 25f1292d0ef7c2549a7ac292347c806c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a16d1367e47c68c4fb903ce13860482f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e1907f69523ab0a49a65127e97cd2775, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 526d7fd8118ff354d92923ddcb097656, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 66a12c28c2ef58149bbafbaf251288d7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0a469478abcf3794c9f79db74f647264, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1e59790dbf79e5d4db70107caef87154, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3741ead633b97604fbb761304bb47694, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ea16724b3d784b50a4942cd55025636a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 33df0b52dae5b3544bbdfeff9034f9bc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6841f7d54e674e2ca426b25e08cae817, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4f58b7e2bdbb4cc0b9e6c96e496efdd2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 39fa3d8997a24136984ca6e2c99902bc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 225
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.InputSystem
+  ClassName: UnityEngine.InputSystem.InputAction
+- AssemblyName: Unity.InputSystem
+  ClassName: UnityEngine.InputSystem.InputActionMap
+- AssemblyName: Unity.InputSystem
+  ClassName: UnityEngine.InputSystem.InputBinding
+- AssemblyName: Unity.InputSystem
+  ClassName: UnityEngine.InputSystem.InputControlScheme
+- AssemblyName: Unity.InputSystem
+  ClassName: UnityEngine.InputSystem.InputControlScheme/DeviceRequirement
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FaceInfo_Legacy
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FontAssetCreationSettings
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.KerningTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.LigatureSubstitutionRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Character
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Dropdown/DropdownEvent
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Dropdown/OptionData
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Dropdown/OptionDataList
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontFeatureTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontWeightPair
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_InputField/OnChangeEvent
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_InputField/SelectionEvent
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_InputField/SubmitEvent
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_InputField/TextSelectionEvent
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_InputField/TouchScreenKeyboardEvent
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.ArgumentCache
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentListenerMode
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.RectOffset
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.FaceInfo
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.Glyph
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphMetrics
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphRect
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.LowLevel.GlyphAdjustmentRecord
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.LowLevel.GlyphPairAdjustmentRecord
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.LowLevel.GlyphValueRecord
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ScrollRect/ScrollRectEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Scrollbar/ScrollEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Slider/SliderEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Toggle/ToggleEvent
+Assets:
+- Assets/Prefabs/UIPrefabs/HUD/ExplorationHUD.prefab
+- Assets/Prefabs/UIPrefabs/HUD/Battle/BattleEnemiesStatusPanel.prefab
+- Assets/Prefabs/UIPrefabs/Widgets/AlliesParty/Ally.prefab
+- Assets/Prefabs/UIPrefabs/Window/SettingsPanel.prefab
+- Assets/Prefabs/UIPrefabs/Widgets/Dialogue/DialogueChoice.prefab
+- Assets/Prefabs/UIPrefabs/Window/BackpackPanel.prefab
+- Assets/Prefabs/UIPrefabs/HUD/Battle/BattleCommandsPanel.prefab
+- Assets/Prefabs/UIPrefabs/HUD/Battle/BattleEnemyBar.prefab
+- Assets/Prefabs/UIPrefabs/Window/Dialogue/DialogueUICanvas.prefab
+- Assets/Prefabs/UIPrefabs/Window/BattlePartyPanel.prefab
+- Assets/Prefabs/UIPrefabs/Popup/Character/CharacterConfirm.prefab
+- Assets/Prefabs/UIPrefabs/Popup/AlliesChooseWindow.prefab
+- Assets/Prefabs/UIPrefabs/Popup/Character/CharacterMaterials.prefab
+- Assets/Prefabs/UIPrefabs/HUD/PartyBackdrop.prefab
+- Assets/Prefabs/UIPrefabs/Popup/BattleResultPanel.prefab
+- Assets/Prefabs/UIPrefabs/Window/Character/CharacterPanel.prefab
+- Assets/Prefabs/UIPrefabs/HUD/Dialogue/DialogueInteractionsPanel.prefab
+- Assets/Prefabs/UIPrefabs/Widgets/Dialogue/DialogueInteract.prefab
+- Assets/Prefabs/UIPrefabs/HUD/Battle/BattleAllyStatusUI.prefab
+- Assets/Prefabs/UIPrefabs/Widgets/Inventory/InventoryItem.prefab
+- Assets/Prefabs/UIPrefabs/Popup/Character/CharacterEquipment.prefab
+- Assets/Prefabs/UIPrefabs/Widgets/Battle/HpShow.prefab
+- Assets/Prefabs/UIPrefabs/UIManager.prefab
+Dependencies: []

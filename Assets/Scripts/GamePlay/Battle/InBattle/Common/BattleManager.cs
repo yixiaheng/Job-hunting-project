@@ -112,12 +112,12 @@ public class BattleManager : MonoBehaviour
         battleFlow.GameOverEvent += HandleBattleEnded;
         battleUIManager = UIManager.Instance;
         alliesStatusHandle = battleUIManager.Open(UIId.BattleAlliesStatus,
-            new BattleAlliesUIContext(units.FindAll(unit => unit.faction == Faction.OurSide)));
+            new BattleAlliesUIContext(units.FindAll(unit => unit.faction == Faction.OurSide)), ownerSceneHandle: gameObject.scene.handle);
         enemiesStatusHandle = battleUIManager.Open(UIId.BattleEnemiesStatus,
             new BattleEnemiesUIContext(units.FindAll(unit => unit.faction == Faction.Enemy),
-                battleCamera != null ? battleCamera : Camera.main));
+                battleCamera != null ? battleCamera : Camera.main), ownerSceneHandle: gameObject.scene.handle);
         commandsHandle = battleUIManager.Open(UIId.BattleCommands,
-            new BattleCommandsUIContext(this));
+            new BattleCommandsUIContext(this), ownerSceneHandle: gameObject.scene.handle);
         battleFlow.Ready();
         BattleStarted?.Invoke(battleFlow);
         RefreshAll();

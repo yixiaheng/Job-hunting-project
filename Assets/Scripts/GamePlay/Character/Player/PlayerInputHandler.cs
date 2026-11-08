@@ -11,7 +11,8 @@ public class PlayerInputHandler : MonoBehaviour
 {
     //新输入系统
     public InputSystem_Actions inputActions;
-    public bool CanMove => isActiveAndEnabled && movementBlocks.Count == 0;
+    public bool CanMove => isActiveAndEnabled && movementBlocks.Count == 0
+        && !(GameSceneManager.Instance != null && GameSceneManager.Instance.IsLoading);
     //三个集合，记录禁用移动/相机/鼠标的来源，当集合为空才可以解除
     //HashSet是一个不保存重复项的Set集合
     private readonly HashSet<object> movementBlocks = new();
@@ -48,7 +49,8 @@ public class PlayerInputHandler : MonoBehaviour
     {
         Bind();
         RefreshControls();
-        if (!Game.Characters.CharacterSceneNavigator.IsActive) InventoryUIInput();
+        var scenes = GameSceneManager.Instance;
+        if (scenes == null || (!scenes.IsLoading && !scenes.IsSceneSuspended(gameObject.scene))) InventoryUIInput();
     }
 
     /// <summary>
