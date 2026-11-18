@@ -24,8 +24,6 @@
 	    <type fullname="UnityEngine.UI.Button" preserve="all"/>
 		<type fullname="UnityEngine.UI.Selectable" preserve="all"/>
 		<type fullname="UnityEngine.UI.Image" preserve="all"/>
-		<type fullname="UnityEngine.UI.Graphic" preserve="all"/>
-		
 	</assembly>
 
 	<assembly fullname="Unity.TextMeshPro">
@@ -45,6 +43,7 @@
 		<type fullname="Game.UI.UICacheMode" preserve="all"/>
 		<type fullname="Game.UI.UILifetime" preserve="all"/>
 		<type fullname="Game.UI.IUIContext" preserve="all"/>
+		<type fullname="Game.UI.LuaUIPanel" preserve="all"/>
 		
 	</assembly>
 

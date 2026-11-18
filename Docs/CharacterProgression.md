@@ -1,4 +1,4 @@
-﻿# 角色养成系统
+# 角色养成系统
 
 ## 入口与资源
 
@@ -45,7 +45,7 @@
 
 ## 场景与 UI 生命周期
 
-`CharacterSceneNavigator` 记录来源场景、时间和相机/监听器/输入状态，暂停游戏时间，暂时禁用来源的游戏输入与相机，叠加加载养成场景。
+`CharacterSceneNavigator` 是静态业务入口，只校验并传递 `CharacterSceneContext`。统一的 `GameSceneManager` / `ScenePresentationScope` 管理追加加载、来源暂停和恢复；来源画面保留到目标模型和必要 UI 就绪。完整调用图见 `SceneFlow.md`。
 
 UIManager 的 `SuspendPresentation()` 返回可释放的租约。每个面板使用独立的显示门控 CanvasGroup，隐藏时不修改面板开关状态、Context、动画透明度，也不禁用业务根节点；暂停的面板不参与返回键、输入和背景请求。
 
@@ -61,11 +61,13 @@ UIManager 的 `SuspendPresentation()` 返回可释放的租约。每个面板使
 
 混合技能支持逐效果目标覆盖，例如岩壁守卫终结技伤害敌方、给我方护盾，雷鸣猎手战技提前自身行动。能量统一限制在合法区间。六个天赋依据实际行动结算触发，追加伤害不再次进入主动技能结算。
 
-## 保存与迁移
+## 完整玩家档案保存
 
 正式文件：`Application.persistentDataPath/Saves/slot_0/player_profile.json`，角色与背包在同一 envelope、同一备份内恢复。保留原有 `player_inventory.json` 和其他模块文件。
 
-首次没有新档时导入旧背包，保留装备实例 ID，补全缺少的合并等级和突破；发放配置中的初始角色，不重复发放原背包材料。全新进度才领取开发初始物品。
+启动只读取完整 `player_profile.json`。不存在时由 `PlayerProfileFactory` 创建配置中的初始角色与物品；不再自动导入旧背包。历史文件保留，但不会参与正式运行。现有完整档案仍使用版本 1、原字段和原文件名。
+
+`PlayerProfileCoordinator` 集中复制和组装完整档案。养成通过 `IPlayerProfileCommitter` 提交角色 / 背包候选数据，成功后才更新内存和通知。普通背包修改由 PlayerRuntime 比较修订号自动保存，失败每 5 秒重试，暂停 / 退出时也尝试保存；养成已保存的同一修订号不会再写盘。详见 `PlayerProfile.md`。
 
 数据损坏不覆盖原文件。主文件损坏但备份可读取时，只读展示恢复的整组数据，禁止培养和保存；两份都损坏则初始化失败并保留文件。不要通过删除存档来掩盖数据错误。
 
@@ -78,7 +80,7 @@ UIManager 的 `SuspendPresentation()` 返回可释放的租约。每个面板使
 - 原生 Play Mode 链路验证：`CharacterProgressionPlayVerification.Begin()`。
 - 验证报告写入 `Temp/CharacterProgressionChecks/`，测试失败会保留原因；测试代码存在不等于已经执行成功。
 
-### 本轮实际验证（2026-11-02）
+### 历史验证（2026-11-02，不能替代本轮结果）
 
 - Unity 原生逻辑验证通过 204 项断言，包括边界、保存失败回滚、旧档迁移、装备保护、六天赋及自身加速/行动提前。
 - 原生 Play Mode 完整链路通过：从探索、配队、背包三次进入并返回；弹窗取消不消费；点击真实确认按钮培养并保存；养成数值与技能进入实际战斗；直接运行养成场景返回探索场景。
@@ -87,7 +89,9 @@ UIManager 的 `SuspendPresentation()` 返回可释放的租约。每个面板使
 
 后续新增角色须配置专属碎片、命途、稳定效果键与成长映射；新增装备须登记 ItemCatalog；新增 UIConfig 仍按 UILayer 分类。
 
-### 2026-11-04 导航与主界面入口修复
+### 历史记录：2026-11-04 导航与主界面入口修复
+
+以下是当时的实现记录；Navigator 持有状态的方案已被 2026-11-08 的统一场景管理替代。本轮验证见 `ArchitectureVerification.md`。
 
 - 摄像机输入轴的启停只由 PlayerInputHandler 的来源锁集合管理。CharacterSceneNavigator 仍保存相机渲染组件和 AudioListener 状态，但不再独立 Hold CinemachineInputAxisController，避免玩家锁记住已禁用状态并在返回时错误恢复。
 - UIManager.IsUnobstructedHUD(handle) 检查所属 HUD 已打开、未挂起且没有前台非 HUD 面板；CharacterEntryButton 用 CanvasGroup 同时控制显示、交互与射线，OnDisable 解除订阅。

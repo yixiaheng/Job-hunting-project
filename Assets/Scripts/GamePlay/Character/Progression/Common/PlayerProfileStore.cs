@@ -11,6 +11,17 @@ namespace Game.Characters
         public int formatVersion = 1;
         public CharacterRosterData roster = new CharacterRosterData();
         public InventoryData inventory = new InventoryData();
+
+        // 完整档案的拷贝规则集中在这里；新增模块时同步补入此处。
+        public PlayerProfileData Copy()
+        {
+            return new PlayerProfileData
+            {
+                formatVersion = formatVersion,
+                roster = roster.Copy(),
+                inventory = inventory.Copy()
+            };
+        }
     }
 
     public interface IPlayerProfileStore

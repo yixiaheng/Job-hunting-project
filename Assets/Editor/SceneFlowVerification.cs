@@ -15,9 +15,12 @@ using UnityEngine.UI;
 public static class SceneFlowVerification
 {
     private const string Key = "SceneFlowVerification.Active";
+    private const string BatchKey = "SceneFlowVerification.Batch";
+    private const string BatchExitCodeKey = "SceneFlowVerification.BatchExitCode";
     private const string ConfigPath = "Assets/Resources/Bootstrap/PlayerRuntimeConfig.asset";
     private static readonly List<string> checks = new();
     private static readonly List<string> notes = new();
+    private static readonly List<string> runtimeExceptions = new();
     private static readonly List<UnityEngine.Object> animationFixtures = new();
     private static bool launched;
     private static double deadline;
@@ -31,6 +34,13 @@ public static class SceneFlowVerification
     }
     [MenuItem("Tools/Scenes/Verify Unified Scene Flow")]
     public static void Begin() => BeginFrom(SceneId.None);
+    public static void BeginBatch()
+    {
+        SessionState.SetBool(BatchKey, true);
+        SessionState.SetInt(BatchExitCodeKey, 1);
+        UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/SampleScene.unity");
+        Begin();
+    }
     [MenuItem("Tools/Scenes/Verify Direct Character Startup")]
     public static void BeginCharacter() => BeginFrom(SceneId.Character);
     [MenuItem("Tools/Scenes/Verify Direct Party Startup")]
@@ -63,8 +73,19 @@ public static class SceneFlowVerification
     {
         if (!SessionState.GetBool(Key, false)) return;
         if (state == PlayModeStateChange.EnteredPlayMode)
-        { launched = false; checks.Clear(); notes.Clear(); deadline = EditorApplication.timeSinceStartup + 240; phase = "bootstrap"; Application.runInBackground = true; EditorApplication.isPaused = false; }
+        {
+            launched = false;
+            checks.Clear();
+            notes.Clear();
+            runtimeExceptions.Clear();
+            Application.logMessageReceived += CaptureRuntimeException;
+            deadline = EditorApplication.timeSinceStartup + 240;
+            phase = "bootstrap";
+            Application.runInBackground = true;
+            EditorApplication.isPaused = false;
+        }
         if (state != PlayModeStateChange.EnteredEditMode) return;
+        Application.logMessageReceived -= CaptureRuntimeException;
         SessionState.SetBool(Key, false);
         UnityEditor.SceneManagement.EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(SessionState.GetString(Key + ".startScene", ""));
         foreach (var fixture in animationFixtures) if (fixture != null) UnityEngine.Object.DestroyImmediate(fixture);
@@ -77,6 +98,12 @@ public static class SceneFlowVerification
         string testSlot = SessionState.GetString(Key + ".testSlot", "");
         if (testSlot.StartsWith("slot_scene_flow_", StringComparison.Ordinal)) TapTap21.SaveSystem.dyh.SaveSystem.DeleteSlot(testSlot);
         File.WriteAllText(SceneFlowSetup.DirectoryPath + "/restored.txt", "Original save configuration restored; isolated test slot removed.");
+        if (SessionState.GetBool(BatchKey, false))
+        {
+            int exitCode = SessionState.GetInt(BatchExitCodeKey, 1);
+            SessionState.SetBool(BatchKey, false);
+            EditorApplication.delayCall += () => EditorApplication.Exit(exitCode);
+        }
     }
     private static void Tick()
     {
@@ -97,13 +124,22 @@ public static class SceneFlowVerification
     }
     private static void Finish(string error = null)
     {
+        if (error == null && runtimeExceptions.Count > 0)
+            error = "Play Mode logged an unhandled exception: " + runtimeExceptions[0];
         var start = (SceneId)SessionState.GetInt(Key + ".start", (int)SceneId.None);
         string name = start == SceneId.None ? "results" : "direct-" + start;
         string hotUpdateError = HotUpdateBootstrap.Instance != null ? HotUpdateBootstrap.Instance.StartupError : null;
+        SessionState.SetInt(BatchExitCodeKey, error == null ? 0 : 1);
         File.WriteAllText(SceneFlowSetup.DirectoryPath + "/" + name + ".json",
             Newtonsoft.Json.JsonConvert.SerializeObject(new { passed = error == null, error, phase, unityVersion = Application.unityVersion,
-                completedAt = DateTime.Now.ToString("O"), checkCount = checks.Count, checks, notes, hotUpdateError }, Newtonsoft.Json.Formatting.Indented));
+                completedAt = DateTime.Now.ToString("O"), checkCount = checks.Count, checks, notes, runtimeExceptions, hotUpdateError }, Newtonsoft.Json.Formatting.Indented));
         EditorApplication.isPlaying = false;
+    }
+
+    private static void CaptureRuntimeException(string message, string stackTrace, LogType type)
+    {
+        if (type == LogType.Exception)
+            runtimeExceptions.Add(message + "\n" + stackTrace);
     }
     private static IEnumerator Guard(IEnumerator routine)
     {
@@ -113,7 +149,13 @@ public static class SceneFlowVerification
             object value = null; bool next = false; Exception failure = null;
             try { next = stack.Peek().MoveNext(); if (next) value = stack.Peek().Current; }
             catch (Exception e) { failure = e; }
-            if (failure != null) { Finish(failure.ToString()); yield break; }
+            if (failure != null)
+            {
+                while (stack.Count > 0)
+                    (stack.Pop() as IDisposable)?.Dispose();
+                Finish(failure.ToString());
+                yield break;
+            }
             if (!next) { (stack.Pop() as IDisposable)?.Dispose(); continue; }
             if (value is IEnumerator nested) stack.Push(nested); else yield return value;
         }
@@ -126,6 +168,19 @@ public static class SceneFlowVerification
         var player = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
         Check(player != null, "exploration player exists");
         Check(UnityEngine.Object.FindFirstObjectByType<PartyEntryButton>() != null, "real exploration party entry installed");
+        // 全局挂起是已有面板的快照，新面板不应被误挂起。
+        var uiRuntime = UIManager.Instance;
+        using (uiRuntime.SuspendPresentation())
+        {
+            var fresh = uiRuntime.Open(UIId.Backpack, ownerSceneHandle: source.handle);
+            yield return ScenePresentationLifecycle<CharacterSceneController>.WaitForPanel(uiRuntime, fresh);
+            Check(uiRuntime.TryGetPanel<UIPanel>(fresh, out var panel) && !panel.IsPresentationSuspended,
+                "global suspension affects only existing panels");
+            uiRuntime.Close(fresh);
+            yield return UIIntegrationVerification.WaitForClosed(fresh);
+        }
+        phase = "UI framework integration";
+        yield return UIIntegrationVerification.Run(Check);
         yield return VerifyCameraHandoffs(source);
         var input = player.InputHandler;
         int partySubscribers = Game.GameEvents.Battle.GetSubscriberCount<Battle.Events.PartyFormationChangedEvent>();
@@ -158,13 +213,13 @@ public static class SceneFlowVerification
                 var explorationAnimator = player.Animation.animator;
                 var animationState = explorationAnimator.GetCurrentAnimatorStateInfo(0);
                 SceneOperation enter = id == SceneId.Character
-                    ? scenes.EnterVisitAsync(id, new ScenePresentationLifecycle<CharacterSceneController>(), transition: SceneTransitionMode.Fade)
-                    : scenes.EnterVisitAsync(id, new ScenePresentationLifecycle<PartySceneController>(), transition: SceneTransitionMode.Fade);
+                    ? scenes.EnterVisitAsync(id, new ScenePresentationLifecycle<CharacterSceneController>(CharacterSceneNavigator.PreviewMask), transition: SceneTransitionMode.Fade)
+                    : scenes.EnterVisitAsync(id, new ScenePresentationLifecycle<PartySceneController>(PartySceneNavigator.PreviewMask), transition: SceneTransitionMode.Fade);
                 Check(enter.Accepted, "visit accepted " + phase);
                 Check(!scenes.LoadAsync(SceneId.Battle).Accepted, "concurrent single load rejected " + phase);
                 yield return enter;
                 Check(enter.Succeeded, "visit initialized " + phase + " " + enter.Error);
-                Check(!scenes.EnterVisitAsync(id, new ScenePresentationLifecycle<PartySceneController>()).Accepted, "same target rejected " + phase);
+                Check(!scenes.EnterVisitAsync(id, new ScenePresentationLifecycle<PartySceneController>(PartySceneNavigator.PreviewMask)).Accepted, "same target rejected " + phase);
                 Check(source.isLoaded && player.IsScenePaused, "original exploration stays loaded and paused " + phase);
                 Check(player.rb.linearVelocity == velocity && player.transform.position == position && ReferenceEquals(moveState, player.playerMoveStateMachine.currentState), "movement state preserved during visit " + phase);
                 Check(explorationAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime == animationState.normalizedTime, "exploration animator does not advance during visit " + phase);
@@ -188,7 +243,7 @@ public static class SceneFlowVerification
         }
         camera.enabled = cameraEnabled;
         phase = "nested visits";
-        var party = scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<PartySceneController>());
+        var party = scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<PartySceneController>(PartySceneNavigator.PreviewMask));
         yield return party;
         var partyController = UnityEngine.Object.FindFirstObjectByType<PartySceneController>();
         var partyManager = BattlePartyManager.Instance;
@@ -210,12 +265,13 @@ public static class SceneFlowVerification
         ScreenCapture.CaptureScreenshot(SceneFlowSetup.DirectoryPath + "/PartyWithCharacter.png");
         yield return null;
         var partyPanel = UnityEngine.Object.FindFirstObjectByType<BattlePartyCanvasUI>();
+        yield return UIIntegrationVerification.VerifyPartyMask(Check);
         partyPanel.AddOrReplaceAlly(0);
         yield return null; yield return null;
         Check(UIManager.Instance.Back() && scenes.VisitCount == 1, "Esc closes party child before returning scene");
         yield return new WaitForSecondsRealtime(.3f);
         animationBefore = partyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        var character = scenes.EnterVisitAsync(SceneId.Character, new ScenePresentationLifecycle<CharacterSceneController>());
+        var character = scenes.EnterVisitAsync(SceneId.Character, new ScenePresentationLifecycle<CharacterSceneController>(CharacterSceneNavigator.PreviewMask));
         yield return character;
         Check(character.Succeeded && scenes.VisitCount == 2, "nested character initialized");
         Check(!partyAnimator.enabled && partyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime == animationBefore, "nested source preview stops updating");
@@ -230,7 +286,7 @@ public static class SceneFlowVerification
         var ui = UIManager.Instance;
         var backpack = ui.Open(UIId.Backpack, ownerSceneHandle: source.handle);
         yield return ScenePresentationLifecycle<CharacterSceneController>.WaitForPanel(ui, backpack);
-        character = scenes.EnterVisitAsync(SceneId.Character, new ScenePresentationLifecycle<CharacterSceneController>());
+        character = scenes.EnterVisitAsync(SceneId.Character, new ScenePresentationLifecycle<CharacterSceneController>(CharacterSceneNavigator.PreviewMask));
         yield return character;
         var service = PlayerRuntime.Instance.Characters;
         var progress = service.GetCharacter(owned.id);
@@ -267,12 +323,12 @@ public static class SceneFlowVerification
         Check(!scenes.TryGetLoadedScene(SceneId.Character, out _), "failed target unloaded");
 
         phase = "missing controller cleanup";
-        var missing = scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<CharacterSceneController>());
+        var missing = scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<CharacterSceneController>(CharacterSceneNavigator.PreviewMask));
         yield return missing;
         Check(!missing.Succeeded && scenes.VisitCount == 0 && !player.IsScenePaused && !scenes.TryGetLoadedScene(SceneId.Party, out _), "wrong or missing entry controller cleans created scene");
 
         phase = "unload failure and retry";
-        party = scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<PartySceneController>());
+        party = scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<PartySceneController>(PartySceneNavigator.PreviewMask));
         yield return party;
         SetUnloadFailure(scenes, true);
         var refused = scenes.ReturnAsync(party.Visit); yield return refused;
@@ -286,15 +342,13 @@ public static class SceneFlowVerification
         SetUnloadFailure(scenes, true);
         broken = scenes.EnterVisitAsync(SceneId.Character, new BrokenLifecycle()); yield return broken;
         Check(!broken.Succeeded && scenes.HasFaultedVisit && scenes.VisitCount == 1 && player.IsScenePaused, "cleanup failure retains recovery ownership");
-        Check(!scenes.LoadAsync(SceneId.Battle).Accepted && !scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<PartySceneController>()).Accepted, "faulted session rejects unrelated requests");
+        Check(!scenes.LoadAsync(SceneId.Battle).Accepted && !scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<PartySceneController>(PartySceneNavigator.PreviewMask)).Accepted, "faulted session rejects unrelated requests");
         SetUnloadFailure(scenes, false);
-        var retry = scenes.GetComponentsInChildren<Button>(true).Single(b => b.gameObject.name == "Retry");
-        retry.onClick.Invoke();
-        while (scenes.IsLoading) yield return null;
-        Check(scenes.VisitCount == 0 && !scenes.HasFaultedVisit && !player.IsScenePaused && !uiBlocked(), "recovery overlay retry releases all ownership");
+        yield return scenes.ReturnAsync(scenes.CurrentVisit);
+        Check(scenes.VisitCount == 0 && !scenes.HasFaultedVisit && !player.IsScenePaused && !uiBlocked(), "explicit return retry releases all ownership");
 
         phase = "business prepare rollback";
-        party = scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<PartySceneController>()); yield return party;
+        party = scenes.EnterVisitAsync(SceneId.Party, new ScenePresentationLifecycle<PartySceneController>(PartySceneNavigator.PreviewMask)); yield return party;
         int businessState = 0;
         var preparation = scenes.ReplaceFromVisitAsync(party.Visit, SceneId.Battle, new SceneLoadOptions
         { Prepare = () => { businessState = 1; throw new InvalidOperationException("Injected prepare failure"); }, Rollback = () => businessState = 0 });
@@ -466,8 +520,8 @@ public static class SceneFlowVerification
             try
             {
                 ISceneVisitLifecycle inner = id == SceneId.Character
-                    ? new ScenePresentationLifecycle<CharacterSceneController>()
-                    : new ScenePresentationLifecycle<PartySceneController>();
+                    ? new ScenePresentationLifecycle<CharacterSceneController>(CharacterSceneNavigator.PreviewMask)
+                    : new ScenePresentationLifecycle<PartySceneController>(PartySceneNavigator.PreviewMask);
                 var delayed = new DelayedPresentationLifecycle(inner, source);
                 var enter = scenes.EnterVisitAsync(id, delayed, transition: mode);
                 yield return ObserveCameraCoverage(enter);
@@ -510,14 +564,29 @@ public static class SceneFlowVerification
         {
             yield return new WaitForSecondsRealtime(.15f);
             Check(HasDisplayCamera(source) && !HasDisplayCamera(target), "source keeps rendering while target initialization is delayed " + phase);
+            int previewMask = target.path.Contains("Character") ? CharacterSceneNavigator.PreviewMask : PartySceneNavigator.PreviewMask;
+            Check(source.GetRootGameObjects().SelectMany(r => r.GetComponentsInChildren<Camera>(true))
+                .All(c => (c.cullingMask & previewMask) == 0), "source cameras exclude incoming preview during initialization " + phase);
+            Check(source.GetRootGameObjects().SelectMany(r => r.GetComponentsInChildren<Light>(true))
+                .All(l => (l.cullingMask & previewMask) == 0), "source lights exclude incoming preview during initialization " + phase);
             yield return inner.InitializeTarget(target, visit, context);
             Check(HasDisplayCamera(source) && !HasDisplayCamera(target), "source keeps rendering until target UI is ready " + phase);
+            var targetPanel = target.path.Contains("Character")
+                ? (UIPanel)UnityEngine.Object.FindFirstObjectByType<CharacterPanel>()
+                : UnityEngine.Object.FindFirstObjectByType<BattlePartyCanvasUI>();
+            Check(targetPanel != null && targetPanel.IsPresentationSuspended && targetPanel.State == UIState.Open,
+                "new target UI initializes while hidden " + phase);
+            var laterSourcePanel = UIManager.Instance.Open(UIId.Backpack, ownerSceneHandle: source.handle);
+            yield return ScenePresentationLifecycle<CharacterSceneController>.WaitForPanel(UIManager.Instance, laterSourcePanel);
+            Check(UIManager.Instance.TryGetPanel<UIPanel>(laterSourcePanel, out var sourcePanel) && sourcePanel.IsPresentationSuspended,
+                "scene suspension includes panels opened after the lease " + phase);
+            UIManager.Instance.Close(laterSourcePanel);
         }
     }
 
     private sealed class BrokenLifecycle : ISceneVisitLifecycle
     {
-        private readonly ISceneVisitLifecycle inner = new ScenePresentationLifecycle<CharacterSceneController>();
+        private readonly ISceneVisitLifecycle inner = new ScenePresentationLifecycle<CharacterSceneController>(CharacterSceneNavigator.PreviewMask);
         public ISceneSuspension SuspendSource(Scene source) => inner.SuspendSource(source);
         public IDisposable SuspendTarget(Scene target) => inner.SuspendTarget(target);
         public void ReleaseTarget(Scene target) => inner.ReleaseTarget(target);

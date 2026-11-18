@@ -25,6 +25,8 @@ namespace Game.Inventory
         public int ascension;
         public int superimposition = 1;
         public bool isLocked;
+
+        public EquipmentInstance Copy() => (EquipmentInstance)MemberwiseClone();
     }
 
     /// <summary>
@@ -37,6 +39,16 @@ namespace Game.Inventory
         public List<ItemStack> stacks = new List<ItemStack>();
         //装备实例的列表
         public List<EquipmentInstance> equipment = new List<EquipmentInstance>();
+
+        public InventoryData Copy()
+        {
+            var copy = new InventoryData();
+            foreach (var stack in stacks)
+                copy.stacks.Add(new ItemStack { configId = stack.configId, quantity = stack.quantity });
+            foreach (var instance in equipment)
+                copy.equipment.Add(instance.Copy());
+            return copy;
+        }
     }
 
     [Serializable]

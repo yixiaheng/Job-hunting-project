@@ -58,9 +58,6 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(UnityEngine.UI.Image), UnityEngineUIImageWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(UnityEngine.UI.Graphic), UnityEngineUIGraphicWrap.__Register);
-        
-        
             translator.DelayWrapLoader(typeof(TMPro.TMP_Text), TMProTMP_TextWrap.__Register);
         
         
@@ -100,7 +97,10 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(Game.UI.IUIContext), GameUIIUIContextWrap.__Register);
         
         
-        
+            translator.DelayWrapLoader(typeof(Game.UI.LuaUIPanel), GameUILuaUIPanelWrap.__Register);
+
+
+
         }
         
         static void Init(LuaEnv luaenv, ObjectTranslator translator)

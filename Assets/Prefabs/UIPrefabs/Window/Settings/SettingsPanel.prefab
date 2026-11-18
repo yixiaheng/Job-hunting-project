@@ -1061,6 +1061,7 @@ GameObject:
   - component: {fileID: 7033430242639703004}
   - component: {fileID: 9204496779774075838}
   - component: {fileID: 76878345980011015}
+  - component: {fileID: 6425782341879742820}
   m_Layer: 0
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -1113,3 +1114,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsPanel
   closeButton: {fileID: 6980585490398680166}
+--- !u!114 &6425782341879742820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655712727271633373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b1911348dff124c87f852712e3ff76, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIFadeTransition
+  duration: 0.2
+  ease: 6

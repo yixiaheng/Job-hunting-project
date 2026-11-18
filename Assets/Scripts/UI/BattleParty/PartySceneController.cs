@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Battle.Events;
 using Battle.SaveData;
 using Game;
@@ -21,7 +21,7 @@ public sealed class PartySceneController : MonoBehaviour, ISceneEntryPoint
     private bool isStartingBattle;
     private bool restoredReformation;
     private SceneVisitHandle visit;
-    public ISceneVisitLifecycle VisitLifecycle => new ScenePresentationLifecycle<PartySceneController>();
+    public ISceneVisitLifecycle VisitLifecycle => new ScenePresentationLifecycle<PartySceneController>(PartySceneNavigator.PreviewMask);
 
     private void Start()
     {
@@ -94,13 +94,22 @@ public sealed class PartySceneController : MonoBehaviour, ISceneEntryPoint
                 BattleLaunchContext.Set(data);
                 BattleSessionContext.Begin(data, targetScene, destination);
             },
-            Rollback = () => { BattleLaunchContext.Restore(pending); BattleSessionContext.Restore(previous); }
+            Rollback = () =>
+            {
+                BattleLaunchContext.Restore(pending);
+                BattleSessionContext.Restore(previous);
+            }
         };
         var operation = visit.IsValid ? scenes.ReplaceFromVisitAsync(visit, targetScene, options) : scenes.LoadAsync(targetScene, options);
         operation.OnCompleted(result =>
         {
-            if (result.Succeeded) return;
-            if (this != null) { isStartingBattle = false; SetBusy(false); }
+            if (result.Succeeded)
+                return;
+            if (this != null)
+            {
+                isStartingBattle = false;
+                SetBusy(false);
+            }
             Debug.LogError(result.Error);
         });
     }

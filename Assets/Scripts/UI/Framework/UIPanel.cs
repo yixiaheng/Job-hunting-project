@@ -17,6 +17,7 @@ namespace Game.UI
         private bool initialized;
         private bool covered;
         private bool suspended;
+        private bool hiddenByWindow;
         private CanvasGroup presentationGroup;
         public bool IsPresentationSuspended => suspended;
         public bool IsOpen => State == UIState.Open || State == UIState.Opening;
@@ -49,6 +50,10 @@ namespace Game.UI
             if (transition != null)
                 yield return transition.PlayOpen();
 
+            // 场景释放可能在动画等待期间同步终止此面板。
+            if (this == null || State != UIState.Opening)
+                yield break;
+
             State = UIState.Open;
             SetInteractable(!covered);
             OnOpened();
@@ -63,6 +68,9 @@ namespace Game.UI
             if (transition != null)
                 yield return transition.PlayClose();
 
+            if (this == null || State != UIState.Closing)
+                yield break;
+
             OnClosed();
             Context = null;
             State = UIState.Closed;
@@ -75,9 +83,11 @@ namespace Game.UI
             OnContextChanged(context);
         }
 
-        internal void SetCovered(bool value)
+        internal void SetCovered(bool value, bool hidden = false)
         {
             covered = value;
+            hiddenByWindow = hidden;
+            RefreshPresentation();
             SetInteractable(!covered && State == UIState.Open);
             OnCoveredChanged(covered);
         }
@@ -114,13 +124,25 @@ namespace Game.UI
         {
             if (suspended == value) return;
             suspended = value;
+            RefreshPresentation();
+            SetInteractable(!covered && State == UIState.Open);
+        }
+
+        private void RefreshPresentation()
+        {
+            bool visible = !suspended && !hiddenByWindow;
             if (presentationGroup != null)
             {
-                presentationGroup.alpha = value ? 0f : 1f;
-                presentationGroup.interactable = !value;
-                presentationGroup.blocksRaycasts = !value;
+                presentationGroup.alpha = visible ? 1f : 0f;
+                presentationGroup.interactable = visible;
+                presentationGroup.blocksRaycasts = visible;
             }
-            SetInteractable(!covered && State == UIState.Open);
+        }
+
+        internal void HandleMaskClick()
+        {
+            if (State == UIState.Open && !covered && !suspended && Config.closeWhenClickMask)
+                owner.Close(Handle);
         }
 
         public virtual bool HandleBack() => false;

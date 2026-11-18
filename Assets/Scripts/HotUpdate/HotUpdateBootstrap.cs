@@ -58,52 +58,105 @@ public sealed class HotUpdateBootstrap : MonoBehaviour
 
     private IEnumerator InitializeRuntime()
     {
+    #if UNITY_EDITOR
+        if (!settings.loadLuaFromAssetBundlesInEditor)
+        {
+            InitializeLuaRuntime();
+            yield break;
+        }
+    #endif
+
         if (!started)
         {
             started = true;
-            string bundleRoot = Path.Combine(Application.persistentDataPath, settings.bundleFolder);
-            if (!Directory.Exists(Path.Combine(bundleRoot, SeedBundleFolder)))
+
+            string bundleRoot = Path.Combine(
+                Application.persistentDataPath,
+                settings.bundleFolder
+            );
+
+            if (!Directory.Exists(
+                Path.Combine(bundleRoot, SeedBundleFolder)))
             {
                 if (!settings.copyStreamingAssetsOnFirstLaunch)
                 {
-                    StopWithError("本地 AssetBundle 不存在，且配置禁止从 StreamingAssets 复制。");
+                    StopWithError(
+                        "本地 AssetBundle 不存在，且配置禁止从 " +
+                        "StreamingAssets 复制。"
+                    );
+
                     yield break;
                 }
 
                 yield return CopyStreamingAssetsBundles(bundleRoot);
-                if (!Directory.Exists(Path.Combine(bundleRoot, SeedBundleFolder)))
+
+                if (!Directory.Exists(
+                    Path.Combine(bundleRoot, SeedBundleFolder)))
                 {
-                    StopWithError("本地首包 AssetBundle 不存在；请先构建 Windows AssetBundles。");
+                    StopWithError(
+                        "本地首包 AssetBundle 不存在；" +
+                        "请先构建 Windows AssetBundles。"
+                    );
+
                     yield break;
                 }
             }
 
-            if (settings.tryRemoteUpdate && !string.IsNullOrWhiteSpace(settings.serverRoot))
+            if (settings.tryRemoteUpdate &&
+                !string.IsNullOrWhiteSpace(settings.serverRoot))
             {
                 yield return hotUpdateManager.UpdateCoroutine();
+
                 if (!hotUpdateManager.LastUpdateSucceeded)
-                    Debug.LogWarning("远程更新不可用，继续使用本地 AssetBundle：" + hotUpdateManager.LastError, this);
+                {
+                    Debug.LogWarning(
+                        "远程更新不可用，继续使用本地 AssetBundle：" +
+                        hotUpdateManager.LastError,
+                        this
+                    );
+                }
             }
             else
             {
-                Debug.Log("远程更新未配置，使用本地 AssetBundle。", this);
+                Debug.Log(
+                    "远程更新未配置，使用本地 AssetBundle。",
+                    this
+                );
             }
         }
 
         if (!abManager.Initialize())
         {
-            StopWithError("AssetBundle 初始化失败，Lua 启动已停止。");
+            StopWithError(
+                "AssetBundle 初始化失败，Lua 启动已停止。"
+            );
+
             yield break;
         }
 
-        LuaManager.ConfigureEditorAssetBundleLoading(settings.loadLuaFromAssetBundlesInEditor);
+        InitializeLuaRuntime();
+    }
+
+    private void InitializeLuaRuntime()
+    {
+        LuaManager.ConfigureEditorAssetBundleLoading(
+            settings.loadLuaFromAssetBundlesInEditor
+        );
+
         try
         {
             LuaManager runtime = LuaManager.Instance;
+
             if (!string.IsNullOrWhiteSpace(settings.luaEntry))
                 runtime.DoLuaFile(settings.luaEntry);
+
             IsReady = true;
-            Debug.Log("热更新运行环境初始化完成。", this);
+            StartupError = null;
+
+            Debug.Log(
+                "热更新运行环境初始化完成。",
+                this
+            );
         }
         catch (Exception exception)
         {

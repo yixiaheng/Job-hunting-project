@@ -4,7 +4,9 @@ using System.Linq;
 
 namespace Game.Characters
 {
-    /// <summary>背包只发意图，选择角色和实际培养仍统一走养成服务。</summary>
+    /// <summary>
+    /// 背包只发意图，选择角色和实际培养仍统一走养成服务。
+    /// </summary>
     public sealed class CharacterNavigationBridge : MonoBehaviour
     {
         private InventoryManager inventory;
@@ -24,16 +26,28 @@ namespace Game.Characters
             if (runtime.Inventory.TryGetEquipment(key, out var instance))
             {
                 runtime.Inventory.TryGetConfig(instance.configId, out var config);
-                var equipment = config as EquipmentConfig;
-                string id = runtime.Characters.EquipmentOwner(key) ?? runtime.Characters.OwnedCharacters.FirstOrDefault(unit => CharacterProgressionService.Matches(unit, equipment, equipment.equipmentKind == EquipmentKind.LightCone ? EquipmentSlot.LightCone : equipment.slot))?.id;
-                CharacterSceneNavigator.TryEnter(id, equipment.equipmentKind == EquipmentKind.LightCone ? CharacterTab.LightCone : CharacterTab.Relics, key);
+                if (!(config is EquipmentConfig equipment))
+                    return;
+                bool lightCone = equipment.equipmentKind == EquipmentKind.LightCone;
+                EquipmentSlot slot = lightCone ? EquipmentSlot.LightCone : equipment.slot;
+                string id = runtime.Characters.EquipmentOwner(key)
+                    ?? runtime.Characters.OwnedCharacters.FirstOrDefault(unit => CharacterProgressionService.Matches(unit, equipment, slot))?.id;
+                CharacterTab tab = lightCone ? CharacterTab.LightCone : CharacterTab.Relics;
+                CharacterSceneNavigator.TryEnter(id, tab, key);
             }
             else
             {
                 var shardOwner = runtime.Characters.OwnedCharacters.FirstOrDefault(unit => unit.growth.shardItem == key);
                 bool skillMaterial = runtime.Characters.OwnedCharacters.Any(unit => unit.growth.skillMaterial == key);
                 runtime.Inventory.TryGetConfig(key, out var material);
-                CharacterSceneNavigator.TryEnter(shardOwner?.id, shardOwner != null ? CharacterTab.Rank : skillMaterial ? CharacterTab.Skills : material?.useKind == ItemUseKind.EquipmentExperience || material?.useKind == ItemUseKind.EquipmentAscension ? CharacterTab.LightCone : CharacterTab.Attributes);
+                CharacterTab tab = CharacterTab.Attributes;
+                if (shardOwner != null)
+                    tab = CharacterTab.Rank;
+                else if (skillMaterial)
+                    tab = CharacterTab.Skills;
+                else if (material?.useKind == ItemUseKind.EquipmentExperience || material?.useKind == ItemUseKind.EquipmentAscension)
+                    tab = CharacterTab.LightCone;
+                CharacterSceneNavigator.TryEnter(shardOwner?.id, tab);
             }
         }
 

@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 985747278003077350}
   - component: {fileID: 5816581476349938115}
   - component: {fileID: 9059205378391332266}
+  - component: {fileID: 7896634851569265431}
   m_Layer: 0
   m_Name: CharacterEquipment
   m_TagString: Untagged
@@ -357,6 +358,7 @@ GameObject:
   - component: {fileID: 3803486176537464368}
   - component: {fileID: 5377925401645800874}
   - component: {fileID: 4073535115341639157}
+  - component: {fileID: 3927670856892085415}
   m_Layer: 5
   m_Name: Mask
   m_TagString: Untagged
@@ -676,3 +678,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &7896634851569265431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999468266306079092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b1911348dff124c87f852712e3ff76, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIFadeTransition
+  duration: 0.2
+  ease: 6
+--- !u!114 &3927670856892085415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3156940358136470188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b25136a44cf7b4dbf9641af24b9e17, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIMaskClose

@@ -1,0 +1,28 @@
+{
+  "unityVersion": "6000.3.23f1",
+  "recordedAt": "2026-11-08T23:12:24.038151+08:00",
+  "sourceAuditCount": 75,
+  "profileEditModeAssertions": 332,
+  "scenePlayModeAssertions": 199,
+  "directStartupAssertions": 12,
+  "cultivationUIAssertions": 60,
+  "assemblies": {
+    "Assembly-CSharp.dll": {
+      "modifiedAt": "2026-11-08T23:06:37.096932+08:00",
+      "bytes": 1022976
+    },
+    "Assembly-CSharp-Editor.dll": {
+      "modifiedAt": "2026-11-08T23:10:15.570240+08:00",
+      "bytes": 247808
+    }
+  },
+  "editorState": "OK status 2026-11-08T23:12:15.6310525+08:00 playing=False active=Assets/Scenes/SampleScene.unity dirty=True paused=False frame=8052 test= launched=False active=False playerReady=False\nSample asset GUID=07430a34e0c973749a84bb6620d5e61c\nBuild scene properties=enabled,path,guid",
+  "profileTestResult": "SUCCESS test 2026-11-08T23:07:58.7516299+08:00",
+  "standaloneBuildExecuted": false,
+  "knownUnrelatedError": "本地首包 AssetBundle 不存在；请先构建 Windows AssetBundles。",
+  "inventoryEditorGenerator": {
+    "sourceChecked": true,
+    "compiled": true,
+    "resourceGenerationExecuted": false
+  }
+}

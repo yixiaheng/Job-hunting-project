@@ -1,0 +1,147 @@
+{
+  "registeredCount": 17,
+  "animatedPanelCount": 10,
+  "errors": [],
+  "entries": [
+    {
+      "id": 4,
+      "config": "Assets/Config/UI/Window/SettingsUIConfig.asset",
+      "layer": "Window",
+      "prefab": "Assets/Prefabs/UIPrefabs/Window/Settings/SettingsPanel.prefab",
+      "fade": true,
+      "mask": false
+    },
+    {
+      "id": 1,
+      "config": "Assets/Config/UI/Window/BackpackUIConfig.asset",
+      "layer": "Window",
+      "prefab": "Assets/Prefabs/UIPrefabs/Window/Backpack/BackpackPanel.prefab",
+      "fade": true,
+      "mask": false
+    },
+    {
+      "id": 6,
+      "config": "Assets/Config/UI/HUD/BattleAllyStatusUIConfig.asset",
+      "layer": "HUD",
+      "prefab": "Assets/Prefabs/UIPrefabs/HUD/Battle/BattleAllyStatusUI.prefab",
+      "fade": false,
+      "mask": false
+    },
+    {
+      "id": 7,
+      "config": "Assets/Config/UI/HUD/BattleEnemiesStatusUIConfig.asset",
+      "layer": "HUD",
+      "prefab": "Assets/Prefabs/UIPrefabs/HUD/Battle/BattleEnemiesStatusPanel.prefab",
+      "fade": false,
+      "mask": false
+    },
+    {
+      "id": 8,
+      "config": "Assets/Config/UI/Window/BattlePartyUIConfig.asset",
+      "layer": "Window",
+      "prefab": "Assets/Prefabs/UIPrefabs/Window/Party/BattlePartyPanel.prefab",
+      "fade": true,
+      "mask": false
+    },
+    {
+      "id": 9,
+      "config": "Assets/Config/UI/Popup/AlliesChooseUIConfig.asset",
+      "layer": "Popup",
+      "prefab": "Assets/Prefabs/UIPrefabs/Popup/Party/AlliesChooseWindow.prefab",
+      "fade": true,
+      "mask": true
+    },
+    {
+      "id": 10,
+      "config": "Assets/Config/UI/Popup/BattleResultUIConfig.asset",
+      "layer": "Popup",
+      "prefab": "Assets/Prefabs/UIPrefabs/Popup/Battle/BattleResultPanel.prefab",
+      "fade": true,
+      "mask": false
+    },
+    {
+      "id": 11,
+      "config": "Assets/Config/UI/HUD/BattleCommandsUIConfig.asset",
+      "layer": "HUD",
+      "prefab": "Assets/Prefabs/UIPrefabs/HUD/Battle/BattleCommandsPanel.prefab",
+      "fade": false,
+      "mask": false
+    },
+    {
+      "id": 13,
+      "config": "Assets/Config/UI/HUD/DialogueInteractionsUIConfig.asset",
+      "layer": "HUD",
+      "prefab": "Assets/Prefabs/UIPrefabs/HUD/Dialogue/DialogueInteractionsPanel.prefab",
+      "fade": false,
+      "mask": false
+    },
+    {
+      "id": 12,
+      "config": "Assets/Config/UI/Window/DialogueUIConfig.asset",
+      "layer": "Window",
+      "prefab": "Assets/Prefabs/UIPrefabs/Window/Dailogue/DialogueUICanvas.prefab",
+      "fade": true,
+      "mask": false
+    },
+    {
+      "id": 14,
+      "config": "Assets/Config/UI/HUD/ExplorationHUDUIConfig.asset",
+      "layer": "HUD",
+      "prefab": "Assets/Prefabs/UIPrefabs/HUD/Exploration/ExplorationHUD.prefab",
+      "fade": false,
+      "mask": false
+    },
+    {
+      "id": 15,
+      "config": "Assets/Config/UI/HUD/PartyBackdropUIConfig.asset",
+      "layer": "HUD",
+      "prefab": "Assets/Prefabs/UIPrefabs/HUD/Party/PartyBackdrop.prefab",
+      "fade": false,
+      "mask": false
+    },
+    {
+      "id": 3,
+      "config": "Assets/Config/UI/Window/CharacterDetailUIConfig.asset",
+      "layer": "Window",
+      "prefab": "Assets/Prefabs/UIPrefabs/Window/Character/CharacterPanel.prefab",
+      "fade": true,
+      "mask": false
+    },
+    {
+      "id": 16,
+      "config": "Assets/Config/UI/Popup/CharacterMaterialsUIConfig.asset",
+      "layer": "Popup",
+      "prefab": "Assets/Prefabs/UIPrefabs/Popup/Character/CharacterMaterials.prefab",
+      "fade": true,
+      "mask": true
+    },
+    {
+      "id": 17,
+      "config": "Assets/Config/UI/Popup/CharacterEquipmentUIConfig.asset",
+      "layer": "Popup",
+      "prefab": "Assets/Prefabs/UIPrefabs/Popup/Character/CharacterEquipment.prefab",
+      "fade": true,
+      "mask": true
+    },
+    {
+      "id": 18,
+      "config": "Assets/Config/UI/Popup/CharacterConfirmUIConfig.asset",
+      "layer": "Popup",
+      "prefab": "Assets/Prefabs/UIPrefabs/Popup/Character/CharacterConfirm.prefab",
+      "fade": true,
+      "mask": true
+    },
+    {
+      "id": 19,
+      "config": "Assets/Config/UI/Overlay/SceneTransitionUIConfig.asset",
+      "layer": "Overlay",
+      "prefab": "Assets/Prefabs/UIPrefabs/Overlay/SceneTransitionPanel.prefab",
+      "fade": false,
+      "mask": false
+    }
+  ],
+  "checkedAt": "2026-11-09T11:30:07.404060+08:00",
+  "newSourceMetaFilesPresent": true,
+  "movedEnemyBarGuidRetained": true,
+  "worldBackdropUnchanged": true
+}

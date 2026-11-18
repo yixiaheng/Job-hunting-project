@@ -1,4 +1,8 @@
-# 统一场景流程验证记录
+# 统一场景流程历史验证记录
+
+> 2026-11-09 UIManager 接入后的最新编译、226 项主回归与独立启动记录见 `UIFrameworkIntegration.md` 和 `UIIntegrationVerification/`。本文下面继续保留历史结果。
+
+> 本文保留早期实现与测试证据。2026-11-08 本轮架构整理后的结果见 `ArchitectureVerification.md`，包括新版档案链路及移除专用恢复 UI 后的验证。
 
 验证日期：2026-11-08（Asia/Shanghai）。项目版本：Unity 6000.3.23f1。使用方式与接口示例见 `Docs/SceneFlow.md`。
 

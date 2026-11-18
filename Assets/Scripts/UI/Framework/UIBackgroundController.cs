@@ -16,11 +16,13 @@ namespace Game.UI
 
         public event Action<UIBackgroundState> StateChanged;
 
+
+        //对需要模糊背景的UI进行登记
         internal void Acquire(UIHandle handle, UIConfig config)
         {
             if (!handle.IsValid)
                 return;
-
+            
             if (config.blurBackground)
                 blurHandles.Add(handle.Value);
 
@@ -29,7 +31,7 @@ namespace Game.UI
 
             PublishIfChanged();
         }
-
+        //注销登记
         internal void Release(UIHandle handle)
         {
             if (!handle.IsValid)

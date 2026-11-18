@@ -39,7 +39,8 @@ namespace DialogueSystem
         {
             CloseInteractions();
             currentDialogue = new DialogueUIContext(runner, line, HandleDialoguePanelClosed);
-            dialogueHandle = manager.Open(UIId.Dialogue, currentDialogue);
+            dialogueHandle = manager.Open(UIId.Dialogue, currentDialogue,
+                ownerSceneHandle: gameObject.scene.handle);
         }
 
         private void CloseDialogue()
@@ -76,7 +77,8 @@ namespace DialogueSystem
                 return;
             }
 
-            interactionsHandle = manager.Open(UIId.DialogueInteractions, new DialogueInteractionsUIContext(runner));
+            interactionsHandle = manager.Open(UIId.DialogueInteractions, new DialogueInteractionsUIContext(runner),
+                ownerSceneHandle: gameObject.scene.handle);
         }
 
         private void CloseInteractions()

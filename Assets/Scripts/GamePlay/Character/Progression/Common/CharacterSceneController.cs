@@ -1,10 +1,13 @@
-﻿using Game.UI;
+using System;
+using System.Collections;
+using Game.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game.Characters
 {
-    /// <summary>仅管理展示模型。数据与操作交给养成服务。</summary>
+    /// <summary>
+    /// 初始化本场景的模型和必要 UI。数据规则交给养成服务，导航交给场景管理器。
+    /// </summary>
     public sealed class CharacterSceneController : MonoBehaviour, ISceneEntryPoint
     {
         [SerializeField]
@@ -12,34 +15,38 @@ namespace Game.Characters
         [SerializeField, Min(0.1f)]
         private float modelHeight = 3.4f;
         private GameObject model;
-        public string DisplayedUnitId { get; private set; }
         private UIHandle panelHandle;
-        public ISceneVisitLifecycle VisitLifecycle => new ScenePresentationLifecycle<CharacterSceneController>();
+        public string DisplayedUnitId { get; private set; }
+        public ISceneVisitLifecycle VisitLifecycle =>
+            new ScenePresentationLifecycle<CharacterSceneController>(CharacterSceneNavigator.PreviewMask);
 
         private void Start()
         {
-            if (GameSceneManager.Instance != null && GameSceneManager.Instance.IsScenePending(gameObject.scene)) return;
+            if (GameSceneManager.Instance != null && GameSceneManager.Instance.IsScenePending(gameObject.scene))
+                return;
             CharacterSceneNavigator.AdoptDirectScene(gameObject.scene);
         }
 
-        public System.Collections.IEnumerator InitializeScene(SceneVisitHandle visit, object context)
+        public IEnumerator InitializeScene(SceneVisitHandle visit, object context)
         {
             PlayerRuntime.EnsureCreated();
-            CharacterSceneNavigator.EnsureInstance();
             if (!PlayerRuntime.Instance.IsReady)
-                throw new System.InvalidOperationException(PlayerRuntime.Instance.LastMessage);
-
-            var selection = context as CharacterVisitContext;
+                throw new InvalidOperationException(PlayerRuntime.Instance.LastMessage);
             var ui = UIManager.Instance;
-            if (ui == null) throw new System.InvalidOperationException("UIManager 尚未初始化。");
-            panelHandle = ui.Open(UIId.CharacterDetail, new CharacterUIContext(this, selection?.UnitId,
-                selection?.Tab ?? CharacterTab.Attributes, selection?.EquipmentId), ownerSceneHandle: gameObject.scene.handle);
+            if (ui == null)
+                throw new InvalidOperationException("UIManager 尚未初始化。");
+            var selection = context as CharacterSceneContext ?? new CharacterSceneContext();
+            panelHandle = ui.Open(UIId.CharacterDetail,
+                new CharacterUIContext(this, selection.UnitId, selection.Tab, selection.EquipmentId),
+                ownerSceneHandle: gameObject.scene.handle);
             yield return ScenePresentationLifecycle<CharacterSceneController>.WaitForPanel(ui, panelHandle);
+            if (model == null)
+                throw new InvalidOperationException("角色展示模型未能初始化。");
         }
 
         public void Show(UnitConfig config)
         {
-            if (config == null || config.id == DisplayedUnitId)
+            if (config == null || config.prefab == null || config.id == DisplayedUnitId)
                 return;
             if (model != null)
                 Destroy(model);
@@ -72,9 +79,16 @@ namespace Game.Characters
 
         public void Rotate(float pixels)
         {
-            if (GameSceneManager.Instance != null && GameSceneManager.Instance.IsSceneSuspended(gameObject.scene)) return;
+            if (GameSceneManager.Instance != null && GameSceneManager.Instance.IsSceneSuspended(gameObject.scene))
+                return;
             if (model != null)
                 model.transform.Rotate(Vector3.up, -pixels * 0.35f, Space.World);
+        }
+
+        private void OnDestroy()
+        {
+            if (UIManager.Instance != null && panelHandle.IsValid)
+                UIManager.Instance.Close(panelHandle);
         }
     }
 

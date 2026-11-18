@@ -24,7 +24,7 @@ namespace XLua.CSObjectWrap
 		    Utils.BeginObjectRegister(typeof(Game.UI.UIId), L, translator, 0, 0, 0, 0);
 			Utils.EndObjectRegister(typeof(Game.UI.UIId), L, translator, null, null, null, null, null);
 			
-			Utils.BeginClassRegister(typeof(Game.UI.UIId), L, null, 20, 0, 0);
+			Utils.BeginClassRegister(typeof(Game.UI.UIId), L, null, 21, 0, 0);
 
             
             Utils.RegisterObject(L, translator, Utils.CLS_IDX, "None", Game.UI.UIId.None);
@@ -64,6 +64,8 @@ namespace XLua.CSObjectWrap
             Utils.RegisterObject(L, translator, Utils.CLS_IDX, "CharacterEquipment", Game.UI.UIId.CharacterEquipment);
             
             Utils.RegisterObject(L, translator, Utils.CLS_IDX, "CharacterConfirm", Game.UI.UIId.CharacterConfirm);
+            
+            Utils.RegisterObject(L, translator, Utils.CLS_IDX, "SceneTransition", Game.UI.UIId.SceneTransition);
             
 
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "__CastFrom", __CastFrom);
@@ -159,6 +161,10 @@ namespace XLua.CSObjectWrap
 				else if (LuaAPI.xlua_is_eq_str(L, 1, "CharacterConfirm"))
                 {
                     translator.PushGameUIUIId(L, Game.UI.UIId.CharacterConfirm);
+                }
+				else if (LuaAPI.xlua_is_eq_str(L, 1, "SceneTransition"))
+                {
+                    translator.PushGameUIUIId(L, Game.UI.UIId.SceneTransition);
                 }
 				else
                 {

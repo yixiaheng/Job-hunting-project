@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Game.Inventory;
+using Game.Characters;
+using Game.UI;
 using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -23,9 +23,6 @@ public static class InventoryDemoSetup
     public static void Setup()
     {
         if (EditorApplication.isPlaying) throw new InvalidOperationException("请在非运行状态搭建背包。");
-        var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-        if (scene.path != "Assets/Scenes/SampleScene.unity")
-            throw new InvalidOperationException("请先打开 SampleScene，再搭建背包。");
         font = CreateFont();
         EnsureFolder(ConfigPath + "/Materials");
         EnsureFolder(ConfigPath + "/Foods");
@@ -34,27 +31,16 @@ public static class InventoryDemoSetup
         EnsureFolder("Assets/Prefabs/UIPrefabs/Widgets/Inventory");
         ItemCatalog catalog = CreateCatalog();
         InventoryItemView itemPrefab = CreateItemPrefab();
-        InventoryManager manager = Object.FindFirstObjectByType<InventoryManager>(FindObjectsInactive.Include);
-        if (manager == null) manager = new GameObject("InventoryManager").AddComponent<InventoryManager>();
-        var managerData = new SerializedObject(manager);
-        if (managerData.FindProperty("catalog").objectReferenceValue == null)
+        var runtime = AssetDatabase.LoadAssetAtPath<PlayerRuntimeConfig>("Assets/Resources/Bootstrap/PlayerRuntimeConfig.asset");
+        if (runtime == null)
+            throw new InvalidOperationException("请先创建 PlayerRuntimeConfig，背包由统一玩家运行时初始化。");
+        if (runtime.items == null)
         {
-            managerData.FindProperty("catalog").objectReferenceValue = catalog;
-            var starting = managerData.FindProperty("startingItems");
-            starting.arraySize = catalog.items.Count;
-            for (int index = 0; index < catalog.items.Count; index++)
-            {
-                var element = starting.GetArrayElementAtIndex(index);
-                element.FindPropertyRelative("configId").stringValue = catalog.items[index].id;
-                element.FindPropertyRelative("quantity").intValue = catalog.items[index].IsEquipment ? 1
-                    : catalog.items[index].category == ItemCategory.Material ? 20 : 5;
-            }
-            managerData.ApplyModifiedPropertiesWithoutUndo();
+            runtime.items = catalog;
+            EditorUtility.SetDirty(runtime);
         }
-        BuildCanvas(manager, itemPrefab);
+        BuildCanvas(itemPrefab);
         AssetDatabase.SaveAssets();
-        EditorSceneManager.MarkSceneDirty(scene);
-        EditorSceneManager.SaveScene(scene);
         Debug.Log("背包搭建完成：12 份物品配置，运行后按 B 打开，Esc 关闭。");
     }
 
@@ -269,19 +255,36 @@ public static class InventoryDemoSetup
         return prefab.GetComponent<InventoryItemView>();
     }
 
-    private static void BuildCanvas(InventoryManager manager, InventoryItemView prefab)
+    private static void BuildCanvas(InventoryItemView prefab)
     {
-        InventoryUIController controller = Object.FindFirstObjectByType<InventoryUIController>(FindObjectsInactive.Include);
-        if (controller == null) throw new InvalidOperationException("SampleScene 缺少现有的 BackpackUICanvas 控制器。");
+        var registry = AssetDatabase.LoadAssetAtPath<UIRegistry>("Assets/Config/UI/UIRegistry.asset");
+        if (registry == null || !registry.TryGet(UIId.Backpack, out var config) || config.prefab == null)
+            throw new InvalidOperationException("请先在 UIRegistry 登记 Backpack 面板。");
+        string path = AssetDatabase.GetAssetPath(config.prefab);
+        if (!path.StartsWith("Assets/Prefabs/UIPrefabs/" + config.layer + "/", StringComparison.Ordinal))
+            throw new InvalidOperationException("背包面板目录必须与 UIConfig.layer 一致。");
+
+        var contents = PrefabUtility.LoadPrefabContents(path);
+        try
+        {
+            var controller = contents.GetComponent<InventoryUIController>();
+            if (controller == null)
+                throw new InvalidOperationException("Backpack prefab 缺少 InventoryUIController。");
+            // 已有布局不重建；只为已登记的空面板生成初始内容。
+            if (controller.transform.Find("InventoryRoot") == null)
+                BuildPanelContents(controller, prefab);
+            UIFrameworkSetup.ConfigurePanel(contents, config.layer, config.space);
+            PrefabUtility.SaveAsPrefabAsset(contents, path);
+        }
+        finally
+        {
+            PrefabUtility.UnloadPrefabContents(contents);
+        }
+    }
+
+    private static void BuildPanelContents(InventoryUIController controller, InventoryItemView prefab)
+    {
         Transform canvasRoot = controller.transform;
-        if (canvasRoot.Find("InventoryRoot") != null) return;
-        Canvas canvas = canvasRoot.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 100;
-        CanvasScaler scaler = canvasRoot.GetComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920f, 1080f);
-        scaler.matchWidthOrHeight = 0.5f;
         GameObject root = Rect("InventoryRoot", canvasRoot);
         Transform blur = canvasRoot.Find("Panel");
         if (blur != null)
@@ -343,7 +346,8 @@ public static class InventoryDemoSetup
         Button save = MakeButton("Save", content, new Vector2(0.55f, 0.045f), new Vector2(0.68f, 0.105f), "保存背包");
         var data = new SerializedObject(controller);
         Assign(data, "backPanel", root);
-        Assign(data, "inventory", manager);
+        // 面板在打开时绑定 InventoryManager.Instance，不序列化场景内的独立背包。
+        Assign(data, "inventory", null);
         Assign(data, "itemRoot", grid);
         Assign(data, "itemPrefab", prefab);
         Assign(data, "categoryDropdown", category);
@@ -374,8 +378,7 @@ public static class InventoryDemoSetup
             label.raycastTarget = false;
         }
         foreach (TMP_Text label in searchObject.GetComponentsInChildren<TMP_Text>(true)) label.fontSize = 23f;
-        if (Object.FindFirstObjectByType<EventSystem>() == null)
-            new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
+        // Canvas、EventSystem 和输入生命周期由 UIManager 统一提供。
         root.SetActive(false);
         EditorUtility.SetDirty(controller);
     }

@@ -2,7 +2,9 @@
 
 namespace Game.Characters
 {
-    /// <summary>界面预览与战斗快照共用同一个按效果键匹配的技能成长计算。</summary>
+    /// <summary>
+    /// 界面预览与战斗快照共用同一个按效果键匹配的技能成长计算。
+    /// </summary>
     public static class CharacterSkillCalculator
     {
         public static float Factor(CharacterGrowthConfig growth, CharacterProgress progress, SkillConfig skill, EffectConfig effect)

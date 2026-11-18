@@ -1,0 +1,60 @@
+PASS native entry exists 0
+PASS native entry button works 0
+PASS duplicate entry refused 0
+PASS time paused 0
+PASS source roots retained 0
+PASS source UI retained hidden 0
+PASS source clicks blocked 0
+PASS source cameras disabled 0
+PASS source listeners disabled 0
+PASS model bound 0
+PASS button wired: 升级
+PASS back closes popup before main
+PASS material cancel changes nothing
+PASS button wired: 升级
+PASS button wired: 使用 1 份
+PASS preview does not change level
+PASS confirmation cancel consumes nothing
+PASS button wired: 确认
+PASS real confirmation levels character
+PASS button wired: 技能
+PASS button wired: 确认
+PASS real confirmation upgrades basic skill
+PASS native save reload retains cultivation
+PASS drag rotation at zero time scale
+PASS source scene and time restored 0
+PASS same UI instance restored 0
+PASS source position restored 0
+PASS load party
+PASS party window has no main HUD entry
+PASS navigation preserves an existing party window
+PASS duplicate entry refused 1
+PASS time paused 1
+PASS source roots retained 1
+PASS source UI retained hidden 1
+PASS source clicks blocked 1
+PASS source cameras disabled 1
+PASS source listeners disabled 1
+PASS model bound 1
+PASS source scene and time restored 1
+PASS same UI instance restored 1
+PASS inventory progression entry connected
+PASS duplicate entry refused 2
+PASS time paused 2
+PASS source roots retained 2
+PASS source UI retained hidden 2
+PASS source clicks blocked 2
+PASS source cameras disabled 2
+PASS source listeners disabled 2
+PASS model bound 2
+PASS source scene and time restored 2
+PASS same UI instance restored 2
+PASS cultivated character enters party
+PASS cultivation stats enter actual BattleManager
+PASS cultivated skill enters actual battle
+PASS battle commands and enemy UI retained
+PASS battle cultivation blocked
+PASS original retry snapshot available
+PASS retry preserves snapshot
+PASS direct character scene load
+PASS direct character scene returns to Sample

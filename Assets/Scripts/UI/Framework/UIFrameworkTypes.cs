@@ -22,7 +22,9 @@ namespace Game.UI
         PartyBackdrop = 15,
         CharacterMaterials = 16,
         CharacterEquipment = 17,
-        CharacterConfirm = 18
+        CharacterConfirm = 18,
+        SceneTransition = 19,
+        Campaign = 20
     }
 
     public enum UILayer

@@ -401,12 +401,7 @@ namespace Game.Inventory
 
         private static EquipmentInstance Copy(EquipmentInstance instance)
         {
-            return new EquipmentInstance
-            {
-                instanceId = instance.instanceId, configId = instance.configId, level = instance.level,
-                experience = instance.experience, ascension = instance.ascension, isLocked = instance.isLocked,
-                superimposition = instance.superimposition
-            };
+            return instance.Copy();
         }
     }
 }

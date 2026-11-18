@@ -412,6 +412,7 @@ public static class CharacterProgressionSetup
         rect.offsetMin = rect.offsetMax = Vector2.zero;
         var panel = root.AddComponent<CharacterPanel>();
         panel.BuildLayout();
+        UIFrameworkSetup.ConfigurePanel(root, UILayer.Window);
         var prefab = PrefabUtility.SaveAsPrefabAsset(root, Prefabs + "/Window/Character/CharacterPanel.prefab");
         Object.DestroyImmediate(root);
         Register(UIId.CharacterDetail, prefab.GetComponent<UIPanel>(), UILayer.Window);
@@ -431,6 +432,7 @@ public static class CharacterProgressionSetup
             rect.offsetMin = rect.offsetMax = Vector2.zero;
             var popup = root.AddComponent<CharacterPopupPanel>();
             popup.BuildLayout();
+            UIFrameworkSetup.ConfigurePanel(root, UILayer.Popup);
             prefab = PrefabUtility.SaveAsPrefabAsset(root, Prefabs + "/Popup/Character/" + id + ".prefab");
             Object.DestroyImmediate(root);
             Register(id, prefab.GetComponent<UIPanel>(), UILayer.Popup);

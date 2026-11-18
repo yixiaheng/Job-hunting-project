@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Game.UI;
 using Game.Inventory;
@@ -60,7 +60,7 @@ namespace Game.Characters
         {
             if (rosterRoot == null)
                 BuildLayout();
-            back.onClick.AddListener(() => CharacterSceneNavigator.Instance?.Return());
+            back.onClick.AddListener(() => CharacterSceneNavigator.Return());
         }
 
         protected override void OnOpen(IUIContext context)
@@ -91,7 +91,7 @@ namespace Game.Characters
 
         public override bool HandleBack()
         {
-            CharacterSceneNavigator.Instance?.Return();
+            CharacterSceneNavigator.Return();
             return true;
         }
 

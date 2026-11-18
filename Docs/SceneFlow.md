@@ -21,13 +21,33 @@
 
 | 文件 | 职责 |
 | --- | --- |
-| `Assets/Scripts/Common/Scene/GameSceneManager.cs` | 常驻实例、异步场景操作、互斥、会话栈、失败清理、过渡与重试入口 |
+| `Assets/Scripts/Common/Scene/GameSceneManager.cs` | 常驻实例、异步场景操作、互斥、会话栈、流程顺序与失败清理 |
 | `Assets/Scripts/Common/Scene/SceneFlowTypes.cs` | 操作结果、只读会话句柄、加载参数、业务生命周期接口 |
-| `Assets/Scripts/Common/Scene/ScenePresentationLifecycle.cs` | 养成和配队共用的来源暂停 / 恢复策略、目标初始化与 UI 清理 |
+| `Assets/Scripts/Common/Scene/ScenePresentationLifecycle.cs` | 按目标展示层连接暂停策略与场景入口 |
+| `Assets/Scripts/Common/Scene/ScenePresentationScope.cs` | 来源玩法、动画、输入、UI 与时间的记录和恢复 |
+| `Assets/Scripts/Common/Scene/ScenePresentationVisibility.cs` | 相机、灯光和监听器的画面交接 |
+| `Assets/Scripts/UI/Framework/SceneTransitionPanel.cs` | UIManager 管理的 Overlay；场景管理器驱动淡入淡出，结束时统一释放遮罩和输入 |
 | `Assets/Scripts/GamePlay/Character/Progression/Common/CharacterSceneNavigator.cs` | 角色业务入口，校验数据与 UI，传角色、页签、装备上下文 |
 | `Assets/Scripts/UI/BattleParty/PartySceneNavigator.cs` | 探索配队入口、配队返回与重配取消 |
 | `Assets/Scripts/UI/BattleParty/PartySceneController.cs` | 配队展示、模型和业务上下文；开始战斗 |
 | `Assets/Scripts/GamePlay/Battle/InBattle/Common/BattleSessionController.cs` | 结算后重试、重配、退出；观察最终操作结果 |
+
+```mermaid
+flowchart TD
+    Entry[探索按钮 / 背包入口] --> Navigator[Character / Party Navigator]
+    Navigator --> Enter[GameSceneManager.EnterVisitAsync]
+    Enter --> Pause[Scope 暂停来源玩法，保留来源画面]
+    Pause --> Load[Additive 加载目标，隐藏目标相机和 UI]
+    Load --> Init[Lifecycle → Controller.InitializeScene]
+    Init --> Ready[模型和必要 UI 就绪]
+    Ready --> Handoff[交接画面、显示目标 UI]
+    Handoff --> Back[返回 / Esc → ReturnAsync]
+    Back --> Source[仍暂停的来源先提供画面]
+    Source --> Unload[卸载目标，释放 UI，恢复来源并出栈]
+    Handoff --> Battle[配队 StartBattle → ReplaceFromVisitAsync]
+    Battle --> Prepare[请求被接受后准备战斗上下文]
+    Prepare --> Single[Single 加载 Battle，释放所有展示会话]
+```
 
 角色养成示例调用链：
 
@@ -96,23 +116,56 @@ var loadedScene = operation.Scene;
 
 ## 新增一个需要往返的展示场景
 
-目标控制器实现 `ISceneEntryPoint`，并通过 `InitializeScene` 明确报告初始化完成。共享展示策略适用于类似养成 / 配队的界面；特殊玩法可以实现自己的 `ISceneVisitLifecycle`。
+先登记 SceneId、SceneCatalog 和构建列表；为模型分配独立展示层，让目标相机 / 灯光只照该层。UIConfig 和 prefab 按 UILayer 分类，保留原有空间与布局。
+
+控制器的最小形态如下。`panelId` 和 `previewMask` 在 Inspector 指向该场景的真实配置；业务初始化放在 Open 之前，模型 Animator 使用 UnscaledTime。
+
+```csharp
+public sealed class ExamplePresentationController : MonoBehaviour, ISceneEntryPoint
+{
+    [SerializeField] private UIId panelId;
+    [SerializeField] private LayerMask previewMask;
+    private SceneVisitHandle visit;
+    public ISceneVisitLifecycle VisitLifecycle =>
+        new ScenePresentationLifecycle<ExamplePresentationController>(previewMask.value);
+
+    private void Start()
+    {
+        var scenes = GameSceneManager.Instance;
+        if (!scenes.IsScenePending(gameObject.scene))
+            scenes.AdoptDirectScene(gameObject.scene, VisitLifecycle);
+    }
+
+    public IEnumerator InitializeScene(SceneVisitHandle handle, object context)
+    {
+        visit = handle;
+        // 在这里创建展示模型、订阅本场景业务事件。
+        var ui = UIManager.Instance;
+        var panel = ui.Open(panelId, context as IUIContext,
+            ownerSceneHandle: gameObject.scene.handle);
+        yield return ScenePresentationLifecycle<ExamplePresentationController>.WaitForPanel(ui, panel);
+    }
+
+    public void Return() => GameSceneManager.Instance.ReturnAsync(visit);
+    // OnDisable / OnDestroy 解除自己订阅的业务事件。
+}
+```
+
+导航入口只做业务校验并提交请求。以已实现的养成为例：
 
 ```csharp
 var operation = GameSceneManager.Instance.EnterVisitAsync(
     SceneId.Character,
-    new ScenePresentationLifecycle<CharacterSceneController>(),
-    new CharacterVisitContext(unitId, CharacterTab.LightCone, equipmentId),
-    SceneTransitionMode.Fade);
-
+    new ScenePresentationLifecycle<CharacterSceneController>(CharacterSceneNavigator.PreviewMask),
+    new CharacterSceneContext(unitId, CharacterTab.LightCone, equipmentId));
 operation.OnCompleted(result =>
 {
-    if (!result.Succeeded) UnityEngine.Debug.LogError(result.Error);
+    if (!result.Succeeded)
+        Debug.LogError(result.Error);
 });
-
-// 保存 operation.Visit，返回时交回管理器；只能返回栈顶。
-// GameSceneManager.Instance.ReturnAsync(operation.Visit);
 ```
+
+不要再增加一个常驻 Navigator，也不要在 Controller 中自行加载或卸载场景。面板从 Context 获取业务控制器，不由场景入口持有 UIManager 创建的面板实例。
 
 `ISceneVisitLifecycle` 的四个职责：
 
@@ -176,10 +229,10 @@ if (additive.Succeeded)
 - 暂停只捕获来源场景中的玩家、相机、监听器、灯光、Animator 与输入动作；常驻 UI 通过 UIManager 的呈现凭据管理。
 - `PlayerController.IsScenePaused` 独立于普通“禁止移动”；暂停期间不运行状态机或物理控制，不主动切 Idle 或清零速度。
 - 保存原时间比例、组件启用值、相机遮罩和实际启用的 InputAction，返回还原记录值。
-- 来源 UI 调用 `SuspendPresentation`，保留实例、打开状态和上下文；恢复 UI 的限制后再移除场景暂停限制。相机关闭与玩法暂停分阶段执行，来源画面保留到目标初始化完成。
+- 来源 UI 同时使用已有面板快照 `SuspendPresentation` 和覆盖后续面板的 `SuspendScenePresentation(source.handle)`，保留实例、打开状态和上下文；恢复 UI 的限制后再移除场景暂停限制。相机关闭与玩法暂停分阶段执行，来源画面保留到目标初始化完成。
 - 输入过渡锁由 UIManager 汇总；光标也仍由 UIManager 管理。
 - 展示模型使用非缩放时间。嵌套进入下一展示场景时，来源展示 Animator 也会暂停。
-- CharacterPreview 使用 Layer 8；PartyPreview 使用 Layer 9。Party 环境和运行时模型使用 Layer 9，Party 相机只看 Layer 9 和 UI；来源相机关闭时同时临时排除展示层，返回还原。
+- CharacterPreview 使用 Layer 8；PartyPreview 使用 Layer 9。Party 环境和运行时模型使用 Layer 9，Party 相机只看 Layer 9 和 UI；来源相机和灯光在加载前就排除本次目标层，但保持来源画面；目标 UI 初始化时隐藏。目标就绪后交接画面，返回卸载完成后恢复原 Mask。嵌套进入只排除下一目标的层，保留来源自己的展示层。
 - PartyBackdrop 仍是原 World Space UI，未改变其 Canvas 空间、世界位置和缩放。
 - `Time.timeScale = 0` 不代表所有自定义脚本都停止调用。未来新增使用非缩放时间的 NPC / 计时器时，在更新前检查 `GameSceneManager.Instance.IsSceneSuspended(gameObject.scene)`，或在业务生命周期中提供专门暂停逻辑。
 
@@ -190,11 +243,11 @@ if (additive.Succeeded)
 | 无效场景、并发请求、重复目标、非栈顶或过期句柄 | 立即返回失败结果，业务准备不执行 |
 | 新展示场景初始化失败 | 卸载本次创建的目标；成功清理后恢复来源 |
 | 返回时卸载被拒绝且目标仍在 | 保留会话与来源暂停，恢复目标交互，允许再次返回 |
-| 初始化失败且目标无法清理 | 保留场景与错误会话，显示恢复入口；拒绝无关请求 |
-| 清理完成但来源恢复仍出错 | 保留可重试的错误会话，不宣告返回成功 |
-| Single 已激活后初始化失败 | 说明旧场景无法回滚；通过恢复入口返回 Sample |
+| 初始化失败且目标无法清理 | 保留残留场景与会话；拒绝继续叠加；通过 `ReturnAsync(CurrentVisit)` 再次清理 |
+| 清理完成但来源恢复仍出错 | 保留错误记录，不宣告成功；错误从 SceneOperation 返回 |
+| Single 已激活后初始化失败 | 说明旧场景无法回滚；可调用普通 `ReturnToSampleAsync()` 返回 Sample |
 
-错误信息包含实际驻留场景，`Succeeded` 只在流程完成后为 true。编辑器回归中的卸载拒绝通过仅 Editor 编译的故障注入字段产生，正式玩家构建不包含该字段。
+不创建专用恢复 UI、不排队、不自动重试。错误由调用方从 SceneOperation 读取并写入现有日志。错误信息包含实际驻留场景，`Succeeded` 只在流程完成后为 true。编辑器回归中的卸载拒绝通过仅 Editor 编译的故障注入字段产生，正式玩家构建不包含该字段。
 
 ## 配置与回归入口
 
@@ -209,6 +262,6 @@ if (additive.Succeeded)
 
 回归使用临时存档槽，结束后恢复原 PlayerRuntimeConfig 的原始文件字节与 Play Mode 启动场景设置，删除测试存档槽。不会覆盖玩家现有进度，也不保存编辑器中未保存的探索场景。
 
-新回归结果位于 `Temp/SceneFlow/results.json`、`direct-Character.json`、`direct-Party.json`、`direct-Battle.json`；`restored.txt` 记录隔离配置已恢复。本次交付的原始结果另行保存为 `Docs/SceneFlowChecks.json`，不受 Temp 清理影响。实际执行范围与测试边界见 `Docs/SceneFlowVerification.md`。
+新回归结果位于 `Temp/SceneFlow/results.json`、`direct-Character.json`、`direct-Party.json`、`direct-Battle.json`；`restored.txt` 记录隔离配置已恢复。本轮整理结果保存为 `Docs/ArchitectureVerification/`；原来的 `SceneFlowChecks.json` 是历史结果。实际执行范围与测试边界见 `Docs/SceneFlowVerification.md`。
 
 本次没有加入认证、网络、Lua 改造、AB 场景加载、跨进程探索存档或新的异步库。

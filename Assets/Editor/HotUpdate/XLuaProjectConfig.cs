@@ -28,7 +28,6 @@ public static class XLuaProjectConfig
         typeof(Button),
         typeof(Selectable),
         typeof(Image),
-        typeof(Graphic),
         typeof(TMP_Text),
         typeof(UnityEvent),
         typeof(UIManager),
@@ -41,7 +40,8 @@ public static class XLuaProjectConfig
         typeof(UIInstanceMode),
         typeof(UICacheMode),
         typeof(UILifetime),
-        typeof(IUIContext)
+        typeof(IUIContext),
+        typeof(LuaUIPanel)
     };
 
     [CSharpCallLua]

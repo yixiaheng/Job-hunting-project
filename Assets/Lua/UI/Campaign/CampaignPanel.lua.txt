@@ -1,0 +1,108 @@
+local CampaignPanel = {}
+CampaignPanel.__index = CampaignPanel
+
+function CampaignPanel.Create(panel, refs)
+    assert(panel ~= nil, "CampaignPanel.Create requires panel")
+    assert(refs ~= nil, "CampaignPanel.Create requires refs")
+    assert(
+        refs.closeButton ~= nil,
+        "CampaignPanel requires refs.closeButton"
+    )
+
+    local instance = {
+        panel = panel,
+        refs = refs,
+        openCount = 0,
+        closeHandler = nil
+    }
+
+    setmetatable(instance, CampaignPanel)
+
+    print("[CampaignPanel] Create")
+
+    return instance
+end
+
+function CampaignPanel:OnInitialize()
+    print("[CampaignPanel] OnInitialize")
+
+    self.closeHandler = function()
+        self:HandleCloseClicked()
+    end
+
+    self.refs.closeButton.onClick:AddListener(
+        self.closeHandler
+    )
+end
+
+function CampaignPanel:OnOpen(context)
+    self.openCount = self.openCount + 1
+    self.context = context
+
+    print(
+        "[CampaignPanel] OnOpen, count = "
+        .. tostring(self.openCount)
+    )
+
+    self:Refresh()
+end
+
+function CampaignPanel:OnOpened()
+    print("[CampaignPanel] OnOpened")
+end
+
+function CampaignPanel:OnContextChanged(context)
+    self.context = context
+    self:Refresh()
+end
+
+function CampaignPanel:OnCoveredChanged(covered)
+    print(
+        "[CampaignPanel] OnCoveredChanged = "
+        .. tostring(covered)
+    )
+end
+
+function CampaignPanel:OnClosing()
+    print("[CampaignPanel] OnClosing")
+end
+
+function CampaignPanel:OnClosed()
+    print("[CampaignPanel] OnClosed")
+    self.context = nil
+end
+
+function CampaignPanel:HandleCloseClicked()
+    print("[CampaignPanel] Close button clicked")
+    self.panel:CloseSelf()
+end
+
+function CampaignPanel:Refresh()
+    if self.refs.titleText ~= nil then
+        self.refs.titleText.text = "活动"
+    end
+
+    if self.refs.statusText ~= nil then
+        self.refs.statusText.text = "七日签到即将接入"
+    end
+end
+
+function CampaignPanel:OnDestroy()
+    print("[CampaignPanel] OnDestroy")
+
+    if self.closeHandler ~= nil
+        and self.refs ~= nil
+        and self.refs.closeButton ~= nil then
+
+        self.refs.closeButton.onClick:RemoveListener(
+            self.closeHandler
+        )
+    end
+
+    self.closeHandler = nil
+    self.context = nil
+    self.panel = nil
+    self.refs = nil
+end
+
+return CampaignPanel

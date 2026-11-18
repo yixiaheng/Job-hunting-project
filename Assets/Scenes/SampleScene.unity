@@ -22129,138 +22129,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2001979969}
   m_Enabled: 1
---- !u!1 &885742650
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 885742652}
-  - component: {fileID: 885742651}
-  m_Layer: 0
-  m_Name: Spline (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &885742651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885742650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineContainer
-  m_Spline:
-    m_EditModeType: 1
-    m_Knots: []
-    m_MetaData: []
-    m_Closed: 0
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
-  m_Splines:
-  - m_EditModeType: 1
-    m_Knots:
-    - Position:
-        x: 0
-        y: 0
-        z: 0
-      TangentIn:
-        x: -0
-        y: -0
-        z: -0.19033365
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0.19033365
-      Rotation:
-        value:
-          x: -0.00211195
-          y: 0.5235885
-          z: 0.0012979278
-          w: 0.8519677
-    - Position:
-        x: 1.6980721
-        y: 0.009436335
-        z: 0.85973954
-      TangentIn:
-        x: -0
-        y: -0
-        z: -0.11329507
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0.08629909
-      Rotation:
-        value:
-          x: 0.0014414714
-          y: 0.94328934
-          z: -0.004096256
-          w: 0.33194333
-    - Position:
-        x: 0.998446
-        y: 0
-        z: 0.00532794
-      TangentIn:
-        x: -0
-        y: -0
-        z: -0.11043482
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0.11043482
-      Rotation:
-        value:
-          x: -0.0014371139
-          y: 0.9417206
-          z: -0.004023439
-          w: -0.3363689
-    m_MetaData:
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    m_Closed: 0
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
-  m_Knots:
-    m_KnotsLink: []
---- !u!4 &885742652
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885742650}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.047642708, y: 0, z: -2.3245344}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!205 &889549521
 LODGroup:
   m_ObjectHideFlags: 0
@@ -42319,6 +42187,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 119775588146814976, guid: 59bd166c883a13c4b81300500ca9bbed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119775588146814976, guid: 59bd166c883a13c4b81300500ca9bbed, type: 3}
       propertyPath: drawTripods
       value: 0
       objectReference: {fileID: 0}
@@ -42390,5 +42262,4 @@ SceneRoots:
   - {fileID: 592901561}
   - {fileID: 39617595}
   - {fileID: 798858262}
-  - {fileID: 885742652}
   - {fileID: 62191555}

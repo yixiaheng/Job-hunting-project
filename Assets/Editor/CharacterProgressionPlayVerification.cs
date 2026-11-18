@@ -25,11 +25,8 @@ public static class CharacterProgressionPlayVerification
     private static float timeScale;
     private static string rosterBefore, inventoryBefore, unitId;
     private static CharacterStats expected;
-    [Serializable]
-    private sealed class Setup
-    {
-        public SceneSetup[] scenes;
-    }
+    private const string ConfigPath = "Assets/Resources/Bootstrap/PlayerRuntimeConfig.asset";
+    private const string ConfigBackupPath = "Temp/CharacterProgressionChecks/runtime-config-before.bin";
 
     static CharacterProgressionPlayVerification()
     {
@@ -39,10 +36,14 @@ public static class CharacterProgressionPlayVerification
 
     public static void Begin()
     {
-        if (EditorSceneManager.GetSceneManagerSetup().Any(s => SceneManager.GetSceneByPath(s.path).isDirty))
-            throw new InvalidOperationException("请先保存当前场景。");
-        SessionState.SetString("CharacterChecks.setup", JsonUtility.ToJson(new Setup { scenes = EditorSceneManager.GetSceneManagerSetup() }));
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+            throw new InvalidOperationException("请先退出运行状态。");
+        Directory.CreateDirectory("Temp/CharacterProgressionChecks");
         var config = Resources.Load<PlayerRuntimeConfig>("Bootstrap/PlayerRuntimeConfig");
+        if (config == null || EditorUtility.IsDirty(config))
+            throw new InvalidOperationException("请先保存玩家配置的修改。");
+        File.WriteAllBytes(ConfigBackupPath, File.ReadAllBytes(ConfigPath));
+        SessionState.SetString("CharacterChecks.startScene", AssetDatabase.GetAssetPath(EditorSceneManager.playModeStartScene));
         SessionState.SetString("CharacterChecks.originalSlot", config.saveSlot);
         config.saveSlot = "slot_character_verification_" + Guid.NewGuid().ToString("N");
         SessionState.SetString("CharacterChecks.testSlot", config.saveSlot);
@@ -50,7 +51,8 @@ public static class CharacterProgressionPlayVerification
         AssetDatabase.SaveAssetIfDirty(config);
         SessionState.SetBool(Active, true);
         File.WriteAllText("Temp/CharacterProgressionChecks/playmode.txt", "");
-        EditorSceneManager.OpenScene("Assets/Scenes/SampleScene.unity");
+        // 只设置测试启动场景，不保存或重新打开用户正在编辑的场景。
+        EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/SampleScene.unity");
         EditorApplication.isPlaying = true;
     }
 
@@ -60,6 +62,7 @@ public static class CharacterProgressionPlayVerification
         {
             step = scenario = 0;
             at = EditorApplication.timeSinceStartup;
+            Application.runInBackground = true;
         }
 
         if (state != PlayModeStateChange.EnteredEditMode || !SessionState.GetBool(Active, false))
@@ -72,9 +75,9 @@ public static class CharacterProgressionPlayVerification
         string slot = SessionState.GetString("CharacterChecks.testSlot", "");
         if (slot.StartsWith("slot_character_verification_", StringComparison.Ordinal))
             TapTap21.SaveSystem.dyh.SaveSystem.DeleteSlot(slot);
-        var setup = JsonUtility.FromJson<Setup>(SessionState.GetString("CharacterChecks.setup", ""));
-        if (setup?.scenes != null)
-            EditorSceneManager.RestoreSceneManagerSetup(setup.scenes);
+        File.WriteAllBytes(ConfigPath, File.ReadAllBytes(ConfigBackupPath));
+        AssetDatabase.ImportAsset(ConfigPath);
+        EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(SessionState.GetString("CharacterChecks.startScene", ""));
     }
 
     private static void Check(bool condition, string name)

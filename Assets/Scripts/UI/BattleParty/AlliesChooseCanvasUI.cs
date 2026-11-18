@@ -18,7 +18,6 @@ public class AlliesChooseCanvasUI : UIPanel
     [SerializeField] private GameObject allyViewPrefab;
     [SerializeField] private Transform allyViewParent;
     [SerializeField] private Button confirmButton;
-    [SerializeField] private Button outsideClickButton;
 
     private readonly Dictionary<AllyView, UnitConfig> views = new();
     // Array indices are real formation slots; null keeps a slot empty.
@@ -35,8 +34,6 @@ public class AlliesChooseCanvasUI : UIPanel
     {
         if (confirmButton != null)
             confirmButton.onClick.AddListener(ConfirmSelection);
-        if (outsideClickButton != null)
-            outsideClickButton.onClick.AddListener(Close);
     }
 
     protected override void OnOpen(IUIContext context)
@@ -224,7 +221,5 @@ public class AlliesChooseCanvasUI : UIPanel
         ClearDraft();
         if (confirmButton != null)
             confirmButton.onClick.RemoveListener(ConfirmSelection);
-        if (outsideClickButton != null)
-            outsideClickButton.onClick.RemoveListener(Close);
     }
 }

@@ -21,16 +21,19 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(Game.UI.UIManager);
-			Utils.BeginObjectRegister(type, L, translator, 0, 9, 5, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 12, 5, 0);
 			
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AcquireTransitionInput", _m_AcquireTransitionInput);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "IsUnobstructedHUD", _m_IsUnobstructedHUD);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Open", _m_Open);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Close", _m_Close);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Release", _m_Release);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "IsOpen", _m_IsOpen);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Back", _m_Back);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "CloseAll", _m_CloseAll);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "ReleaseSceneUI", _m_ReleaseSceneUI);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SuspendPresentation", _m_SuspendPresentation);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SuspendScenePresentation", _m_SuspendScenePresentation);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "PresentationStateChanged", _e_PresentationStateChanged);
 			
@@ -85,6 +88,34 @@ namespace XLua.CSObjectWrap
         
         
         
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_AcquireTransitionInput(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                Game.UI.UIManager gen_to_be_invoked = (Game.UI.UIManager)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    
+                        var gen_ret = gen_to_be_invoked.AcquireTransitionInput(  );
+                        translator.PushAny(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _m_IsUnobstructedHUD(RealStatePtr L)
@@ -232,6 +263,35 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_Release(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                Game.UI.UIManager gen_to_be_invoked = (Game.UI.UIManager)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    Game.UI.UIHandle _handle;translator.Get(L, 2, out _handle);
+                    
+                        var gen_ret = gen_to_be_invoked.Release( _handle );
+                        LuaAPI.lua_pushboolean(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _m_IsOpen(RealStatePtr L)
         {
 		    try {
@@ -371,6 +431,35 @@ namespace XLua.CSObjectWrap
                 {
                     
                         var gen_ret = gen_to_be_invoked.SuspendPresentation(  );
+                        translator.PushAny(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_SuspendScenePresentation(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                Game.UI.UIManager gen_to_be_invoked = (Game.UI.UIManager)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    int _sceneHandle = LuaAPI.xlua_tointeger(L, 2);
+                    
+                        var gen_ret = gen_to_be_invoked.SuspendScenePresentation( _sceneHandle );
                         translator.PushAny(L, gen_ret);
                     
                     

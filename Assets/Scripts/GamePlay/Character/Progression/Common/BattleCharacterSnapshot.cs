@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Game.Characters
 {
+    /// <summary>
+    /// 把当前养成结果转换成战斗使用的数据快照，并创建战斗单位
+    /// </summary>
     public sealed class BattleCharacterSnapshot
     {
         private readonly UnitConfig source;

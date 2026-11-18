@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -76,7 +76,7 @@ public static class CharacterNavigationRegression
             Check(!Visible(),"entry hidden and not raycastable under backpack");Check(!axis.enabled,"backpack keeps camera locked");Check(CharacterSceneNavigator.TryEnter(),"navigation from an existing window accepted");Next(5);break;
         case 5:
             if(!ui.IsOpen(UIId.CharacterDetail))return;
-            CharacterSceneNavigator.Instance.Return();Next(6);break;
+            CharacterSceneNavigator.Return();Next(6);break;
         case 6:
             if(CharacterSceneNavigator.IsActive)return;
             Check(ui.IsOpen(UIId.Backpack)&&!axis.enabled&&ui.Input.Current.BlockCamera,"return preserves source window camera lock");Check(!Visible(),"entry stays hidden when source window restored");ui.Close(window);Next(7);break;
@@ -89,7 +89,7 @@ public static class CharacterNavigationRegression
             if(GameSceneManager.Instance.IsLoading)return;
             Check(axis.enabled&&Visible(),"party close restores main state");axis.enabled=false;Check(CharacterSceneNavigator.TryEnter(),"enter with pre-disabled camera");Next(10);break;
         case 10:
-            if(!ui.IsOpen(UIId.CharacterDetail))return;CharacterSceneNavigator.Instance.Return();Next(11);break;
+            if(!ui.IsOpen(UIId.CharacterDetail))return;CharacterSceneNavigator.Return();Next(11);break;
         case 11:
             if(CharacterSceneNavigator.IsActive)return;Check(!axis.enabled,"pre-disabled camera remains disabled");axis.enabled=true;entry.Open();Next(12);break;
         case 12:

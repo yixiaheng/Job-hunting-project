@@ -6,12 +6,14 @@ using UnityEngine;
 
 namespace Game.Characters
 {
-    /// <summary>全部培养指令先在副本预演，保存成功后才一次性发布新状态。</summary>
+    /// <summary>
+    /// 全部培养指令先在副本预演，保存成功后才一次性发布新状态。
+    /// </summary>
     public sealed class CharacterProgressionService : IEquipmentUsageProvider
     {
         private readonly UnitCatalog catalog;
         private readonly ItemCatalog items;
-        private readonly IPlayerProfileStore store;
+        private readonly IPlayerProfileCommitter profiles;
         private CharacterRosterData roster;
         private bool committing;
         public InventoryService Inventory { get; }
@@ -19,12 +21,13 @@ namespace Game.Characters
         public bool CanMutate { get; set; } = true;
         public IReadOnlyList<UnitConfig> OwnedCharacters => catalog.Units.Where(c => c != null && Find(c.id) != null).ToArray();
 
-        public CharacterProgressionService(UnitCatalog catalog, ItemCatalog items, InventoryService inventory, CharacterRosterData roster, IPlayerProfileStore store)
+        public CharacterProgressionService(UnitCatalog catalog, ItemCatalog items, InventoryService inventory,
+            CharacterRosterData roster, IPlayerProfileCommitter profiles)
         {
             this.catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
             this.items = items ?? throw new ArgumentNullException(nameof(items));
             Inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
-            this.store = store ?? throw new ArgumentNullException(nameof(store));
+            this.profiles = profiles ?? throw new ArgumentNullException(nameof(profiles));
             if (!ValidateRoster(roster, inventory, out string reason))
                 throw new ArgumentException(reason);
             this.roster = roster.Copy();
@@ -36,7 +39,11 @@ namespace Game.Characters
         public UnitConfig Config(string id) => catalog.FindById(id);
         public CharacterProgress GetCharacter(string id) => Find(id)?.Copy();
         public CharacterRosterData CreateSnapshot() => roster.Copy();
-        public CharacterStats Stats(string id) => Find(id)is CharacterProgress progress ? CharacterStatCalculator.Calculate(Config(id), progress, Inventory, out _) : default;
+        public CharacterStats Stats(string id)
+        {
+            var progress = Find(id);
+            return progress != null ? CharacterStatCalculator.Calculate(Config(id), progress, Inventory, out _) : default;
+        }
         public string EquipmentOwner(string instanceId)
         {
             if (string.IsNullOrEmpty(instanceId))
@@ -139,7 +146,7 @@ namespace Game.Characters
                 result.Success = true;
                 return result;
             }
-            catch (Exception exception)when (exception is ArgumentException || exception is OverflowException || exception is IndexOutOfRangeException)
+            catch (Exception exception) when (exception is ArgumentException || exception is OverflowException || exception is IndexOutOfRangeException)
             {
                 return Fail(result, "培养配置或数量无效：" + exception.Message);
             }
@@ -171,27 +178,17 @@ namespace Game.Characters
             try
             {
                 verified.roster.revision = checked(Revision + 1);
-                var profile = new PlayerProfileData
-                {
-                    roster = verified.roster.Copy(),
-                    inventory = verified.inventory
-                };
-                try
-                {
-                    if (!store.TrySave(profile, out reason))
-                        return false;
-                }
-                catch (Exception exception)
-                {
-                    reason = "保存失败：" + exception.Message;
+                // PublishCommitted 将背包修订号增加一次；提前记录成功保存对应的版本。
+                long nextInventoryRevision = checked(Inventory.Revision + 1);
+                if (!profiles.TrySave(verified.roster, verified.inventory, nextInventoryRevision, out reason))
                     return false;
-                }
 
                 roster = verified.roster.Copy();
                 if (!Inventory.TryRestore(verified.inventory, out reason, false))
                     throw new InvalidOperationException(reason);
                 Inventory.PublishCommitted();
-                Game.GameEvents.Character.Publish(new CharacterChangedEvent(verified.request.unitId, verified.request.operation, Revision, verified.affected.Distinct().ToArray()));
+                Game.GameEvents.Character.Publish(new CharacterChangedEvent(
+                    verified.request.unitId, verified.request.operation, Revision, verified.affected.Distinct().ToArray()));
                 return true;
             }
             finally
@@ -215,7 +212,17 @@ namespace Game.Characters
             {
                 UnitConfig config = progress == null ? null : catalog.FindById(progress.unitId);
                 CharacterGrowthConfig growth = config?.growth;
-                if (growth == null || !ids.Add(progress.unitId) || progress.ascension < 0 || progress.ascension >= growth.levelCaps.Length || progress.level < 1 || progress.level > growth.levelCaps[progress.ascension] || progress.experience < 0 || progress.rank < 0 || progress.rank > growth.shardCosts.Length || progress.equipment?.Length != 7 || progress.basicLevel < 1 || progress.skillLevel < 1 || progress.ultimateLevel < 1 || progress.basicLevel > growth.skillCaps[progress.ascension] || progress.skillLevel > growth.skillCaps[progress.ascension] || progress.ultimateLevel > growth.skillCaps[progress.ascension] || progress.experience >= growth.NextExperience(progress.level) || progress.level == growth.levelCaps[progress.ascension] && progress.experience != 0)
+                if (growth == null || !ids.Add(progress.unitId)
+                    || progress.ascension < 0 || progress.ascension >= growth.levelCaps.Length
+                    || progress.level < 1 || progress.level > growth.levelCaps[progress.ascension]
+                    || progress.experience < 0 || progress.experience >= growth.NextExperience(progress.level)
+                    || progress.level == growth.levelCaps[progress.ascension] && progress.experience != 0
+                    || progress.rank < 0 || progress.rank > growth.shardCosts.Length
+                    || progress.equipment?.Length != 7
+                    || progress.basicLevel < 1 || progress.skillLevel < 1 || progress.ultimateLevel < 1
+                    || progress.basicLevel > growth.skillCaps[progress.ascension]
+                    || progress.skillLevel > growth.skillCaps[progress.ascension]
+                    || progress.ultimateLevel > growth.skillCaps[progress.ascension])
                 {
                     reason = "角色存档含无效、重复或超出上限的进度。";
                     return false;
@@ -226,7 +233,9 @@ namespace Game.Characters
                     string id = progress.equipment[slot];
                     if (string.IsNullOrEmpty(id))
                         continue;
-                    if (!equipped.Add(id) || !inventory.TryGetEquipment(id, out EquipmentInstance instance) || !inventory.TryGetConfig(instance.configId, out ItemConfig item) || !(item is EquipmentConfig equipment) || !Matches(config, equipment, (EquipmentSlot)slot))
+                    if (!equipped.Add(id) || !inventory.TryGetEquipment(id, out EquipmentInstance instance)
+                        || !inventory.TryGetConfig(instance.configId, out ItemConfig item)
+                        || !(item is EquipmentConfig equipment) || !Matches(config, equipment, (EquipmentSlot)slot))
                     {
                         reason = "角色装备缺失、重复穿戴或不符合命途/部位限制。";
                         return false;
@@ -237,7 +246,12 @@ namespace Game.Characters
             return true;
         }
 
-        public static bool Matches(UnitConfig unit, EquipmentConfig equipment, EquipmentSlot slot) => slot == EquipmentSlot.LightCone ? equipment.equipmentKind == EquipmentKind.LightCone && equipment.path == unit.path : equipment.equipmentKind == EquipmentKind.Instrument && equipment.slot == slot;
+        public static bool Matches(UnitConfig unit, EquipmentConfig equipment, EquipmentSlot slot)
+        {
+            if (slot == EquipmentSlot.LightCone)
+                return equipment.equipmentKind == EquipmentKind.LightCone && equipment.path == unit.path;
+            return equipment.equipmentKind == EquipmentKind.Instrument && equipment.slot == slot;
+        }
         private static CharacterPreview Fail(CharacterPreview preview, string reason)
         {
             preview.Success = false;
@@ -269,7 +283,9 @@ namespace Game.Characters
             return true;
         }
 
-        private static bool Experience(CharacterPreview preview, InventoryService stage, string material, int requested, ItemUseKind kind, int currentLevel, int currentExperience, int cap, Func<int, int> next, out int level, out int experience)
+        private static bool Experience(CharacterPreview preview, InventoryService stage, string material, int requested,
+            ItemUseKind kind, int currentLevel, int currentExperience, int cap, Func<int, int> next,
+            out int level, out int experience)
         {
             level = currentLevel;
             experience = currentExperience;
@@ -373,7 +389,10 @@ namespace Game.Characters
 
         private bool Equip(CharacterPreview preview, InventoryService stage, CharacterProgress progress, UnitConfig unit, CharacterRequest request)
         {
-            if (!Enum.IsDefined(typeof(EquipmentSlot), request.slot) || !stage.TryGetEquipment(request.equipmentId, out EquipmentInstance instance) || !stage.TryGetConfig(instance.configId, out ItemConfig item) || !(item is EquipmentConfig equipment) || !Matches(unit, equipment, request.slot))
+            if (!Enum.IsDefined(typeof(EquipmentSlot), request.slot)
+                || !stage.TryGetEquipment(request.equipmentId, out EquipmentInstance instance)
+                || !stage.TryGetConfig(instance.configId, out ItemConfig item)
+                || !(item is EquipmentConfig equipment) || !Matches(unit, equipment, request.slot))
             {
                 preview.Message = "装备不存在，或命途/部位不匹配。";
                 return false;
@@ -407,7 +426,8 @@ namespace Game.Characters
 
         private bool Equipment(CharacterPreview preview, InventoryService stage, CharacterRequest request)
         {
-            if (!stage.TryGetEquipment(request.equipmentId, out EquipmentInstance instance) || !stage.TryGetConfig(instance.configId, out ItemConfig item) || !(item is EquipmentConfig config))
+            if (!stage.TryGetEquipment(request.equipmentId, out EquipmentInstance instance)
+                || !stage.TryGetConfig(instance.configId, out ItemConfig item) || !(item is EquipmentConfig config))
             {
                 preview.Message = "装备实例不存在。";
                 return false;
@@ -418,7 +438,9 @@ namespace Game.Characters
                 preview.affected.Add(owner);
             if (request.operation == CharacterOperation.Merge)
             {
-                if (config.equipmentKind != EquipmentKind.LightCone || instance.instanceId == request.materialEquipmentId || !stage.TryGetEquipment(request.materialEquipmentId, out EquipmentInstance donor) || donor.configId != instance.configId || donor.isLocked || IsEquipped(donor.instanceId))
+                if (config.equipmentKind != EquipmentKind.LightCone || instance.instanceId == request.materialEquipmentId
+                    || !stage.TryGetEquipment(request.materialEquipmentId, out EquipmentInstance donor)
+                    || donor.configId != instance.configId || donor.isLocked || IsEquipped(donor.instanceId))
                 {
                     preview.Message = "只能合并同款、未锁定、未穿戴的其他光锥。";
                     return false;

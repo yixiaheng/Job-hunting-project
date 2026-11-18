@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Game.Inventory;
 using TapTap21.SaveSystem.dyh;
@@ -17,8 +17,9 @@ namespace Game.Characters
         public bool IsReady { get; private set; }
         public string LastMessage { get; private set; }
 
-        private PlayerProfileStore store;
-        private bool dirty;
+        public PlayerProfileCoordinator Profiles { get; private set; }
+        private bool HasUnsavedChanges => IsReady && !Inventory.IsReadOnly
+            && Profiles.HasChanges(Characters.Revision, Inventory.Revision);
         private float retryAt;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetRuntime()
@@ -49,10 +50,10 @@ namespace Game.Characters
                 if (Config == null || Config.units == null || Config.items == null)
                     throw new InvalidOperationException("缺少玩家运行时配置或角色/物品目录。");
                 Inventory = new InventoryService(Config.items);
-                store = new PlayerProfileStore(Config.saveSlot);
+                var store = new PlayerProfileStore(Config.saveSlot);
                 var loaded = store.Load();
                 PlayerProfileData profile;
-                bool migrated = false;
+                bool created = false;
                 if (loaded.Success)
                 {
                     profile = loaded.Data;
@@ -61,30 +62,16 @@ namespace Game.Characters
                 }
                 else if (loaded.Status == SaveStatus.NotFound)
                 {
-                    profile = new PlayerProfileData();
-                    var legacy = SaveSystem.Load(InventorySaveDefinitions.Inventory, Config.saveSlot);
-                    if (legacy.Success)
-                    {
-                        profile = PlayerProfileMigration.ImportLegacy(legacy.Data, Config);
-                    }
-                    else if (legacy.Status == SaveStatus.NotFound)
-                    {
-                        var starting = new InventoryService(Config.items, false);
-                        if (Config.startingItems.Count > 0 && !starting.TryAddRewards(Config.startingItems, out string error))
-                            throw new InvalidOperationException(error);
-                        profile.inventory = starting.CreateSnapshot();
-                    }
-                    else
-                        throw new InvalidOperationException("旧背包读取失败：" + legacy.Message);
-                    PlayerProfileMigration.AddInitialCharacters(profile, Config);
-                    migrated = true;
+                    profile = PlayerProfileFactory.Create(Config);
+                    created = true;
                 }
                 else
                     throw new InvalidOperationException("玩家进度读取失败：" + loaded.Message);
                 if (!Inventory.TryRestore(profile.inventory, out string reason, false))
                     throw new InvalidOperationException(reason);
-                Characters = new CharacterProgressionService(Config.units, Config.items, Inventory, profile.roster, store);
-                if (migrated && !store.TrySave(profile, out reason))
+                Profiles = new PlayerProfileCoordinator(store, profile, Inventory.Revision, !created, loaded.UsedBackup);
+                Characters = new CharacterProgressionService(Config.units, Config.items, Inventory, profile.roster, Profiles);
+                if (created && !Profiles.TrySave(profile.roster, profile.inventory, Inventory.Revision, out reason))
                     throw new InvalidOperationException(reason);
                 IsReady = true;
                 if (loaded.UsedBackup)
@@ -94,8 +81,10 @@ namespace Game.Characters
                     Debug.LogWarning("玩家进度从成组备份读取，目前只读，损坏的原文件不会被覆盖。", this);
                 }
 
-                LastMessage = loaded.UsedBackup ? "玩家进度已成组从备份恢复。" : migrated ? "玩家数据初始化/迁移完成。" : "玩家数据已读取。";
-                Inventory.Changed += OnInventoryChanged;
+                if (loaded.UsedBackup)
+                    LastMessage = "玩家进度已成组从备份恢复。";
+                else
+                    LastMessage = created ? "玩家初始数据已创建。" : "玩家数据已读取。";
                 gameObject.AddComponent<InventoryManager>();
                 gameObject.AddComponent<CharacterNavigationBridge>();
             }
@@ -111,50 +100,48 @@ namespace Game.Characters
             }
         }
 
-        private void OnInventoryChanged()
-        {
-            dirty = true;
-        }
-
         public bool Save(out string reason)
         {
             reason = LastMessage;
-            if (!IsReady || Characters == null || store == null || Inventory.IsReadOnly)
+            if (!IsReady || Characters == null || Profiles == null || Inventory.IsReadOnly)
                 return false;
-            if (!store.TrySave(new PlayerProfileData { roster = Characters.CreateSnapshot(), inventory = Inventory.CreateSnapshot() }, out reason))
+            if (!Profiles.HasChanges(Characters.Revision, Inventory.Revision))
+            {
+                reason = null;
+                return true;
+            }
+            if (!Profiles.TrySave(Characters.CreateSnapshot(), Inventory.CreateSnapshot(), Inventory.Revision, out reason))
             {
                 LastMessage = "保存失败：" + reason;
                 retryAt = Time.unscaledTime + 5f;
                 return false;
             }
 
-            dirty = false;
+            retryAt = 0f;
             LastMessage = "玩家进度已保存。";
             return true;
         }
 
         private void LateUpdate()
         {
-            if (dirty && IsReady && Time.unscaledTime >= retryAt)
+            if (HasUnsavedChanges && Time.unscaledTime >= retryAt)
                 Save(out _);
         }
 
         private void OnApplicationPause(bool pause)
         {
-            if (pause && dirty)
+            if (pause && HasUnsavedChanges)
                 Save(out _);
         }
 
         private void OnApplicationQuit()
         {
-            if (dirty)
+            if (HasUnsavedChanges)
                 Save(out _);
         }
 
         private void OnDestroy()
         {
-            if (Inventory != null)
-                Inventory.Changed -= OnInventoryChanged;
             if (Instance == this)
                 Instance = null;
         }

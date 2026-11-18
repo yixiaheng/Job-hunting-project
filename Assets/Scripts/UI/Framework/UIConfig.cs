@@ -18,6 +18,8 @@ namespace Game.UI
         public UIInstanceMode instanceMode = UIInstanceMode.Single;
         public UICacheMode cacheMode = UICacheMode.Keep;
         public UILifetime lifetime = UILifetime.Scene;
+        [Tooltip("关闭此项用于切换黑幕等系统 UI，使其不随业务场景界面挂起。")]
+        public bool suspendWithPresentation = true;
 
         [Header("Navigation")]
         public bool handlesBack = true;

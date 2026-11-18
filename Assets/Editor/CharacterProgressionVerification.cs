@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,12 +14,14 @@ public static class CharacterProgressionVerification
     private sealed class MemoryStore : IPlayerProfileStore
     {
         public bool Fail;
+        public int SaveCount;
         public PlayerProfileData Saved;
         public bool TrySave(PlayerProfileData profile, out string reason)
         {
             reason = Fail ? "simulated disk failure" : null;
             if (Fail)
                 return false;
+            SaveCount++;
             Saved = JsonUtility.FromJson<PlayerProfileData>(JsonUtility.ToJson(profile));
             return true;
         }
@@ -48,7 +50,9 @@ public static class CharacterProgressionVerification
         foreach (var unit in runtime.units.Units)
             roster.characters.Add(new CharacterProgress { unitId = unit.id });
         var store = new MemoryStore();
-        var service = new CharacterProgressionService(runtime.units, runtime.items, inventory, roster, store);
+        var profiles = new PlayerProfileCoordinator(store,
+            new PlayerProfileData { roster = roster, inventory = inventory.CreateSnapshot() }, inventory.Revision);
+        var service = new CharacterProgressionService(runtime.units, runtime.items, inventory, roster, profiles);
         var first = runtime.units.Units[0];
         string id = first.id;
         CharacterRequest Request(CharacterOperation op) => new CharacterRequest
@@ -61,6 +65,10 @@ public static class CharacterProgressionVerification
             var p = service.Preview(request);
             Check(p.Success, name + " preview: " + p.Message);
             Check(service.TryCommit(p, out string reason), name + " commit: " + reason);
+            int writes = store.SaveCount;
+            Check(!profiles.HasChanges(service.Revision, inventory.Revision), name + " saved revisions match runtime");
+            Check(profiles.TrySave(service.CreateSnapshot(), inventory.CreateSnapshot(), inventory.Revision, out _)
+                && store.SaveCount == writes, name + " autosave does not duplicate write");
         }
 
         bool notificationRejected = false;
@@ -217,7 +225,7 @@ public static class CharacterProgressionVerification
         Commit(duplicate, "duplicate character");
         Check(inventory.GetQuantity(first.growth.shardItem) == shards + 10, "duplicate converts to ten shards even at max rank");
         CombatChecks(runtime);
-        SaveAndMigrationChecks(runtime);
+        ProfileSaveChecks(runtime);
         Check(SceneCatalogEditorUtility.ValidateRuntimeCatalog(), "scene catalog valid");
         File.WriteAllLines("Temp/CharacterProgressionChecks/editmode.txt", results.Concat(new[] { "TOTAL " + count + " assertions passed" }));
         Debug.Log("Character progression verification: " + count + " assertions passed.");
@@ -308,26 +316,59 @@ public static class CharacterProgressionVerification
     }
 
     private static double flowTime(BattleUnit caster) => 2 * ActionQueue.BaseActionValue / caster.speed;
-    private static void SaveAndMigrationChecks(PlayerRuntimeConfig runtime)
+    private static void ProfileSaveChecks(PlayerRuntimeConfig runtime)
     {
-        var legacy = new InventoryData();
-        legacy.stacks.Add(new ItemStack { configId = "character_exp", quantity = 2 });
-        legacy.equipment.Add(new EquipmentInstance { instanceId = "legacy-equipment-stable-id", configId = "cone_guard", level = 45, superimposition = 0 });
-        var imported = PlayerProfileMigration.ImportLegacy(legacy, runtime);
-        Check(imported.inventory.equipment[0].instanceId == "legacy-equipment-stable-id" && imported.inventory.equipment[0].ascension == 2 && imported.inventory.equipment[0].superimposition == 1, "legacy equipment IDs and missing fields migrated");
-        Check(imported.roster.characters.Count == 6 && imported.inventory.stacks.Count == 1 && imported.inventory.stacks[0].quantity == 2, "legacy migration preserves quantities without starter rewards");
-        PlayerProfileMigration.AddInitialCharacters(imported, runtime);
-        Check(imported.roster.characters.Count == 6 && legacy.equipment[0].superimposition == 0, "legacy migration is idempotent and leaves input untouched");
+        var initial = PlayerProfileFactory.Create(runtime);
+        Check(initial.roster.characters.Count == runtime.startingCharacters.Distinct().Count(), "factory creates configured initial roster");
+        var restored = new InventoryService(runtime.items, false);
+        Check(restored.TryRestore(initial.inventory, out _, false), "factory inventory restores");
+        foreach (var reward in runtime.startingItems.Where(i => !runtime.items.BuildIndex()[i.configId].IsEquipment))
+            Check(restored.GetQuantity(reward.configId) >= reward.quantity, "factory includes starter " + reward.configId);
+
+        var memory = new MemoryStore();
+        var profiles = new PlayerProfileCoordinator(memory, initial, restored.Revision, false);
+        Check(profiles.HasChanges(initial.roster.revision, restored.Revision), "new profile needs initial save");
+        Check(profiles.TrySave(initial.roster, initial.inventory, restored.Revision, out _), "new complete profile saves");
+        int writes = memory.SaveCount;
+        Check(profiles.TrySave(initial.roster, initial.inventory, restored.Revision, out _) && memory.SaveCount == writes,
+            "unchanged profile skips writing");
+        var copy = initial.Copy();
+        copy.roster.characters[0].level = 2;
+        copy.inventory.stacks[0].quantity++;
+        copy.inventory.equipment[0].isLocked = !initial.inventory.equipment[0].isLocked;
+        Check(initial.roster.characters[0].level == 1 && copy.inventory.stacks[0].quantity != initial.inventory.stacks[0].quantity
+            && copy.inventory.equipment[0].isLocked != initial.inventory.equipment[0].isLocked, "complete snapshot owns deep copies");
+
+        Check(restored.TryAdd("character_exp", 1, out _), "ordinary inventory mutation");
+        memory.Fail = true;
+        Check(!profiles.TrySave(initial.roster, restored.CreateSnapshot(), restored.Revision, out _)
+            && profiles.HasChanges(initial.roster.revision, restored.Revision), "failed autosave remains dirty");
+        memory.Fail = false;
+        Check(profiles.TrySave(initial.roster, restored.CreateSnapshot(), restored.Revision, out _)
+            && !profiles.HasChanges(initial.roster.revision, restored.Revision), "ordinary inventory retry saves latest state");
+        var readOnly = new PlayerProfileCoordinator(memory, initial, restored.Revision, readOnly: true);
+        Check(!readOnly.TrySave(initial.roster, restored.CreateSnapshot(), restored.Revision, out _), "backup coordinator rejects writes");
+
         var empty = new InventoryService(runtime.items, false);
-        var fail = new CharacterProgressionService(runtime.units, runtime.items, empty, imported.roster, new MemoryStore());
-        Check(!fail.Preview(new CharacterRequest { unitId = imported.roster.characters[0].unitId, operation = CharacterOperation.Level }).Success, "insufficient materials has no changes");
+        var emptyProfile = new PlayerProfileData { roster = initial.roster, inventory = empty.CreateSnapshot() };
+        var fail = new CharacterProgressionService(runtime.units, runtime.items, empty, initial.roster,
+            new PlayerProfileCoordinator(new MemoryStore(), emptyProfile, empty.Revision));
+        Check(!fail.Preview(new CharacterRequest { unitId = initial.roster.characters[0].unitId, operation = CharacterOperation.Level }).Success,
+            "insufficient materials has no changes");
+        // 固定内容用于成组备份验证，和项目初始奖励数量无关。
+        var imported = new PlayerProfileData { roster = initial.roster.Copy() };
+        imported.inventory.stacks.Add(new ItemStack { configId = "character_exp", quantity = 2 });
         var storage = typeof(TapTap21.SaveSystem.dyh.SaveSystem).Assembly.GetType("TapTap21.SaveSystem.dyh.SaveStorage");
         var withRoot = storage.GetMethod("WithRoot", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic).MakeGenericMethod(typeof(bool));
         string root = Path.GetFullPath("Temp/CharacterProgressionChecks/Storage_" + Guid.NewGuid().ToString("N"));
         var action = new Func<bool>(() =>
         {
             var store = new PlayerProfileStore("slot_character_test");
+            Check(store.Load().Status == TapTap21.SaveSystem.dyh.SaveStatus.NotFound, "empty slot has no complete profile");
             Check(store.TrySave(imported, out _), "native profile serialization");
+            var loaded = store.Load();
+            Check(loaded.Success && !loaded.UsedBackup && loaded.Data.formatVersion == 1
+                && loaded.Data.inventory.stacks[0].quantity == 2, "existing complete profile reads without migration");
             string directory = Path.Combine(root, "Saves", "slot_character_test");
             File.WriteAllText(Path.Combine(directory, "unrelated_module.json"), "preserved");
             imported.roster.characters[0].level = 2;

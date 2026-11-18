@@ -51,7 +51,8 @@ namespace Game.Characters
         public void BuildLayout()
         {
             CharacterUIWidgets.Clear(transform);
-            CharacterUIWidgets.Image("Mask", transform, Vector2.zero, Vector2.one, new Color(0, 0, 0, .72f));
+            CharacterUIWidgets.Image("Mask", transform, Vector2.zero, Vector2.one, new Color(0, 0, 0, .72f))
+                .gameObject.AddComponent<UIMaskClose>();
             content = CharacterUIWidgets.Scroll(transform, new Vector2(.28f, .19f), new Vector2(.85f, .86f));
             var bottom = CharacterUIWidgets.Rect("Cancel", transform, new Vector2(.28f, .10f), new Vector2(.85f, .17f));
             cancel = CharacterUIWidgets.Button(bottom, "取消 / 返回");

@@ -153,12 +153,21 @@ public sealed class BattleSessionController : MonoBehaviour
         var operation = scenes.LoadAsync(target, new SceneLoadOptions
         {
             Prepare = prepare,
-            Rollback = () => { BattleLaunchContext.Restore(pending); BattleSessionContext.Restore(previous); }
+            Rollback = () =>
+            {
+                BattleLaunchContext.Restore(pending);
+                BattleSessionContext.Restore(previous);
+            }
         });
         operation.OnCompleted(result =>
         {
-            if (result.Succeeded) return;
-            if (this != null) { navigating = false; SetResultBusy(false); }
+            if (result.Succeeded)
+                return;
+            if (this != null)
+            {
+                navigating = false;
+                SetResultBusy(false);
+            }
             Debug.LogError(result.Error);
         });
     }

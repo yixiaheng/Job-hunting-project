@@ -63,6 +63,7 @@ public static class SceneFlowSetup
         InstallPartyEntry();
         InstallPartyBack();
         ConfigurePartyScene();
+        UIFrameworkSetup.Apply();
         if (!SceneCatalogEditorUtility.ValidateRuntimeCatalog()) throw new InvalidOperationException("Scene catalog validation failed.");
     }
 

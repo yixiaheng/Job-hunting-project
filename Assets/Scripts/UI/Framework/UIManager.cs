@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -126,6 +126,7 @@ namespace Game.UI
                 Back();
 #endif
 
+            //光标处理：不同界面对光标的显示要求不同
             if (inputCoordinator.Current.ShowCursor)
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -179,8 +180,26 @@ namespace Game.UI
                 return default;
             }
 
-            //有就取出，没有就创建
-            UIInstanceRecord instance = GetOrCreate(config, ownerSceneHandle);
+            // 子窗口默认属于父窗口的场景，不能依赖加载过程中的活动场景。
+            if (!ownerSceneHandle.HasValue && parent.HasValue
+                && TryGetInstance(parent.Value, out UIInstanceRecord parentInstance))
+            {
+                ownerSceneHandle = parentInstance.OwnerSceneHandle;
+            }
+
+            UIInstanceRecord instance;
+            try
+            {
+                // 有就取出，没有就创建。初始化失败不能污染实例缓存。
+                instance = GetOrCreate(config, ownerSceneHandle);
+            }
+            catch (System.Exception exception)
+            {
+                Debug.LogError(
+                    $"创建 UI '{id}' 失败，已回滚本次实例。\n{exception}",
+                    config);
+                return default;
+            }
             //设置父节点
             SetParent(instance, parent);
             
@@ -191,6 +210,7 @@ namespace Game.UI
             {
                 instance.Panel.UpdateContext(context);
                 BringToFront(instance);
+                RefreshFrameworkState();
             }
 
             StartProcessing(instance);
@@ -213,6 +233,17 @@ namespace Game.UI
                 return false;
 
             return Close(instance.Handle);
+        }
+
+        /// <summary>立即关闭并释放面板及子面板。用于场景清理；普通交互使用 Close 播放关闭动画。</summary>
+        public bool Release(UIHandle handle)
+        {
+            if (!TryGetInstance(handle, out UIInstanceRecord instance))
+                return false;
+
+            ReleaseInstanceImmediately(instance);
+            RefreshFrameworkState();
+            return true;
         }
 
         public bool IsOpen(UIId id)
@@ -242,13 +273,27 @@ namespace Game.UI
         public bool Back()
         {
             if (transitionInputs > 0) return false;
+            //从上向下找可以响应Esc的面板
             for (int index = openedPanels.Count - 1; index >= 0; index--)
             {
                 UIInstanceRecord instance = openedPanels[index];
-                if (instance.Suspended || !instance.Config.handlesBack || !instance.Panel.CanCloseFromBack())
+
+                //被挂起/暂时失效
+                if (instance.Suspended)
                     continue;
 
-                if (!instance.Panel.HandleBack()) Close(instance.Handle);
+                //这个面板不处理返回并且不可关闭
+                if (!instance.Config.handlesBack || !instance.Panel.CanCloseFromBack())
+                {
+                    // A modal that cannot return must not send Esc to a window behind it.
+                    // 这个面板是否hideLowerWindows，也就是挡住后面的窗口
+                    if (instance.Config.modal || instance.Config.hideLowerWindows)
+                        return false;
+                    continue;
+                }
+
+                if (!instance.Panel.HandleBack())
+                    Close(instance.Handle);
                 return true;
             }
 
@@ -301,12 +346,14 @@ namespace Game.UI
 
         private UIInstanceRecord GetOrCreate(UIConfig config, int? ownerSceneHandle)
         {
+            //如果为Single并且已经存在，直接返回对象即可
             if (config.instanceMode == UIInstanceMode.Single
                 && singleInstances.TryGetValue(config.id, out UIInstanceRecord existing))
             {
                 return existing;
             }
 
+            //不存在/多个存在，则需要进行创建
             Transform parent = GetPanelRoot(config);
 
             // A separate group gates presentation without fighting the panel transition alpha.
@@ -315,17 +362,32 @@ namespace Game.UI
             presentationRect.SetParent(parent, false);
             presentationRect.anchorMin = Vector2.zero; presentationRect.anchorMax = Vector2.one;
             presentationRect.offsetMin = presentationRect.offsetMax = Vector2.zero;
+            // 创建对象
             UIPanel panel = Instantiate(config.prefab, presentationRect, false);
             panel.gameObject.SetActive(false);
 
             UIHandle handle = new(nextInstanceId++);
             UIInstanceRecord instance = new(handle, config, panel, ownerSceneHandle ?? SceneManager.GetActiveScene().handle);
-            instances.Add(handle.Value, instance);
 
+            try
+            {
+                panel.Initialize(this, handle, config);
+            }
+            catch
+            {
+                Destroy(presentation);
+                throw;
+            }
+
+            instances.Add(handle.Value, instance);
             if (config.instanceMode == UIInstanceMode.Single)
                 singleInstances.Add(config.id, instance);
 
-            panel.Initialize(this, handle, config);
+            foreach (var lease in scenePresentationLeases)
+            {
+                if (lease.SceneHandle == instance.OwnerSceneHandle)
+                    lease.Hold(instance);
+            }
             return instance;
         }
 
@@ -366,6 +428,9 @@ namespace Game.UI
                     RegisterOpened(instance);
                     yield return instance.Panel.OpenRoutine(instance.PendingContext);
 
+                    if (!instances.ContainsKey(instance.Handle.Value))
+                        yield break;
+
                     if (instance.RequestedOpen)
                     {
                         // 打开动画期间也可能收到下一行对话或新的交互目标。
@@ -403,6 +468,8 @@ namespace Game.UI
                 }
 
                 yield return instance.Panel.CloseRoutine();
+                if (!instances.ContainsKey(instance.Handle.Value))
+                    yield break;
                 UnregisterOpened(instance, !instance.RequestedOpen);
 
                 if (instance.RequestedOpen)
@@ -429,7 +496,8 @@ namespace Game.UI
 
             openedPanels.Add(instance);
             instance.OpenOrder = ++openOrder;
-            backgroundController.Acquire(instance.Handle, instance.Config);
+            if (!instance.Suspended)
+                backgroundController.Acquire(instance.Handle, instance.Config);
             BringToFront(instance);
             RefreshFrameworkState();
         }
@@ -493,33 +561,51 @@ namespace Game.UI
         public System.IDisposable SuspendPresentation()
             => SuspendPresentationInternal(null);
 
+        /// <summary>按场景挂起同时覆盖租约存续期间新建的面板。</summary>
         public System.IDisposable SuspendScenePresentation(int sceneHandle)
             => SuspendPresentationInternal(sceneHandle);
 
+        private readonly List<PresentationLease> scenePresentationLeases = new();
+
         private System.IDisposable SuspendPresentationInternal(int? sceneHandle)
         {
-            var held = new List<UIInstanceRecord>();
+            var lease = new PresentationLease(this, sceneHandle);
+            if (sceneHandle.HasValue)
+                scenePresentationLeases.Add(lease);
             foreach (var record in instances.Values)
-                if (!sceneHandle.HasValue || record.OwnerSceneHandle == sceneHandle.Value) held.Add(record);
-            foreach (var record in held)
             {
-                record.SuspendCount++;
-                record.Panel.SetPresentationSuspended(true);
-                backgroundController.Release(record.Handle);
+                if (!sceneHandle.HasValue || record.OwnerSceneHandle == sceneHandle.Value)
+                    lease.Hold(record);
             }
             RefreshFrameworkState();
-            return new PresentationLease(this, held);
+            return lease;
         }
 
         private sealed class PresentationLease : System.IDisposable
         {
             private UIManager manager;
-            private readonly List<UIInstanceRecord> held;
-            public PresentationLease(UIManager manager, List<UIInstanceRecord> held)
-            { this.manager = manager; this.held = held; }
+            private readonly List<UIInstanceRecord> held = new();
+            public int? SceneHandle { get; }
+
+            public PresentationLease(UIManager manager, int? sceneHandle)
+            {
+                this.manager = manager;
+                SceneHandle = sceneHandle;
+            }
+
+            public void Hold(UIInstanceRecord record)
+            {
+                if (!record.Config.suspendWithPresentation)
+                    return;
+                held.Add(record);
+                record.SuspendCount++;
+                record.Panel.SetPresentationSuspended(true);
+                manager.backgroundController.Release(record.Handle);
+            }
             public void Dispose()
             {
                 if (manager == null) return;
+                manager.scenePresentationLeases.Remove(this);
                 foreach (var record in held)
                 {
                     if (!manager.instances.ContainsKey(record.Handle.Value)) continue;
@@ -533,11 +619,25 @@ namespace Game.UI
             }
         }
 
+        /// <summary>
+        /// 状态刷新
+        /// </summary>
         private void RefreshFrameworkState()
         {
+            // 通过面板层级和打开顺序进行排序
+            // Use the same layer and within-layer order for rendering, Back and coverage.
+            openedPanels.Sort((left, right) =>
+            {
+                int layerOrder = left.Config.layer.CompareTo(right.Config.layer);
+                return layerOrder != 0 ? layerOrder : left.OpenOrder.CompareTo(right.OpenOrder);
+            });
+            //刷新覆盖状态
             RefreshCoveredState();
+            //刷新输入协调，需不需要锁定输入
             inputCoordinator.Refresh(openedPanels, transitionInputs > 0);
+            //刷新光标状态
             RefreshCursorState();
+            //发布变更声明
             PresentationStateChanged?.Invoke();
         }
 
@@ -568,6 +668,7 @@ namespace Game.UI
             for (int lowerIndex = 0; lowerIndex < openedPanels.Count; lowerIndex++)
             {
                 bool covered = false;
+                bool hidden = false;
                 for (int higherIndex = lowerIndex + 1; higherIndex < openedPanels.Count; higherIndex++)
                 {
                     if (openedPanels[higherIndex].Suspended) continue;
@@ -575,11 +676,14 @@ namespace Game.UI
                     if (higherConfig.modal || higherConfig.hideLowerWindows)
                     {
                         covered = true;
-                        break;
+                        // HUD remains visible; hideLowerWindows hides windows and popups below.
+                        UILayer lowerLayer = openedPanels[lowerIndex].Config.layer;
+                        hidden |= higherConfig.hideLowerWindows
+                            && (lowerLayer == UILayer.Window || lowerLayer == UILayer.Popup);
                     }
                 }
 
-                openedPanels[lowerIndex].Panel.SetCovered(covered);
+                openedPanels[lowerIndex].Panel.SetCovered(covered, hidden);
             }
         }
 

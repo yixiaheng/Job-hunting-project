@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "error": null,
+  "phase": "completed",
+  "unityVersion": "6000.3.23f1",
+  "completedAt": "2026-11-08T23:04:34.4440874+08:00",
+  "checkCount": 4,
+  "checks": [
+    "Editor bootstraps target as the only scene",
+    "Start adopts direct presentation without a source",
+    "Esc returns direct presentation",
+    "direct startup returns to Sample and restores time"
+  ],
+  "notes": [],
+  "hotUpdateError": "本地首包 AssetBundle 不存在；请先构建 Windows AssetBundles。"
+}

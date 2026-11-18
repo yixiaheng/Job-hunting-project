@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 900000001}
   - component: {fileID: 900000002}
   - component: {fileID: 900000003}
+  - component: {fileID: 5443888657962877905}
   m_Layer: 5
   m_Name: AlliesChooseWindow
   m_TagString: Untagged
@@ -415,7 +416,6 @@ MonoBehaviour:
   allyViewPrefab: {fileID: 4829738574595794870, guid: c73ba40be23fed34cb76cd06160e4748, type: 3}
   allyViewParent: {fileID: 1072047807}
   confirmButton: {fileID: 810000002}
-  outsideClickButton: {fileID: 900000012}
 --- !u!1 &900000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 900000014}
   - component: {fileID: 900000013}
   - component: {fileID: 900000012}
+  - component: {fileID: 4050716073669028459}
   m_Layer: 5
   m_Name: OutsideClickMask
   m_TagString: Untagged
@@ -810,3 +811,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5443888657962877905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b1911348dff124c87f852712e3ff76, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIFadeTransition
+  duration: 0.2
+  ease: 6
+--- !u!114 &4050716073669028459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b25136a44cf7b4dbf9641af24b9e17, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIMaskClose
