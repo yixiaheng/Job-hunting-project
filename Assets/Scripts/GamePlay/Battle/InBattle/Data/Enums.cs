@@ -8,6 +8,7 @@ public enum EffectType
     AdvanceAction,
     RemoveDeBuff,
     RemoveBuff,
+    GainSkillPoint,
 
 }
 

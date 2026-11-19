@@ -34,7 +34,6 @@ public class BattleUnit
     public double nextActionTime;   // 下次行动的时刻（绝对时间戳）
 
     public int tieBreaker;
-    public GameObject gameObject;
 
     public List<SkillConfig> skills = new ();
 

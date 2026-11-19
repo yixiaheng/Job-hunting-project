@@ -5,6 +5,7 @@ using Game.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text;
 
 public sealed class GameOverCanvasUI : UIPanel
 {
@@ -13,6 +14,7 @@ public sealed class GameOverCanvasUI : UIPanel
     [SerializeField] private Toggle reformPartyToggle;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button retryButton;
+    [SerializeField] private TMP_Text rewardsText;
 
     private BattleResultUIContext resultContext;
     private bool busy;
@@ -21,6 +23,14 @@ public sealed class GameOverCanvasUI : UIPanel
     {
         exitButton.onClick.AddListener(ExitBattle);
         retryButton.onClick.AddListener(RetryBattle);
+        if (rewardsText == null && turnsText != null)
+        {
+            GameObject copy = Instantiate(turnsText.gameObject, turnsText.transform.parent);
+            copy.name = "RewardsText";
+            rewardsText = copy.GetComponent<TMP_Text>();
+            RectTransform rect = (RectTransform)copy.transform;
+            rect.anchoredPosition += new Vector2(0f, -80f);
+        }
     }
 
     protected override void OnOpen(IUIContext context) => Bind(context);
@@ -42,6 +52,19 @@ public sealed class GameOverCanvasUI : UIPanel
         turnsText.text = resultContext == null
             ? string.Empty
             : $"行动次数：{resultContext.TurnCount}";
+        if (rewardsText != null)
+        {
+            var text = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(resultContext?.RewardError))
+                text.Append("奖励结算失败：").Append(resultContext.RewardError);
+            else if (resultContext?.Rewards?.HasRewards == true)
+            {
+                text.Append("获得奖励：");
+                foreach (var reward in resultContext.Rewards.Rewards)
+                    text.Append('\n').Append(reward.DisplayName).Append(" x").Append(reward.Quantity);
+            }
+            rewardsText.text = text.ToString();
+        }
     }
 
     private void RetryBattle()

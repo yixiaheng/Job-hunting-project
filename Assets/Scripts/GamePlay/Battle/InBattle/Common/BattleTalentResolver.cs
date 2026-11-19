@@ -14,6 +14,12 @@ namespace Battle.Logic
         public bool AffectedAlly;
         public float SelfActionMultiplier = 1f;
         public readonly List<AttackResult> FollowUps = new List<AttackResult>();
+        public BattleActionRecord Record { get; internal set; }
+
+        internal void AddEffect(BattleEffectRecord effect)
+        {
+            Record?.effects.Add(effect);
+        }
     }
 
     /// <summary>由战斗流程同步调用，追加伤害不再次进入主动技能结算。</summary>
@@ -83,7 +89,13 @@ namespace Battle.Logic
                         var attack = new AttackService();
                         foreach (BattleUnit target in result.Damaged)
                             if (target.IsActive)
-                                result.FollowUps.Add(attack.Execute(caster, target, effect));
+                            {
+                                AttackResult followUp = attack.Execute(caster, target, effect);
+                                result.FollowUps.Add(followUp);
+                                result.AddEffect(new BattleEffectRecord(BattleEffectRecordType.FollowUp,
+                                    caster, target, followUp.HealthDamage, followUp.PreviousHealth,
+                                    followUp.CurrentHealth, effect.key));
+                            }
                     }
 
                     break;

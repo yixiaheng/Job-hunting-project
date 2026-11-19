@@ -1,5 +1,6 @@
 using System;
 using Game.Inventory;
+using Battle.SaveData;
 
 namespace Game.Characters
 {
@@ -34,7 +35,23 @@ namespace Game.Characters
                 || savedInventoryRevision != inventoryRevision;
         }
 
+        public bool HasChanges(long rosterRevision, long inventoryRevision, long battleRevision)
+        {
+            return HasChanges(rosterRevision, inventoryRevision)
+                || savedProfile.battle == null
+                || savedProfile.battle.revision != battleRevision;
+        }
+
         public bool TrySave(CharacterRosterData roster, InventoryData inventory, long inventoryRevision, out string reason)
+        {
+            return TrySave(roster, inventory, inventoryRevision,
+                savedProfile.battle ?? new BattleProgressData(),
+                savedProfile.battle?.revision ?? 0, out reason);
+        }
+
+        public bool TrySave(CharacterRosterData roster, InventoryData inventory,
+            long inventoryRevision, BattleProgressData battle, long battleRevision,
+            out string reason)
         {
             reason = null;
             if (readOnly)
@@ -42,18 +59,20 @@ namespace Game.Characters
                 reason = "档案处于只读状态，原文件不会被覆盖。";
                 return false;
             }
-            if (roster == null || inventory == null)
+            if (roster == null || inventory == null || battle == null)
             {
                 reason = "提交的角色或背包数据为空。";
                 return false;
             }
-            if (!HasChanges(roster.revision, inventoryRevision))
+            if (!HasChanges(roster.revision, inventoryRevision, battleRevision))
                 return true;
 
             // 从完整快照出发，只替换本次参与修改的模块，避免业务漏掉其他模块。
             var candidate = savedProfile.Copy();
             candidate.roster = roster.Copy();
             candidate.inventory = inventory.Copy();
+            candidate.battle = battle.Copy();
+            candidate.battle.revision = battleRevision;
             try
             {
                 if (!store.TrySave(candidate.Copy(), out reason))

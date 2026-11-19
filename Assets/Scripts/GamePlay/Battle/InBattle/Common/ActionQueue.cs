@@ -26,6 +26,8 @@ namespace Battle.Logic
             {
                 if(unit.speed <= 0)
                     return;
+                if (units.Contains(unit))
+                    return;
                 units.Add(unit);
                 unit.nextActionTime = CurrentTime + BaseActionValue / unit.speed;
             }

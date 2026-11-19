@@ -9,7 +9,7 @@ namespace Battle.SaveData
     [Serializable]
     public class BattleFormation
     {
-        public const int MaxMembers = 4;
+        public static int MaxMembers => 4;
 
         public List<FormationMember> members = new();
 

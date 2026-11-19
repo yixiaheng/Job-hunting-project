@@ -44,7 +44,13 @@ public class BattlePartyManager : MonoBehaviour
         }
 
         Instance = this;
-        if (PartyFormationState.TryRestore(out BattleFormation remembered))
+        BattleFormation remembered = null;
+        if (Game.Characters.PlayerRuntime.Instance != null
+            && Game.Characters.PlayerRuntime.Instance.IsReady)
+            remembered = Game.Characters.PlayerRuntime.Instance.GetFormation();
+        else
+            PartyFormationState.TryRestore(out remembered);
+        if (remembered != null)
         {
             foreach (FormationMember member in remembered.members)
             {
@@ -88,11 +94,10 @@ public class BattlePartyManager : MonoBehaviour
         if (config == null || FindConfig(config.id) != config)
             return false;
 
-        if (!formation.TryReplace(config.id, position))
+        BattleFormation next = Copy(formation);
+        if (!next.TryReplace(config.id, position))
             return false;
-
-        PublishFormationChanged();
-        return true;
+        return CommitFormation(next);
     }
 
     // Compatibility with existing Inspector callbacks.
@@ -115,9 +120,7 @@ public class BattlePartyManager : MonoBehaviour
                 return false;
         }
 
-        formation = next;
-        PublishFormationChanged();
-        return true;
+        return CommitFormation(next);
     }
 
     public bool RemoveAt(int position)
@@ -125,9 +128,9 @@ public class BattlePartyManager : MonoBehaviour
         if (!formation.ContainsPosition(position))
             return false;
 
-        formation.RemoveAtPosition(position);
-        PublishFormationChanged();
-        return true;
+        BattleFormation next = Copy(formation);
+        next.RemoveAtPosition(position);
+        return CommitFormation(next);
     }
 
     public void ClearFormation()
@@ -135,14 +138,35 @@ public class BattlePartyManager : MonoBehaviour
         if (formation.members.Count == 0)
             return;
 
-        formation.Clear();
-        PublishFormationChanged();
+        CommitFormation(new BattleFormation());
     }
 
-    private void PublishFormationChanged()
+    private bool CommitFormation(BattleFormation next)
     {
+        if (next == null)
+            return false;
+        var runtime = Game.Characters.PlayerRuntime.Instance;
+        if (runtime != null && runtime.IsReady
+            && !runtime.TrySetFormation(next, out string reason))
+        {
+            Debug.LogError("配队保存失败：" + reason, this);
+            return false;
+        }
+        formation = Copy(next);
         PartyFormationState.Save(Formation);
         GameEvents.Battle.Publish(new PartyFormationChangedEvent(this));
+        return true;
+    }
+
+    private static BattleFormation Copy(BattleFormation source)
+    {
+        var copy = new BattleFormation();
+        if (source?.members == null)
+            return copy;
+        foreach (FormationMember member in source.members)
+            if (member != null)
+                copy.TryAdd(member.unitId, member.position);
+        return copy;
     }
 
     private void OnDestroy()

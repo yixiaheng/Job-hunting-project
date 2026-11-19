@@ -129,9 +129,9 @@ GameObject:
   m_Component:
   - component: {fileID: 131087432}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: AllyPosition1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -160,9 +160,9 @@ GameObject:
   m_Component:
   - component: {fileID: 148298691}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: AllyPosition2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -341,6 +341,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 251866962}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &900000200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900000201}
+  m_Layer: 0
+  m_Name: AllyPosition4
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &900000201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.72, y: 0.09, z: -5.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1603987493}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900000300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715890823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982769a9a7a94e82ab2c29d3add9d523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleSessionController
+  battleManager: {fileID: 1715890824}
+  partyScene: 2
+  exitScene: 0
 --- !u!1 &1177652487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,7 +1291,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 119a724650adf9b458edd229e1924b1f, type: 2}
   - {fileID: 11400000, guid: f95072e1bf7efae4bb87e6057b8cb58e, type: 2}
   - {fileID: 11400000, guid: 2a5e417b5391cc24eb35b902eca17ba4, type: 2}
+  encounter: {fileID: 0}
+  encounterId: 
+  victoryRewards: []
   battleCamera: {fileID: 1610152002}
+  battleCameraController: {fileID: 0}
   allyPos:
   - {fileID: 131087432}
   - {fileID: 148298691}
@@ -1293,9 +1343,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1988892810}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: AllyPosition3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1324,50 +1374,3 @@ SceneRoots:
   - {fileID: 1177652493}
   - {fileID: 654381895}
   - {fileID: 1214487996}
-
---- !u!1 &900000200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 900000201}
-  m_Layer: 0
-  m_Name: AllyPosition4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &900000201
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 900000200}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.72, y: 0.09, z: -5.09}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1603987493}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &900000300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715890823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 982769a9a7a94e82ab2c29d3add9d523, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::BattleSessionController
-  battleManager: {fileID: 1715890824}
-  partyScene: 2
-  exitScene: 0

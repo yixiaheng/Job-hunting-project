@@ -21,6 +21,7 @@ public class BattleEnemiesStatusPanel : UIPanel
     private RectTransform panelRect;
     private Canvas canvas;
     private Camera battleCamera;
+    private IBattleActorLookup actorLookup;
     private BattleUnit actingUnit;
 
     public int BarCount => entries.Count;
@@ -43,9 +44,10 @@ public class BattleEnemiesStatusPanel : UIPanel
         panelRect = (RectTransform)transform;
         canvas = GetComponentInParent<Canvas>()?.rootCanvas;
         battleCamera = battleContext.BattleCamera != null ? battleContext.BattleCamera : Camera.main;
-        if (barPrefab == null || canvas == null)
+        actorLookup = battleContext.ActorLookup;
+        if (barPrefab == null || canvas == null || actorLookup == null)
         {
-            Debug.LogError("敌方血条面板需要血条 prefab，并放在 Canvas 下。", this);
+            Debug.LogError("敌方血条面板需要血条 prefab、Canvas 和本场模型查询器。", this);
             return;
         }
 
@@ -70,13 +72,7 @@ public class BattleEnemiesStatusPanel : UIPanel
         bar.SetVisible(false);
         bar.Bind(unit);
 
-        BattleManager manager = BattleManager.Instance;
-        BattleUnit selectedTarget =
-            manager != null && manager.rayCasting != null
-                ? manager.rayCasting.selectedTarget
-                : null;
-
-        bar.SetSelected(unit == selectedTarget);
+        bar.SetSelected(false);
 
         bar.SetActing(unit == actingUnit);
         entries.Add(unit, new Entry { Bar = bar, Rect = (RectTransform)bar.transform });
@@ -113,14 +109,14 @@ public class BattleEnemiesStatusPanel : UIPanel
         {
             BattleUnit unit = pair.Key;
             Entry entry = pair.Value;
+            BattleUnitActor actor = null;
             bool visible = battleCamera != null && battleCamera.isActiveAndEnabled
                 && canvas != null && unit.IsActive
-                && unit.gameObject != null && unit.gameObject.activeInHierarchy;
+                && actorLookup != null && actorLookup.TryGetActor(unit, out actor)
+                && actor != null && actor.gameObject.activeInHierarchy;
             if (visible)
             {
-                if (entry.Actor == null || entry.Actor.gameObject != unit.gameObject)
-                    entry.Actor = unit.gameObject.GetComponent<BattleUnitActor>();
-
+                entry.Actor = actor;
                 visible = entry.Actor != null;
                 if (visible)
                 {
@@ -170,6 +166,7 @@ public class BattleEnemiesStatusPanel : UIPanel
         entries.Clear();
         actingUnit = null;
         battleCamera = null;
+        actorLookup = null;
 
         subscriptions.Clear();
     }

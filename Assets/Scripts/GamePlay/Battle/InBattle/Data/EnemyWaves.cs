@@ -4,5 +4,5 @@ using System.Collections.Generic;
 [System.Serializable]
 public class EnemyWaves
 {
-    public List<BattleWave> battleWaves;
+    public List<BattleWave> battleWaves = new();
 }

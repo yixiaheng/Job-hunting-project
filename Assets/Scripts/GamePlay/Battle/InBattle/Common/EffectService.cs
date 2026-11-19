@@ -10,19 +10,22 @@ namespace Battle.Logic
         private readonly EnergyService energyService;
         private readonly BuffService buffService;
         private readonly ActionQueue actionQueue;
+        private readonly BattleSkillPoints skillPoints;
 
         public EffectService(
             AttackService attackService = null,
             HealService healService = null,
             EnergyService energyService = null,
             BuffService buffService = null,
-            ActionQueue actionQueue = null)
+            ActionQueue actionQueue = null,
+            BattleSkillPoints skillPoints = null)
         {
             this.attackService = attackService ?? new AttackService();
             this.healService = healService ?? new HealService();
             this.energyService = energyService ?? new EnergyService();
             this.buffService = buffService ?? new BuffService();
             this.actionQueue = actionQueue;
+            this.skillPoints = skillPoints;
         }
 
         public void Execute(
@@ -44,16 +47,35 @@ namespace Battle.Logic
                     case EffectType.Damage:
                         if (target.IsActive)
                         {
-                            attackService.Execute(caster, target, effect);
+                            AttackResult attack = attackService.Execute(caster, target, effect);
+                            resolution?.AddEffect(new BattleEffectRecord(BattleEffectRecordType.Damage,
+                                caster, target, attack.HealthDamage, attack.PreviousHealth,
+                                attack.CurrentHealth, effect.key));
                             if (target.faction != caster.faction && resolution != null)
                             { resolution.Damaged.Add(target); resolution.Killed |= !target.IsActive; }
                         }
                         break;
                     case EffectType.Heal:
-                        if (target.IsActive && healService.Execute(caster, target, effect) > 0) resolution?.Healed.Add(target);
+                        if (target.IsActive)
+                        {
+                            int before = target.currentHealth;
+                            int healed = healService.Execute(caster, target, effect);
+                            if (healed > 0)
+                            {
+                                resolution?.Healed.Add(target);
+                                resolution?.AddEffect(new BattleEffectRecord(BattleEffectRecordType.Heal,
+                                    caster, target, healed, before, target.currentHealth, effect.key));
+                            }
+                        }
                         break;
                     case EffectType.GainEnergy:
-                        if (target.IsActive) energyService.Execute(target, effect);
+                        if (target.IsActive)
+                        {
+                            int before = target.currentEnergy;
+                            int gained = energyService.Execute(target, effect);
+                            resolution?.AddEffect(new BattleEffectRecord(BattleEffectRecordType.Energy,
+                                caster, target, gained, before, target.currentEnergy, effect.key));
+                        }
                         break;
                     case EffectType.ApplyBuff:
                         if (buffService.Execute(target, effect) && resolution != null)
@@ -65,34 +87,56 @@ namespace Battle.Logic
                             }
                             resolution.AppliedDebuff |= effect.buff.isDebuff && target.faction != caster.faction;
                             resolution.AffectedAlly |= !effect.buff.isDebuff && target.faction == caster.faction;
+                            resolution.AddEffect(new BattleEffectRecord(BattleEffectRecordType.BuffApplied,
+                                caster, target, key: effect.buff.Name));
                         }
                         break;
                     case EffectType.AddShield:
                         if (target.IsActive)
                         {
+                            int before = target.shield;
                             int basis = effect.scaleStat == StatType.Health
                                 ? caster.maxHealth
                                 : caster.GetStat(effect.scaleStat);
                             target.shield += Mathf.Max(0, Mathf.RoundToInt(effect.value * basis));
+                            resolution?.AddEffect(new BattleEffectRecord(BattleEffectRecordType.Shield,
+                                caster, target, target.shield - before, before, target.shield, effect.key));
                         }
                         break;
                     case EffectType.RemoveBuff:
-                        RemoveStatuses(target, false);
+                        RecordRemoved(caster, target, RemoveStatuses(target, false), resolution, effect.key);
                         break;
                     case EffectType.RemoveDeBuff:
-                        RemoveStatuses(target, true);
+                        RecordRemoved(caster, target, RemoveStatuses(target, true), resolution, effect.key);
                         break;
                     case EffectType.AdvanceAction:
                         if (target == caster && resolution != null)
                             resolution.SelfActionMultiplier *= Mathf.Max(0f, 1f - effect.value);
-                        else actionQueue?.ModifyAction(target, effect.value);
+                        else
+                        {
+                            double before = target.nextActionTime;
+                            actionQueue?.ModifyAction(target, effect.value);
+                            resolution?.AddEffect(new BattleEffectRecord(BattleEffectRecordType.ActionAdvanced,
+                                caster, target, before: Mathf.RoundToInt((float)before),
+                                after: Mathf.RoundToInt((float)target.nextActionTime), key: effect.key));
+                        }
+                        break;
+                    case EffectType.GainSkillPoint:
+                        if (target.faction == Faction.OurSide && skillPoints != null)
+                        {
+                            int before = skillPoints.Current;
+                            int gained = skillPoints.Gain(Mathf.RoundToInt(effect.value));
+                            resolution?.AddEffect(new BattleEffectRecord(BattleEffectRecordType.SkillPoint,
+                                caster, target, gained, before, skillPoints.Current, "SkillPoint"));
+                        }
                         break;
                 }
             }
         }
 
-        private static void RemoveStatuses(BattleUnit target, bool debuffsOnly)
+        private static int RemoveStatuses(BattleUnit target, bool debuffsOnly)
         {
+            int removed = 0;
             for (int i = target.buffs.Count - 1; i >= 0; i--)
             {
                 BuffInstance instance = target.buffs[i];
@@ -100,9 +144,19 @@ namespace Battle.Logic
                 if (!debuffsOnly || instance.config.isDebuff)
                 {
                     target.buffs.RemoveAt(i);
+                    removed++;
                     if (instance.ownsConfig) Object.Destroy(instance.config);
                 }
             }
+            return removed;
+        }
+
+        private static void RecordRemoved(BattleUnit caster, BattleUnit target, int removed,
+            ActionResolution resolution, string key)
+        {
+            if (removed > 0)
+                resolution?.AddEffect(new BattleEffectRecord(BattleEffectRecordType.BuffRemoved,
+                    caster, target, removed, key: key));
         }
     }
 }

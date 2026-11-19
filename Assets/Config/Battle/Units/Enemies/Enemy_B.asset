@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
   m_Name: Enemy_B
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
+  id: 
   displayName: Enemy_B
+  icon: {fileID: 0}
+  growth: {fileID: 0}
+  element: 0
+  path: 0
   maxHealth: 50
-  attack: 19
+  attack: 100
   defence: 3
   speed: 90
   startEnergy: 0
+  maxEnergy: 100
   prefab: {fileID: 4064924966840310132, guid: 1d8107d23af8875448bc3ae9a21fb0db, type: 3}
   skills:
   - {fileID: 11400000, guid: e74f913bb782dc64ea9edabaa0b23cd3, type: 2}

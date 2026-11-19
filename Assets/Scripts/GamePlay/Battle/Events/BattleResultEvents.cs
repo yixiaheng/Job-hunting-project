@@ -1,5 +1,6 @@
 ﻿using System;
 using Battle.Logic;
+using Battle.SaveData;
 
 namespace Battle.Events
 {
@@ -8,12 +9,17 @@ namespace Battle.Events
         public Guid BattleId { get; }
         public BattleResult Result { get; }
         public int TurnCount { get; }
+        public BattleRewardReceipt Rewards { get; }
+        public string RewardError { get; }
 
-        public BattleEndedEvent(Guid battleId, BattleResult result, int turnCount)
+        public BattleEndedEvent(Guid battleId, BattleResult result, int turnCount,
+            BattleRewardReceipt rewards = null, string rewardError = null)
         {
             BattleId = battleId;
             Result = result;
             TurnCount = turnCount;
+            Rewards = rewards;
+            RewardError = rewardError;
         }
     }
 

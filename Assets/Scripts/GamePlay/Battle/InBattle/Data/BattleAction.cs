@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public class BattleAction
 {
+    public BattleUnit caster;
     public SkillConfig skill;
     public BattleUnit mainTarget; //全体 / self 可以是null;
 }

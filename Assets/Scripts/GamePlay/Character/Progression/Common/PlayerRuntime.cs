@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using Battle.SaveData;
 using Game.Inventory;
 using TapTap21.SaveSystem.dyh;
 using UnityEngine;
@@ -14,12 +16,14 @@ namespace Game.Characters
         public PlayerRuntimeConfig Config { get; private set; }
         public InventoryService Inventory { get; private set; }
         public CharacterProgressionService Characters { get; private set; }
+        public BattleProgressData BattleProgress { get; private set; }
         public bool IsReady { get; private set; }
         public string LastMessage { get; private set; }
 
         public PlayerProfileCoordinator Profiles { get; private set; }
         private bool HasUnsavedChanges => IsReady && !Inventory.IsReadOnly
-            && Profiles.HasChanges(Characters.Revision, Inventory.Revision);
+            && Profiles.HasChanges(Characters.Revision, Inventory.Revision,
+                BattleProgress?.revision ?? 0);
         private float retryAt;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetRuntime()
@@ -57,7 +61,8 @@ namespace Game.Characters
                 if (loaded.Success)
                 {
                     profile = loaded.Data;
-                    if (profile == null || profile.formatVersion != 1 || profile.roster == null || profile.inventory == null)
+                    if (profile == null || profile.formatVersion != 2 || profile.roster == null
+                        || profile.inventory == null || profile.battle == null)
                         throw new InvalidOperationException("玩家进度文件格式无效，原文件不会被覆盖。");
                 }
                 else if (loaded.Status == SaveStatus.NotFound)
@@ -70,6 +75,7 @@ namespace Game.Characters
                 if (!Inventory.TryRestore(profile.inventory, out string reason, false))
                     throw new InvalidOperationException(reason);
                 Profiles = new PlayerProfileCoordinator(store, profile, Inventory.Revision, !created, loaded.UsedBackup);
+                BattleProgress = profile.battle.Copy();
                 Characters = new CharacterProgressionService(Config.units, Config.items, Inventory, profile.roster, Profiles);
                 if (created && !Profiles.TrySave(profile.roster, profile.inventory, Inventory.Revision, out reason))
                     throw new InvalidOperationException(reason);
@@ -105,12 +111,15 @@ namespace Game.Characters
             reason = LastMessage;
             if (!IsReady || Characters == null || Profiles == null || Inventory.IsReadOnly)
                 return false;
-            if (!Profiles.HasChanges(Characters.Revision, Inventory.Revision))
+            if (!Profiles.HasChanges(Characters.Revision, Inventory.Revision,
+                BattleProgress?.revision ?? 0))
             {
                 reason = null;
                 return true;
             }
-            if (!Profiles.TrySave(Characters.CreateSnapshot(), Inventory.CreateSnapshot(), Inventory.Revision, out reason))
+            if (!Profiles.TrySave(Characters.CreateSnapshot(), Inventory.CreateSnapshot(),
+                Inventory.Revision, BattleProgress ?? new BattleProgressData(),
+                BattleProgress?.revision ?? 0, out reason))
             {
                 LastMessage = "保存失败：" + reason;
                 retryAt = Time.unscaledTime + 5f;
@@ -120,6 +129,111 @@ namespace Game.Characters
             retryAt = 0f;
             LastMessage = "玩家进度已保存。";
             return true;
+        }
+
+        public BattleFormation GetFormation()
+        {
+            return BattleProgress?.formation != null
+                ? CopyFormation(BattleProgress.formation)
+                : new BattleFormation();
+        }
+
+        public bool TrySetFormation(BattleFormation formation, out string reason)
+        {
+            reason = "玩家数据尚未初始化。";
+            if (!IsReady || Inventory.IsReadOnly || formation == null)
+                return false;
+
+            BattleFormation verified;
+            try { verified = CopyFormation(formation); }
+            catch (Exception exception) { reason = exception.Message; return false; }
+            foreach (FormationMember member in verified.members)
+            {
+                if (!Characters.Owns(member.unitId))
+                {
+                    reason = "配队包含未拥有角色：" + member.unitId;
+                    return false;
+                }
+            }
+
+            BattleProgressData candidate = (BattleProgress ?? new BattleProgressData()).Copy();
+            candidate.formation = verified;
+            candidate.revision++;
+            if (!Profiles.TrySave(Characters.CreateSnapshot(), Inventory.CreateSnapshot(),
+                Inventory.Revision, candidate, candidate.revision, out reason))
+                return false;
+            BattleProgress = candidate;
+            return true;
+        }
+
+        public bool TryGrantBattleRewards(string encounterId, int turnCount,
+            IEnumerable<ItemAmount> rewards, out BattleRewardReceipt receipt, out string reason)
+        {
+            receipt = new BattleRewardReceipt();
+            reason = "玩家数据尚未初始化。";
+            if (!IsReady || Inventory.IsReadOnly || string.IsNullOrWhiteSpace(encounterId))
+                return false;
+
+            var normalized = new List<ItemAmount>();
+            if (rewards != null)
+                foreach (ItemAmount reward in rewards)
+                    if (reward != null)
+                        normalized.Add(new ItemAmount(reward.configId, reward.quantity));
+
+            InventoryData nextInventory = Inventory.CreateSnapshot();
+            long nextInventoryRevision = Inventory.Revision;
+            if (normalized.Count > 0)
+            {
+                var stage = new InventoryService(Config.items, false);
+                if (!stage.TryRestore(nextInventory, out reason, false)
+                    || !stage.TryAddRewards(normalized, out reason))
+                    return false;
+                nextInventory = stage.CreateSnapshot();
+                nextInventoryRevision++;
+            }
+
+            BattleProgressData candidate = (BattleProgress ?? new BattleProgressData()).Copy();
+            BattleCompletionRecord record = candidate.Find(encounterId);
+            if (record == null)
+            {
+                record = new BattleCompletionRecord { encounterId = encounterId };
+                candidate.completions.Add(record);
+            }
+            record.clearCount++;
+            if (turnCount > 0 && (record.bestTurnCount <= 0 || turnCount < record.bestTurnCount))
+                record.bestTurnCount = turnCount;
+            record.lastClearedAtUtc = DateTime.UtcNow.ToString("O");
+            record.lastRewards = normalized.Select(item =>
+                new ItemAmount(item.configId, item.quantity)).ToList();
+            candidate.revision++;
+
+            if (!Profiles.TrySave(Characters.CreateSnapshot(), nextInventory,
+                nextInventoryRevision, candidate, candidate.revision, out reason))
+                return false;
+            if (normalized.Count > 0
+                && !Inventory.TryCommitSnapshot(nextInventory, nextInventoryRevision, out reason))
+                return false;
+            BattleProgress = candidate;
+
+            foreach (ItemAmount reward in normalized)
+            {
+                Inventory.TryGetConfig(reward.configId, out ItemConfig config);
+                receipt.Add(new BattleRewardLine(reward.configId,
+                    config != null ? config.displayName : reward.configId, reward.quantity));
+            }
+            reason = null;
+            return true;
+        }
+
+        private static BattleFormation CopyFormation(BattleFormation source)
+        {
+            var copy = new BattleFormation();
+            if (source?.members == null)
+                return copy;
+            foreach (FormationMember member in source.members)
+                if (member == null || !copy.TryAdd(member.unitId, member.position))
+                    throw new ArgumentException("配队数据无效。", nameof(source));
+            return copy;
         }
 
         private void LateUpdate()

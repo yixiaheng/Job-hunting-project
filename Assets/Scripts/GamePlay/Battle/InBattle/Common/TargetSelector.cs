@@ -13,9 +13,19 @@ namespace Battle.Logic
             this.units = new List<BattleUnit>(units);
         }
 
+        public void Add(BattleUnit unit)
+        {
+            if (unit != null && !units.Contains(unit))
+                units.Add(unit);
+        }
+
         public List<BattleUnit> Select(BattleUnit caster, TargetSide side ,TargetRule rule, BattleUnit mainTarget)
         {
             List<BattleUnit> res = new List<BattleUnit>();
+            // 外场对象不能成为直接目标，也不能触发自动补选。
+            if (caster == null || !units.Contains(caster)
+                || (mainTarget != null && (!units.Contains(mainTarget) || mainTarget.BattleId != caster.BattleId)))
+                return res;
 
             Faction targetFaction;
             if(side == TargetSide.OurSide)

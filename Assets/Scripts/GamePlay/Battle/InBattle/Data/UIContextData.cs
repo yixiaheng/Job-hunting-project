@@ -17,10 +17,13 @@ public sealed class BattleEnemiesUIContext : IUIContext
 {
     public IReadOnlyList<BattleUnit> Units { get; }
     public Camera BattleCamera { get; }
+    public IBattleActorLookup ActorLookup { get; }
 
-    public BattleEnemiesUIContext(IReadOnlyList<BattleUnit> units, Camera battleCamera = null)
+    public BattleEnemiesUIContext(IReadOnlyList<BattleUnit> units,
+        IBattleActorLookup actorLookup, Camera battleCamera = null)
     {
         Units = units;
+        ActorLookup = actorLookup;
         BattleCamera = battleCamera;
     }
 }

@@ -59,7 +59,7 @@ namespace Game.Characters
 
         private sealed class SkillSnapshot
         {
-            private readonly int id, energyCost, energyGain, skillPointCost;
+            private readonly int id, energyCost, energyGain, skillPointCost, skillPointGain;
             private readonly string name;
             private readonly SkillKind kind;
             private readonly ElementType element;
@@ -75,6 +75,7 @@ namespace Game.Characters
                 energyCost = skill.energyCost;
                 energyGain = skill.energyGain;
                 skillPointCost = skill.skillPointCost;
+                skillPointGain = skill.skillPointGain;
                 rule = skill.targetRule;
                 side = skill.targetSide;
                 if (skill.effectConfigs == null)
@@ -108,6 +109,7 @@ namespace Game.Characters
                 skill.energyCost = energyCost;
                 skill.energyGain = energyGain;
                 skill.skillPointCost = skillPointCost;
+                skill.skillPointGain = skillPointGain;
                 skill.targetRule = rule;
                 skill.targetSide = side;
                 skill.effectConfigs = new List<EffectConfig>();

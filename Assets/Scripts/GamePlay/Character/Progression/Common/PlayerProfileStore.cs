@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Inventory;
 using TapTap21.SaveSystem.dyh;
+using Battle.SaveData;
 
 namespace Game.Characters
 {
@@ -8,9 +9,10 @@ namespace Game.Characters
     [Serializable]
     public sealed class PlayerProfileData
     {
-        public int formatVersion = 1;
+        public int formatVersion = 2;
         public CharacterRosterData roster = new CharacterRosterData();
         public InventoryData inventory = new InventoryData();
+        public BattleProgressData battle = new BattleProgressData();
 
         // 完整档案的拷贝规则集中在这里；新增模块时同步补入此处。
         public PlayerProfileData Copy()
@@ -19,7 +21,8 @@ namespace Game.Characters
             {
                 formatVersion = formatVersion,
                 roster = roster.Copy(),
-                inventory = inventory.Copy()
+                inventory = inventory.Copy(),
+                battle = battle?.Copy() ?? new BattleProgressData()
             };
         }
     }
@@ -31,7 +34,19 @@ namespace Game.Characters
 
     public sealed class PlayerProfileStore : IPlayerProfileStore
     {
-        public static readonly SaveDefinition<PlayerProfileData> Definition = SaveSystem.Register<PlayerProfileData>("player_profile", "player_profile.json", 1);
+        public static readonly SaveDefinition<PlayerProfileData> Definition = SaveSystem.Register<PlayerProfileData>("player_profile", "player_profile.json", 2);
+        static PlayerProfileStore()
+        {
+            SaveMigration.Register(Definition, 1, 2, profile =>
+            {
+                profile ??= new PlayerProfileData();
+                profile.formatVersion = 2;
+                profile.roster ??= new CharacterRosterData();
+                profile.inventory ??= new InventoryData();
+                profile.battle ??= new BattleProgressData();
+                return profile;
+            });
+        }
         private readonly string slot;
         public PlayerProfileStore(string slot)
         {

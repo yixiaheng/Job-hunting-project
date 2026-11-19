@@ -88,7 +88,8 @@ public sealed class BattleSessionController : MonoBehaviour
 
         endedBattleId = message.BattleId;
         resultHandle = uiManager.Open(UIId.BattleResult,
-            new BattleResultUIContext(message.BattleId, message.Result, message.TurnCount), ownerSceneHandle: gameObject.scene.handle);
+            new BattleResultUIContext(message.BattleId, message.Result, message.TurnCount,
+                message.Rewards, message.RewardError), ownerSceneHandle: gameObject.scene.handle);
     }
 
     private bool AcceptRequest(Guid battleId)

@@ -5,28 +5,30 @@ public class FirstSkillDecider : IActionDecider
 {
     public BattleAction Decide(BattleUnit caster, IReadOnlyList<BattleUnit> units)
     {
-        if (caster.skills == null || caster.skills.Count == 0)
+        if (caster == null || caster.skills == null || caster.skills.Count == 0)
             return null;
 
         SkillConfig skillConfig = SelectSkill(caster, units);
+        if (skillConfig == null) return null;
         BattleUnit target = SelectBattleUnit(caster, units, skillConfig);
 
-        return new BattleAction{skill = skillConfig, mainTarget = target};
+        return new BattleAction{caster = caster, skill = skillConfig, mainTarget = target};
     }
 
     public SkillConfig SelectSkill(BattleUnit caster, IReadOnlyList<BattleUnit> units)
     {
+        if (caster?.skills == null) return null;
         //优先终结技
         foreach(var skill in caster.skills)
         {
-            if(skill.kind == SkillKind.Ultimate && caster.currentEnergy >= skill.energyCost)
+            if(skill != null && skill.kind == SkillKind.Ultimate && caster.currentEnergy >= skill.energyCost)
             {
                 return skill;
             }
         }
         foreach(var skill in caster.skills)
         {
-            if(skill.kind != SkillKind.Ultimate)
+            if(skill != null && skill.kind != SkillKind.Ultimate && caster.currentEnergy >= skill.energyCost)
             {
                 return skill;
             }
@@ -35,6 +37,7 @@ public class FirstSkillDecider : IActionDecider
     }
     public BattleUnit SelectBattleUnit(BattleUnit caster, IReadOnlyList<BattleUnit> units, SkillConfig skillConfig)
     {
+        if (caster == null || skillConfig == null || units == null) return null;
         BattleUnit unit = null;
         Faction targetFaction;
         if(skillConfig.targetSide == TargetSide.OurSide)
@@ -44,7 +47,7 @@ public class FirstSkillDecider : IActionDecider
 
         foreach(var u in units)
         {
-            if(u.faction == targetFaction)
+            if(u != null && u.IsActive && u.faction == targetFaction)
             {
                 if(unit == null)
                     unit = u;

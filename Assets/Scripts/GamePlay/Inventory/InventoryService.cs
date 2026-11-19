@@ -333,6 +333,15 @@ namespace Game.Inventory
 
         internal void PublishCommitted() => NotifyChanged();
 
+        internal bool TryCommitSnapshot(InventoryData data, long revision, out string reason)
+        {
+            if (!TryRestore(data, out reason, false))
+                return false;
+            Revision = revision;
+            NotifyChanged(false);
+            return true;
+        }
+
         private bool TryAggregate(IEnumerable<ItemAmount> items, out Dictionary<string, int> amounts, out string reason)
         {
             amounts = new Dictionary<string, int>(StringComparer.Ordinal);
@@ -362,9 +371,10 @@ namespace Game.Inventory
             return false;
         }
 
-        private void NotifyChanged()
+        private void NotifyChanged(bool incrementRevision = true)
         {
-            Revision++;
+            if (incrementRevision)
+                Revision++;
             notifying = true;
             try
             {

@@ -20,6 +20,9 @@ public class BattleUnitActor : MonoBehaviour
     {
         Unit = u;
         cachedHealthBarOffset = fallbackHealthBarOffset;
+        if (u == null)
+            return;
+
         if (healthBarAnchor != null)
             return;
 

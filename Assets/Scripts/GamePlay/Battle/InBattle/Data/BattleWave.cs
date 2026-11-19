@@ -1,10 +1,6 @@
-using UnityEngine;
-using System;
-
-//战斗波次，每个波次有一定的怪物
-//Todo:怪物不一定是一波波的，有可能会补齐怪物，怪物可能会随机出现
+// 一波敌人的配置；逻辑单位在进入该波时由 BattleUnitFactory 创建。
 [System.Serializable]
 public class BattleWave
 {
-    public BattleUnit[] enemies;
+    public UnitConfig[] enemies;
 }

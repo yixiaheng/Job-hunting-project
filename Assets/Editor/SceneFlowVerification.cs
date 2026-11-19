@@ -372,6 +372,7 @@ public static class SceneFlowVerification
         while (scenes.IsLoading) yield return null;
         yield return null;
         Check(scenes.VisitCount == 0 && !source.isLoaded && BattleManager.Instance != null && BattleManager.Instance.battleFlow != null, "battle activated and presentation sessions ended");
+        BattleActionVerification.VerifyLiveCommands(Check);
         Check(Mathf.Approximately(Time.timeScale, .7f), "battle does not inherit paused time");
         var session = BattleSessionContext.Current;
         Check(session != null && session.BattleScene == SceneId.Battle, "battle session retained");

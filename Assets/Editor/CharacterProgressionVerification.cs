@@ -212,8 +212,19 @@ public static class CharacterProgressionVerification
         Commit(transfer, "confirmed equipment transfer");
         Check(service.GetCharacter(id).equipment[1] == null && service.GetCharacter(other).equipment[1] == relics[0].instanceId, "unique owner after transfer");
         Check(!inventory.TryRemoveEquipment(relics[0].instanceId, out _), "equipped item cannot be deleted");
-        var snapshot = new BattleCharacterSnapshot(first, service.GetCharacter(id), inventory);
+        int originalSkillPointGain = first.skills[0].skillPointGain;
+        BattleCharacterSnapshot snapshot;
+        try
+        {
+            first.skills[0].skillPointGain = 2;
+            snapshot = new BattleCharacterSnapshot(first, service.GetCharacter(id), inventory);
+        }
+        finally
+        {
+            first.skills[0].skillPointGain = originalSkillPointGain;
+        }
         var captured = snapshot.CreateUnit(0, 0);
+        Check(captured.skills[0].skillPointGain == 2, "battle snapshot retains configured skill point gain");
         int capturedAttack = captured.attack;
         Commit(Request(CharacterOperation.Unequip), "unequip cone");
         var retry = snapshot.CreateUnit(0, 0);
@@ -269,7 +280,8 @@ public static class CharacterProgressionVerification
             var flow = new BattleFlow(units);
             flow.Ready();
             var skill = config.skills.First(s => s.kind == SkillKind.Skill);
-            Check(flow.Execute(new BattleAction { skill = skill, mainTarget = config.path == PathType.Abundance ? ally : e1 }), "talent action " + config.id);
+            caster.skills.Add(skill);
+            Check(flow.Execute(new BattleAction { caster = caster, skill = skill, mainTarget = config.path == PathType.Abundance ? ally : e1 }), "talent action " + config.id);
             switch (caster.talent)
             {
                 case CharacterTalent.Aegis:
@@ -308,7 +320,9 @@ public static class CharacterProgressionVerification
         var enemy = U(Faction.Enemy, 0);
         var battle = new BattleFlow(new[] { a, partner, enemy });
         battle.Ready();
-        Check(battle.Execute(new BattleAction { skill = guard.skills.First(s => s.kind == SkillKind.Ultimate), mainTarget = enemy }), "mixed targets execute");
+        var ultimate = guard.skills.First(s => s.kind == SkillKind.Ultimate);
+        a.skills.Add(ultimate);
+        Check(battle.Execute(new BattleAction { caster = a, skill = ultimate, mainTarget = enemy }), "mixed targets execute");
         Check(partner.shield > 0 && enemy.shield == 0 && enemy.currentHealth < 1000, "damage enemies and protect allies in same skill");
         a.currentEnergy = 98;
         new EnergyService().Execute(a, new EffectConfig { value = 999 });
@@ -367,8 +381,9 @@ public static class CharacterProgressionVerification
             Check(store.Load().Status == TapTap21.SaveSystem.dyh.SaveStatus.NotFound, "empty slot has no complete profile");
             Check(store.TrySave(imported, out _), "native profile serialization");
             var loaded = store.Load();
-            Check(loaded.Success && !loaded.UsedBackup && loaded.Data.formatVersion == 1
-                && loaded.Data.inventory.stacks[0].quantity == 2, "existing complete profile reads without migration");
+            Check(loaded.Success && !loaded.UsedBackup && loaded.Data.formatVersion == 2
+                && loaded.Data.inventory.stacks[0].quantity == 2,
+                $"existing complete profile reads without migration (success={loaded.Success}, status={loaded.Status}, backup={loaded.UsedBackup}, message={loaded.Message}, version={loaded.Data?.formatVersion})");
             string directory = Path.Combine(root, "Saves", "slot_character_test");
             File.WriteAllText(Path.Combine(directory, "unrelated_module.json"), "preserved");
             imported.roster.characters[0].level = 2;
