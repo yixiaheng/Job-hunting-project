@@ -24,7 +24,8 @@ namespace Game.UI
         CharacterEquipment = 17,
         CharacterConfirm = 18,
         SceneTransition = 19,
-        Campaign = 20
+        Campaign = 20,
+        HotUpdateProgress = 21
     }
 
     public enum UILayer

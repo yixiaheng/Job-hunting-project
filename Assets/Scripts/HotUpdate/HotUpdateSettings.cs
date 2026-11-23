@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Game/Hot Update Settings", fileName = "HotUpdateSettings")]
 public sealed class HotUpdateSettings : ScriptableObject
@@ -6,8 +7,11 @@ public sealed class HotUpdateSettings : ScriptableObject
     [Header("远程更新")]
     [Tooltip("关闭时完全跳过网络更新，直接使用本地首包资源。")]
     public bool tryRemoteUpdate = true;
-    [Tooltip("留空时跳过网络更新并使用本地资源。")]
-    public string serverRoot = "";
+    [FormerlySerializedAs("serverRoot")]
+    [Tooltip("正式更新基础地址，例如 https://update.example.com/update。")]
+    public string productionBaseUrl = "";
+    public string currentVersionPath = "current/version.txt";
+    public string releasesPath = "releases";
     public string manifestName = "ABCompareInfo.txt";
     [Min(1)] public int requestTimeoutSeconds = 30;
 

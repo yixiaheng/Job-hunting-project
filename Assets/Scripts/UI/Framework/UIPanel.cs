@@ -18,6 +18,7 @@ namespace Game.UI
         private bool covered;
         private bool suspended;
         private bool hiddenByWindow;
+        private bool hiddenByPresentation;
         private CanvasGroup presentationGroup;
         public bool IsPresentationSuspended => suspended;
         public bool IsOpen => State == UIState.Open || State == UIState.Opening;
@@ -128,9 +129,17 @@ namespace Game.UI
             SetInteractable(!covered && State == UIState.Open);
         }
 
+        // Independent from scene suspension: a cinematic must not resume a suspended scene's UI.
+        internal void SetCinematicHidden(bool value)
+        {
+            hiddenByPresentation = value;
+            RefreshPresentation();
+            SetInteractable(!covered && State == UIState.Open);
+        }
+
         private void RefreshPresentation()
         {
-            bool visible = !suspended && !hiddenByWindow;
+            bool visible = !suspended && !hiddenByWindow && !hiddenByPresentation;
             if (presentationGroup != null)
             {
                 presentationGroup.alpha = visible ? 1f : 0f;
@@ -167,8 +176,8 @@ namespace Game.UI
             if (canvasGroup == null)
                 return;
 
-            canvasGroup.interactable = value && !suspended;
-            canvasGroup.blocksRaycasts = value && !suspended;
+            canvasGroup.interactable = value && !suspended && !hiddenByPresentation;
+            canvasGroup.blocksRaycasts = value && !suspended && !hiddenByPresentation;
         }
     }
 }

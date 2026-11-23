@@ -1,4 +1,4 @@
-﻿using Battle.Logic;
+using Battle.Logic;
 using Game.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -92,6 +92,7 @@ public sealed class BattleUIController : UIPanel
         BattleFlow flow = commands?.Flow;
         BattleUnit unit = flow?.CurrentUnit;
         bool canAct = flow != null
+            && (!(commands is BattleManager manager) || manager.CanAcceptCommands)
             && flow.Result == BattleResult.None && unit != null
             && unit.IsActive && unit.faction == Faction.OurSide;
 
@@ -106,12 +107,25 @@ public sealed class BattleUIController : UIPanel
         SetAbilityAvailable(ultimateButton, SkillKind.Ultimate, canAct);
     }
 
+    private void Update()
+    {
+        if (!IsOpen) return;
+        Refresh();
+        if (UnityEngine.InputSystem.Keyboard.current?.spaceKey.wasPressedThisFrame != true) return;
+        var selected = UnityEngine.EventSystems.EventSystem.current?.currentSelectedGameObject;
+        if (selected != null && (selected.GetComponent<TMP_InputField>() != null || selected.GetComponent<InputField>() != null)) return;
+        if (commands is BattleManager manager && manager.CanAcceptCommands) commands.SubmitSelection();
+    }
+
     private void SetAbilityAvailable(Button button, SkillKind kind, bool canAct)
     {
         if (button == null)
             return;
 
         button.interactable = canAct && commands.Flow.ValidateAction(commands.CreateAbilityAction(kind)).IsValid;
+        var colors = button.colors;
+        colors.normalColor = commands?.Selection?.Skill?.kind == kind ? new Color(1f, .83f, .35f) : Color.white;
+        button.colors = colors;
     }
 
     public void OnStartBattle()

@@ -9,5 +9,9 @@ public sealed class BattleEncounterConfig : ScriptableObject
     [Min(0)] public int initialSkillPoints = 4;
     [Min(0)] public int maximumSkillPoints = 5;
     public EnemyWaves waves = new();
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("defaultFormationPreset")] private string formationPreset;
+    public string DefaultFormationPreset => formationPreset;
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("cameraProfile")] private Battle.Presentation.BattleCameraProfile presentationCamera;
+    public Battle.Presentation.BattleCameraProfile CameraProfile => presentationCamera;
     public List<ItemAmount> victoryRewards = new();
 }

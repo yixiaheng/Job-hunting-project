@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: HotUpdateSettings
   m_EditorClassIdentifier: 
   tryRemoteUpdate: 0
-  serverRoot: 
+  productionBaseUrl: ''
+  currentVersionPath: current/version.txt
+  releasesPath: releases
   manifestName: ABCompareInfo.txt
   requestTimeoutSeconds: 30
   bundleFolder: AssetBundles

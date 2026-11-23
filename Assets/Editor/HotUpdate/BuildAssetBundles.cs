@@ -9,7 +9,7 @@ using UnityEngine;
 
 public static class BuildAssetBundles
 {
-    [MenuItem("Tools/Build AssetBundles")]
+    [MenuItem("Tools/Hot Update/Build AssetBundles", priority = 100)]
     public static void Build()
     {
         string outputPath = Path.Combine(Application.streamingAssetsPath, "AssetBundles");

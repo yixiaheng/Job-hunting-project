@@ -35,14 +35,19 @@ public sealed class BattleActorRegistry : IBattleActorLookup
             return false;
         }
 
-        GameObject instance = Object.Instantiate(config.prefab);
-        instance.transform.position = anchor.position;
-        actor = instance.GetComponent<BattleUnitActor>();
-        if (actor == null)
-            actor = instance.AddComponent<BattleUnitActor>();
+        GameObject instance = new GameObject(config.name + " [Battle]");
+        if (anchor.gameObject.scene.IsValid()) UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(instance, anchor.gameObject.scene);
+        instance.transform.SetPositionAndRotation(anchor.position, anchor.rotation);
+        var movement = new GameObject("PresentationRoot").transform;
+        movement.SetParent(instance.transform, false);
+        var model = Object.Instantiate(config.prefab, movement, false);
+        actor = model.GetComponent<BattleUnitActor>();
+        // Identity lives on the model so authored anchors and profile references are retained.
+        if (actor == null) actor = model.AddComponent<BattleUnitActor>();
+        actor.ConfigurePresentationRoot(movement, actor.VisualRoot);
         actor.Bind(unit);
-        if (instance.GetComponentInChildren<Collider>() == null)
-            instance.AddComponent<CapsuleCollider>();
+        if (model.GetComponentInChildren<Collider>() == null)
+            model.AddComponent<CapsuleCollider>();
         actors.Add(unit, actor);
         return true;
     }
@@ -77,8 +82,8 @@ public sealed class BattleActorRegistry : IBattleActorLookup
             return;
         actor.Bind(null);
         if (Application.isPlaying)
-            Object.Destroy(actor.gameObject);
+            Object.Destroy(actor.PresentationRoot != actor.transform ? actor.PresentationRoot.parent.gameObject : actor.gameObject);
         else
-            Object.DestroyImmediate(actor.gameObject);
+            Object.DestroyImmediate(actor.PresentationRoot != actor.transform ? actor.PresentationRoot.parent.gameObject : actor.gameObject);
     }
 }

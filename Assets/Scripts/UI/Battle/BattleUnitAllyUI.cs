@@ -4,6 +4,7 @@ using Game;
 using Game.Events;
 using UnityEngine;
 using UnityEngine.UI;
+using Battle.Presentation;
 
 [RequireComponent(typeof(BattleUnitView))]
 public class BattleUnitAllyUI : MonoBehaviour
@@ -18,16 +19,25 @@ public class BattleUnitAllyUI : MonoBehaviour
     {
         subscriptions.Clear();
         subscriptions.Add(GameEvents.Battle.Subscribe<HealthChangedEvent>(OnHealthChanged));
+        BattleDisplayState.HealthChanged -= OnVisualHealthChanged;
+        BattleDisplayState.HealthChanged += OnVisualHealthChanged;
         if (Unit != null)
             SnapLifeBars(GetHealthFill());
     }
     void OnDisable()
     {
+        BattleDisplayState.HealthChanged -= OnVisualHealthChanged;
         subscriptions.Clear();
         StopDelayCoroutine();
     }
 
     private void OnHealthChanged(HealthChangedEvent changedEvent)
+    {
+        if (BattleDisplayState.IsManaged(Unit)) return;
+        OnVisualHealthChanged(changedEvent);
+    }
+
+    private void OnVisualHealthChanged(HealthChangedEvent changedEvent)
     {
         if(Unit == null || Unit.BattleId != changedEvent.BattleId)
             return;
@@ -37,6 +47,7 @@ public class BattleUnitAllyUI : MonoBehaviour
             return;
         float targetFill = changedEvent.CurrentHealth / (float)changedEvent.MaxHealth;
         UpdateLifeBar(targetFill);
+        GetComponent<BattleUnitView>().Refresh();
     }
 
     private void UpdateLifeBar(float targetFill)
@@ -55,10 +66,10 @@ public class BattleUnitAllyUI : MonoBehaviour
 
     private IEnumerator DelayBarLerp(float targetFill)
     {
-        yield return new WaitForSeconds(0.2f);
+        for (float wait = 0f; wait < 0.2f; wait += BattleDisplayState.Delta(Unit)) yield return null;
         float startFill = delay_bar != null ? delay_bar.fillAmount : targetFill;
         const float duration = 0.25f;
-        for (float elapsed = 0f; elapsed < duration; elapsed += Time.deltaTime)
+        for (float elapsed = 0f; elapsed < duration; elapsed += BattleDisplayState.Delta(Unit))
         {
             if (delay_bar != null)
                 delay_bar.fillAmount = Mathf.Lerp(startFill, targetFill, elapsed / duration);
@@ -89,7 +100,7 @@ public class BattleUnitAllyUI : MonoBehaviour
     private float GetHealthFill()
     {
         return Unit != null && Unit.maxHealth > 0
-            ? Mathf.Clamp01((float)Unit.currentHealth / Unit.maxHealth)
+            ? Mathf.Clamp01((float)BattleDisplayState.Health(Unit) / Unit.maxHealth)
             : 0f;
     }
 

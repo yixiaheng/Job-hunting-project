@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
@@ -12,16 +12,19 @@ public class MouseRayCasting : MonoBehaviour
     public BattleUnit selectedTarget{get; private set;}
     public GameObject makerPrefab;
     Transform marker;
+    private readonly List<GameObject> rangeMarkers = new();
+    private Material rangeMaterial;
 
     void Update()
     {
+        if (BattleManager.Instance != null && !BattleManager.Instance.CanAcceptCommands) return;
         var scenes = GameSceneManager.Instance;
         if (scenes != null && (scenes.IsLoading || scenes.IsSceneSuspended(gameObject.scene))) return;
         if (Mouse.current == null) return;
         if (!Mouse.current.leftButton.wasPressedThisFrame) return;
         if (IsPointerOverUI()) return;
 
-        Camera cam = Camera.main;
+        Camera cam = BattleManager.Instance != null ? BattleManager.Instance.OutputCamera : Camera.main;
         if (cam == null) return;
 
         Vector2 screenPos = Mouse.current.position.ReadValue();
@@ -32,12 +35,28 @@ public class MouseRayCasting : MonoBehaviour
         if (actor == null || actor.Unit == null || !actor.Unit.IsActive)
             return;
 
-        ShowMarker(actor.transform);
-        //广播
-        SetSelectedTarget(actor.Unit);
+        BattleManager.Instance?.SelectTarget(actor.Unit);
 
-        Debug.Log($"选中 {selectedTarget.displayName} pos={selectedTarget.pos}");
+    }
 
+    public void DisplaySelection(BattleUnit target, IReadOnlyList<BattleUnit> affected)
+    {
+        SetSelectedTarget(target);
+        foreach (var item in rangeMarkers) if (item != null) Destroy(item);
+        rangeMarkers.Clear();
+        if (affected != null) foreach (var unit in affected)
+        {
+            if (unit == null || !BattleManager.Instance.ActorLookup.TryGetActor(unit, out var recipient)) continue;
+            if (rangeMaterial == null) rangeMaterial = new Material(Shader.Find("Universal Render Pipeline/Unlit") ?? Shader.Find("Sprites/Default"));
+            var go = new GameObject("Affected target preview"); go.transform.SetParent(recipient.PresentationRoot,false);
+            var line = go.AddComponent<LineRenderer>(); line.sharedMaterial = rangeMaterial; line.useWorldSpace = false;
+            line.loop = true; line.positionCount = 40; line.widthMultiplier = unit == target ? .065f : .035f;
+            line.startColor = line.endColor = unit == target ? Color.yellow : new Color(1,.5f,.15f);
+            for (int i=0;i<40;i++) { float angle=i*Mathf.PI*2/40; line.SetPosition(i,new Vector3(Mathf.Cos(angle)*.65f,.04f,Mathf.Sin(angle)*.65f)); }
+            rangeMarkers.Add(go);
+        }
+        if (target != null && BattleManager.Instance.ActorLookup.TryGetActor(target, out var actor)) ShowMarker(actor.transform);
+        else if (marker != null) marker.gameObject.SetActive(false);
     }
 
     public void ClearSelection()
@@ -46,6 +65,8 @@ public class MouseRayCasting : MonoBehaviour
             Destroy(marker.gameObject);
 
         marker = null;
+        foreach(var item in rangeMarkers) if(item!=null) Destroy(item);
+        rangeMarkers.Clear();
         SetSelectedTarget(null);
     }
 
@@ -72,6 +93,7 @@ public class MouseRayCasting : MonoBehaviour
 
     }
 
+    private void OnDestroy() { if(rangeMaterial!=null) Destroy(rangeMaterial); }
     bool IsPointerOverUI()
     {
         if (EventSystem.current == null) return false;
@@ -94,6 +116,7 @@ public class MouseRayCasting : MonoBehaviour
         Guid battleId = target != null ? target.BattleId : previousTarget.BattleId;
 
         selectedTarget = target;
+
 
         GameEvents.Battle.Publish( new TargetSelectionChangedEvent
         (

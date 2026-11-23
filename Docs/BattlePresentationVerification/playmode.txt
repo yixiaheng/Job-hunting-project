@@ -1,0 +1,12 @@
+PASS real BattleScene opens HUD and configured camera
+PASS submitted skill blocks command input immediately
+PASS real HUD data waits while logical skill already deals damage
+PASS paused real action cannot reveal damage
+PASS pause freezes authored camera and animation Timeline
+PASS real skill returns camera to ally base
+PASS real independent stage controls render mask and input gate
+PASS cinematic HUD is hidden and does not intercept clicks
+PASS retry during stage restores camera and suppresses stale completion
+PASS retried battle reaches usable base view without old stage ownership
+SUCCESS real battle presentation smoke test
+RESTORED original save configuration and editor start scene

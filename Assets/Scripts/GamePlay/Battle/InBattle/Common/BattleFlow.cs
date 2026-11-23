@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -89,6 +89,28 @@ namespace Battle.Logic
         {
             if (!IsExecuting && Result == BattleResult.None)
                 currentUnit = Peek();
+        }
+
+        public BattleActionPreview PreviewAction(BattleAction requested)
+        {
+            var action = new BattleAction { caster = requested?.caster, skill = requested?.skill, mainTarget = requested?.mainTarget };
+            var validation = ValidateAction(action);
+            var targets = new List<BattleUnit>();
+            var perEffect = new List<IReadOnlyList<BattleUnit>>();
+            if (action.caster != null && action.skill != null && validation.Failure != ActionFailure.ForeignTarget)
+            {
+                var primary = selector.Select(action.caster, action.skill.targetSide, action.skill.targetRule, action.mainTarget);
+                if (primary.Count > 0 && !primary.Contains(action.mainTarget)) action.mainTarget = primary[0];
+                if (action.skill.effectConfigs != null) foreach (var effect in action.skill.effectConfigs)
+                {
+                    if (effect == null) continue;
+                    var found = selector.Select(action.caster, effect.overrideTarget ? effect.targetSide : action.skill.targetSide,
+                        effect.overrideTarget ? effect.target : action.skill.targetRule, action.mainTarget);
+                    perEffect.Add(found.AsReadOnly());
+                    foreach (var unit in found) if (!targets.Contains(unit)) targets.Add(unit);
+                }
+            }
+            return new BattleActionPreview(validation, action, targets, perEffect);
         }
 
         public ActionValidation ValidateAction(BattleAction action)

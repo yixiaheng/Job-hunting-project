@@ -6,6 +6,8 @@ public sealed class BattleWaveController
     private readonly List<BattleWave> waves = new();
     private int nextIndex;
 
+    public string CurrentFormation { get; private set; }
+    public int CurrentCapacity { get; private set; }
     public int CurrentWaveNumber { get; private set; }
     public int WaveCount => waves.Count;
     public bool HasNext => nextIndex < waves.Count;
@@ -31,6 +33,7 @@ public sealed class BattleWaveController
         BattleWave wave = waves[nextIndex++];
         CurrentWaveNumber = nextIndex;
         enemies = wave.enemies;
+        CurrentFormation = wave.FormationPreset; CurrentCapacity = enemies?.Length ?? 0;
         return enemies != null && enemies.Length > 0;
     }
 

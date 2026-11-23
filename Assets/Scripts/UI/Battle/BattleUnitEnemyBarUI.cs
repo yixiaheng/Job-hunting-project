@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.UI;
+using Battle.Presentation;
 
 /// <summary>
 /// 单个敌人的名字和血量显示。位置跟随和实例管理由外部负责。
@@ -42,6 +43,7 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
 
     private void OnDisable()
     {
+        BattleDisplayState.HealthChanged -= OnVisualHealthChanged;
         subscriptions.Clear();
         StopDelayCoroutine();
     }
@@ -92,6 +94,8 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
 
     private void Subscribe()
     {
+        BattleDisplayState.HealthChanged -= OnVisualHealthChanged;
+        if (Unit != null && isActiveAndEnabled) BattleDisplayState.HealthChanged += OnVisualHealthChanged;
         subscriptions.Clear();
         if (Unit != null && isActiveAndEnabled)
             subscriptions.Add(GameEvents.Battle.Subscribe<HealthChangedEvent>(OnHealthChanged));
@@ -103,7 +107,7 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
         if (nameHp != null)
             nameHp.text = Unit == null
                 ? string.Empty
-                : $"{Unit.displayName}  {Unit.currentHealth}/{Unit.maxHealth}";
+                : $"{Unit.displayName}  {BattleDisplayState.Health(Unit)}/{Unit.maxHealth}";
 
         // 隐藏显示内容，保留根物体运行，供后续的位置跟随逻辑使用。
         UpdateVisibility();
@@ -118,7 +122,7 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
 
     private void UpdateVisibility()
     {
-        canvasGroup.alpha = positionVisible && Unit != null && Unit.IsActive ? 1f : 0f;
+        canvasGroup.alpha = positionVisible && BattleDisplayState.Visible(Unit) ? 1f : 0f;
     }
 
     public void SetActing(bool acting)
@@ -131,12 +135,18 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
 
     private void OnHealthChanged(HealthChangedEvent changedEvent)
     {
+        if (BattleDisplayState.IsManaged(Unit)) return;
+        OnVisualHealthChanged(changedEvent);
+    }
+
+    private void OnVisualHealthChanged(HealthChangedEvent changedEvent)
+    {
         if (Unit == null || Unit != changedEvent.Unit || Unit.BattleId != changedEvent.BattleId)
             return;
 
         Refresh();
         float targetFill = GetHealthFill();
-        if (!Unit.IsActive)
+        if (!BattleDisplayState.Visible(Unit))
         {
             SetActing(false);
             SetSelected(false);
@@ -156,7 +166,7 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
     private float GetHealthFill()
     {
         return Unit != null && Unit.maxHealth > 0
-            ? Mathf.Clamp01((float)Unit.currentHealth / Unit.maxHealth)
+            ? Mathf.Clamp01((float)BattleDisplayState.Health(Unit) / Unit.maxHealth)
             : 0f;
     }
 
@@ -180,11 +190,11 @@ public class BattleUnitEnemyBarUI : MonoBehaviour
 
     private IEnumerator DelayBarLerp(float targetFill)
     {
-        yield return new WaitForSeconds(0.2f);
+        for (float wait = 0f; wait < 0.2f; wait += BattleDisplayState.Delta(Unit)) yield return null;
 
         float startFill = delay_bar.fillAmount;
         const float duration = 0.25f;
-        for (float elapsed = 0f; elapsed < duration; elapsed += Time.deltaTime)
+        for (float elapsed = 0f; elapsed < duration; elapsed += BattleDisplayState.Delta(Unit))
         {
             delay_bar.fillAmount = Mathf.Lerp(startFill, targetFill, elapsed / duration);
             yield return null;

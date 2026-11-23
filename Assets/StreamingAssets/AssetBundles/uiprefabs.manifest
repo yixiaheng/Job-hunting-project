@@ -1,16 +1,16 @@
 ManifestFileVersion: 0
 UnityVersion: 6000.3.23f1
-CRC: 1939529484
+CRC: 2998618214
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 759be04833596532952da4ef8cc416a6
+    Hash: 64cf40702736103e7e9dbd301de64d02
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 49be2559e1eb9b655b8a36c0c964d995
+    Hash: 74e3a61699031d0ef2d1603451552f8a
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 939cb2455ca1b763ae68e5927442068c
+    Hash: 47998a375c2f1562a8911615f22c217c
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -57,6 +57,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 99683e1acd3344a09d7320daf8e8f0a5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4161384266574dc1ac5d75c35c238f39, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c47cc28b9cc681a45821de17645321f7, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d66ecc58dd9c04d499c56bb76852ad33, type: 3}
 - Class: 114
@@ -261,6 +263,7 @@ Assets:
 - Assets/Prefabs/UIPrefabs/Popup/Character/CharacterConfirm.prefab
 - Assets/Prefabs/UIPrefabs/Popup/Party/AlliesChooseWindow.prefab
 - Assets/Prefabs/UIPrefabs/Popup/Character/CharacterMaterials.prefab
+- Assets/Prefabs/UIPrefabs/Overlay/HotUpdateProgressPanel.prefab
 - Assets/Prefabs/UIPrefabs/HUD/Party/PartyBackdrop.prefab
 - Assets/Prefabs/UIPrefabs/Popup/Battle/BattleResultPanel.prefab
 - Assets/Prefabs/UIPrefabs/Window/Character/CharacterPanel.prefab

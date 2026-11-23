@@ -1,0 +1,5 @@
+﻿PASS an event appended during a skill holds next-turn continuation
+PASS skill and event duplicate completions cannot advance twice
+PASS action barrier drains fully
+PASS cancellation cannot consume a new session
+PASS ten thousand synchronous segments drain without recursive stack growth

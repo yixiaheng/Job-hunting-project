@@ -483,11 +483,15 @@ public static class SceneFlowVerification
         => (T)new SerializedObject(owner).FindProperty(field).objectReferenceValue;
     private static IEnumerator EndBattle()
     {
+        var manager = BattleManager.Instance;
+        while (!manager.CanAcceptCommands && manager.Flow.Result == Battle.Logic.BattleResult.None) yield return null;
         foreach (var actor in UnityEngine.Object.FindObjectsByType<BattleUnitActor>(FindObjectsSortMode.None))
             if (actor.Unit != null && actor.Unit.faction == Faction.Enemy) actor.Unit.currentHealth = 0;
-        BattleManager.Instance.battleFlow.Step();
-        yield return null;
-        var panel = UnityEngine.Object.FindFirstObjectByType<GameOverCanvasUI>();
+        manager.TurnDriver.StepOnce();
+        double until = EditorApplication.timeSinceStartup + 15;
+        GameOverCanvasUI panel = null;
+        while (panel == null && EditorApplication.timeSinceStartup < until)
+        { yield return null; panel = UnityEngine.Object.FindFirstObjectByType<GameOverCanvasUI>(); }
         Check(panel != null, "battle completion opens real result panel");
         yield return ScenePresentationLifecycle<PartySceneController>.WaitForPanel(UIManager.Instance, panel.Handle);
     }

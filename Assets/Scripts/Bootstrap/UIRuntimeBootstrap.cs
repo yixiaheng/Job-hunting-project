@@ -23,13 +23,18 @@ public static class UIRuntimeBootstrap
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
+        EnsureInitialized();
+    }
+
+    public static UIManager EnsureInitialized()
+    {
         if (UIManager.Instance == null)
         {
             UIBootstrapConfig config = Resources.Load<UIBootstrapConfig>(ConfigPath);
             if (config == null || config.RuntimePrefab == null)
             {
                 Debug.LogError("UI bootstrap requires Resources/Bootstrap/UIBootstrapConfig and a configured runtime prefab.");
-                return;
+                return null;
             }
 
             UIManager runtime = Object.Instantiate(config.RuntimePrefab);
@@ -39,6 +44,7 @@ public static class UIRuntimeBootstrap
         SceneManager.sceneLoaded -= HandleSceneLoaded;
         SceneManager.sceneLoaded += HandleSceneLoaded;
         EnsureSingleEventSystem();
+        return UIManager.Instance;
     }
 
     private static void HandleSceneLoaded(Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)

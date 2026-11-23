@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Battle.Presentation;
 
 public class BattleUnitView : MonoBehaviour
 {
@@ -44,9 +45,9 @@ public class BattleUnitView : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        gameObject.SetActive(unit.IsActive);
+        gameObject.SetActive(BattleDisplayState.Visible(unit));
         if (nameHp != null)
-            nameHp.text = $"{unit.displayName}  {unit.currentHealth}/{unit.maxHealth}";
+            nameHp.text = $"{unit.displayName}  {BattleDisplayState.Health(unit)}/{unit.maxHealth}";
     }
 
     public void SetActing(bool acting)

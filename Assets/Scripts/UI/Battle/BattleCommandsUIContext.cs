@@ -5,9 +5,12 @@ using Game.UI;
 public interface IBattleCommandSource
 {
     BattleFlow Flow { get; }
+    BattleSelectionState Selection { get; }
     void StartBattle();
     BattleAction CreateAbilityAction(SkillKind kind);
     void ChooseAbility(SkillKind kind);
+    void SelectTarget(BattleUnit target);
+    void SubmitSelection();
 }
 
 /// <summary>将本场战斗的窄操作入口交给战斗操作栏。</summary>

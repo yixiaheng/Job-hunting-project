@@ -11,6 +11,19 @@ public sealed class BattleUIPresenter : IDisposable
     private UIHandle alliesStatusHandle;
     private UIHandle enemiesStatusHandle;
     private UIHandle commandsHandle;
+    public bool IsReady => uiManager.TryGetPanel(alliesStatusHandle, out BattleAlliesStatusControll allies)
+        && allies.State == UIState.Open && !allies.IsPresentationSuspended
+        && uiManager.TryGetPanel(enemiesStatusHandle, out BattleEnemiesStatusPanel enemies)
+        && enemies.State == UIState.Open && !enemies.IsPresentationSuspended
+        && uiManager.TryGetPanel(commandsHandle, out BattleUIController commands)
+        && commands.State == UIState.Open && !commands.IsPresentationSuspended;
+
+    public void SetVisible(bool visible)
+    {
+        if (uiManager.TryGetPanel(alliesStatusHandle, out BattleAlliesStatusControll allies)) allies.SetCinematicHidden(!visible);
+        if (uiManager.TryGetPanel(enemiesStatusHandle, out BattleEnemiesStatusPanel enemies)) enemies.SetCinematicHidden(!visible);
+        if (uiManager.TryGetPanel(commandsHandle, out BattleUIController commands)) commands.SetCinematicHidden(!visible);
+    }
 
     public BattleUIPresenter(UIManager uiManager, int ownerSceneHandle)
     {

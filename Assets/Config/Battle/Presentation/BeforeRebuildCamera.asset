@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62bdca4525c331c43823f4d04eb1797e, type: 3}
+  m_Name: BeforeRebuildCamera
+  m_EditorClassIdentifier: Assembly-CSharp::Battle.Presentation.BattleCameraProfile
+  shoulderOffset: {x: 2.5833251, y: 2.106498, z: -1.0314033}
+  aimOffset: {x: 0, y: 1.1, z: 0}
+  useManualRotation: 1
+  rotationEuler: {x: 13.751018, y: 320.8265, z: 0.00026984277}
+  enemyCenterWeight: 0.65
+  selectedPositionOffset: {x: -0.009540796, y: -0.0036964417, z: 0.0117099285}
+  selectedRotationOffset: {x: -0.00000086246337, y: -0.0000011849429, z: 0.00000058137215}
+  selectedFovOffset: 0
+  selectedAimOffset: {x: 0, y: 1.1, z: 0}
+  selectionBlendSeconds: 0.2
+  fieldOfView: 50
+  blendSeconds: 0.35
+  selectionWeight: 0
+  groupPadding: 1.3
+  fallbackWindup: 0.3
+  fallbackRecovery: 0.25
+  deathSeconds: 0.65
+  entranceSeconds: 0.8

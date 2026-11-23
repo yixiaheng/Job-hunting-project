@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Battle.Events;
 using Battle.Logic;
@@ -9,6 +10,7 @@ using Game.Characters;
 using Battle.SaveData;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Battle.Presentation;
 
 /// <summary>战斗场景入口：组装本场服务，并保留场景与 UI 使用的兼容 API。</summary>
 [DefaultExecutionOrder(-50)]
@@ -27,7 +29,12 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
     [SerializeField] private List<ItemAmount> victoryRewards = new();
 
     [SerializeField] private Camera battleCamera;
-    [SerializeField] private BattleCameraController battleCameraController;
+    [SerializeField] private BattlePresentationCoordinator presentation;
+    [SerializeField] private BattlefieldDirector battlefield;
+    public BattlefieldDirector Battlefield => battlefield;
+    public BattleSelectionState Selection { get; private set; }
+    public void ConfigureBattlefield(BattlefieldDirector value) => battlefield = value;
+    public int EnemyCapacity => waveController?.CurrentCapacity ?? activeEnemies.Count;
 
     public Transform[] allyPos;
     public Transform[] enemyPos;
@@ -37,7 +44,15 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
     public BattleTurnDriver TurnDriver => turnDriver;
     public IBattleActorLookup ActorLookup => actorRegistry;
     public BattlePresentationQueue PresentationQueue => presentationQueue;
-    public BattleCameraController CameraController => battleCameraController;
+    public BattleShotDirector CameraController => presentation != null ? presentation.cameraDirector : null;
+    public BattlePresentationCoordinator Presentation => presentation;
+    public Camera OutputCamera => battleCamera != null ? battleCamera : Camera.main;
+    public bool CanAcceptCommands => turnDriver != null && turnDriver.CanSubmit
+        && !(CameraController != null && CameraController.IsEditing)
+        && !(presentationQueue?.IsPresenting ?? false) && !(battlefield?.IsMoving ?? false)
+        && (GameSceneManager.Instance == null || (!GameSceneManager.Instance.IsLoading && !GameSceneManager.Instance.IsSceneSuspended(gameObject.scene)));
+    private BattleUnit DisplayedActor => turnDriver?.State == BattleTurnState.Presenting
+        ? battleFlow?.LastResolution?.Record?.Caster : battleFlow?.CurrentUnit;
     public int CurrentWave => waveController?.CurrentWaveNumber ?? 0;
     public int WaveCount => waveController?.WaveCount ?? 0;
     public string EncounterId => !string.IsNullOrWhiteSpace(encounter?.id)
@@ -140,19 +155,22 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
         battleFlow = new BattleFlow(units, new EnemyActionDecider(),
             initialSkillPoints, maximumSkillPoints);
         battleFlow.SetPendingWave(waveController.HasNext);
-        battleFlow.GameOverEvent += HandleBattleEnded;
         presentationQueue = new BattlePresentationQueue();
         turnDriver = new BattleTurnDriver(battleFlow, presentationQueue, TryTransitionWave);
+        turnDriver.StateChanged += OnTurnStateChanged;
+        turnDriver.TransitionWaveAsync = TransitionWave;
         uiPresenter = new BattleUIPresenter(UIManager.Instance, gameObject.scene.handle);
         Camera activeBattleCamera = battleCamera != null ? battleCamera : Camera.main;
-        if (battleCameraController == null && activeBattleCamera != null)
+        if (presentation != null)
         {
-            battleCameraController = activeBattleCamera.GetComponent<BattleCameraController>();
-            if (battleCameraController == null)
-                battleCameraController = activeBattleCamera.gameObject.AddComponent<BattleCameraController>();
+            presentation.ConfigureBattlefield(battlefield);
+            presentation.cameraDirector?.ConfigureBattlefield(battlefield, encounter != null ? encounter.CameraProfile : null);
+            presentation.Bind(battleFlow, actorRegistry);
+            presentation.HUDVisibilityChanged += uiPresenter.SetVisible;
+            presentationQueue.ActionPresenter = presentation.Present;
         }
-        battleCameraController?.ConfigureDefaultShots(allyPos, enemyPos);
-        battleCameraController?.CutToDefault();
+        Selection = new BattleSelectionState(battleFlow);
+        Selection.Changed += OnSelectionChanged;
         uiPresenter.Open(
             units.FindAll(unit => unit.faction == Faction.OurSide),
             activeEnemies,
@@ -163,7 +181,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
         battleFlow.Ready();
         BattleStarted?.Invoke(battleFlow);
         uiPresenter.Refresh(battleFlow.CurrentUnit);
-        turnDriver.Start();
+        StartCoroutine(StartAfterHUDReady());
         uiPresenter.Refresh(battleFlow.CurrentUnit);
 
         if (turnDriver.State == BattleTurnState.Faulted)
@@ -218,8 +236,8 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
                     continue;
 
                 hasAlly = true;
-                if (config.prefab == null || allyPos == null || position >= allyPos.Length
-                    || allyPos[position] == null)
+                if (config.prefab == null || (battlefield == null && (allyPos == null || position >= allyPos.Length
+                    || allyPos[position] == null)))
                 {
                     Debug.LogError($"Cannot start battle: ally slot {position + 1} ({config.id}) needs a model prefab and scene anchor.", this);
                     return false;
@@ -246,16 +264,27 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
 
             Transform anchor = positions != null && position < positions.Length
                 ? positions[position] : null;
-            BattleUnit unit = unitFactory.Create(config, faction, position, tieBreaker);
-            if (unit == null)
-                continue;
-
-            if (!actorRegistry.TrySpawn(config, unit, anchor, out _, out string error))
+            GameObject temporaryAnchor = null;
+            if (battlefield != null && battlefield.Layout != null)
             {
+                temporaryAnchor = new GameObject("SpawnPose");
+                UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(temporaryAnchor, gameObject.scene);
+                var pose = battlefield.GetSpawnPose(faction, position, configs.Length, FormationPreset);
+                temporaryAnchor.transform.SetPositionAndRotation(pose.position, pose.rotation);
+                anchor = temporaryAnchor.transform;
+            }
+            BattleUnit unit = unitFactory.Create(config, faction, position, tieBreaker);
+            if (unit == null) { if (temporaryAnchor != null) Destroy(temporaryAnchor); continue; }
+
+            if (!actorRegistry.TrySpawn(config, unit, anchor, out var actor, out string error))
+            {
+                if (temporaryAnchor != null) Destroy(temporaryAnchor);
                 unitFactory.Release(unit);
                 Debug.LogError(error, this);
                 continue;
             }
+            if (temporaryAnchor != null) Destroy(temporaryAnchor);
+            battlefield?.Register(actor, configs.Length, FormationPreset);
 
             output.Add(unit);
             tieBreaker++;
@@ -264,11 +293,19 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
 
     private void TearDownBattle()
     {
+        if (Selection != null) Selection.Changed -= OnSelectionChanged;
+        Selection = null;
         turnDriver?.Stop();
+        StopAllCoroutines();
+        presentationQueue?.Cancel();
+        if (presentation != null)
+        {
+            presentation.Cancel();
+            if (uiPresenter != null) presentation.HUDVisibilityChanged -= uiPresenter.SetVisible;
+        }
         uiPresenter?.Close();
-        if (battleFlow != null)
-            battleFlow.GameOverEvent -= HandleBattleEnded;
         actorRegistry?.Clear();
+        battlefield?.Clear();
         unitFactory?.ReleaseAll();
 
         uiPresenter = null;
@@ -290,7 +327,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
 
         var previous = activeEnemies;
         foreach (BattleUnit unit in previous)
-            actorRegistry.Remove(unit);
+        { battlefield?.Unregister(unit); actorRegistry.Remove(unit); }
 
         var next = new List<BattleUnit>();
         CreateUnits(nextWave, Faction.Enemy, enemyPos, next, ref nextTieBreaker);
@@ -305,6 +342,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
         }
 
         activeEnemies = next;
+        presentation?.Register(next);
         battleFlow.SetPendingWave(waveController.HasNext);
         uiPresenter?.ReplaceEnemies(previous, next);
         uiPresenter?.Refresh(battleFlow.CurrentUnit);
@@ -322,7 +360,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
         }
 
         BattleActionResult result = turnDriver.StepOnce();
-        uiPresenter?.Refresh(battleFlow?.CurrentUnit);
+        uiPresenter?.Refresh(DisplayedActor);
         if (!result.Succeeded)
             Debug.Log(result.Result == BattleResult.None
                 ? "自动推进已停止，战斗尚未结束。"
@@ -355,15 +393,86 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
 
     public void ChooseAbility(SkillKind kind)
     {
-        if (turnDriver == null || battleFlow?.CurrentUnit == null
+        if (!CanAcceptCommands || battleFlow?.CurrentUnit == null
             || battleFlow.CurrentUnit.faction != Faction.OurSide)
             return;
 
-        BattleActionResult result = turnDriver.Submit(CreateAbilityAction(kind));
-        uiPresenter?.Refresh(battleFlow.CurrentUnit);
+        if (Selection == null) return;
+        if (Selection.Skill == null || Selection.Skill.kind != kind) { Selection.SelectSkill(kind); return; }
+        SubmitSelection();
+    }
+
+    public void SelectTarget(BattleUnit target) { if (CanAcceptCommands) Selection?.SelectTarget(target); }
+    public void SubmitSelection()
+    {
+        if (!CanAcceptCommands || Selection?.Skill == null) return;
+        var previous = Selection.Target;
+        Selection.Refresh();
+        if (previous != Selection.Target || !Selection.Preview.Validation.IsValid) return;
+        BattleActionResult result = turnDriver.Submit(Selection.CreateAction());
+        uiPresenter?.Refresh(DisplayedActor);
         if (!result.Succeeded)
             Debug.LogWarning(result.Validation.Message, this);
         if (turnDriver.State == BattleTurnState.Faulted)
             Debug.LogError("自动回合推进失败：" + turnDriver.LastFailure.Message, this);
+    }
+
+    private System.Collections.IEnumerator StartAfterHUDReady()
+    {
+        // UIManager may instantiate its panels asynchronously. Never attack behind the loading HUD.
+        while (uiPresenter != null && !uiPresenter.IsReady) yield return null;
+        if (turnDriver == null) yield break;
+        if (presentation != null)
+            presentationQueue.Enqueue(done => presentation.PresentEvent("BattleStart", activeEnemies, done), turnDriver.Start);
+        else turnDriver.Start();
+    }
+
+    private void TransitionWave(Action<bool> completed)
+    {
+        if (!TryTransitionWave()) { completed(false); return; }
+        if (presentation != null)
+            presentationQueue.Enqueue(done => presentation.PresentEvent("WaveEnter", activeEnemies, done), () => completed(true));
+        else completed(true);
+    }
+
+    private void OnTurnStateChanged(BattleTurnState state)
+    {
+        if (state == BattleTurnState.Resolving) rayCasting?.ClearSelection();
+        if (state == BattleTurnState.WaitingForPlayer)
+        { battlefield?.SetReady(battleFlow.CurrentUnit); Selection?.Begin(battleFlow.CurrentUnit); }
+        uiPresenter?.Refresh(DisplayedActor);
+        if (state == BattleTurnState.Completed)
+        {
+            if (presentation != null) QueuePresentationEvent(battleFlow.Result == BattleResult.AllyWin ? "Victory" : "Defeat",
+                battleFlow.Units.Where(u => u.IsActive).ToList(), () => HandleBattleEnded(battleFlow.Result));
+            else HandleBattleEnded(battleFlow.Result);
+        }
+    }
+
+    public string FormationPreset => !string.IsNullOrEmpty(waveController?.CurrentFormation) ? waveController.CurrentFormation : encounter != null ? encounter.DefaultFormationPreset : null;
+    private void OnSelectionChanged()
+    {
+        if (Selection == null) return;
+        CameraController?.SetContext(BattleCameraContext.FromSelection(Selection));
+        rayCasting?.DisplaySelection(Selection.Target, Selection.Preview?.Targets);
+        uiPresenter?.Refresh(DisplayedActor);
+    }
+
+    /// <summary>Extend from the combat/presentation orchestrator; logical summon/revive happens before this call.</summary>
+    public void QueuePresentationEvent(string eventId, IReadOnlyList<BattleUnit> subjects, Action completed = null)
+    {
+        if (battleFlow == null || presentationQueue == null) return;
+        if (presentation == null) { completed?.Invoke(); return; }
+        var snapshot = new List<BattleUnit>();
+        if (subjects != null) foreach (var unit in subjects)
+        {
+            if (unit == null || unit.BattleId != battleFlow.BattleId)
+                throw new ArgumentException("Presentation subjects must belong to the current battle.", nameof(subjects));
+            snapshot.Add(unit);
+        }
+        presentation.Register(snapshot);
+        presentationQueue.Enqueue(done => presentation.PresentEvent(eventId, snapshot, done), () =>
+        { if(turnDriver?.State == BattleTurnState.WaitingForPlayer) OnSelectionChanged(); uiPresenter?.Refresh(battleFlow?.CurrentUnit); completed?.Invoke(); });
+        uiPresenter?.Refresh(battleFlow?.CurrentUnit);
     }
 }

@@ -6,6 +6,7 @@ using Game;
 using Game.Events;
 
 /// <summary>管理本场战斗的敌方血条实例，将模型挂点投影到 HUD。</summary>
+[DefaultExecutionOrder(200)]
 public class BattleEnemiesStatusPanel : UIPanel
 {
     [SerializeField] private BattleUnitEnemyBarUI barPrefab;
@@ -111,7 +112,7 @@ public class BattleEnemiesStatusPanel : UIPanel
             Entry entry = pair.Value;
             BattleUnitActor actor = null;
             bool visible = battleCamera != null && battleCamera.isActiveAndEnabled
-                && canvas != null && unit.IsActive
+                && canvas != null && Battle.Presentation.BattleDisplayState.Visible(unit)
                 && actorLookup != null && actorLookup.TryGetActor(unit, out actor)
                 && actor != null && actor.gameObject.activeInHierarchy;
             if (visible)

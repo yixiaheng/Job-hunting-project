@@ -1,0 +1,78 @@
+﻿{
+    "completedAt":  "2026-11-19T20:33:52.3435074+08:00",
+    "unityVersion":  "6000.3.23f1",
+    "compiler":  "Unity bundled Roslyn using current Bee editor response-file dependencies",
+    "runtimeCompiled":  true,
+    "editorCompiled":  true,
+    "note":  "Final-source compile, distinct from earlier live Unity test snapshots.",
+    "sources":  [
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattleCameraDirector.cs",
+                        "sha256":  "37B2384FCE5F3B444D8F594F8F54408540BF1823C68451E894A15FB6D0E03FC8"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattleCameraProfile.cs",
+                        "sha256":  "5675F633254A54DAA8827773905E64C95BF6113EB0575D17034E5ACD43DADB5D"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattleCameraShotClip.cs",
+                        "sha256":  "8DC7E96BDD6906122EA82A9A9BE9724B056BCD50108CDFCA4C2CF7D2EA9E439F"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattleCameraShotTrack.cs",
+                        "sha256":  "F1315C7F1F960FF57DE0E01D29E148EF63C6459BD0CB689CA90C07E8DADA2810"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattleDisplayState.cs",
+                        "sha256":  "B3DE3EFF7DD4D986ED487F0A259D7F0F3B051C3D74FE6436C0C317BF73648B14"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattleImpactMarker.cs",
+                        "sha256":  "6EA04155D669802E85ECFEF13FE56FBBB2EF1626BC5A9014A8AB13C2CCCF3DC7"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattlePresentationClock.cs",
+                        "sha256":  "9A94E5ED1C9DFB11F235B9C438990ED0FCED0CA93D7C07EEED91FA2657BBF07D"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattlePresentationCoordinator.cs",
+                        "sha256":  "70989AC8E1739208F52988250D71FD028EF3E3FA37C048FEF70E0490A264F320"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattleSequenceDefinition.cs",
+                        "sha256":  "61CC7AEE513D4ABDE737B0AB8CDF2DDC256DCDF24F45B896DEE81A7C17AEA374"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Presentation/BattleStage.cs",
+                        "sha256":  "129C7C8508FED21172715D387E44EE400130EFEBA833A1600403D178399627A9"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Common/BattleManager.cs",
+                        "sha256":  "FEA95E8F00338EA9314DB0E71A87EF34F0D911F2B5794CC275C72C24A6C8CF55"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Common/BattlePresentationQueue.cs",
+                        "sha256":  "F276BFC3477BC8ED5609C295F197057BCB0946EF65690910DBD1F683C836713D"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Common/BattleTurnDriver.cs",
+                        "sha256":  "2DE6827AD2FD9BDE0C9D047DD0C5545A6699EFEBA4DF1CCA40AA854DA13F5347"
+                    },
+                    {
+                        "path":  "Assets/Scripts/GamePlay/Battle/InBattle/Common/BattleUnitActor.cs",
+                        "sha256":  "02F860A10DDE561B17CF8C77A298EE104F8BB68E8F19F34AB8E33707CF7BEADA"
+                    },
+                    {
+                        "path":  "Assets/Editor/BattlePresentationSetup.cs",
+                        "sha256":  "ACB4440E9F268E32D8859FA316AE7F63467CA4422A3CF1CC4B068FFA1E213CEF"
+                    },
+                    {
+                        "path":  "Assets/Editor/BattlePresentationVerification.cs",
+                        "sha256":  "2D211DCDA6BB80A13971845A0E7DB928122014E77AF1A0082FFEF94CB0969BB5"
+                    },
+                    {
+                        "path":  "Assets/Editor/BattlePresentationPlayVerification.cs",
+                        "sha256":  "D27E6A84BF45E2D0305439B41A211238B5FED55D2A91E18EFC7EBF4264120C84"
+                    }
+                ]
+}

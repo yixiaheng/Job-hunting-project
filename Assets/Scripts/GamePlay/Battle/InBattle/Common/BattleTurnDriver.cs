@@ -21,6 +21,9 @@ namespace Battle.Logic
         private readonly IBattleResolutionPresenter presenter;
         private readonly Func<bool> tryTransitionWave;
         private bool stopRequested;
+        private int generation;
+        public Action<Action<bool>> TransitionWaveAsync { get; set; }
+        public bool CanSubmit => !stopRequested && State == BattleTurnState.WaitingForPlayer;
 
         public BattleFlow Flow => flow;
         public BattleTurnState State { get; private set; } = BattleTurnState.Stopped;
@@ -38,6 +41,7 @@ namespace Battle.Logic
 
         public void Start()
         {
+            generation++;
             stopRequested = false;
             LastFailure = default;
             flow.Ready();
@@ -48,6 +52,8 @@ namespace Battle.Logic
         {
             if (stopRequested || State == BattleTurnState.Stopped)
                 return StoppedResult();
+
+            if (!CanSubmit) return BusyResult();
 
             SetState(BattleTurnState.Resolving);
             BattleActionResult result = flow.TryExecute(action);
@@ -68,6 +74,9 @@ namespace Battle.Logic
             if (stopRequested || State == BattleTurnState.Stopped)
                 return StoppedResult();
 
+            if (State == BattleTurnState.Presenting || State == BattleTurnState.Resolving
+                || State == BattleTurnState.TransitioningWave) return BusyResult();
+
             SetState(BattleTurnState.Resolving);
             BattleActionResult result = flow.TryStep();
             if (result.Succeeded)
@@ -79,6 +88,7 @@ namespace Battle.Logic
 
         public void Stop()
         {
+            generation++;
             stopRequested = true;
             SetState(BattleTurnState.Stopped);
         }
@@ -98,6 +108,17 @@ namespace Battle.Logic
             if (flow.IsWaveCleared)
             {
                 SetState(BattleTurnState.TransitioningWave);
+                if (TransitionWaveAsync != null)
+                {
+                    int session = generation; bool finished = false;
+                    TransitionWaveAsync(success =>
+                    {
+                        if (finished || session != generation || stopRequested) return;
+                        finished = true;
+                        if (success) ContinueUntilPlayer(); else SetState(BattleTurnState.Faulted);
+                    });
+                    return;
+                }
                 if (tryTransitionWave == null || !tryTransitionWave())
                 {
                     SetState(BattleTurnState.Faulted);
@@ -129,6 +150,9 @@ namespace Battle.Logic
 
         private void UpdateAfterStep(BattleActionResult result)
         {
+            if (stopRequested) return;
+            if (result.Succeeded && flow.IsWaveCleared && flow.Result == BattleResult.None)
+            { ContinueUntilPlayer(); return; }
             if (!result.Succeeded)
             {
                 LastFailure = result.Validation;
@@ -159,7 +183,19 @@ namespace Battle.Logic
                 return;
             }
             SetState(BattleTurnState.Presenting);
-            presenter.Present(result.Resolution, completed);
+            int session = generation;
+            bool finished = false;
+            presenter.Present(result.Resolution, () =>
+            {
+                if (finished || session != generation || stopRequested) return;
+                finished = true; completed?.Invoke();
+            });
+        }
+
+        private BattleActionResult BusyResult()
+        {
+            LastFailure = new ActionValidation(ActionFailure.Resolving);
+            return new BattleActionResult(LastFailure, flow.Result);
         }
 
         private BattleActionResult StoppedResult()
