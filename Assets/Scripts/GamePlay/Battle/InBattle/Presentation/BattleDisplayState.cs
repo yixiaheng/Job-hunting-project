@@ -11,6 +11,7 @@ namespace Battle.Presentation
     {
         private static readonly Dictionary<BattleUnit, BattleDisplayState> owners = new();
         private readonly Dictionary<BattleUnit, int> health = new();
+        private readonly Dictionary<BattleUnit, int> shields = new();
         private readonly HashSet<BattleUnit> hidden = new();
         public static event Action<HealthChangedEvent> HealthChanged;
         public BattlePresentationClock Clock { get; }
@@ -22,6 +23,7 @@ namespace Battle.Presentation
             && (owners.TryGetValue(unit, out var owner) ? !owner.hidden.Contains(unit) : unit.IsActive);
         public static float Delta(BattleUnit unit) => unit != null && owners.TryGetValue(unit, out var owner)
             ? owner.Clock.Delta : UnityEngine.Time.deltaTime;
+        public static int Shield(BattleUnit unit) => unit == null ? 0 : owners.TryGetValue(unit, out var owner) ? owner.shields[unit] : unit.shield;
         public void Register(IEnumerable<BattleUnit> units)
         {
             foreach (var unit in units)
@@ -29,17 +31,23 @@ namespace Battle.Presentation
                 if (unit == null || health.ContainsKey(unit)) continue;
                 owners[unit] = this;
                 health[unit] = unit.currentHealth;
+                shields[unit] = unit.shield;
                 if (!unit.IsActive) hidden.Add(unit);
             }
         }
         public void Apply(BattleEffectRecord effect)
         {
-            if (effect.Type == BattleEffectRecordType.Damage || effect.Type == BattleEffectRecordType.Heal)
+            if (effect.Type == BattleEffectRecordType.Damage || effect.Type == BattleEffectRecordType.Heal || effect.Type == BattleEffectRecordType.FollowUp)
                 SetHealth(effect.Target, effect.After);
+            if (effect.Target != null && shields.ContainsKey(effect.Target))
+            {
+                if (effect.Type == BattleEffectRecordType.Shield) shields[effect.Target] = effect.After;
+                else if (effect.ShieldAfter >= 0) shields[effect.Target] = effect.ShieldAfter;
+            }
         }
         public void Synchronize()
         {
-            foreach (var unit in new List<BattleUnit>(health.Keys)) SetHealth(unit, unit.currentHealth);
+            foreach (var unit in new List<BattleUnit>(health.Keys)) { SetHealth(unit, unit.currentHealth); shields[unit] = unit.shield; }
         }
         private void SetHealth(BattleUnit unit, int value)
         {
@@ -56,7 +64,7 @@ namespace Battle.Presentation
         {
             foreach (var unit in health.Keys)
                 if (owners.TryGetValue(unit, out var owner) && owner == this) owners.Remove(unit);
-            health.Clear(); hidden.Clear();
+            health.Clear(); shields.Clear(); hidden.Clear();
         }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetStatics() { owners.Clear(); HealthChanged = null; }

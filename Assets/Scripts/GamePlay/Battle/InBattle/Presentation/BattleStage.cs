@@ -9,6 +9,8 @@ namespace Battle.Presentation
     {
         public Transform casterAnchor;
         public Transform targetAnchor;
+        [SerializeField] private Transform[] additionalTargetAnchors = Array.Empty<Transform>();
+        public Transform AdditionalTargetAnchor(int index) => index >= 0 && index < additionalTargetAnchors.Length ? additionalTargetAnchors[index] : null;
         [Range(8, 31)] public int stageLayer = 30;
 
         public static GameObject CloneVisual(Transform source, Transform parent)

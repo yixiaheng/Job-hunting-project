@@ -1,5 +1,7 @@
 # 当前战斗系统说明
 
+2026-11-24 技能表现补充：四种技能模板、目标攻击挂点、Animator 接近／返回、弹体和原对象固定演出已经接入。配置从 [技能表现配置与试用指南](BattleSkillConfigurationGuide.md) 开始；实际验证及边界见 [本次实施报告](BattleSkillImplementationReport.md)。下文的规则系统介绍继续有效。
+
 ## 1. 系统目标与边界
 
 当前战斗系统负责：

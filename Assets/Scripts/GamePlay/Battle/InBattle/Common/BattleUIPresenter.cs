@@ -24,6 +24,8 @@ public sealed class BattleUIPresenter : IDisposable
         if (uiManager.TryGetPanel(enemiesStatusHandle, out BattleEnemiesStatusPanel enemies)) enemies.SetCinematicHidden(!visible);
         if (uiManager.TryGetPanel(commandsHandle, out BattleUIController commands)) commands.SetCinematicHidden(!visible);
     }
+    public void SetCommandsVisible(bool visible)
+    { if (uiManager.TryGetPanel(commandsHandle, out BattleUIController commands)) commands.SetCinematicHidden(!visible); }
 
     public BattleUIPresenter(UIManager uiManager, int ownerSceneHandle)
     {

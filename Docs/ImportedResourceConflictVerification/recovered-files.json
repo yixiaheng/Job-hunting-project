@@ -1,0 +1,122 @@
+﻿[
+    {
+        "Path":  "Assets/Plugins/Demigiant/DOTween/DOTween.dll",
+        "SHA256":  "D74BFC3F37CD97D90F7F08A9A73E204C5EAE66E77BE24B12378A4E99F1690843"
+    },
+    {
+        "Path":  "Assets/Plugins/Demigiant/DOTween/Editor/DOTweenEditor.dll",
+        "SHA256":  "887CC6138BB9493240EA9C933F1E37B6DF00FA21BD7334A933D9E0C0FF38711F"
+    },
+    {
+        "Path":  "Assets/Plugins/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs",
+        "SHA256":  "C52EA07BF4013C59659A9FCC54C45C3FE3080C8DBAC29FF5F17F1E58CF7FA190"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/NoEditor/Sirenix.Serialization.dll",
+        "SHA256":  "018BBE93F1321D085B7484385733936177A10364FEBD33A8140237BCB6E4D247"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/NoEditor/Sirenix.Utilities.dll",
+        "SHA256":  "FF4B6D608C4E8D87ABF9F98FDCA6BE0EBC6C2B51ED51D4A9661D022932C57052"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor/Sirenix.Serialization.dll",
+        "SHA256":  "DE52632DD5397BE42D7B0D8208D2D1AA492D689B0F4FE604D5FF1309E4990485"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor/Sirenix.Utilities.dll",
+        "SHA256":  "D6806B8C235F47275A6EC158FF6E307425255CF608C736EAE7B79A1E8EC8416F"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Attributes.dll",
+        "SHA256":  "207D8EBA3F16186CEF3E115079F26E6F0E20030D6F27C81B08CCF2B27D255563"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll",
+        "SHA256":  "A3393C8E1D9E41F2E2B3FF492175C2E40E0EFB96910BA837FBEFF293CDEA8262"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/Sirenix.Reflection.Editor.dll",
+        "SHA256":  "9B53E2562B40DBA9929487FACD704077110B98D0FFB72176EA17E4CEE5E90ADB"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll",
+        "SHA256":  "909E1025A4819B7C974FAF90738741DD784281AF217407C98A6DAE0CED5EFCB5"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.dll",
+        "SHA256":  "68EF7424262FE5D650DA98CF6F640CFFEBCDE8B8E827DB4BD84687963635C1D3"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll",
+        "SHA256":  "753B63D9A33856FDB24BE29597BAC253B48169D0A09FD4D162025E49F8C2A4A6"
+    },
+    {
+        "Path":  "Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.dll",
+        "SHA256":  "1462986D39AE0E6CECE7CF32233ED8340DF8DCB62E6EA1EFE350D0F15F1C54DD"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/Benchmark01.cs",
+        "SHA256":  "3C61167C0EAB6C7BD295C2FF7C36777C89FFCBC453AF8D6580236A6AABC0757D"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/Benchmark02.cs",
+        "SHA256":  "E89E3ED0038C306FE7E4DCDAAF9D7931097C32493B34622877E4D53A6EEF03A5"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/Benchmark04.cs",
+        "SHA256":  "840C386820D5037E1F4CFC85A34B7348581566704076CA304BE72AB672C70787"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/ObjectSpin.cs",
+        "SHA256":  "FF61DA5BF98D6B797AA6C99D0ED59928153271DC71F63B2DEB3BDB7715E4D5A9"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/SimpleScript.cs",
+        "SHA256":  "4D13B6A4AF5B35897CF73E0164D4069E2C1F5328ECB53B0D6713B22546B0624F"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/TMP_FrameRateCounter.cs",
+        "SHA256":  "D9FBDF75FD2E62D887150CE6F29FEFB2D32B199588649C835567FD3AA97BB82B"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/TMP_TextEventHandler.cs",
+        "SHA256":  "07E23509A862C25CF32CC3A84AFEABCD8D79F6662F680405654AA1D905D9FBE8"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/TMP_TextSelector_B.cs",
+        "SHA256":  "6E93B8E1EB4FF438C24E35AB0BF80B2EE4AB65A2D8C10F93F387E64F415D425B"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/TMP_UiFrameRateCounter.cs",
+        "SHA256":  "D2F2AB0090772DA36B7759783DE6FBF225DAD51FC40D4D7B06F82E6A8BE27D2F"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/TeleType.cs",
+        "SHA256":  "6D2E0E4FD557486FF1652FF2A6404312DC49ADA59632563FC98C9B95D85FFF7A"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/TextMeshProFloatingText.cs",
+        "SHA256":  "B31384607C78E1B71C8773B0162F9E8C4C299D7F7BAAAB04CCD773039C79861A"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Examples \u0026 Extras/Scripts/VertexZoom.cs",
+        "SHA256":  "921EFF16D54EA819C0741ACD9CB3D0F53D79D42D593AAB7CAD6F0AA93F20A16C"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Resources/Fonts \u0026 Materials/LiberationSans SDF - Fallback.asset",
+        "SHA256":  "9921AD0564DF1C1EEFFBA42E31931D1E9AFB79985CB3AE5EEC69F7ACC3F5DEF8"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Resources/Fonts \u0026 Materials/LiberationSans SDF.asset",
+        "SHA256":  "8E1D458D23544A132BC61053EBFE378C6812B1439F7F4FEBF74328568EB202F4"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader",
+        "SHA256":  "970DB4B1E73B8289C1DD56CFF60877F426B49C9682620B2D14DA6CD70B64CB9C"
+    },
+    {
+        "Path":  "Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc",
+        "SHA256":  "26C70831A9BDD6A56A37EC1E2358929453D66A064D10A61DA49A1D4B05280E06"
+    }
+]

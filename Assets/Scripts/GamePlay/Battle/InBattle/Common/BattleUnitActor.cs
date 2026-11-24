@@ -16,6 +16,9 @@ public class BattleUnitActor : MonoBehaviour
     [SerializeField] private Vector3 framingCenter = new(0, 1, 0);
     [SerializeField] private Vector3 framingSize = new(1, 2, 1);
     public Transform PresentationRoot => presentationRoot != null ? presentationRoot : transform;
+    public Battle.Presentation.BattleActorPresentation Presentation => GetComponent<Battle.Presentation.BattleActorPresentation>();
+    public bool WorldPresentationVisible { get; private set; } = true;
+    public void SetWorldPresentationVisible(bool visible) => WorldPresentationVisible = visible;
     public Vector3 FocusPosition => cameraFocusAnchor != null ? cameraFocusAnchor.position : PresentationRoot.TransformPoint(framingCenter);
     public Bounds FramingBounds
     {

@@ -25,7 +25,8 @@ namespace Battle.Presentation
         private void ApplyFramingVisibility(BattleShotSettings settings)
         {
             RestoreFramingVisibility();
-            if(settings==null || !settings.hideOtherAllies || units==null || actors==null)return;
+            if(settings==null || !settings.hideOtherAllies || context?.Target == null
+                || context.Target.faction != Faction.Enemy || units==null || actors==null)return;
             foreach(var unit in units)if(unit.faction==Faction.OurSide && unit!=AnchorUnit && actors.TryGetActor(unit,out var actor))
                 foreach(var renderer in actor.VisualRoot.GetComponentsInChildren<Renderer>(true))
                 { framingVisibility[renderer]=renderer.enabled;renderer.enabled=false; }
@@ -249,6 +250,8 @@ namespace Battle.Presentation
         public int Acquire()
         {
             if (HasExclusiveOwner) throw new InvalidOperationException("Battle camera already owned by a sequence.");
+            // Selection framing belongs to the normal camera. The presentation coordinator
+            // owns visibility once a cinematic starts.
             RestoreFramingVisibility();
             owner = ++generation; transitioning = false;
             if (cinematicCamera != null) { Write(cinematicCamera, outputCamera != null ? new BattleCameraPose(outputCamera.transform.position, outputCamera.transform.rotation, outputCamera.fieldOfView) : Read(normalCamera)); cinematicCamera.Priority = 20; }

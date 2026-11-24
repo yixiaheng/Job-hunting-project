@@ -15,10 +15,11 @@ namespace Battle.Logic
         public float SelfActionMultiplier = 1f;
         public readonly List<AttackResult> FollowUps = new List<AttackResult>();
         public BattleActionRecord Record { get; internal set; }
+        internal int ActiveEffectGroup { get; set; } = -1;
 
         internal void AddEffect(BattleEffectRecord effect)
         {
-            Record?.effects.Add(effect);
+            Record?.effects.Add(effect.InGroup(ActiveEffectGroup));
         }
     }
 
@@ -94,7 +95,7 @@ namespace Battle.Logic
                                 result.FollowUps.Add(followUp);
                                 result.AddEffect(new BattleEffectRecord(BattleEffectRecordType.FollowUp,
                                     caster, target, followUp.HealthDamage, followUp.PreviousHealth,
-                                    followUp.CurrentHealth, effect.key));
+                                    followUp.CurrentHealth, effect.key, shieldBefore: target.shield + followUp.ShieldDamage, shieldAfter: target.shield));
                             }
                     }
 

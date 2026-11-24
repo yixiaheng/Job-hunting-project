@@ -23,18 +23,39 @@ public static class BattlePresentationSetup
     {
         if (EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isCompiling || EditorApplication.isUpdating
             || !File.Exists(Folder + "/request.txt")) return;
+        // External edits can be waiting for Unity's next refresh even while isCompiling is false.
+        // Do not consume a new command with an older assembly during that gap.
+        var assemblyPath = typeof(BattlePresentationSetup).Assembly.Location;
+        if (File.Exists(assemblyPath) && File.GetLastWriteTimeUtc("Assets/Editor/BattlePresentationSetup.cs") > File.GetLastWriteTimeUtc(assemblyPath))
+        { AssetDatabase.Refresh(); return; }
         string command = File.ReadAllText(Folder + "/request.txt").Trim();
         File.Delete(Folder + "/request.txt");
         try
         {
             if (command == "setup") Setup();
+            else if (command == "skill-samples") BattleSkillSamples.Create();
+            else if (command == "skill-test") BattleSkillVerification.Run();
+            else if (command == "skill-preview") { BattleSkillStudio.Open(AssetDatabase.LoadAssetAtPath<BattleSequenceDefinition>(BattleSkillSamples.Folder + "/MeleeApproach.asset")); EditorWindow.GetWindow<BattleSkillStudio>().Export(Folder + "/skill-preview.png"); }
+            else if (command == "skill-captures")
+            {
+                foreach (var studio in Resources.FindObjectsOfTypeAll<BattleSkillStudio>()) studio.Close();
+                if (UnityEngine.Rendering.RenderPipelineManager.currentPipeline == null) UnityEngine.Rendering.Blitter.Cleanup();
+                BattleSkillSamples.Create();
+                foreach (string name in new[] { "MeleeApproach", "Ranged", "Support", "Staged" })
+                { BattleSkillStudio.Open(AssetDatabase.LoadAssetAtPath<BattleSequenceDefinition>(BattleSkillSamples.Folder + "/" + name + ".asset")); EditorWindow.GetWindow<BattleSkillStudio>().ExportSequence(Folder + "/Captures/" + name); }
+            }
+            else if (command == "skill-close")
+            {
+                foreach (var studio in Resources.FindObjectsOfTypeAll<BattleSkillStudio>()) studio.Close();
+                if (UnityEngine.Rendering.RenderPipelineManager.currentPipeline == null) UnityEngine.Rendering.Blitter.Cleanup();
+            }
             else if (command == "preview-source") { BattlePresentationStudio.Open(); var studio = EditorWindow.GetWindow<BattlePresentationStudio>(); studio.ReloadFromAssets(); studio.ExportPreview(Folder + "/studio-preview.png"); }
             else if (command == "preview") { BattlePresentationStudio.Open(); EditorWindow.GetWindow<BattlePresentationStudio>().ExportPreview(Folder + "/studio-preview.png"); }
             else if (command == "test-scene") { SceneFlowVerification.BeginBattle(); return; }
             else if (command == "test-rebuild") BattleRebuildVerification.Run();
             else if (command == "test") BattlePresentationVerification.Run();
             else if (command == "test-tuning") BattlePresentationVerification.RunTuning();
-            else if (command == "play") { BattlePresentationPlayVerification.Begin(); return; }
+            else if (command == "play") { foreach (var studio in Resources.FindObjectsOfTypeAll<BattleSkillStudio>()) studio.Close(); BattlePresentationPlayVerification.Begin(); return; }
             else if (command == "refresh") AssetDatabase.Refresh();
             else if (command == "tune") BattlePresentationStudio.Open();
             else if (command == "reimport-samples")

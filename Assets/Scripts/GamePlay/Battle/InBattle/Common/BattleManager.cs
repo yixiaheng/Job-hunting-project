@@ -167,6 +167,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
             presentation.cameraDirector?.ConfigureBattlefield(battlefield, encounter != null ? encounter.CameraProfile : null);
             presentation.Bind(battleFlow, actorRegistry);
             presentation.HUDVisibilityChanged += uiPresenter.SetVisible;
+            presentation.CommandsVisibilityChanged += uiPresenter.SetCommandsVisible;
             presentationQueue.ActionPresenter = presentation.Present;
         }
         Selection = new BattleSelectionState(battleFlow);
@@ -302,6 +303,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
         {
             presentation.Cancel();
             if (uiPresenter != null) presentation.HUDVisibilityChanged -= uiPresenter.SetVisible;
+            if (uiPresenter != null) presentation.CommandsVisibilityChanged -= uiPresenter.SetCommandsVisible;
         }
         uiPresenter?.Close();
         actorRegistry?.Clear();

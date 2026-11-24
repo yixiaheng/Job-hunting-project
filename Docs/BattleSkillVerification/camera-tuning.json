@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "error": null,
+  "checkCount": 15,
+  "checks": [
+    "tuning draft acquires base preview",
+    "manual position and rotation apply immediately without advancing clock (lock=False, actual=(0.37, 4.00, -9.46), expected=(0.37, 4.00, -9.46))",
+    "draft FOV applies immediately",
+    "selection adds position and FOV offsets",
+    "selection offsets never accumulate",
+    "camera transition terminates after finite duration",
+    "idle LateUpdate does not rewrite camera transform",
+    "explicit configuration event reapplies camera pose",
+    "enemy target selection hides non-acting allies",
+    "cinematic handoff releases selection-only visibility",
+    "cinematic completion reapplies active enemy selection framing",
+    "ally-target skills keep the full party visible",
+    "cinematic cancellation restores non-acting allies",
+    "draft JSON roundtrip retains new configuration fields",
+    "explicit draft save persists values and preserves destination GUID and flags"
+  ],
+  "completedAt": "2026-11-24T17:21:56.9650736+08:00"
+}

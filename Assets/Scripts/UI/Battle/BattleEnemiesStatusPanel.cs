@@ -114,7 +114,7 @@ public class BattleEnemiesStatusPanel : UIPanel
             bool visible = battleCamera != null && battleCamera.isActiveAndEnabled
                 && canvas != null && Battle.Presentation.BattleDisplayState.Visible(unit)
                 && actorLookup != null && actorLookup.TryGetActor(unit, out actor)
-                && actor != null && actor.gameObject.activeInHierarchy;
+                && actor != null && actor.gameObject.activeInHierarchy && actor.WorldPresentationVisible;
             if (visible)
             {
                 entry.Actor = actor;

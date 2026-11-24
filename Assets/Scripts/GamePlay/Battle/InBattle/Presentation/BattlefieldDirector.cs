@@ -12,6 +12,19 @@ namespace Battle.Presentation
         private readonly List<Motion> motions = new();
         private BattlePresentationClock clock;
         private BattleUnit ready;
+        private readonly Dictionary<BattleUnit, int> owners = new();
+        private int generation;
+        public Pose HomePose(BattleUnit unit)
+        { return slots.TryGetValue(unit, out var slot) ? new Pose(Root.TransformPoint(slot.position), Root.rotation * Quaternion.Euler(slot.euler)) : actors.TryGetValue(unit, out var actor) ? new Pose(actor.PresentationRoot.position, actor.PresentationRoot.rotation) : new Pose(Root.position, Root.rotation); }
+        public int Acquire(BattleUnit unit)
+        {
+            if (unit == null || owners.ContainsKey(unit)) throw new System.InvalidOperationException("Actor movement is already owned.");
+            if (actors.TryGetValue(unit, out var actor)) motions.RemoveAll(m => m.root == actor.PresentationRoot);
+            if (ready == unit) ready = null;
+            int token = ++generation; owners.Add(unit, token); return token;
+        }
+        public void Release(BattleUnit unit, int token)
+        { if (unit != null && owners.TryGetValue(unit, out int current) && current == token) owners.Remove(unit); }
         private sealed class Motion
         {
             public Transform root;
@@ -45,6 +58,7 @@ namespace Battle.Presentation
         public Vector3 CameraOffset(BattleUnit unit) => unit != null && slots.TryGetValue(unit, out var slot) ? slot.cameraOffset : Vector3.zero;
         public void SetReady(BattleUnit unit, bool immediate = false)
         {
+            if (unit != null && owners.ContainsKey(unit)) return;
             if (ready == unit) return;
             if (ready != null) Move(ready, false, immediate);
             ready = unit != null && unit.faction == Faction.OurSide ? unit : null;
@@ -54,6 +68,7 @@ namespace Battle.Presentation
         { Move(unit, false, immediate); if (ready == unit) ready = null; }
         private void Move(BattleUnit unit, bool preparing, bool immediate)
         {
+            if (unit != null && owners.ContainsKey(unit)) return;
             if (unit == null || !actors.TryGetValue(unit, out var actor) || actor == null || !slots.TryGetValue(unit, out var slot)) return;
             var root = actor.PresentationRoot;
             motions.RemoveAll(m => m.root == root);
@@ -73,6 +88,7 @@ namespace Battle.Presentation
         }
         public void ApplyLayout(BattlefieldLayout value, int enemyCapacity, string preset = null, BattleUnit previewActor = null)
         {
+            if (owners.Count > 0) throw new System.InvalidOperationException("Cannot change formation during a skill.");
             layout = value; motions.Clear(); ready = null;
             foreach (var entry in actors)
             {
@@ -83,7 +99,7 @@ namespace Battle.Presentation
             SetReady(previewActor, true);
         }
         public void Unregister(BattleUnit unit) { if (actors.TryGetValue(unit, out var actor) && actor != null) motions.RemoveAll(m => m.root == actor.PresentationRoot); actors.Remove(unit); slots.Remove(unit); if (ready == unit) ready = null; }
-        public void Clear() { motions.Clear(); actors.Clear(); slots.Clear(); ready = null; clock = null; }
+        public void Clear() { motions.Clear(); owners.Clear(); actors.Clear(); slots.Clear(); ready = null; clock = null; generation++; }
         private void LateUpdate()
         {
             float delta = clock?.Delta ?? 0;

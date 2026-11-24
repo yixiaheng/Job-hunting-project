@@ -100,22 +100,29 @@ public static class BattlePresentationVerification
     private sealed class Fixture : IDisposable
     {
         public BattleUnit Ally = Unit(Faction.OurSide, 0, 200);
+        public BattleUnit Support = Unit(Faction.OurSide, 1, 90);
         public BattleUnit Enemy = Unit(Faction.Enemy, 1, 100);
         public SkillConfig Skill;
         public BattleFlow Flow;
-        public Fixture(bool lethal = false)
+        public Fixture(bool lethal = false, bool includeSupport = false, bool allyTargetSkill = false)
         {
             Skill = ScriptableObject.CreateInstance<SkillConfig>(); Skill.id = -9182;
-            Skill.Name = "Presentation Verification"; Skill.targetRule = TargetRule.Single; Skill.targetSide = TargetSide.OtherSide;
+            Skill.Name = "Presentation Verification"; Skill.targetRule = TargetRule.Single;
+            Skill.targetSide = allyTargetSkill ? TargetSide.OurSide : TargetSide.OtherSide;
             Skill.effectConfigs = new List<EffectConfig>
             {
-                new() { effectType = EffectType.Damage, scaleStat = StatType.Attack, value = lethal ? 100 : 1 },
-                new() { effectType = EffectType.Damage, scaleStat = StatType.Attack, value = 1 }
+                allyTargetSkill
+                    ? new EffectConfig { effectType = EffectType.Heal, scaleStat = StatType.Attack, value = 1 }
+                    : new EffectConfig { effectType = EffectType.Damage, scaleStat = StatType.Attack, value = lethal ? 100 : 1 },
+                allyTargetSkill
+                    ? new EffectConfig { effectType = EffectType.Heal, scaleStat = StatType.Attack, value = 1 }
+                    : new EffectConfig { effectType = EffectType.Damage, scaleStat = StatType.Attack, value = 1 }
             };
             Ally.skills.Add(Skill); Enemy.skills.Add(Skill);
-            Flow = new BattleFlow(new[] { Ally, Enemy }); Flow.Ready();
+            Flow = new BattleFlow(includeSupport ? new[] { Ally, Support, Enemy } : new[] { Ally, Enemy }); Flow.Ready();
         }
         public BattleAction Action => new() { caster = Ally, skill = Skill, mainTarget = Enemy };
+        public BattleAction AllyAction => new() { caster = Ally, skill = Skill, mainTarget = Support };
         public void Dispose() => Object.DestroyImmediate(Skill);
     }
     private static BattleUnit Unit(Faction side, int index, int speed) => new()
@@ -164,7 +171,7 @@ public static class BattlePresentationVerification
         SceneManager.SetActiveScene(scene); GameObject root = null;
         try
         {
-            using var f = new Fixture(); using var actors = new Actors(f.Flow.Units, scene);
+            using var f = new Fixture(includeSupport: true); using var actors = new Actors(f.Flow.Units, scene);
             var coordinator = MakeCoordinator(scene, out root); coordinator.Bind(f.Flow, actors);
             var sample = AssetDatabase.LoadAssetAtPath<BattleSequenceDefinition>(BattlePresentationSetup.Root + "/SampleBattlefield.asset");
             Check(sample != null && sample.timeline != null && BattlePresentationCoordinator.CollectMarkers(sample.timeline).Count == 2,
@@ -177,6 +184,9 @@ public static class BattlePresentationVerification
                 "logic resolves while displayed HP remains at pre-action value");
             int completed = 0; int effects = 0; coordinator.EffectPresented += _ => effects++;
             coordinator.Present(result.Resolution, () => completed++); coordinator.Tick(0.01f);
+            actors.TryGetActor(f.Support, out var supportActor);
+            var supportRenderer = supportActor.GetComponentInChildren<Renderer>(true);
+            Check(!supportRenderer.enabled, "other-side skill hides non-acting allies for the full presentation");
             Check(coordinator.cameraDirector.HasExclusiveOwner && BattleDisplayState.Health(f.Enemy) == before, "cinematic owns camera before first impact");
             coordinator.Clock.Paused = true; coordinator.Tick(5);
             Check(BattleDisplayState.Health(f.Enemy) == before && completed == 0, "pause freezes Timeline and impact markers");
@@ -186,6 +196,7 @@ public static class BattlePresentationVerification
             coordinator.Tick(2f);
             Check(BattleDisplayState.Health(f.Enemy) == f.Enemy.currentHealth && completed == 1
                 && effects == result.Resolution.Record.Effects.Count, "skipped frame dispatches every crossed effect exactly once");
+            Check(supportRenderer.enabled, "other-side skill restores non-acting allies after presentation");
             Check(!coordinator.cameraDirector.HasExclusiveOwner, "completion returns camera ownership to base");
             int token = coordinator.cameraDirector.Acquire(); coordinator.cameraDirector.Release(token);
             int next = coordinator.cameraDirector.Acquire();
@@ -207,6 +218,29 @@ public static class BattlePresentationVerification
             coordinator.PresentEvent("Transform", new[] { lethal.Ally }, () => deathDone++);
             coordinator.Tick(0.01f); coordinator.Cancel(); coordinator.Tick(10f);
             Check(deathDone == 1, "cancel suppresses outstanding event completion");
+
+            using var cancelled = new Fixture(includeSupport: true);
+            using var cancelledActors = new Actors(cancelled.Flow.Units, scene);
+            coordinator.Bind(cancelled.Flow, cancelledActors);
+            coordinator.skills = new[] { new BattleSkillSequence { skillId = cancelled.Skill.id, casterFaction = Faction.OurSide, sequence = sample } };
+            var cancelledResult = cancelled.Flow.TryExecute(cancelled.Action);
+            coordinator.Present(cancelledResult.Resolution, () => { }); coordinator.Tick(0.01f);
+            cancelledActors.TryGetActor(cancelled.Support, out var cancelledSupportActor);
+            var cancelledSupportRenderer = cancelledSupportActor.GetComponentInChildren<Renderer>(true);
+            Check(!cancelledSupportRenderer.enabled, "cancelled other-side presentation starts with non-acting allies hidden");
+            coordinator.Cancel();
+            Check(cancelledSupportRenderer.enabled, "presentation cancellation restores non-acting allies");
+
+            using var support = new Fixture(includeSupport: true, allyTargetSkill: true);
+            using var supportActors = new Actors(support.Flow.Units, scene);
+            coordinator.Bind(support.Flow, supportActors);
+            var supportResult = support.Flow.TryExecute(support.AllyAction);
+            coordinator.skills = Array.Empty<BattleSkillSequence>();
+            coordinator.Present(supportResult.Resolution, () => { }); coordinator.Tick(0.01f);
+            supportActors.TryGetActor(support.Support, out var allyTargetActor);
+            Check(allyTargetActor.GetComponentInChildren<Renderer>(true).enabled,
+                "ally-target presentation keeps the full party visible");
+            coordinator.Cancel();
         }
         finally
         {
@@ -228,21 +262,21 @@ public static class BattlePresentationVerification
             Check(sample != null && sample.stagePrefab.IsSafe(out _), "stage prefab contains only approved visual components");
             coordinator.skills = new[] { new BattleSkillSequence { skillId = f.Skill.id, casterFaction = Faction.OurSide, sequence = sample } };
             var camera = coordinator.cameraDirector.outputCamera; int mask = camera.cullingMask;
-            bool visible = true; coordinator.HUDVisibilityChanged += state => visible = state;
+            bool visible = true; coordinator.CommandsVisibilityChanged += state => visible = state;
             actors.TryGetActor(f.Ally, out var actor); Vector3 position = actor.transform.position;
             var result = f.Flow.TryExecute(f.Action);
             coordinator.Present(result.Resolution, () => { }); coordinator.Tick(0.01f);
             Check(camera.cullingMask == 1 << sample.stagePrefab.stageLayer && !visible,
                 "stage masks battlefield and suspends only battle HUD");
-            Check(!actor.GetComponent<Renderer>().enabled && actor.transform.position == position,
-                "stage uses clones without moving authoritative actor");
+            Check(actor.GetComponent<Renderer>().enabled && actor.transform.position != position,
+                "stage moves original presentation actor and retains its renderers");
             Transform clone = coordinator.cameraDirector.SequenceCaster;
-            Check(clone != actor.transform && clone.GetComponent<BattleUnitActor>() == null
-                && clone.GetComponent<Collider>() == null, "stage clones omit gameplay scripts and colliders");
+            Check(clone == actor.VisualRoot && clone.GetComponent<BattleUnitActor>() == actor,
+                "stage retains original actor identity and health anchor");
             coordinator.Cancel();
             Check(camera.cullingMask == mask && visible && actor.GetComponent<Renderer>().enabled,
                 "mid-cinematic cancellation restores camera mask HUD and original renderers");
-            Check(actor.transform.position == position && clone == null, "stage cancellation destroys clones and preserves original pose");
+            Check(actor.transform.position == position && clone != null, "stage cancellation restores original pose without destroying original actor");
         }
         finally
         {
@@ -295,6 +329,33 @@ public static class BattlePresentationVerification
             Check(camera.normalCamera.transform.position == moved, "idle LateUpdate does not rewrite camera transform");
             camera.RefreshConfiguration();
             Check(camera.normalCamera.transform.position != moved, "explicit configuration event reapplies camera pose");
+
+            var support = Unit(Faction.OurSide, 1, 100);
+            var visibilityUnits = new[] { f.Ally, support, f.Enemy };
+            using (var visibilityActors = new Actors(visibilityUnits, scene))
+            {
+                camera.Bind(visibilityActors, visibilityUnits, coordinator.Clock);
+                visibilityActors.TryGetActor(support, out var supportActor);
+                var supportRenderer = supportActor.GetComponentInChildren<Renderer>(true);
+
+                camera.SetContext(new BattleCameraContext(f.Ally, f.Enemy,
+                    new[] { f.Enemy }, BattleShotMode.EnemySingle), true);
+                Check(!supportRenderer.enabled, "enemy target selection hides non-acting allies");
+                int sequence = camera.Acquire();
+                Check(supportRenderer.enabled, "cinematic handoff releases selection-only visibility");
+                camera.Release(sequence);
+                Check(!supportRenderer.enabled, "cinematic completion reapplies active enemy selection framing");
+
+                camera.SetContext(new BattleCameraContext(f.Ally, support,
+                    new[] { support }, BattleShotMode.AllySupport), true);
+                Check(supportRenderer.enabled, "ally-target skills keep the full party visible");
+
+                camera.SetContext(new BattleCameraContext(f.Ally, f.Enemy,
+                    new[] { f.Enemy }, BattleShotMode.EnemySingle), true);
+                sequence = camera.Acquire();
+                camera.Cancel();
+                Check(supportRenderer.enabled, "cinematic cancellation restores non-acting allies");
+            }
             string json = JsonUtility.ToJson(draft);
             var restored = ScriptableObject.CreateInstance<BattleCameraProfile>();
             try

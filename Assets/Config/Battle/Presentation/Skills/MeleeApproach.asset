@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12e71277c5116645b6ad2e40b10a6cd, type: 3}
+  m_Name: MeleeApproach
+  m_EditorClassIdentifier: Assembly-CSharp::Battle.Presentation.BattleSequenceDefinition
+  timeline: {fileID: 11400000, guid: 7ec55aa8b75b0ae4fbbe158017afc079, type: 2}
+  stagePrefab: {fileID: 0}
+  hideBattleHUD: 0
+  casterTrack: Caster
+  targetTrack: Target
+  template: 1
+  animation:
+    driver: 0
+    approachState: Base Layer.Approach
+    attackState: Base Layer.Attack
+    returnState: Base Layer.Return
+    approachRate: ApproachPlaybackRate
+    returnRate: ReturnPlaybackRate
+    blendSeconds: 0.1
+    controllerAttackSeconds: 0.8
+    controllerImpactSeconds: 0.45
+  standOffset: {x: 0, y: 0, z: 0}
+  standEuler: {x: 0, y: 0, z: 0}
+  approach:
+    preferredSeconds: 0.4
+    minimumSpeed: 2
+    maximumSpeed: 12
+    referenceSpeed: 4
+    playbackLimits: {x: 0.5, y: 2}
+  returning:
+    preferredSeconds: 0.4
+    minimumSpeed: 2
+    maximumSpeed: 12
+    referenceSpeed: 4
+    playbackLimits: {x: 0.5, y: 2}
+  returnMode: 0
+  impactPrefab: {fileID: 8202701006663977182, guid: b47cf5dbb10f33f479cc3dafb534ae26, type: 3}
+  impactAnchor: 0
+  impactOffset: {x: 0, y: 0, z: 0}
+  effectLifetime: 1
+  projectile:
+    enabled: 0
+    prefab: {fileID: 0}
+    timing: 0
+    seconds: 0.35
+    speed: 15
+    followTarget: 0
+  stageSpace: 0
+  stageOrigin: {x: 0, y: 0, z: 0}
+  isolatedSetOffset: {x: 0, y: -1000, z: 0}
+  stageEuler: {x: 0, y: 0, z: 0}
+  casterPosition: {x: 0, y: 0, z: -1}
+  casterEuler: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetEuler: {x: 0, y: 180, z: 0}
+  additionalTargetSpacing: {x: 1.8, y: 0, z: 0}
+  hideCommands: 1
+  timeoutSeconds: 60

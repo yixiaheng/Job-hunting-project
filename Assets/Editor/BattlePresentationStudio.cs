@@ -343,6 +343,7 @@ public sealed class BattlePresentationStudio : EditorWindow
     }
     private void DrawSequence()
     {
+        if (GUILayout.Button("打开完整技能预览（接近／攻击／返回）")) BattleSkillStudio.OpenMenu();
         EditorGUILayout.HelpBox("选择 Timeline 内的 BattleCameraShotClip 子资产。时间以片段起点为 0 秒；勾选关键帧 cut 可硬切。完整动画轨与命中标记在 Timeline 编辑。", MessageType.None);
         var next = (BattleCameraShotClip)EditorGUILayout.ObjectField("镜头片段",shotSource,typeof(BattleCameraShotClip),false);
         if (GUILayout.Button("使用当前选中的镜头片段") && Selection.activeObject is BattleCameraShotClip selected) next = selected;

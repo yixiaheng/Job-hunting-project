@@ -300,15 +300,20 @@ namespace Battle.Logic
                 skill.targetRule,
                 action.mainTarget);
 
-            foreach (EffectConfig effect in skill.effectConfigs)
+            resolution.Record.PrimaryTargets = new List<BattleUnit>(targets).AsReadOnly();
+            if (!targets.Contains(resolution.Record.MainTarget)) resolution.Record.MainTarget = targets.Count > 0 ? targets[0] : null;
+            for (int effectIndex = 0; effectIndex < skill.effectConfigs.Count; effectIndex++)
             {
-                
+                EffectConfig effect = skill.effectConfigs[effectIndex];
                 if (effect == null) continue;
                 var effectTargets = effect.overrideTarget
                     ? selector.Select(caster, effect.targetSide, effect.target, action.mainTarget)
                     : targets;
+                resolution.Record.resolvedTargets.Add(new BattleResolvedEffectTargets(effectIndex, effectTargets));
+                resolution.ActiveEffectGroup = effectIndex;
                 effectService.Execute(caster, effectTargets, effect, resolution);
             }
+            resolution.ActiveEffectGroup = -1;
 
             int energyBefore = caster.currentEnergy;
             caster.currentEnergy = Mathf.Clamp(caster.currentEnergy + skill.energyGain, 0, caster.maxEnergy);

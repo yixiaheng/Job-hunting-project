@@ -50,7 +50,7 @@ namespace Battle.Logic
                             AttackResult attack = attackService.Execute(caster, target, effect);
                             resolution?.AddEffect(new BattleEffectRecord(BattleEffectRecordType.Damage,
                                 caster, target, attack.HealthDamage, attack.PreviousHealth,
-                                attack.CurrentHealth, effect.key));
+                                attack.CurrentHealth, effect.key, shieldBefore: target.shield + attack.ShieldDamage, shieldAfter: target.shield));
                             if (target.faction != caster.faction && resolution != null)
                             { resolution.Damaged.Add(target); resolution.Killed |= !target.IsActive; }
                         }
