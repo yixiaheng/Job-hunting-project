@@ -8,6 +8,7 @@ using Game.UI;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 /// <summary>Real BattleScene/HUD/Timeline smoke test using a disposable save slot; restores editor state on exit.</summary>
@@ -16,6 +17,7 @@ public static class BattlePresentationPlayVerification
 {
     private const string Active = "BattlePresentation.play";
     private const string Folder = "Temp/BattlePresentation";
+    private const string Request = Folder + "/play-request.txt";
     private const string ConfigPath = "Assets/Resources/Bootstrap/PlayerRuntimeConfig.asset";
     private static int step;
     private static double at;
@@ -77,7 +79,16 @@ public static class BattlePresentationPlayVerification
     private static void Capture(string name) => ScreenCapture.CaptureScreenshot(Path.GetFullPath(Folder + "/" + name + ".png"));
     private static void Update()
     {
-        if (!SessionState.GetBool(Active, false) || !EditorApplication.isPlaying || EditorApplication.isPaused) return;
+        if (!SessionState.GetBool(Active, false))
+        {
+            if (!EditorApplication.isPlayingOrWillChangePlaymode && File.Exists(Request))
+            {
+                File.Delete(Request);
+                Begin();
+            }
+            return;
+        }
+        if (!EditorApplication.isPlaying || EditorApplication.isPaused) return;
         try
         {
             if (EditorApplication.timeSinceStartup - at > 45) throw new TimeoutException("Battle presentation step " + step);
@@ -91,6 +102,15 @@ public static class BattlePresentationPlayVerification
                 if (!manager.CanAcceptCommands || EditorApplication.timeSinceStartup - at < 0.7) return;
                 Check(UIManager.Instance != null && manager.OutputCamera != null && manager.CameraController != null,
                     "real BattleScene opens HUD and configured camera");
+                var actionTimeline = Object.FindFirstObjectByType<BattleActionTimelinePanel>();
+                var actionOrder = manager.Flow.GetActionOrderSnapshot(manager.Flow.CurrentUnit);
+                Check(actionTimeline != null && UIManager.Instance.IsOpen(UIId.BattleActionTimeline)
+                    && actionTimeline.VisibleEntryCount == manager.Flow.Units.Count(unit => unit.IsActive),
+                    "UIManager opens the real battle action timeline with one row per active unit");
+                Check(actionOrder.Count > 0 && actionOrder[0].Unit == manager.Flow.CurrentUnit
+                    && actionOrder[0].RemainingActionValue == 0
+                    && actionTimeline.GetComponentsInChildren<Graphic>(true).All(graphic => !graphic.raycastTarget),
+                    "real action timeline pins current actor at zero without blocking input");
                 var current = manager.Selection.Actor;
                 int logicalSlot = current.pos; int turn = manager.Flow.TurnCount;
                 var originalSkill = manager.Selection.Skill;
@@ -127,6 +147,8 @@ public static class BattlePresentationPlayVerification
                 manager.ChooseBasic();
                 Check(manager.TurnDriver.State == BattleTurnState.Presenting && !manager.CanAcceptCommands,
                     "submitted skill blocks command input immediately");
+                Check(actionTimeline.IsHolding,
+                    "action timeline freezes its pre-resolution order during skill presentation");
                 Check(BattleDisplayState.Health(target) == previousHP && target.currentHealth < previousHP,
                     "real HUD data waits while logical skill already deals damage");
                 Next(1); return;
@@ -154,6 +176,10 @@ public static class BattlePresentationPlayVerification
             {
                 if (!manager.CanAcceptCommands) return;
                 Check(!manager.CameraController.HasExclusiveOwner, "real skill returns camera to ally base");
+                var actionTimeline = Object.FindFirstObjectByType<BattleActionTimelinePanel>();
+                Check(actionTimeline != null && !actionTimeline.IsHolding
+                    && manager.Flow.GetActionOrderSnapshot(manager.Flow.CurrentUnit)[0].RemainingActionValue == 0,
+                    "action timeline releases and advances after skill presentation completes");
                 var stage = AssetDatabase.LoadAssetAtPath<BattleSequenceDefinition>(BattlePresentationSetup.Root + "/SampleSeparateStage.asset");
                 presentation.events = new[] { new BattleEventSequence { eventId = "VerificationStage", sequence = stage } };
                 manager.QueuePresentationEvent("VerificationStage", new[] { manager.Flow.CurrentUnit, target }, () => cancelledCallbacks++);
@@ -182,6 +208,10 @@ public static class BattlePresentationPlayVerification
                 if (!manager.CanAcceptCommands) return;
                 Check(cancelledCallbacks == 0 && !manager.CameraController.HasExclusiveOwner,
                     "retried battle reaches usable base view without old stage ownership");
+                var actionTimeline = Object.FindFirstObjectByType<BattleActionTimelinePanel>();
+                Check(actionTimeline != null && UIManager.Instance.IsOpen(UIId.BattleActionTimeline)
+                    && actionTimeline.VisibleEntryCount == manager.Flow.Units.Count(unit => unit.IsActive),
+                    "retried battle rebuilds its UIManager-owned action timeline without stale rows");
                 File.AppendAllText(Folder + "/playmode.txt", "SUCCESS real battle presentation smoke test\n");
                 EditorApplication.isPlaying = false;
             }

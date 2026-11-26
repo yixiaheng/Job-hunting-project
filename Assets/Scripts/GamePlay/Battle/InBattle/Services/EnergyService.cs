@@ -11,11 +11,7 @@ namespace Battle.Logic
             if (!target.IsActive) return 0;
 
             int before = target.currentEnergy;
-            target.currentEnergy = Mathf.Clamp(
-                target.currentEnergy + Mathf.RoundToInt(effect.value),
-                0,
-                Mathf.Max(1, target.maxEnergy));
-            int actual = target.currentEnergy - before;
+            int actual = target.ChangeEnergy(Mathf.RoundToInt(effect.value));
             Debug.Log($"    {Name(target)} 能量 {before}→{target.currentEnergy}");
             return actual;
         }

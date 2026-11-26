@@ -24,6 +24,11 @@ namespace Battle.Logic
         private int generation;
         public Action<Action<bool>> TransitionWaveAsync { get; set; }
         public bool CanSubmit => !stopRequested && State == BattleTurnState.WaitingForPlayer;
+        public bool CanQueueUltimate => !stopRequested
+            && State != BattleTurnState.Stopped
+            && State != BattleTurnState.Completed
+            && State != BattleTurnState.Faulted
+            && State != BattleTurnState.TransitioningWave;
 
         public BattleFlow Flow => flow;
         public BattleTurnState State { get; private set; } = BattleTurnState.Stopped;
@@ -65,8 +70,21 @@ namespace Battle.Logic
                 return result;
             }
 
-            Present(result, ContinueUntilPlayer);
+            Present(result, null, ContinueUntilPlayer);
             return result;
+        }
+
+        public ActionValidation QueueUltimate(BattleAction action,
+            out BattleActionRequest request)
+        {
+            request = null;
+            if (!CanQueueUltimate)
+                return new ActionValidation(stopRequested
+                    ? ActionFailure.DriverStopped : ActionFailure.Resolving);
+            ActionValidation validation = flow.QueueUltimate(action, out request);
+            if (validation.IsValid && State == BattleTurnState.WaitingForPlayer)
+                ContinueUntilPlayer();
+            return validation;
         }
 
         public BattleActionResult StepOnce()
@@ -77,10 +95,13 @@ namespace Battle.Logic
             if (State == BattleTurnState.Presenting || State == BattleTurnState.Resolving
                 || State == BattleTurnState.TransitioningWave) return BusyResult();
 
+            if (flow.TryTakeQueuedAction(out BattleActionRequest queued))
+                return ExecuteQueued(queued);
+
             SetState(BattleTurnState.Resolving);
             BattleActionResult result = flow.TryStep();
             if (result.Succeeded)
-                Present(result, () => UpdateAfterStep(result));
+                Present(result, null, () => UpdateAfterStep(result));
             else
                 UpdateAfterStep(result);
             return result;
@@ -90,6 +111,7 @@ namespace Battle.Logic
         {
             generation++;
             stopRequested = true;
+            flow.CancelQueuedActions();
             SetState(BattleTurnState.Stopped);
         }
 
@@ -107,6 +129,7 @@ namespace Battle.Logic
             }
             if (flow.IsWaveCleared)
             {
+                flow.CancelQueuedActions();
                 SetState(BattleTurnState.TransitioningWave);
                 if (TransitionWaveAsync != null)
                 {
@@ -127,6 +150,11 @@ namespace Battle.Logic
                 ContinueUntilPlayer();
                 return;
             }
+            if (flow.TryTakeQueuedAction(out BattleActionRequest queued))
+            {
+                ExecuteQueued(queued);
+                return;
+            }
             if (flow.CurrentUnit != null && flow.CurrentUnit.faction == Faction.OurSide)
             {
                 SetState(BattleTurnState.WaitingForPlayer);
@@ -142,7 +170,7 @@ namespace Battle.Logic
                     SetState(BattleTurnState.Faulted);
                     return;
                 }
-                Present(result, ContinueUntilPlayer);
+                Present(result, null, ContinueUntilPlayer);
                 return;
             }
             SetState(BattleTurnState.Faulted);
@@ -175,7 +203,23 @@ namespace Battle.Logic
             StateChanged?.Invoke(state);
         }
 
-        private void Present(BattleActionResult result, Action completed)
+        private BattleActionResult ExecuteQueued(BattleActionRequest request)
+        {
+            SetState(BattleTurnState.Resolving);
+            BattleActionResult result = flow.TryExecute(request);
+            if (!result.Succeeded)
+            {
+                LastFailure = result.Validation;
+                flow.CompleteRequest(request);
+                ContinueUntilPlayer();
+                return result;
+            }
+            Present(result, request, ContinueUntilPlayer);
+            return result;
+        }
+
+        private void Present(BattleActionResult result,
+            BattleActionRequest request, Action completed)
         {
             if (!result.Succeeded || result.Resolution == null)
             {
@@ -188,7 +232,10 @@ namespace Battle.Logic
             presenter.Present(result.Resolution, () =>
             {
                 if (finished || session != generation || stopRequested) return;
-                finished = true; completed?.Invoke();
+                finished = true;
+                if (request != null)
+                    flow.CompleteRequest(request);
+                completed?.Invoke();
             });
         }
 

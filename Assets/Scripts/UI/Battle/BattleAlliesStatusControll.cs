@@ -57,6 +57,7 @@ public class BattleAlliesStatusControll : UIPanel
             }
 
             view.Bind(unit);
+            view.GetComponent<BattleUnitAllyUI>()?.BindCommands(battleContext.Commands);
         }
     }
 
@@ -72,6 +73,7 @@ public class BattleAlliesStatusControll : UIPanel
 
             view.Refresh();
             view.SetActing(view.unit != null && view.unit == currentUnit);
+            view.GetComponent<BattleUnitAllyUI>()?.RefreshUltimateAvailability();
         }
     }
 
@@ -83,7 +85,10 @@ public class BattleAlliesStatusControll : UIPanel
         foreach (BattleUnitView view in allyViews)
         {
             if (view != null)
+            {
+                view.GetComponent<BattleUnitAllyUI>()?.BindCommands(null);
                 view.Bind(null);
+            }
         }
     }
 }

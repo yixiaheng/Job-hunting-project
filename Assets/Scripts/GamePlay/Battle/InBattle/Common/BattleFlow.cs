@@ -6,12 +6,13 @@ namespace Battle.Logic
 {
     public enum BattleResult { None, AllyWin, EnemyWin, Draw }
 
-    public class BattleFlow
+    public class BattleFlow : IBattleActionOrderSource
     {
         #region Fields
         public const int MaxTurns = 500;
         private readonly List<BattleUnit> units;
         private readonly ActionQueue queue;
+        private readonly BattleActionScheduler scheduler;
         private readonly TargetSelector selector;
         private readonly EffectService effectService;
         public System.Guid BattleId { get; } = System.Guid.NewGuid();
@@ -20,6 +21,7 @@ namespace Battle.Logic
         public ActionResolution LastResolution { get; private set; }
         public IReadOnlyList<BattleUnit> Units => units;
         public IReadOnlyList<BattleActionRecord> ActionHistory => actionHistory;
+        public BattleActionScheduler Scheduler => scheduler;
         public BattleSkillPoints SkillPoints { get; }
         public bool HasPendingWave { get; private set; }
         public bool IsWaveCleared => Result == BattleResult.None && CountActive(Faction.OurSide) > 0
@@ -30,6 +32,7 @@ namespace Battle.Logic
         public BattleUnit CurrentUnit => currentUnit;
         public double CurrentTime => queue.CurrentTime;
         public bool IsExecuting { get; private set; }
+        public int ActionSequence { get; private set; }
 
         public UnityAction<BattleResult> GameOverEvent;
         #endregion
@@ -42,6 +45,7 @@ namespace Battle.Logic
                 unit.BattleId = BattleId;
 
             queue = new ActionQueue(units);
+            scheduler = new BattleActionScheduler();
             selector = new TargetSelector(units);
             SkillPoints = new BattleSkillPoints(initialSkillPoints, maximumSkillPoints);
             effectService = new EffectService(actionQueue: queue, skillPoints: SkillPoints);
@@ -61,7 +65,68 @@ namespace Battle.Logic
             return Result;
         }
 
-        public BattleUnit Peek() => queue.PeekNext(); 
+        public BattleUnit Peek() => queue.PeekNext();
+        public IReadOnlyList<BattleActionOrderEntry> GetActionOrderSnapshot(BattleUnit displayedActor = null)
+        {
+            var snapshot = new List<BattleActionOrderEntry>();
+            BattleActionRequest active = scheduler.ActiveRequest;
+            if (active?.Action?.caster != null && active.Action.caster.IsActive)
+                snapshot.Add(QueuedOrder(active, true));
+            foreach (BattleActionRequest request in scheduler.Pending)
+                if (request?.Action?.caster != null && request.Action.caster.IsActive)
+                    snapshot.Add(QueuedOrder(request, false));
+
+            BattleUnit pinned = active == null ? displayedActor ?? currentUnit : null;
+            snapshot.AddRange(queue.GetOrderSnapshot(pinned));
+            return snapshot.AsReadOnly();
+        }
+
+        public bool HasQueuedActions => scheduler.PendingCount > 0
+            || scheduler.ActiveRequest != null;
+        public int ReservedEnergy(BattleUnit unit) => scheduler.GetReservedEnergy(unit);
+
+        public ActionValidation QueueUltimate(BattleAction action, out BattleActionRequest request)
+        {
+            request = null;
+            if (action?.caster != null && action.skill != null
+                && scheduler.HasPending(action.caster, action.skill,
+                    BattleActionOrigin.Ultimate))
+                return new ActionValidation(ActionFailure.AlreadyQueued);
+            ActionValidation validation = ValidateAction(action, BattleActionOrigin.Ultimate);
+            if (!validation.IsValid)
+                return validation;
+
+            BattleAction prepared = PrepareAction(action);
+            request = scheduler.Enqueue(prepared, BattleActionOrigin.Ultimate,
+                BattleActionExecutionPolicy.FreeAction, 300,
+                BattleTargetFallback.AutoSelectFirst, prepared.skill.energyCost);
+            return validation;
+        }
+
+        internal BattleActionRequest QueueTriggered(BattleAction action,
+            BattleActionOrigin origin, int priority)
+        {
+            if (action?.caster == null || action.skill == null
+                || !units.Contains(action.caster) || !action.caster.IsActive
+                || action.caster.BattleId != BattleId
+                || !ReferenceEquals(action.caster.talentAction, action.skill))
+                return null;
+            return scheduler.Enqueue(PrepareAction(action), origin,
+                origin == BattleActionOrigin.ExtraTurn
+                    ? BattleActionExecutionPolicy.ExtraTurn
+                    : BattleActionExecutionPolicy.FreeAction,
+                priority, BattleTargetFallback.AutoSelectFirst, 0);
+        }
+
+        public bool TryTakeQueuedAction(out BattleActionRequest request)
+            => scheduler.TryTakeNext(out request);
+
+        public void CompleteRequest(BattleActionRequest request)
+            => scheduler.Complete(request);
+
+        public bool CancelQueuedAction(long requestId) => scheduler.Cancel(requestId);
+
+        public void CancelQueuedActions() => scheduler.CancelAll();
         public void SetPendingWave(bool value) => HasPendingWave = value;
 
         public bool AddUnits(IEnumerable<BattleUnit> reinforcements)
@@ -91,10 +156,11 @@ namespace Battle.Logic
                 currentUnit = Peek();
         }
 
-        public BattleActionPreview PreviewAction(BattleAction requested)
+        public BattleActionPreview PreviewAction(BattleAction requested,
+            BattleActionOrigin origin = BattleActionOrigin.NormalTurn)
         {
             var action = new BattleAction { caster = requested?.caster, skill = requested?.skill, mainTarget = requested?.mainTarget };
-            var validation = ValidateAction(action);
+            var validation = ValidateAction(action, origin);
             var targets = new List<BattleUnit>();
             var perEffect = new List<IReadOnlyList<BattleUnit>>();
             if (action.caster != null && action.skill != null && validation.Failure != ActionFailure.ForeignTarget)
@@ -114,6 +180,10 @@ namespace Battle.Logic
         }
 
         public ActionValidation ValidateAction(BattleAction action)
+            => ValidateAction(action, BattleActionOrigin.NormalTurn);
+
+        public ActionValidation ValidateAction(BattleAction action, BattleActionOrigin origin,
+            BattleActionRequest executingRequest = null)
         {
             if (IsExecuting) return new ActionValidation(ActionFailure.Resolving);
             if (PendingResult() != BattleResult.None) return new ActionValidation(ActionFailure.BattleEnded);
@@ -123,11 +193,22 @@ namespace Battle.Logic
             if (action.caster == null || !units.Contains(action.caster)
                 || action.caster.BattleId != BattleId || !action.caster.IsActive)
                 return new ActionValidation(ActionFailure.InvalidActor);
-            if (action.caster != actor) return new ActionValidation(ActionFailure.NotCurrentActor);
+            if (origin == BattleActionOrigin.NormalTurn && action.caster != actor)
+                return new ActionValidation(ActionFailure.NotCurrentActor);
             SkillConfig skill = action.skill;
             if (skill == null) return new ActionValidation(ActionFailure.MissingSkill);
-            if (actor.skills == null || !actor.skills.Contains(skill))
+            bool ownsRegularSkill = action.caster.skills != null && action.caster.skills.Contains(skill);
+            bool ownsTriggeredSkill = ReferenceEquals(action.caster.talentAction, skill);
+            if (!ownsRegularSkill && !ownsTriggeredSkill)
                 return new ActionValidation(ActionFailure.SkillNotOwned);
+            if (origin == BattleActionOrigin.NormalTurn && skill.kind == SkillKind.Ultimate)
+                return new ActionValidation(ActionFailure.InvalidActionOrigin);
+            if (origin == BattleActionOrigin.Ultimate
+                && (action.caster.faction != Faction.OurSide || skill.kind != SkillKind.Ultimate))
+                return new ActionValidation(ActionFailure.InvalidActionOrigin);
+            if ((origin == BattleActionOrigin.FollowUp || origin == BattleActionOrigin.Counter)
+                && !ownsTriggeredSkill)
+                return new ActionValidation(ActionFailure.InvalidActionOrigin);
             if (skill.energyCost < 0 || skill.skillPointCost < 0 || skill.skillPointGain < 0
                 || skill.effectConfigs == null
                 || !System.Enum.IsDefined(typeof(TargetSide), skill.targetSide)
@@ -149,13 +230,18 @@ namespace Battle.Logic
                     || (effect.effectType == EffectType.ApplyBuff && (effect.buff == null
                         || float.IsNaN(effect.buffValueMultiplier) || float.IsInfinity(effect.buffValueMultiplier))))
                     return new ActionValidation(ActionFailure.InvalidSkillConfig);
-                hasTargets |= selector.Select(actor,
+                hasTargets |= selector.Select(action.caster,
                     effect.overrideTarget ? effect.targetSide : skill.targetSide,
                     effect.overrideTarget ? effect.target : skill.targetRule, action.mainTarget).Count > 0;
             }
             if (!hasEffect) return new ActionValidation(ActionFailure.InvalidSkillConfig);
-            if (skill.energyCost > actor.currentEnergy) return new ActionValidation(ActionFailure.InsufficientEnergy);
-            if (actor.faction == Faction.OurSide
+            int ownReservation = executingRequest != null ? executingRequest.ReservedEnergy : 0;
+            int availableEnergy = action.caster.currentEnergy
+                - Mathf.Max(0, scheduler.GetReservedEnergy(action.caster) - ownReservation);
+            if (skill.energyCost > availableEnergy)
+                return new ActionValidation(scheduler.GetReservedEnergy(action.caster) > 0
+                    ? ActionFailure.ResourceReserved : ActionFailure.InsufficientEnergy);
+            if (action.caster.faction == Faction.OurSide
                 && !SkillPoints.CanSpend(SkillPointCost(skill)))
                 return new ActionValidation(ActionFailure.InsufficientSkillPoints);
             return new ActionValidation(hasTargets ? ActionFailure.None : ActionFailure.NoTargets);
@@ -164,8 +250,26 @@ namespace Battle.Logic
         public bool Execute(BattleAction action) => TryExecute(action).Succeeded;
 
         public BattleActionResult TryExecute(BattleAction action)
+            => action == null
+                ? ExecuteRequest(null)
+                : ExecuteRequest(scheduler.CreateImmediate(action));
+
+        public BattleActionResult TryExecute(BattleActionRequest request)
+            => ExecuteRequest(request);
+
+        private BattleActionResult ExecuteRequest(BattleActionRequest request)
         {
-            ActionValidation validation = ValidateAction(action);
+            if (IsExecuting)
+            {
+                var resolving = new ActionValidation(ActionFailure.Resolving);
+                return new BattleActionResult(resolving, Result);
+            }
+            BattleAction action = request?.Action;
+            BattleActionOrigin origin = request?.Origin
+                ?? BattleActionOrigin.NormalTurn;
+            ActionValidation validation = ValidateAction(action, origin, request);
+            if (validation.IsValid)
+                validation = ValidateRequestPolicy(request);
             if (!validation.IsValid)
             {
                 // 查询不结算终局；提交/推进时才发布一次结束事件。
@@ -177,18 +281,31 @@ namespace Battle.Logic
             }
 
             // 固定本次请求，避免事件监听者改写调用者持有的 BattleAction。
-            var submitted = new BattleAction { caster = action.caster, skill = action.skill, mainTarget = action.mainTarget };
+            BattleAction submitted = PrepareAction(action);
+            BattleUnit previousCurrent = currentUnit;
+            bool normalTurn = request.Policy == BattleActionExecutionPolicy.NormalTurn;
+            bool turnLifecycle = request.Policy != BattleActionExecutionPolicy.FreeAction;
             IsExecuting = true;
             try
             {
                 currentUnit = submitted.caster;
-                queue.BeginTurn(currentUnit);
-                BattleTalentResolver.OnTurnStart(currentUnit, units);
+                if (normalTurn)
+                    queue.BeginTurn(currentUnit);
+                if (turnLifecycle)
+                    BattleTalentResolver.OnTurnStart(currentUnit, units);
+                if (request.IsQueuedAction)
+                    scheduler.ConsumeReservation(request);
+                ActionSequence++;
                 var resolution = new ActionResolution
                 {
                     Record = new BattleActionRecord
                     {
-                        Turn = TurnCount + 1,
+                        RequestId = request.RequestId,
+                        Origin = request.Origin,
+                        ActionSequence = ActionSequence,
+                        NormalTurnIndex = TurnCount + (turnLifecycle ? 1 : 0),
+                        ConsumedNormalTurn = normalTurn,
+                        Turn = TurnCount + (turnLifecycle ? 1 : 0),
                         StartedAt = queue.CurrentTime,
                         Caster = currentUnit,
                         Skill = submitted.skill,
@@ -198,19 +315,30 @@ namespace Battle.Logic
                     }
                 };
                 Act(currentUnit, submitted, resolution);
-                TickBuffs(currentUnit);
-                // Resolve speed changes first; apply deferred self-advance to the new interval.
-                queue.EndTurn(currentUnit);
-                queue.ModifyAction(currentUnit, 1f - resolution.SelfActionMultiplier);
-                BattleTalentResolver.AfterAction(currentUnit, submitted.skill, resolution, units, queue);
+                if (turnLifecycle)
+                    TickBuffs(currentUnit);
+                if (normalTurn)
+                {
+                    // Resolve speed changes first; apply deferred self-advance to the new interval.
+                    queue.EndTurn(currentUnit);
+                    queue.ModifyAction(currentUnit, 1f - resolution.SelfActionMultiplier);
+                }
+                IReadOnlyList<BattleAction> triggered = BattleTalentResolver.AfterAction(
+                    currentUnit, submitted.skill, resolution, units, queue, request.Origin);
+                if (triggered != null)
+                    foreach (BattleAction followUp in triggered)
+                        QueueTriggered(followUp, BattleActionOrigin.FollowUp, 100);
                 resolution.Record.EndedAt = queue.CurrentTime;
                 resolution.Record.SkillPointsAfter = SkillPoints.Current;
                 resolution.Record.EnergyAfter = currentUnit.currentEnergy;
                 LastResolution = resolution;
                 actionHistory.Add(resolution.Record);
-                TurnCount++;
+                if (turnLifecycle)
+                    TurnCount++;
                 CompleteIfEnded();
-                currentUnit = Result == BattleResult.None ? Peek() : null;
+                currentUnit = Result != BattleResult.None ? null
+                    : normalTurn ? Peek()
+                    : previousCurrent != null && previousCurrent.IsActive ? previousCurrent : Peek();
                 return new BattleActionResult(validation, Result, resolution);
             }
             finally
@@ -224,7 +352,7 @@ namespace Battle.Logic
         public BattleActionResult TryStep()
         {
             if (IsExecuting || PendingResult() != BattleResult.None || (currentUnit ?? Peek()) == null)
-                return TryExecute(null);
+                return TryExecute((BattleAction)null);
             BattleUnit actor = currentUnit ?? Peek();
             BattleAction preferred = decider.Decide(actor, units);
             if (ValidateAction(preferred).IsValid)
@@ -243,6 +371,43 @@ namespace Battle.Logic
             Debug.LogWarning(failure.Message);
             return new BattleActionResult(failure, Result);
         }
+
+        private ActionValidation ValidateRequestPolicy(BattleActionRequest request)
+        {
+            if (request == null)
+                return new ActionValidation(ActionFailure.MissingAction);
+            bool valid = request.Origin switch
+            {
+                BattleActionOrigin.NormalTurn => request.Policy == BattleActionExecutionPolicy.NormalTurn,
+                BattleActionOrigin.ExtraTurn => request.Policy == BattleActionExecutionPolicy.ExtraTurn,
+                _ => request.Policy == BattleActionExecutionPolicy.FreeAction
+            };
+            return new ActionValidation(valid
+                ? ActionFailure.None : ActionFailure.InvalidExecutionPolicy);
+        }
+
+        private BattleAction PrepareAction(BattleAction action)
+        {
+            var prepared = new BattleAction
+            {
+                caster = action?.caster,
+                skill = action?.skill,
+                mainTarget = action?.mainTarget
+            };
+            if (prepared.caster == null || prepared.skill == null)
+                return prepared;
+            List<BattleUnit> targets = selector.Select(prepared.caster,
+                prepared.skill.targetSide, prepared.skill.targetRule,
+                prepared.mainTarget);
+            if (targets.Count > 0 && !targets.Contains(prepared.mainTarget))
+                prepared.mainTarget = targets[0];
+            return prepared;
+        }
+
+        private BattleActionOrderEntry QueuedOrder(BattleActionRequest request,
+            bool isCurrent)
+            => new(request.RequestId, request.Action.caster, queue.CurrentTime,
+                0, isCurrent, request.Origin, request.RequestId);
 
         private BattleResult PendingResult()
         {
@@ -290,7 +455,7 @@ namespace Battle.Logic
                         caster, caster, SkillPoints.Current - before, before, SkillPoints.Current,
                         "Skill"));
             }
-            caster.currentEnergy -= skill.energyCost;
+            caster.ChangeEnergy(-skill.energyCost);
 
             Debug.Log($"[{TurnCount + 1}] {Name(caster)} uses {SkillName(skill)}. HP={Hp(caster)}, Energy={caster.currentEnergy}");
 
@@ -316,7 +481,7 @@ namespace Battle.Logic
             resolution.ActiveEffectGroup = -1;
 
             int energyBefore = caster.currentEnergy;
-            caster.currentEnergy = Mathf.Clamp(caster.currentEnergy + skill.energyGain, 0, caster.maxEnergy);
+            caster.ChangeEnergy(skill.energyGain);
 
             if (skill.energyGain != 0)
                 Debug.Log($"    {Name(caster)} energy {energyBefore}->{caster.currentEnergy}");

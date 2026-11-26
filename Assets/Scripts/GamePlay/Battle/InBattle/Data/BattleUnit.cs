@@ -10,6 +10,7 @@ using UnityEngine;
 public class BattleUnit
 {
     public string displayName;
+    public Sprite Icon { get; internal set; }
     public ElementType element;
     public PathType path;
     public Faction faction;
@@ -36,8 +37,24 @@ public class BattleUnit
     public int tieBreaker;
 
     public List<SkillConfig> skills = new ();
+    public SkillConfig talentAction;
+    public bool ownsRuntimeTalentAction;
 
     public List<BuffInstance> buffs = new();
+
+    public int SetEnergy(int value)
+    {
+        int previous = currentEnergy;
+        currentEnergy = Mathf.Clamp(value, 0, Mathf.Max(1, maxEnergy));
+        if (currentEnergy != previous)
+        {
+            Game.GameEvents.Battle.Publish(new EnergyChangedEvent(
+                this, previous, currentEnergy, maxEnergy));
+        }
+        return currentEnergy - previous;
+    }
+
+    public int ChangeEnergy(int amount) => SetEnergy(currentEnergy + amount);
 
     public int TakeDamage(int amount)
     {

@@ -8,6 +8,7 @@ public class AllyView : MonoBehaviour
 {
     [SerializeField] private GameObject selectedSign;
     [SerializeField] private GameObject sortSign;
+    [SerializeField] private Image backImage;
     [SerializeField] private Image allyImage;
     [SerializeField] private Button chooseButton;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -33,10 +34,15 @@ public class AllyView : MonoBehaviour
         if (chooseButton != null)
             chooseButton.interactable = unit != null;
 
-        if (allyImage != null && !hasNormalImageColor)
+        if (backImage != null && !hasNormalImageColor)
         {
-            normalImageColor = allyImage.color;
+            normalImageColor = backImage.color;
             hasNormalImageColor = true;
+        }
+
+        if(allyImage != null)
+        {
+            allyImage.sprite = config.icon;
         }
 
         Refresh(false);
@@ -61,11 +67,11 @@ public class AllyView : MonoBehaviour
                 positionText.text = sortPosition > 0 ? sortPosition.ToString() : string.Empty;
         }
 
-        if (allyImage != null && hasNormalImageColor)
+        if (backImage != null && hasNormalImageColor)
         {
             Color tint = selectedColor;
             tint.a = normalImageColor.a;
-            allyImage.color = isSelected ? tint : normalImageColor;
+            backImage.color = isSelected ? tint : normalImageColor;
         }
     }
 

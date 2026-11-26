@@ -23,7 +23,7 @@ namespace Battle.Logic
         }
     }
 
-    /// <summary>由战斗流程同步调用，追加伤害不再次进入主动技能结算。</summary>
+    /// <summary>由战斗流程同步调用；需要独立表现的反应返回为调度请求，不在父动作内追加结算。</summary>
     public static class BattleTalentResolver
     {
         public static void OnTurnStart(BattleUnit caster, IReadOnlyList<BattleUnit> units)
@@ -35,8 +35,11 @@ namespace Battle.Logic
                 target.shield += Mathf.Max(0, Mathf.RoundToInt(caster.GetStat(StatType.Defence) * caster.talentValue));
         }
 
-        public static void AfterAction(BattleUnit caster, SkillConfig skill, ActionResolution result, IReadOnlyList<BattleUnit> units, ActionQueue queue)
+        public static IReadOnlyList<BattleAction> AfterAction(BattleUnit caster,
+            SkillConfig skill, ActionResolution result, IReadOnlyList<BattleUnit> units,
+            ActionQueue queue, BattleActionOrigin origin)
         {
+            var triggered = new List<BattleAction>();
             switch (caster.talent)
             {
                 case CharacterTalent.Verdant:
@@ -77,26 +80,21 @@ namespace Battle.Logic
 
                     break;
                 case CharacterTalent.FrostNova:
-                    if (result.Damaged.Count >= 2)
+                    if (origin != BattleActionOrigin.FollowUp
+                        && origin != BattleActionOrigin.Counter
+                        && result.Damaged.Count >= 2)
                     {
-                        var effect = new EffectConfig
-                        {
-                            key = "Talent.FrostNova.FollowUp",
-                            origin = EffectOrigin.Talent,
-                            effectType = EffectType.Damage,
-                            value = caster.talentValue,
-                            scaleStat = StatType.Attack
-                        };
-                        var attack = new AttackService();
-                        foreach (BattleUnit target in result.Damaged)
-                            if (target.IsActive)
+                        BattleUnit target = result.Damaged
+                            .Where(unit => unit != null && unit.IsActive)
+                            .OrderBy(unit => unit.pos).FirstOrDefault();
+                        SkillConfig followUp = EnsureFrostNovaAction(caster);
+                        if (target != null && followUp != null)
+                            triggered.Add(new BattleAction
                             {
-                                AttackResult followUp = attack.Execute(caster, target, effect);
-                                result.FollowUps.Add(followUp);
-                                result.AddEffect(new BattleEffectRecord(BattleEffectRecordType.FollowUp,
-                                    caster, target, followUp.HealthDamage, followUp.PreviousHealth,
-                                    followUp.CurrentHealth, effect.key, shieldBefore: target.shield + followUp.ShieldDamage, shieldAfter: target.shield));
-                            }
+                                caster = caster,
+                                skill = followUp,
+                                mainTarget = target
+                            });
                     }
 
                     break;
@@ -111,8 +109,39 @@ namespace Battle.Logic
                                 Gain(target, caster.talentEnergy);
                     break;
             }
+            return triggered;
         }
 
-        private static void Gain(BattleUnit target, int value) => target.currentEnergy = Mathf.Clamp(target.currentEnergy + value, 0, Mathf.Max(1, target.maxEnergy));
+        private static SkillConfig EnsureFrostNovaAction(BattleUnit caster)
+        {
+            if (caster.talentAction != null)
+                return caster.talentAction;
+
+            var skill = ScriptableObject.CreateInstance<SkillConfig>();
+            skill.hideFlags = HideFlags.DontSave;
+            skill.id = -7000 - Mathf.Max(0, caster.tieBreaker);
+            skill.Name = "Frost Nova Follow-Up";
+            skill.kind = SkillKind.Skill;
+            skill.element = caster.element;
+            skill.targetSide = TargetSide.OtherSide;
+            skill.targetRule = TargetRule.AoE;
+            skill.effectConfigs = new List<EffectConfig>
+            {
+                new()
+                {
+                    key = "Talent.FrostNova.FollowUp",
+                    origin = EffectOrigin.Talent,
+                    effectType = EffectType.Damage,
+                    value = caster.talentValue,
+                    scaleStat = StatType.Attack
+                }
+            };
+            caster.talentAction = skill;
+            caster.ownsRuntimeTalentAction = true;
+            return skill;
+        }
+
+        private static void Gain(BattleUnit target, int value)
+            => target.ChangeEnergy(value);
     }
 }

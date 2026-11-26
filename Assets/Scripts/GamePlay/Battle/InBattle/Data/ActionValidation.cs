@@ -17,7 +17,12 @@ namespace Battle.Logic
         ForeignTarget,
         NoTargets,
         NoLegalAction,
-        DriverStopped
+        DriverStopped,
+        AlreadyQueued,
+        InvalidActionOrigin,
+        ResourceReserved,
+        InvalidExecutionPolicy,
+        QueuedActionCancelled
     }
 
     /// <summary>只描述查询结果，不持有可以再次执行的许可。</summary>
@@ -45,6 +50,11 @@ namespace Battle.Logic
             ActionFailure.NoTargets => "没有合法的技能目标。",
             ActionFailure.NoLegalAction => "自动行动没有可用技能，已停止推进。",
             ActionFailure.DriverStopped => "回合驱动已经停止。",
+            ActionFailure.AlreadyQueued => "该行动已经进入插队队列。",
+            ActionFailure.InvalidActionOrigin => "技能与行动来源不匹配。",
+            ActionFailure.ResourceReserved => "所需资源已被其他待执行行动预留。",
+            ActionFailure.InvalidExecutionPolicy => "行动执行策略无效。",
+            ActionFailure.QueuedActionCancelled => "插队行动已经取消。",
             _ => "无法执行行动。"
         };
     }

@@ -104,7 +104,9 @@ public sealed class BattleUIController : UIPanel
                 : $"战技点 {flow.SkillPoints.Current}/{flow.SkillPoints.Maximum}";
         SetAbilityAvailable(basicButton, SkillKind.Basic, canAct);
         SetAbilityAvailable(skillButton, SkillKind.Skill, canAct);
-        SetAbilityAvailable(ultimateButton, SkillKind.Ultimate, canAct);
+        if (ultimateButton != null)
+            ultimateButton.interactable = unit != null
+                && commands != null && commands.CanQueueUltimate(unit);
     }
 
     private void Update()
@@ -136,7 +138,13 @@ public sealed class BattleUIController : UIPanel
 
     public void OnBasic() => Choose(SkillKind.Basic);
     public void OnSkill() => Choose(SkillKind.Skill);
-    public void OnUlt() => Choose(SkillKind.Ultimate);
+    public void OnUlt()
+    {
+        BattleUnit caster = commands?.Flow?.CurrentUnit;
+        if (caster != null)
+            commands.QueueUltimate(caster);
+        Refresh();
+    }
 
     private void Choose(SkillKind kind)
     {

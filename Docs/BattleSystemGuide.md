@@ -16,7 +16,7 @@
 - 打开战斗 UI 和结果页；
 - 保存配队、奖励和关卡完成记录。
 
-目前不负责弱点、削韧、击破、暴击、持续伤害和终结技插队。这些属于第 8 阶段。
+目前已负责终结技插队、通用追击请求、资源预留和安全表现节点。弱点、削韧、击破、暴击与持续伤害仍未实现，属于后续战斗规则阶段。
 
 ## 2. 模块目录
 
@@ -41,10 +41,11 @@ Assets/Scripts/UI/Battle/   战斗状态栏、操作栏和结果面板
 | `BattleManager` | 战斗场景 | 组装本场服务，保留场景／UI 兼容入口 |
 | `BattleFlow` | 单场战斗 | 规则、行动校验、结算、胜负、历史记录 |
 | `ActionQueue` | 单场战斗 | 绝对时间、下一行动者和行动提前 |
+| `BattleActionScheduler` | 单场战斗 | 终结技、追击、反击等插队请求的优先级、FIFO 和资源预留 |
 | `BattleTurnDriver` | 单场战斗 | 玩家边界、敌方自动回合、表现等待、换波 |
 | `BattleUnitFactory` | 单场战斗 | 配置／养成快照生成逻辑单位，释放运行时资产 |
 | `BattleActorRegistry` | 单场战斗 | 逻辑单位与场景模型映射和模型生命周期 |
-| `BattleUIPresenter` | 单场战斗 | 三块战斗 UI 的打开、刷新和关闭 |
+| `BattleUIPresenter` | 单场战斗 | 我方状态、敌方状态、命令栏和行动条四块战斗 UI 的打开、刷新和关闭 |
 | `BattlePresentationQueue` | 单场战斗 | 按顺序播放结构化效果记录 |
 | `BattleWaveController` | 单个 encounter | 波次配置游标 |
 | `BattleSessionController` | 战斗场景 | 结果页、重试、重新配队和退出 |
@@ -160,6 +161,37 @@ encounter 统一配置稳定关卡 ID、初始／最大战技点、敌人波次�
 
 例如剩余 50、提前 50%，新时刻是当前时刻加 25，而不是把整个绝对时刻乘 50%。新波敌人从当前时刻开始计算首次行动，我方原有绝对行动时刻保持不变。
 
+### 7.1 普通行动轴与插队调度器
+
+`ActionQueue` 和 `BattleActionScheduler` 是两个不同职责的系统：
+
+- `ActionQueue` 只保存普通速度行动轴，负责 `CurrentTime`、`nextActionTime`、速度重排和行动提前；
+- `BattleActionScheduler` 只保存插队请求，不修改 `CurrentTime` 或角色原有 `nextActionTime`；
+- `BattleTurnDriver` 是两者的唯一协调者。一个完整表现结束后，它先取插队请求；没有插队请求时才继续普通玩家／敌方回合。
+
+插队来源与默认策略如下：
+
+| 来源 | 执行策略 | 默认优先级 | 是否推进普通行动轴 | 是否触发回合开始／Buff Tick |
+| --- | --- | ---: | --- | --- |
+| `NormalTurn` | `NormalTurn` | 行动轴决定 | 是 | 是 |
+| `Ultimate` | `FreeAction` | 300 | 否 | 否 |
+| `Counter` | `FreeAction` | 200 | 否 | 否 |
+| `FollowUp` | `FreeAction` | 100 | 否 | 否 |
+| `ExtraTurn` | `ExtraTurn` | 50 | 否 | 是 |
+| `Scripted` | `FreeAction` | 由调用方指定 | 否 | 否 |
+
+同优先级请求按入队顺序执行。调度器存在 `ActiveRequest` 时不会再取下一条，因此不会在一个技能动画中途硬切到另一动作。
+
+终结技能量采用两阶段处理：
+
+1. 入队时校验可用能量并登记 `ReservedEnergy`，角色面板中的实际能量暂不扣除；
+2. 到达安全节点并正式执行时释放预留，然后由技能结算扣除真实能量；
+3. 请求在执行前取消、换波清理、停止战斗或重新校验失败时，未消费的预留必须释放。
+
+相同角色、技能和来源不能重复排队。目标在入队后死亡时，单体／扩散技能会在执行节点重新选择本场第一个合法目标；显式传入其他战斗的目标仍会立即返回 `ForeignTarget`。AoE 也会在执行节点重新读取当前存活目标集合。
+
+行动条不能再以 `BattleUnit` 作为唯一键，因为同一角色可能同时拥有一条普通行动和一条插队行动。普通条目使用稳定负数 `EntryId`，插队条目使用正数 `RequestId`；UI 只在入队、取消、开始表现、完成表现等状态节点刷新，不进行每帧重算。
+
 ## 8. 行动请求与校验
 
 ```csharp
@@ -187,7 +219,7 @@ BattleActionResult result = flow.TryExecute(action);
 
 ## 9. 单次行动结算顺序
 
-成功提交的固定顺序是：
+普通回合成功提交的固定顺序是：
 
 1. 锁定本次请求并进入 `IsExecuting`；
 2. 行动轴推进到施法者时刻；
@@ -200,10 +232,14 @@ BattleActionResult result = flow.TryExecute(action);
 9. 持有者 Buff 计时和过期清理；
 10. 按结算后的速度安排下次行动；
 11. 应用自身行动提前；
-12. 触发行动后天赋／追击；
-13. 完成记录，增加行动次数；
+12. 触发行动后天赋，并把追击转换为独立的 `FollowUp` 请求；
+13. 完成记录，增加 `ActionSequence` 和普通 `TurnCount`；
 14. 检查胜负或待切换波次；
 15. 释放同步执行锁。
+
+`FreeAction` 复用技能校验、效果结算、结构化记录和表现流程，但跳过第 2、3、9、10、11 步，不增加 `TurnCount`，也不会改变原普通行动者。`ExtraTurn` 具有回合开始和 Buff Tick 生命周期并增加 `TurnCount`，但不消费或重排普通速度行动轴。
+
+每个成功动作都增加 `ActionSequence` 并写入 `ActionHistory`。`BattleActionRecord` 同时记录 `RequestId`、`Origin`、`NormalTurnIndex` 和 `ConsumedNormalTurn`，因此统计、回放和表现可以区分“第几个动作”与“第几个普通回合”。
 
 ## 10. 数值规则
 
@@ -381,6 +417,11 @@ v1 档案加载时自动补充空战斗进度并升级为 v2。新增档案字�
 | 按钮不可点击 | `ValidateAction().Failure`、当前行动者、能量、战技点和技能归属 |
 | 单体技能打错目标 | `BattleId`、目标阵营、目标存活状态和 `MouseRayCasting.selectedTarget` |
 | AI 停止 | `BattleTurnDriver.LastFailure`、敌人技能配置和能量 |
+| 终结技按钮不可用 | `CanQueueUltimate()`、实际能量减去 `ReservedEnergy`、是否已经排队 |
+| 插队动作没有出现 | `BattleActionScheduler.Pending/ActiveRequest`、行动条是否处于正确的状态节点刷新 |
+| 插队后跑条变化 | 请求是否错误使用了 `NormalTurn` 策略；FreeAction 不应调用 `ActionQueue.BeginTurn/EndTurn` |
+| 插队后 Buff 少一回合 | 请求是否错误使用了 `ExtraTurn`；Ultimate/FollowUp/Counter 应使用 `FreeAction` |
+| 表现中途切到下一技能 | 自定义 presenter 是否提前调用 `completed`；完整技能结束前不能释放表现屏障 |
 | 血条找不到模型 | `BattleActorRegistry` 是否包含该单位、actor 是否激活 |
 | 换波后直接胜利 | `SetPendingWave`、encounter 是否还有有效波次 |
 | 换波后我方跑条重置 | 不应重建 `BattleFlow` 或我方 `BattleUnit` |

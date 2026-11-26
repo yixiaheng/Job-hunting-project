@@ -6,10 +6,13 @@ using UnityEngine;
 public sealed class BattleAlliesUIContext : IUIContext
 {
     public IReadOnlyList<BattleUnit> Units { get; }
+    public IBattleCommandSource Commands { get; }
 
-    public BattleAlliesUIContext(IReadOnlyList<BattleUnit> units)
+    public BattleAlliesUIContext(IReadOnlyList<BattleUnit> units,
+        IBattleCommandSource commands = null)
     {
         Units = units;
+        Commands = commands;
     }
 }
 

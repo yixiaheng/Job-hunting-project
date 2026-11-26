@@ -294,8 +294,22 @@ public static class CharacterProgressionVerification
                     Check(caster.currentEnergy >= caster.talentEnergy && caster.nextActionTime < flowTime(caster), "Volt kill energy and self advance");
                     break;
                 case CharacterTalent.FrostNova:
-                    Check(e1.currentHealth < 930 && e2.currentHealth < 930, "Frost multi-target follow-up");
-                    Check(flow.LastResolution.FollowUps.Count == 2 && flow.LastResolution.FollowUps.All(hit => hit.Origin == EffectOrigin.Talent && hit.EffectKey == "Talent.FrostNova.FollowUp"), "Frost follow-up retains talent source without recursion");
+                    int firstHealth = e1.currentHealth;
+                    int secondHealth = e2.currentHealth;
+                    Check(flow.TryTakeQueuedAction(out BattleActionRequest followUp)
+                        && followUp.Origin == BattleActionOrigin.FollowUp,
+                        "Frost creates an independent follow-up request");
+                    BattleActionResult followUpResult = flow.TryExecute(followUp);
+                    flow.CompleteRequest(followUp);
+                    Check(followUpResult.Succeeded
+                        && e1.currentHealth < firstHealth
+                        && e2.currentHealth < secondHealth,
+                        "Frost multi-target follow-up");
+                    Check(followUpResult.Resolution.Record.Origin == BattleActionOrigin.FollowUp
+                        && followUpResult.Resolution.Record.Effects.Count(effect =>
+                            effect.Key == "Talent.FrostNova.FollowUp") == 2
+                        && flow.Scheduler.PendingCount == 0,
+                        "Frost follow-up retains talent source without recursion");
                     break;
                 case CharacterTalent.UmbralHex:
                     Check(caster.currentEnergy >= caster.talentEnergy && e1.buffs.Count > 0, "Umbral successful debuff energy");
@@ -307,9 +321,13 @@ public static class CharacterProgressionVerification
             }
 
             foreach (var u in units)
+            {
                 foreach (var b in u.buffs)
                     if (b.ownsConfig)
                         Object.DestroyImmediate(b.config);
+                if (u.ownsRuntimeTalentAction && u.talentAction != null)
+                    Object.DestroyImmediate(u.talentAction);
+            }
         }
 
         var guard = runtime.units.Units.First(u => u.path == PathType.Preservation);
@@ -322,7 +340,13 @@ public static class CharacterProgressionVerification
         battle.Ready();
         var ultimate = guard.skills.First(s => s.kind == SkillKind.Ultimate);
         a.skills.Add(ultimate);
-        Check(battle.Execute(new BattleAction { caster = a, skill = ultimate, mainTarget = enemy }), "mixed targets execute");
+        BattleActionRequest ultimateRequest = null;
+        Check(battle.QueueUltimate(new BattleAction
+            { caster = a, skill = ultimate, mainTarget = enemy }, out _).IsValid
+            && battle.TryTakeQueuedAction(out ultimateRequest)
+            && battle.TryExecute(ultimateRequest).Succeeded,
+            "mixed targets execute through the ultimate queue");
+        battle.CompleteRequest(ultimateRequest);
         Check(partner.shield > 0 && enemy.shield == 0 && enemy.currentHealth < 1000, "damage enemies and protect allies in same skill");
         a.currentEnergy = 98;
         new EnergyService().Execute(a, new EffectConfig { value = 999 });

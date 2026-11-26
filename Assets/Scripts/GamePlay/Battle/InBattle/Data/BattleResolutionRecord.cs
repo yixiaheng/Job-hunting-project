@@ -54,6 +54,11 @@ namespace Battle.Logic
 
     public sealed class BattleActionRecord
     {
+        public long RequestId { get; internal set; }
+        public BattleActionOrigin Origin { get; internal set; }
+        public int ActionSequence { get; internal set; }
+        public int NormalTurnIndex { get; internal set; }
+        public bool ConsumedNormalTurn { get; internal set; }
         public int Turn { get; internal set; }
         public double StartedAt { get; internal set; }
         public double EndedAt { get; internal set; }

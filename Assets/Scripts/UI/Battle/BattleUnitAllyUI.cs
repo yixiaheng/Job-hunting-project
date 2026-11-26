@@ -11,14 +11,27 @@ public class BattleUnitAllyUI : MonoBehaviour
 {
     [SerializeField] private Image hp_bar;
     [SerializeField] private Image delay_bar;
+    [SerializeField] private Image energy_bar;
     private BattleUnit Unit;
+    private IBattleCommandSource commands;
+    private Button ultimateButton;
     private Coroutine delayCoroutine;
     private readonly SubscriptionBag subscriptions = new();
+
+    private void Awake()
+    {
+        ultimateButton = GetComponent<Button>();
+        if (ultimateButton == null)
+            ultimateButton = gameObject.AddComponent<Button>();
+        ultimateButton.transition = Selectable.Transition.None;
+        ultimateButton.onClick.AddListener(QueueUltimate);
+    }
 
     void OnEnable()
     {
         subscriptions.Clear();
         subscriptions.Add(GameEvents.Battle.Subscribe<HealthChangedEvent>(OnHealthChanged));
+        subscriptions.Add(GameEvents.Battle.Subscribe<EnergyChangedEvent>(OnEnergyChanged));
         BattleDisplayState.HealthChanged -= OnVisualHealthChanged;
         BattleDisplayState.HealthChanged += OnVisualHealthChanged;
         if (Unit != null)
@@ -48,6 +61,14 @@ public class BattleUnitAllyUI : MonoBehaviour
         float targetFill = changedEvent.CurrentHealth / (float)changedEvent.MaxHealth;
         UpdateLifeBar(targetFill);
         GetComponent<BattleUnitView>().Refresh();
+    }
+
+    private void OnEnergyChanged(EnergyChangedEvent changedEvent)
+    {
+        if (Unit == null || Unit.BattleId != changedEvent.BattleId
+            || Unit != changedEvent.Unit)
+            return;
+        RefreshEnergyBar(changedEvent.CurrentEnergy, changedEvent.MaxEnergy);
     }
 
     private void UpdateLifeBar(float targetFill)
@@ -87,6 +108,8 @@ public class BattleUnitAllyUI : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (ultimateButton != null)
+            ultimateButton.onClick.RemoveListener(QueueUltimate);
         subscriptions.Clear();
         StopDelayCoroutine();
     }
@@ -95,6 +118,29 @@ public class BattleUnitAllyUI : MonoBehaviour
     {
         Unit = unit;
         SnapLifeBars(GetHealthFill());
+        RefreshEnergyBar(Unit?.currentEnergy ?? 0, Unit?.maxEnergy ?? 0);
+        RefreshUltimateAvailability();
+    }
+
+    public void BindCommands(IBattleCommandSource source)
+    {
+        commands = source;
+        RefreshUltimateAvailability();
+    }
+
+    public void RefreshUltimateAvailability()
+    {
+        if (ultimateButton != null)
+            ultimateButton.interactable = Unit != null
+                && commands != null && commands.CanQueueUltimate(Unit);
+    }
+
+    private void QueueUltimate()
+    {
+        if (Unit == null || commands == null)
+            return;
+        commands.QueueUltimate(Unit);
+        RefreshUltimateAvailability();
     }
 
     private float GetHealthFill()
@@ -102,6 +148,14 @@ public class BattleUnitAllyUI : MonoBehaviour
         return Unit != null && Unit.maxHealth > 0
             ? Mathf.Clamp01((float)BattleDisplayState.Health(Unit) / Unit.maxHealth)
             : 0f;
+    }
+
+    private void RefreshEnergyBar(int current, int maximum)
+    {
+        if (energy_bar != null)
+            energy_bar.fillAmount = maximum > 0
+                ? Mathf.Clamp01((float)current / maximum)
+                : 0f;
     }
 
     private void SnapLifeBars(float fill)

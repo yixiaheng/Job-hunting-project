@@ -62,6 +62,28 @@ namespace Battle.Events
     }
 
     /// <summary>
+    /// 战斗内实际能量变化。终结技入队时的资源预留不属于实际能量变化。
+    /// </summary>
+    public readonly struct EnergyChangedEvent : IBattleEvent
+    {
+        public BattleUnit Unit { get; }
+        public Guid BattleId { get; }
+        public int PreviousEnergy { get; }
+        public int CurrentEnergy { get; }
+        public int MaxEnergy { get; }
+
+        public EnergyChangedEvent(BattleUnit unit, int previousEnergy,
+            int currentEnergy, int maxEnergy)
+        {
+            Unit = unit;
+            BattleId = unit.BattleId;
+            PreviousEnergy = previousEnergy;
+            CurrentEnergy = currentEnergy;
+            MaxEnergy = maxEnergy;
+        }
+    }
+
+    /// <summary>
     /// 选中目标变化
     /// </summary>
     public readonly struct TargetSelectionChangedEvent : IBattleEvent

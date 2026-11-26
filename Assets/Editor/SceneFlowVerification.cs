@@ -449,6 +449,36 @@ public static class SceneFlowVerification
             yield return EndBattle();
             ReadObject<Button>(UnityEngine.Object.FindFirstObjectByType<GameOverCanvasUI>(), "exitButton").onClick.Invoke();
         }
+        else if (start == SceneId.Party)
+        {
+            Check(scenes.TryGetVisit(start, out _) && scenes.VisitCount == 1, "Start adopts direct presentation without a source");
+            var partyPanel = UnityEngine.Object.FindFirstObjectByType<BattlePartyCanvasUI>();
+            partyPanel.AddOrReplaceAlly(0);
+            yield return null;
+            yield return null;
+            AllyView[] cards = UnityEngine.Object.FindObjectsByType<AllyView>(FindObjectsSortMode.None);
+            Check(cards.Length > 0, "party selection creates ally cards");
+            foreach (AllyView card in cards)
+            {
+                var layoutRoot = (RectTransform)card.transform;
+                var visualRoot = card.transform.Find("VisualRoot") as RectTransform;
+                Check(visualRoot != null, "ally card keeps a dedicated visual root");
+                Check(layoutRoot.localScale == Vector3.one,
+                    "ally card layout root remains unscaled");
+                Check(visualRoot.localScale.x > 0f
+                    && Mathf.Approximately(visualRoot.localScale.x, visualRoot.localScale.y),
+                    "ally card visual root scales uniformly");
+                Check(visualRoot.rect.width * visualRoot.localScale.x <= layoutRoot.rect.width + .1f
+                    && visualRoot.rect.height * visualRoot.localScale.y <= layoutRoot.rect.height + .1f,
+                    "ally card visual root fits its runtime grid cell");
+            }
+            Check(UIManager.Instance.Back(), "Esc closes party selection before returning direct presentation");
+            for (int frame = 0; frame < 120 && UIManager.Instance.IsOpen(UIId.AlliesChoose); frame++)
+                yield return null;
+            Check(!UIManager.Instance.IsOpen(UIId.AlliesChoose), "party selection finishes closing");
+            Check(UIManager.Instance.Back(), "Esc returns direct presentation");
+            yield return new WaitForSecondsRealtime(.5f);
+        }
         else
         {
             Check(scenes.TryGetVisit(start, out _) && scenes.VisitCount == 1, "Start adopts direct presentation without a source");

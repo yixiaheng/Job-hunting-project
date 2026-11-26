@@ -33,6 +33,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
     [SerializeField] private BattlefieldDirector battlefield;
     public BattlefieldDirector Battlefield => battlefield;
     public BattleSelectionState Selection { get; private set; }
+    public BattleInterruptSelectionState InterruptSelection { get; private set; }
     public void ConfigureBattlefield(BattlefieldDirector value) => battlefield = value;
     public int EnemyCapacity => waveController?.CurrentCapacity ?? activeEnemies.Count;
 
@@ -51,6 +52,10 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
         && !(CameraController != null && CameraController.IsEditing)
         && !(presentationQueue?.IsPresenting ?? false) && !(battlefield?.IsMoving ?? false)
         && (GameSceneManager.Instance == null || (!GameSceneManager.Instance.IsLoading && !GameSceneManager.Instance.IsSceneSuspended(gameObject.scene)));
+    public bool CanAcceptInterrupts => turnDriver != null && turnDriver.CanQueueUltimate
+        && !(CameraController != null && CameraController.IsEditing)
+        && (GameSceneManager.Instance == null || (!GameSceneManager.Instance.IsLoading
+            && !GameSceneManager.Instance.IsSceneSuspended(gameObject.scene)));
     private BattleUnit DisplayedActor => turnDriver?.State == BattleTurnState.Presenting
         ? battleFlow?.LastResolution?.Record?.Caster : battleFlow?.CurrentUnit;
     public int CurrentWave => waveController?.CurrentWaveNumber ?? 0;
@@ -172,12 +177,14 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
         }
         Selection = new BattleSelectionState(battleFlow);
         Selection.Changed += OnSelectionChanged;
+        InterruptSelection = new BattleInterruptSelectionState(battleFlow);
         uiPresenter.Open(
             units.FindAll(unit => unit.faction == Faction.OurSide),
             activeEnemies,
             actorRegistry,
             activeBattleCamera,
-            this);
+            this,
+            battleFlow);
 
         battleFlow.Ready();
         BattleStarted?.Invoke(battleFlow);
@@ -296,6 +303,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
     {
         if (Selection != null) Selection.Changed -= OnSelectionChanged;
         Selection = null;
+        InterruptSelection = null;
         turnDriver?.Stop();
         StopAllCoroutines();
         presentationQueue?.Cancel();
@@ -371,7 +379,12 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
 
     public void ChooseBasic() => ChooseAbility(SkillKind.Basic);
     public void ChooseSkill() => ChooseAbility(SkillKind.Skill);
-    public void ChooseUlt() => ChooseAbility(SkillKind.Ultimate);
+    public void ChooseUlt()
+    {
+        BattleUnit caster = battleFlow?.CurrentUnit;
+        if (caster != null)
+            QueueUltimate(caster, rayCasting != null ? rayCasting.selectedTarget : null);
+    }
 
     public BattleAction CreateAbilityAction(SkillKind kind)
     {
@@ -395,6 +408,11 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
 
     public void ChooseAbility(SkillKind kind)
     {
+        if (kind == SkillKind.Ultimate)
+        {
+            ChooseUlt();
+            return;
+        }
         if (!CanAcceptCommands || battleFlow?.CurrentUnit == null
             || battleFlow.CurrentUnit.faction != Faction.OurSide)
             return;
@@ -419,6 +437,56 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
             Debug.LogError("自动回合推进失败：" + turnDriver.LastFailure.Message, this);
     }
 
+    public bool CanQueueUltimate(BattleUnit caster)
+        => CanAcceptInterrupts && PreviewUltimate(caster,
+            rayCasting != null ? rayCasting.selectedTarget : null).Validation.IsValid;
+
+    public BattleActionPreview PreviewUltimate(BattleUnit caster,
+        BattleUnit target = null)
+    {
+        SkillConfig skill = caster?.skills?.FirstOrDefault(candidate => candidate != null
+            && candidate.kind == SkillKind.Ultimate);
+        return battleFlow?.PreviewAction(new BattleAction
+        {
+            caster = caster,
+            skill = skill,
+            mainTarget = target
+        }, BattleActionOrigin.Ultimate);
+    }
+
+    public ActionValidation QueueUltimate(BattleUnit caster,
+        BattleUnit target = null)
+    {
+        if (!CanAcceptInterrupts || InterruptSelection == null)
+            return new ActionValidation(ActionFailure.Resolving);
+        InterruptSelection.Begin(caster, target);
+        BattleAction action = InterruptSelection.CreateAction();
+        ActionValidation validation = turnDriver.QueueUltimate(action, out _);
+        InterruptSelection.Clear();
+        if (validation.IsValid && turnDriver != null
+            && (turnDriver.State == BattleTurnState.Resolving
+                || turnDriver.State == BattleTurnState.Presenting))
+            uiPresenter?.AdvanceAndHoldActionTimeline(DisplayedActor);
+        uiPresenter?.Refresh(DisplayedActor);
+        if (!validation.IsValid)
+            Debug.LogWarning(validation.Message, this);
+        return validation;
+    }
+
+    public bool CancelQueuedAction(long requestId)
+    {
+        bool cancelled = battleFlow != null && battleFlow.CancelQueuedAction(requestId);
+        if (cancelled)
+        {
+            if (turnDriver != null
+                && (turnDriver.State == BattleTurnState.Resolving
+                    || turnDriver.State == BattleTurnState.Presenting))
+                uiPresenter?.AdvanceAndHoldActionTimeline(DisplayedActor);
+            uiPresenter?.Refresh(DisplayedActor);
+        }
+        return cancelled;
+    }
+
     private System.Collections.IEnumerator StartAfterHUDReady()
     {
         // UIManager may instantiate its panels asynchronously. Never attack behind the loading HUD.
@@ -440,6 +508,21 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
     private void OnTurnStateChanged(BattleTurnState state)
     {
         if (state == BattleTurnState.Resolving) rayCasting?.ClearSelection();
+        switch (state)
+        {
+            case BattleTurnState.Resolving:
+                uiPresenter?.HoldActionTimeline(battleFlow?.CurrentUnit);
+                break;
+            case BattleTurnState.AutoDeciding:
+                uiPresenter?.AdvanceAndHoldActionTimeline(battleFlow?.CurrentUnit);
+                break;
+            case BattleTurnState.Presenting:
+                uiPresenter?.AdvanceAndHoldActionTimeline(DisplayedActor);
+                break;
+            default:
+                uiPresenter?.ReleaseActionTimeline(DisplayedActor);
+                break;
+        }
         if (state == BattleTurnState.WaitingForPlayer)
         { battlefield?.SetReady(battleFlow.CurrentUnit); Selection?.Begin(battleFlow.CurrentUnit); }
         uiPresenter?.Refresh(DisplayedActor);

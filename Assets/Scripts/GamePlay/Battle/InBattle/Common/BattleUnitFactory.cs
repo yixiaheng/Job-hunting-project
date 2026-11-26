@@ -41,6 +41,9 @@ public sealed class BattleUnitFactory
                     DestroyOwned(skill);
         }
 
+        if (unit.ownsRuntimeTalentAction && unit.talentAction != null)
+            DestroyOwned(unit.talentAction);
+
         if (unit.buffs != null)
         {
             var released = new HashSet<BuffConfig>();

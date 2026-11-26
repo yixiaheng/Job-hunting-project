@@ -21,4 +21,5 @@ public class UnitConfig : ScriptableObject
     public int maxEnergy = 100;
     public GameObject prefab;
     public List<SkillConfig> skills = new();
+    public SkillConfig talentAction;
 }
