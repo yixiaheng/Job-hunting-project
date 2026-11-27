@@ -184,7 +184,7 @@ public class BattleManager : MonoBehaviour, IBattleCommandSource
             actorRegistry,
             activeBattleCamera,
             this,
-            battleFlow);
+            battleFlow, presentation?.ActionDamage);
 
         battleFlow.Ready();
         BattleStarted?.Invoke(battleFlow);

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Battle.Logic
 {
+    /// <summary>
+    /// 战斗行动的来源：正常回合/大招/追击/反击/额外回合/剧情
+    /// </summary>
     public enum BattleActionOrigin
     {
         NormalTurn,
@@ -12,18 +15,22 @@ namespace Battle.Logic
         ExtraTurn,
         Scripted
     }
-
+    /// <summary>
+    /// 战斗行动的回合资源消耗：正常、自由/不占回合、额外回合
+    /// </summary>
     public enum BattleActionExecutionPolicy
     {
         NormalTurn,
         FreeAction,
         ExtraTurn
     }
-
+    /// <summary>
+    /// 目标回退策略枚举，用来决定 当技能/效果原本要选的目标无效或不可选时，该怎么办
+    /// </summary>
     public enum BattleTargetFallback
     {
-        AutoSelectFirst,
-        Cancel
+        AutoSelectFirst,    //自动选择第一个有效目标
+        Cancel              //取消本次释放
     }
 
     public sealed class BattleActionRequest
@@ -56,7 +63,7 @@ namespace Battle.Logic
         internal bool ReservationReleased { get; set; }
     }
 
-    /// <summary>Owns free-action ordering and resource reservations. It never advances battle time.</summary>
+    //战斗行动插队
     public sealed class BattleActionScheduler
     {
         private readonly List<BattleActionRequest> pending = new();

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc58f74992fb7498d78c3ba916b5c7, type: 3}
   m_Name: Enemy_C
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
-  id: 
+  id: Enemy_C
   displayName: Enemy_C
   icon: {fileID: 0}
   growth: {fileID: 0}

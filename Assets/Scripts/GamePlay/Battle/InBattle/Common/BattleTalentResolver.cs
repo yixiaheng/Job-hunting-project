@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Battle.Logic
 {
+    //行动的结算结果
     public sealed class ActionResolution
     {
         public readonly HashSet<BattleUnit> Damaged = new HashSet<BattleUnit>();

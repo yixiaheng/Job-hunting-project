@@ -38,11 +38,13 @@ namespace Game.Characters
         public BattleUnit CreateUnit(int pos, int tie)
         {
             BattleUnit unit = BattleDataMaping.ToUnit(source, Faction.OurSide, pos, tie);
+            unit.Level = stats.Level;
             unit.maxHealth = unit.currentHealth = stats.health;
             unit.attack = stats.attack;
             unit.defence = stats.defence;
             unit.speed = stats.speed;
             unit.damageBonus = stats.damageBonus;
+            unit.SetOffensiveStats(stats.OffensiveStats);
             unit.shield = Mathf.RoundToInt(stats.defence * openingShield);
             unit.talent = talent;
             unit.talentValue = talentValue;

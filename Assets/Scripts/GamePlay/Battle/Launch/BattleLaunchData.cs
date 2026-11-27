@@ -33,6 +33,8 @@ public sealed class BattleLaunchData
     {
         data = null;
         error = null;
+        if (UnityEngine.Application.isPlaying && PlayerRuntime.Instance == null)
+        { error = "玩家养成入口尚未初始化，不能按基础配置代替真实等级开始战斗。"; return false; }
         if (PlayerRuntime.Instance != null && !PlayerRuntime.Instance.IsReady)
         { error = "玩家养成数据未成功读取，不能开始战斗。"; return false; }
 

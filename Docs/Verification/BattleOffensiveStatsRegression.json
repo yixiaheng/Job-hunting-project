@@ -1,0 +1,25 @@
+{
+  "completedAt": "2026-11-27T20:30:19.166096+08:00",
+  "results": [
+    {
+      "name": "BattleOffensiveStats",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BattleAction",
+      "passed": false,
+      "error": "System.NullReferenceException: Object reference not set to an instance of an object\r\n  at BattleActionVerification.ActionTimelineResourceChecks () [0x00172] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleActionVerification.cs:711 \r\n  at BattleActionVerification.Run () [0x000b4] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleActionVerification.cs:63 \r\n  at PipelineEvaluation.PipelineEval_4c69a3c4.<Execute>g__Run|0_0 (System.String name, System.Action action, PipelineEvaluation.PipelineEval_4c69a3c4+<>c__DisplayClass0_0& ) [0x00002] in <d5cbbfae338f425280f681d07bbf239e>:0 "
+    },
+    {
+      "name": "CharacterProgression",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BattleConfigImport",
+      "passed": true,
+      "error": null
+    }
+  ]
+}

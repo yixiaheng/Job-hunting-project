@@ -18,8 +18,8 @@ MonoBehaviour:
   growth: {fileID: 11400000, guid: 3498dc7771a25eb4b97882d89240dc7c, type: 2}
   element: 0
   path: 0
-  maxHealth: 260
-  attack: 48
+  maxHealth: 150
+  attack: 50
   defence: 32
   speed: 95
   startEnergy: 0
@@ -29,3 +29,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eea34c8d40044023b8448f05a67c692d, type: 2}
   - {fileID: 11400000, guid: 220b7ddcad344625b7c5a124fd20c1c6, type: 2}
   - {fileID: 11400000, guid: 4c1899cff59042219efb6daf466ba699, type: 2}
+  talentAction: {fileID: 0}

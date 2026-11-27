@@ -1,0 +1,161 @@
+{
+  "BattleConfig.xlsx": {
+    "Instructions": {
+      "rows": 9,
+      "columns": 2,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "Units": {
+      "rows": 9,
+      "columns": 11,
+      "freeze": "B3",
+      "validations": 3,
+      "merges": 0
+    },
+    "Skills": {
+      "rows": 21,
+      "columns": 10,
+      "freeze": "B3",
+      "validations": 4,
+      "merges": 0
+    },
+    "SkillEffects": {
+      "rows": 34,
+      "columns": 14,
+      "freeze": "B3",
+      "validations": 9,
+      "merges": 0
+    },
+    "Buffs": {
+      "rows": 12,
+      "columns": 8,
+      "freeze": "B3",
+      "validations": 3,
+      "merges": 0
+    },
+    "UnitSkills": {
+      "rows": 21,
+      "columns": 4,
+      "freeze": "B3",
+      "validations": 3,
+      "merges": 0
+    },
+    "Enums": {
+      "rows": 42,
+      "columns": 3,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "Meta": {
+      "rows": 6,
+      "columns": 2,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "RefUnits": {
+      "rows": 9,
+      "columns": 4,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "RefSkills": {
+      "rows": 21,
+      "columns": 4,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "RefBuffs": {
+      "rows": 13,
+      "columns": 4,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    }
+  },
+  "BattleConfigTemplate.xlsx": {
+    "Instructions": {
+      "rows": 9,
+      "columns": 2,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "Units": {
+      "rows": 0,
+      "columns": 11,
+      "freeze": "B3",
+      "validations": 3,
+      "merges": 0
+    },
+    "Skills": {
+      "rows": 0,
+      "columns": 10,
+      "freeze": "B3",
+      "validations": 4,
+      "merges": 0
+    },
+    "SkillEffects": {
+      "rows": 0,
+      "columns": 14,
+      "freeze": "B3",
+      "validations": 9,
+      "merges": 0
+    },
+    "Buffs": {
+      "rows": 0,
+      "columns": 8,
+      "freeze": "B3",
+      "validations": 3,
+      "merges": 0
+    },
+    "UnitSkills": {
+      "rows": 0,
+      "columns": 4,
+      "freeze": "B3",
+      "validations": 3,
+      "merges": 0
+    },
+    "Enums": {
+      "rows": 42,
+      "columns": 3,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "Meta": {
+      "rows": 6,
+      "columns": 2,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "RefUnits": {
+      "rows": 9,
+      "columns": 4,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "RefSkills": {
+      "rows": 21,
+      "columns": 4,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    },
+    "RefBuffs": {
+      "rows": 13,
+      "columns": 4,
+      "freeze": "B3",
+      "validations": 0,
+      "merges": 0
+    }
+  },
+  "approximate_render_overflows": []
+}

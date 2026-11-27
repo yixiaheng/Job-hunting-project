@@ -95,6 +95,18 @@ public static class CharacterProgressionVerification
         store.Fail = false;
         Check(service.TryCommit(preview, out _), "atomic successful commit");
         Check(service.GetCharacter(id).level == 20 && service.GetCharacter(id).experience == 0, "level 20 boundary");
+        var actualProgress = service.GetCharacter(id);
+        var actualStats = service.Stats(id);
+        var actualSnapshot = new BattleCharacterSnapshot(service.Config(id), actualProgress, inventory);
+        actualProgress.level = 1;
+        var levelledUnit = actualSnapshot.CreateUnit(0, 0);
+        Check(actualStats.Level == 20 && levelledUnit.Level == 20,
+            "saved progression level flows through calculator and immutable battle snapshot");
+        Check(levelledUnit.attack == actualStats.attack && levelledUnit.maxHealth == actualStats.health
+            && Mathf.Approximately(levelledUnit.CritRate, actualStats.OffensiveStats.CritRate),
+            "battle unit matches computed character stats rather than raw UnitConfig");
+        Check(service.GetCharacter(id).level == 20, "editing progression copy cannot alter stored character level");
+        Release(levelledUnit);
         Check(preview.WastedExperience >= 0 && preview.Costs[0].quantity < 100000, "automatically reduce excess books");
         Check(!service.TryCommit(preview, out _), "stale preview rejected");
         for (int stage = 0; stage < 5; stage++)

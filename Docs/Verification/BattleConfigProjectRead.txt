@@ -1,0 +1,11 @@
+PlayerRuntimeConfig → BattleCharacterSnapshot / BattleUnitFactory 读取成功
+Aegis: HP=260, ATK=48, SPD=95, Skills=3
+Verdant: HP=190, ATK=42, SPD=108, Skills=3
+VoltHunt: HP=170, ATK=68, SPD=125, Skills=3
+FrostNova: HP=180, ATK=55, SPD=102, Skills=3
+UmbralHex: HP=200, ATK=52, SPD=100, Skills=3
+AstralChord: HP=175, ATK=40, SPD=115, Skills=3
+Enemy Enemy_A: HP=60, ATK=50, Skills=1
+Enemy Enemy_B: HP=50, ATK=100, Skills=1
+Enemy Enemy_C: HP=55, ATK=50, Skills=1
+2026/11/27 15:41:41 +08:00

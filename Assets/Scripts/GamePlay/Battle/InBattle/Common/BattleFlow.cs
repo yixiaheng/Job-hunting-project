@@ -10,33 +10,40 @@ namespace Battle.Logic
     {
         #region Fields
         public const int MaxTurns = 500;
-        private readonly List<BattleUnit> units;
-        private readonly ActionQueue queue;
-        private readonly BattleActionScheduler scheduler;
-        private readonly TargetSelector selector;
-        private readonly EffectService effectService;
-        public System.Guid BattleId { get; } = System.Guid.NewGuid();
-        public BattleResult Result { get; private set; } = BattleResult.None;
-        public int TurnCount { get; private set; }
-        public ActionResolution LastResolution { get; private set; }
+        private readonly List<BattleUnit> units;            //本场战斗全部逻辑单位
+        private readonly ActionQueue queue;                 //普通行动的跑条和顺序行动
+        private readonly BattleActionScheduler scheduler;   //终结技，反击，追击等插队请求
+        private readonly TargetSelector selector;           //根据技能计算的合法目标
+        private readonly EffectService effectService;       //真正执行伤害、治疗、护盾、Buff 等效果的Service服务
+
+        //每创建一个 BattleFlow，都会生成一个新的战斗 ID。战斗实例身份
+        public System.Guid BattleId { get; } = System.Guid.NewGuid();   
+        public BattleResult Result { get; private set; } = BattleResult.None;   //战斗结果
+        public int TurnCount { get; private set; }  //回合数
+        public ActionResolution LastResolution { get; private set; }    //上次的结算结果
         public IReadOnlyList<BattleUnit> Units => units;
-        public IReadOnlyList<BattleActionRecord> ActionHistory => actionHistory;
+        //保存整场战斗已经完成的所有 BattleActionRecord。
+        public IReadOnlyList<BattleActionRecord> ActionHistory => actionHistory;   
         public BattleActionScheduler Scheduler => scheduler;
-        public BattleSkillPoints SkillPoints { get; }
-        public bool HasPendingWave { get; private set; }
+        
+        public BattleSkillPoints SkillPoints { get; }       //战技点数
+        public bool HasPendingWave { get; private set; }    //多波次状态
         public bool IsWaveCleared => Result == BattleResult.None && CountActive(Faction.OurSide) > 0
-            && CountActive(Faction.Enemy) == 0;
+            && CountActive(Faction.Enemy) == 0;             //当前波已经清空，但整场战斗还没有正式结束
         private readonly List<BattleActionRecord> actionHistory = new();
         private readonly IActionDecider decider;
-        private BattleUnit currentUnit;
+        private BattleUnit currentUnit;         //当前行动者
         public BattleUnit CurrentUnit => currentUnit;
-        public double CurrentTime => queue.CurrentTime;
-        public bool IsExecuting { get; private set; }
-        public int ActionSequence { get; private set; }
+        public double CurrentTime => queue.CurrentTime; //当前时间
+        public bool IsExecuting { get; private set; }   //逻辑锁，它表示 BattleFlow 当前是否正在进行一次权威结算。
+        public int ActionSequence { get; private set; } //行动数 它不等于NormalTurns
 
-        public UnityAction<BattleResult> GameOverEvent;
+        public UnityAction<BattleResult> GameOverEvent; //战斗结束生命
         #endregion
 
+        /// <summary>
+        /// 创建时传入所有战斗对象，ai决策，和最大最小战技点即可
+        /// </summary>
         public BattleFlow(IEnumerable<BattleUnit> allUnits, IActionDecider decider = null,
             int initialSkillPoints = 4, int maximumSkillPoints = 5)
         {
@@ -52,45 +59,40 @@ namespace Battle.Logic
             this.decider = decider ?? new FirstSkillDecider();
         }
 
-        public BattleResult Run()
-        {
-            Debug.Log($"Battle started. Allies={Count(Faction.OurSide)}, Enemies={Count(Faction.Enemy)}");
-
-            while (Step())
-            {
-                
-            }
-
-            Debug.Log($"Battle {(Result == BattleResult.None ? "stopped" : "ended")}: {ResultText(Result)}, Turns={TurnCount}");
-            return Result;
-        }
-
+        //查看普通行动周接下来的应该行动的单位，只做查看操作
         public BattleUnit Peek() => queue.PeekNext();
+        //生成行动条的快照（应用于UI的行动轴）
         public IReadOnlyList<BattleActionOrderEntry> GetActionOrderSnapshot(BattleUnit displayedActor = null)
         {
             var snapshot = new List<BattleActionOrderEntry>();
             BattleActionRequest active = scheduler.ActiveRequest;
             if (active?.Action?.caster != null && active.Action.caster.IsActive)
                 snapshot.Add(QueuedOrder(active, true));
+
             foreach (BattleActionRequest request in scheduler.Pending)
+            {
                 if (request?.Action?.caster != null && request.Action.caster.IsActive)
                     snapshot.Add(QueuedOrder(request, false));
+            }
 
             BattleUnit pinned = active == null ? displayedActor ?? currentUnit : null;
+
             snapshot.AddRange(queue.GetOrderSnapshot(pinned));
             return snapshot.AsReadOnly();
         }
-
-        public bool HasQueuedActions => scheduler.PendingCount > 0
-            || scheduler.ActiveRequest != null;
+        
+        //存在待执行请求或正在执行的插队请求
+        public bool HasQueuedActions => scheduler.PendingCount > 0 || scheduler.ActiveRequest != null;
+        
+        //返回某个角色因为已排队终结技而被预留的能量。
         public int ReservedEnergy(BattleUnit unit) => scheduler.GetReservedEnergy(unit);
 
+        //检查同角色同终结技是否已经排队
         public ActionValidation QueueUltimate(BattleAction action, out BattleActionRequest request)
         {
             request = null;
             if (action?.caster != null && action.skill != null
-                && scheduler.HasPending(action.caster, action.skill,
-                    BattleActionOrigin.Ultimate))
+                && scheduler.HasPending(action.caster, action.skill,BattleActionOrigin.Ultimate))
                 return new ActionValidation(ActionFailure.AlreadyQueued);
             ActionValidation validation = ValidateAction(action, BattleActionOrigin.Ultimate);
             if (!validation.IsValid)
@@ -103,6 +105,7 @@ namespace Battle.Logic
             return validation;
         }
 
+        //用于追击、反击、额外回合等系统触发行动
         internal BattleActionRequest QueueTriggered(BattleAction action,
             BattleActionOrigin origin, int priority)
         {

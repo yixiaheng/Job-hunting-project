@@ -21,6 +21,6 @@ public class EffectConfig
     public StatType scaleStat;
     public TargetRule target;
     public int buffId;
-    public BuffConfig buff; //暂留，以后改成用id查询buff
+    public BuffConfig buff; 
     public int stack;
 }

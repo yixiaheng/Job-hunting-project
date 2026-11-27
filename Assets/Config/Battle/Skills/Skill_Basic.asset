@@ -15,19 +15,34 @@ MonoBehaviour:
   id: 1
   Name: Basic
   kind: 0
+  element: 0
+  skillPointCost: 0
+  skillPointGain: 0
   energyCost: 0
   energyGain: 20
   targetRule: 0
   targetSide: 1
   effectConfigs:
-  - effectType: 3
+  - origin: 0
+    key: legacy.1.0
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 3
     value: 0
     scaleStat: 0
     target: 0
-    buffId: 1
-    buff: {fileID: 11400000, guid: 26bc72bccd9ce3e47840aed42f8c33bf, type: 2}
+    buffId: 9201
+    buff: {fileID: 11400000, guid: 3a3cd5ab3ffb41e4ab9e475da9338f35, type: 2}
     stack: 1
-  - effectType: 0
+  - origin: 0
+    key: legacy.1.1
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
     value: 1
     scaleStat: 0
     target: 0

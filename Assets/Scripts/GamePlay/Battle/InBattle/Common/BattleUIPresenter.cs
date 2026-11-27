@@ -4,7 +4,7 @@ using Battle.Logic;
 using Game.UI;
 using UnityEngine;
 
-/// <summary>拥有本场三个战斗面板的打开、刷新与关闭。</summary>
+/// <summary>拥有本场战斗面板的打开、刷新与关闭。</summary>
 public sealed class BattleUIPresenter : IDisposable
 {
     private readonly UIManager uiManager;
@@ -13,6 +13,7 @@ public sealed class BattleUIPresenter : IDisposable
     private UIHandle enemiesStatusHandle;
     private UIHandle commandsHandle;
     private UIHandle actionTimelineHandle;
+    private UIHandle actionDamageHandle;
     public bool IsReady => uiManager.TryGetPanel(alliesStatusHandle, out BattleAlliesStatusControll allies)
         && allies.State == UIState.Open && !allies.IsPresentationSuspended
         && uiManager.TryGetPanel(enemiesStatusHandle, out BattleEnemiesStatusPanel enemies)
@@ -20,7 +21,9 @@ public sealed class BattleUIPresenter : IDisposable
         && uiManager.TryGetPanel(commandsHandle, out BattleUIController commands)
         && commands.State == UIState.Open && !commands.IsPresentationSuspended
         && uiManager.TryGetPanel(actionTimelineHandle, out BattleActionTimelinePanel timeline)
-        && timeline.State == UIState.Open && !timeline.IsPresentationSuspended;
+        && timeline.State == UIState.Open && !timeline.IsPresentationSuspended
+        && uiManager.TryGetPanel(actionDamageHandle, out BattleActionDamagePanel damage)
+        && damage.State == UIState.Open && !damage.IsPresentationSuspended;
 
     public void SetVisible(bool visible)
     {
@@ -40,7 +43,7 @@ public sealed class BattleUIPresenter : IDisposable
 
     public void Open(IReadOnlyList<BattleUnit> allies, IReadOnlyList<BattleUnit> enemies,
         IBattleActorLookup actorLookup, Camera battleCamera, IBattleCommandSource commands,
-        IBattleActionOrderSource actionOrderSource)
+        IBattleActionOrderSource actionOrderSource, Battle.Presentation.BattleActionDamageDisplay actionDamage = null)
     {
         Close();
         alliesStatusHandle = uiManager.Open(UIId.BattleAlliesStatus,
@@ -51,6 +54,9 @@ public sealed class BattleUIPresenter : IDisposable
             new BattleCommandsUIContext(commands), ownerSceneHandle: ownerSceneHandle);
         actionTimelineHandle = uiManager.Open(UIId.BattleActionTimeline,
             new BattleActionTimelineUIContext(actionOrderSource), ownerSceneHandle: ownerSceneHandle);
+        // Damage remains visible during skill cinematics; it is not part of SetVisible's ordinary HUD group.
+        actionDamageHandle = uiManager.Open(UIId.BattleActionDamage,
+            new BattleActionDamageUIContext(actionDamage), ownerSceneHandle: ownerSceneHandle);
     }
 
     public void Refresh(BattleUnit currentUnit)
@@ -103,6 +109,8 @@ public sealed class BattleUIPresenter : IDisposable
             alliesStatusHandle = default;
             enemiesStatusHandle = default;
             commandsHandle = default;
+            actionTimelineHandle = default;
+            actionDamageHandle = default;
             return;
         }
 
@@ -114,10 +122,13 @@ public sealed class BattleUIPresenter : IDisposable
             uiManager.Close(commandsHandle);
         if (actionTimelineHandle.IsValid)
             uiManager.Close(actionTimelineHandle);
+        if (actionDamageHandle.IsValid)
+            uiManager.Close(actionDamageHandle);
         alliesStatusHandle = default;
         enemiesStatusHandle = default;
         commandsHandle = default;
         actionTimelineHandle = default;
+        actionDamageHandle = default;
     }
 
     public void Dispose() => Close();

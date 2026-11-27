@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 3}
   m_Name: Guard
   m_EditorClassIdentifier: Assembly-CSharp::BuffConfig
-  id: 205
+  id: 9205
   Name: 守护
   buffType: 0
   durationTimes: 2

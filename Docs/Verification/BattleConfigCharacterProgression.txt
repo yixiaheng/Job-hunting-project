@@ -1,0 +1,335 @@
+PASS six owned character configurations
+PASS seed character_exp
+PASS seed equipment_exp
+PASS seed character_ascension
+PASS seed equipment_ascension
+PASS seed food_revive
+PASS seed food_technique
+PASS seed food_heal
+PASS seed food_attack
+PASS seed cone_dawn
+PASS seed cone_guard
+PASS seed cone_wind
+PASS seed cone_memory
+PASS seed shard_Aegis
+PASS seed shard_Verdant
+PASS seed shard_VoltHunt
+PASS seed shard_FrostNova
+PASS seed shard_UmbralHex
+PASS seed shard_AstralChord
+PASS seed skill_manual
+PASS seed cone_abundance
+PASS seed cone_hunt
+PASS seed relic_0_1
+PASS seed relic_0_2
+PASS seed relic_0_3
+PASS seed relic_0_4
+PASS seed relic_1_1
+PASS seed relic_1_2
+PASS seed relic_1_3
+PASS seed relic_1_4
+PASS seed relic_2_5
+PASS seed relic_2_6
+PASS seed relic_3_5
+PASS seed relic_3_6
+PASS inventory notification rejects cultivation before saving
+PASS read-only inventory prevents profile writes
+PASS preview never mutates roster or inventory
+PASS failed save consumes nothing
+PASS atomic successful commit
+PASS level 20 boundary
+PASS automatically reduce excess books
+PASS stale preview rejected
+PASS skill Basic stage 0 preview: 
+PASS skill Basic stage 0 commit: 
+PASS skill Basic stage 0 saved revisions match runtime
+PASS skill Basic stage 0 autosave does not duplicate write
+PASS skill stage cap 0 Basic
+PASS skill Skill stage 0 preview: 
+PASS skill Skill stage 0 commit: 
+PASS skill Skill stage 0 saved revisions match runtime
+PASS skill Skill stage 0 autosave does not duplicate write
+PASS skill stage cap 0 Skill
+PASS skill Ultimate stage 0 preview: 
+PASS skill Ultimate stage 0 commit: 
+PASS skill Ultimate stage 0 saved revisions match runtime
+PASS skill Ultimate stage 0 autosave does not duplicate write
+PASS skill stage cap 0 Ultimate
+PASS character ascension 0 preview: 
+PASS character ascension 0 commit: 
+PASS character ascension 0 saved revisions match runtime
+PASS character ascension 0 autosave does not duplicate write
+PASS level next cap 0 preview: 
+PASS level next cap 0 commit: 
+PASS level next cap 0 saved revisions match runtime
+PASS level next cap 0 autosave does not duplicate write
+PASS level cap 40
+PASS skill Basic stage 1 preview: 
+PASS skill Basic stage 1 commit: 
+PASS skill Basic stage 1 saved revisions match runtime
+PASS skill Basic stage 1 autosave does not duplicate write
+PASS skill stage cap 1 Basic
+PASS skill Skill stage 1 preview: 
+PASS skill Skill stage 1 commit: 
+PASS skill Skill stage 1 saved revisions match runtime
+PASS skill Skill stage 1 autosave does not duplicate write
+PASS skill stage cap 1 Skill
+PASS skill Ultimate stage 1 preview: 
+PASS skill Ultimate stage 1 commit: 
+PASS skill Ultimate stage 1 saved revisions match runtime
+PASS skill Ultimate stage 1 autosave does not duplicate write
+PASS skill stage cap 1 Ultimate
+PASS character ascension 1 preview: 
+PASS character ascension 1 commit: 
+PASS character ascension 1 saved revisions match runtime
+PASS character ascension 1 autosave does not duplicate write
+PASS level next cap 1 preview: 
+PASS level next cap 1 commit: 
+PASS level next cap 1 saved revisions match runtime
+PASS level next cap 1 autosave does not duplicate write
+PASS level cap 60
+PASS skill Basic stage 2 preview: 
+PASS skill Basic stage 2 commit: 
+PASS skill Basic stage 2 saved revisions match runtime
+PASS skill Basic stage 2 autosave does not duplicate write
+PASS skill stage cap 2 Basic
+PASS skill Skill stage 2 preview: 
+PASS skill Skill stage 2 commit: 
+PASS skill Skill stage 2 saved revisions match runtime
+PASS skill Skill stage 2 autosave does not duplicate write
+PASS skill stage cap 2 Skill
+PASS skill Ultimate stage 2 preview: 
+PASS skill Ultimate stage 2 commit: 
+PASS skill Ultimate stage 2 saved revisions match runtime
+PASS skill Ultimate stage 2 autosave does not duplicate write
+PASS skill stage cap 2 Ultimate
+PASS character ascension 2 preview: 
+PASS character ascension 2 commit: 
+PASS character ascension 2 saved revisions match runtime
+PASS character ascension 2 autosave does not duplicate write
+PASS level next cap 2 preview: 
+PASS level next cap 2 commit: 
+PASS level next cap 2 saved revisions match runtime
+PASS level next cap 2 autosave does not duplicate write
+PASS level cap 90
+PASS skill Basic stage 3 preview: 
+PASS skill Basic stage 3 commit: 
+PASS skill Basic stage 3 saved revisions match runtime
+PASS skill Basic stage 3 autosave does not duplicate write
+PASS skill Basic stage 3 preview: 
+PASS skill Basic stage 3 commit: 
+PASS skill Basic stage 3 saved revisions match runtime
+PASS skill Basic stage 3 autosave does not duplicate write
+PASS skill stage cap 3 Basic
+PASS skill Skill stage 3 preview: 
+PASS skill Skill stage 3 commit: 
+PASS skill Skill stage 3 saved revisions match runtime
+PASS skill Skill stage 3 autosave does not duplicate write
+PASS skill Skill stage 3 preview: 
+PASS skill Skill stage 3 commit: 
+PASS skill Skill stage 3 saved revisions match runtime
+PASS skill Skill stage 3 autosave does not duplicate write
+PASS skill stage cap 3 Skill
+PASS skill Ultimate stage 3 preview: 
+PASS skill Ultimate stage 3 commit: 
+PASS skill Ultimate stage 3 saved revisions match runtime
+PASS skill Ultimate stage 3 autosave does not duplicate write
+PASS skill Ultimate stage 3 preview: 
+PASS skill Ultimate stage 3 commit: 
+PASS skill Ultimate stage 3 saved revisions match runtime
+PASS skill Ultimate stage 3 autosave does not duplicate write
+PASS skill stage cap 3 Ultimate
+PASS character ascension 3 preview: 
+PASS character ascension 3 commit: 
+PASS character ascension 3 saved revisions match runtime
+PASS character ascension 3 autosave does not duplicate write
+PASS level next cap 3 preview: 
+PASS level next cap 3 commit: 
+PASS level next cap 3 saved revisions match runtime
+PASS level next cap 3 autosave does not duplicate write
+PASS level cap 100
+PASS skill Basic stage 4 preview: 
+PASS skill Basic stage 4 commit: 
+PASS skill Basic stage 4 saved revisions match runtime
+PASS skill Basic stage 4 autosave does not duplicate write
+PASS skill stage cap 4 Basic
+PASS skill Skill stage 4 preview: 
+PASS skill Skill stage 4 commit: 
+PASS skill Skill stage 4 saved revisions match runtime
+PASS skill Skill stage 4 autosave does not duplicate write
+PASS skill stage cap 4 Skill
+PASS skill Ultimate stage 4 preview: 
+PASS skill Ultimate stage 4 commit: 
+PASS skill Ultimate stage 4 saved revisions match runtime
+PASS skill Ultimate stage 4 autosave does not duplicate write
+PASS skill stage cap 4 Ultimate
+PASS max 100 blocks leveling
+PASS rank 1 preview: 
+PASS rank 1 commit: 
+PASS rank 1 saved revisions match runtime
+PASS rank 1 autosave does not duplicate write
+PASS rank 2 preview: 
+PASS rank 2 commit: 
+PASS rank 2 saved revisions match runtime
+PASS rank 2 autosave does not duplicate write
+PASS rank 3 preview: 
+PASS rank 3 commit: 
+PASS rank 3 saved revisions match runtime
+PASS rank 3 autosave does not duplicate write
+PASS rank 4 preview: 
+PASS rank 4 commit: 
+PASS rank 4 saved revisions match runtime
+PASS rank 4 autosave does not duplicate write
+PASS rank 5 preview: 
+PASS rank 5 commit: 
+PASS rank 5 saved revisions match runtime
+PASS rank 5 autosave does not duplicate write
+PASS rank cap 5
+PASS talent unlock at 60 exactly
+PASS equip matching cone preview: 
+PASS equip matching cone commit: 
+PASS equip matching cone saved revisions match runtime
+PASS equip matching cone autosave does not duplicate write
+PASS path restriction
+PASS cone level 0 preview: 
+PASS cone level 0 commit: 
+PASS cone level 0 saved revisions match runtime
+PASS cone level 0 autosave does not duplicate write
+PASS cone ascend 0 preview: 
+PASS cone ascend 0 commit: 
+PASS cone ascend 0 saved revisions match runtime
+PASS cone ascend 0 autosave does not duplicate write
+PASS cone level 1 preview: 
+PASS cone level 1 commit: 
+PASS cone level 1 saved revisions match runtime
+PASS cone level 1 autosave does not duplicate write
+PASS cone ascend 1 preview: 
+PASS cone ascend 1 commit: 
+PASS cone ascend 1 saved revisions match runtime
+PASS cone ascend 1 autosave does not duplicate write
+PASS cone level 2 preview: 
+PASS cone level 2 commit: 
+PASS cone level 2 saved revisions match runtime
+PASS cone level 2 autosave does not duplicate write
+PASS cone ascend 2 preview: 
+PASS cone ascend 2 commit: 
+PASS cone ascend 2 saved revisions match runtime
+PASS cone ascend 2 autosave does not duplicate write
+PASS cone level 3 preview: 
+PASS cone level 3 commit: 
+PASS cone level 3 saved revisions match runtime
+PASS cone level 3 autosave does not duplicate write
+PASS cone maximum 80
+PASS merge donor preview: 
+PASS merge donor commit: 
+PASS merge donor saved revisions match runtime
+PASS merge donor autosave does not duplicate write
+PASS merge donor preview: 
+PASS merge donor commit: 
+PASS merge donor saved revisions match runtime
+PASS merge donor autosave does not duplicate write
+PASS merge donor preview: 
+PASS merge donor commit: 
+PASS merge donor saved revisions match runtime
+PASS merge donor autosave does not duplicate write
+PASS merge preserves target progress
+PASS locked donor rejected
+PASS merge reaches five preview: 
+PASS merge reaches five commit: 
+PASS merge reaches five saved revisions match runtime
+PASS merge reaches five autosave does not duplicate write
+PASS merge overcap rejected
+PASS equip relic Head preview: 
+PASS equip relic Head commit: 
+PASS equip relic Head saved revisions match runtime
+PASS equip relic Head autosave does not duplicate write
+PASS equip relic Hands preview: 
+PASS equip relic Hands commit: 
+PASS equip relic Hands saved revisions match runtime
+PASS equip relic Hands autosave does not duplicate write
+PASS equip relic Body preview: 
+PASS equip relic Body commit: 
+PASS equip relic Body saved revisions match runtime
+PASS equip relic Body autosave does not duplicate write
+PASS equip relic Feet preview: 
+PASS equip relic Feet commit: 
+PASS equip relic Feet saved revisions match runtime
+PASS equip relic Feet autosave does not duplicate write
+PASS four-piece damage bonus active
+PASS relic enhance preview: 
+PASS relic enhance commit: 
+PASS relic enhance saved revisions match runtime
+PASS relic enhance autosave does not duplicate write
+PASS relic max +15
+PASS transfer requires confirmation
+PASS confirmed equipment transfer preview: 
+PASS confirmed equipment transfer commit: 
+PASS confirmed equipment transfer saved revisions match runtime
+PASS confirmed equipment transfer autosave does not duplicate write
+PASS unique owner after transfer
+PASS equipped item cannot be deleted
+PASS battle snapshot retains configured skill point gain
+PASS unequip cone preview: 
+PASS unequip cone commit: 
+PASS unequip cone saved revisions match runtime
+PASS unequip cone autosave does not duplicate write
+PASS snapshot immutable and runtime skills independent
+PASS duplicate character preview: 
+PASS duplicate character commit: 
+PASS duplicate character saved revisions match runtime
+PASS duplicate character autosave does not duplicate write
+PASS duplicate converts to ten shards even at max rank
+PASS talent action Aegis
+PASS Aegis lowest health shield
+PASS talent action Verdant
+PASS Verdant real heal defense for two actions
+PASS talent action VoltHunt
+PASS Volt kill energy and self advance
+PASS talent action FrostNova
+PASS Frost creates an independent follow-up request
+PASS Frost multi-target follow-up
+PASS Frost follow-up retains talent source without recursion
+PASS talent action UmbralHex
+PASS Umbral successful debuff energy
+PASS talent action AstralChord
+PASS Harmony other allies energy
+PASS self speed buff affects the next action interval
+PASS mixed targets execute through the ultimate queue
+PASS damage enemies and protect allies in same skill
+PASS energy clamp
+PASS factory creates configured initial roster
+PASS factory inventory restores
+PASS factory includes starter character_exp
+PASS factory includes starter equipment_exp
+PASS factory includes starter character_ascension
+PASS factory includes starter equipment_ascension
+PASS factory includes starter food_revive
+PASS factory includes starter food_technique
+PASS factory includes starter food_heal
+PASS factory includes starter food_attack
+PASS factory includes starter shard_Aegis
+PASS factory includes starter shard_Verdant
+PASS factory includes starter shard_VoltHunt
+PASS factory includes starter shard_FrostNova
+PASS factory includes starter shard_UmbralHex
+PASS factory includes starter shard_AstralChord
+PASS factory includes starter skill_manual
+PASS new profile needs initial save
+PASS new complete profile saves
+PASS unchanged profile skips writing
+PASS complete snapshot owns deep copies
+PASS ordinary inventory mutation
+PASS failed autosave remains dirty
+PASS ordinary inventory retry saves latest state
+PASS backup coordinator rejects writes
+PASS insufficient materials has no changes
+PASS empty slot has no complete profile
+PASS native profile serialization
+PASS existing complete profile reads without migration (success=True, status=Success, backup=False, message=, version=2)
+PASS native profile replacement and backup
+PASS unrelated module file retained
+PASS roster and inventory recovered from same backup
+PASS corrupt primary is preserved on load
+PASS both corrupt files reject load
+PASS scene catalog valid
+TOTAL 334 assertions passed

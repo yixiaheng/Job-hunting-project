@@ -13,6 +13,6 @@ public class SkillConfig : ScriptableObject
     public int energyCost;
     public int energyGain;
     public TargetRule targetRule;
-    public TargetSide targetSide;
-    public List<EffectConfig> effectConfigs;
+    public TargetSide targetSide;       //目标是我方还是敌方
+    public List<EffectConfig> effectConfigs;    //技能效果
 }

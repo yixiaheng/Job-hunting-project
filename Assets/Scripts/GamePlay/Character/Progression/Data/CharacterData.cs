@@ -96,8 +96,10 @@ namespace Game.Characters
     [Serializable]
     public struct CharacterStats
     {
+        public int Level { get; internal set; }
         public int health, attack, defence, speed;
         public float damageBonus;
+        public Battle.Logic.BattleOffensiveStats OffensiveStats { get; internal set; }
         public string Explain() => $"生命 {health}    攻击 {attack}\n防御 {defence}    速度 {speed}\n伤害加成 {damageBonus:P0}";
     }
 

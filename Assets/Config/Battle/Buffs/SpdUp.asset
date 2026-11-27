@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 3}
   m_Name: SpdUp
   m_EditorClassIdentifier: Assembly-CSharp::BuffConfig
-  id: 203
+  id: 9203
   Name: 速度提升
   buffType: 0
   durationTimes: 2

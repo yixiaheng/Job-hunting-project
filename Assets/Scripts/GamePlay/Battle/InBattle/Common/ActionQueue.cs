@@ -51,14 +51,14 @@ namespace Battle.Logic
 
         public ActionQueue(IEnumerable<BattleUnit> allUnits)
         {
-            //閫愪釜Add
+            //逐个添加
             foreach(var unit in allUnits)
             {
                 Add(unit);
             }
         }
 
-        public void Add(BattleUnit unit)       //瑙掕壊/鏁屼汉鍔犲叆鍒拌鍔ㄧ殑璺戞潯涓?
+        public void Add(BattleUnit unit)       
         {
             if(unit != null)
             {
@@ -70,25 +70,33 @@ namespace Battle.Logic
                 unit.nextActionTime = CurrentTime + BaseActionValue / unit.speed;
             }
         }
-        public BattleUnit PeekNext()           //閫夊嚭褰撳墠璺戞潯鏈€蹇殑涓€浣?
+        public BattleUnit PeekNext()           
         {
-            BattleUnit best = null;
+            BattleUnit best = null; //最早行动的
             foreach(var u in units)
             {
                 if(!u.IsActive) continue;
                 if(best == null || u.nextActionTime < best.nextActionTime)
                     best = u;
-                else if(u.nextActionTime == best.nextActionTime &&        //濡傛灉鏃堕棿鎵撳钩
+                else if(u.nextActionTime == best.nextActionTime &&        
                          u.tieBreaker < best.tieBreaker)    
                     best = u;
 
             }
             return best;
         }
-        public void BeginTurn(BattleUnit u)     //鏃堕挓鍔犻€熷埌褰撳墠琛屽姩鐨勮繖涓€浣嶏紝鐒跺悗缁х画璺戞潯
+
+        //开始这个unit的回合
+        public void BeginTurn(BattleUnit u)     
         {
             CurrentTime = u.nextActionTime;
         }
+
+        /// <summary>
+        /// 拉条
+        /// </summary>
+        /// <param name="unit">对象</param>
+        /// <param name="ratio">拉条进度 XX% </param>
         public void ModifyAction(BattleUnit unit, float ratio)
         {
             if (unit == null) return;
@@ -96,12 +104,14 @@ namespace Battle.Logic
             unit.nextActionTime = CurrentTime + remaining * Mathf.Max(0f, 1f - ratio);
         }
 
-        public void EndTurn(BattleUnit u)     //璁＄畻涓嬩竴娆¤鍔ㄧ殑琛屽姩鍊?
+        //结束他的回合(重新设置他的下次行动时间)
+        public void EndTurn(BattleUnit u)     
         {
             int spd = Mathf.Max(1, u.GetStat(StatType.Speed));
             u.nextActionTime = CurrentTime + BaseActionValue / spd;
         }
 
+        //获取当前行动条的映射，用于UI
         public IReadOnlyList<BattleActionOrderEntry> GetOrderSnapshot(BattleUnit displayedActor = null)
         {
             var active = new List<BattleUnit>();

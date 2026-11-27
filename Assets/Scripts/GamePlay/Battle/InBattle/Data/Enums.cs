@@ -54,12 +54,14 @@ public enum SkillKind
 
 public enum ElementType
 {
-    Fire,
-    Ice,
-    Lightning,
-    Wind,
-    Quantum,
-    Imaginary
+    Fire = 0,
+    Ice = 1,
+    Lightning = 2,
+    Wind = 3,
+    Quantum = 4,
+    Imaginary = 5,
+    // 追加在末尾，保留已有SO和技能中序列化的元素编号。
+    Physical = 6
 }
 
 public enum PathType

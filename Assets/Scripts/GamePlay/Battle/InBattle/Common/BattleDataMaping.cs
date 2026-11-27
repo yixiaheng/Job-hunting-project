@@ -18,7 +18,7 @@ namespace Battle.Logic
                 ? new List<SkillConfig>(cfg.skills)
                 : new List<SkillConfig>();
 
-            return new BattleUnit
+            var unit = new BattleUnit
             {
                 displayName = string.IsNullOrEmpty(cfg.displayName) ? cfg.name : cfg.displayName,
                 Icon = cfg.icon,
@@ -37,6 +37,8 @@ namespace Battle.Logic
                 skills = skills,
                 talentAction = cfg.talentAction
             };
+            unit.SetOffensiveStats(cfg.OffensiveStats);
+            return unit;
         }
     }
 }

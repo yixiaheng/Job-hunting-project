@@ -20,6 +20,7 @@ namespace Battle.Presentation
         public BattleEventSequence[] events = Array.Empty<BattleEventSequence>();
         public BattlePresentationClock Clock { get; private set; } = new();
         public BattleDisplayState Display { get; private set; }
+        public BattleActionDamageDisplay ActionDamage { get; } = new();
         public bool Busy => routine != null;
         public event Action<bool> HUDVisibilityChanged;
         public event Action<bool> CommandsVisibilityChanged;
@@ -118,6 +119,7 @@ namespace Battle.Presentation
         {
             var record = resolution?.Record;
             if (record == null) yield break;
+            ActionDamage.Begin(record);
             actors.TryGetActor(record.Caster, out var casterActor);
             var definition = casterActor != null && casterActor.Presentation != null ? casterActor.Presentation.Resolve(record.Skill.id) : null;
             if (definition == null) foreach (var entry in skills ?? Array.Empty<BattleSkillSequence>())
@@ -216,6 +218,7 @@ namespace Battle.Presentation
         { if (!worldVisibility.ContainsKey(actor)) worldVisibility.Add(actor, actor.WorldPresentationVisible); actor.SetWorldPresentationVisible(visible); }
         private void EndActionSession(bool homeCaster)
         {
+            ActionDamage.End();
             if (actionSession != null) { actionSession.RestorePositions(homeCaster); actionSession.Dispose(); actionSession = null; }
             foreach (var pair in worldVisibility) if (pair.Key != null) pair.Key.SetWorldPresentationVisible(pair.Value);
             worldVisibility.Clear();
@@ -255,7 +258,7 @@ namespace Battle.Presentation
         {
             var record = actionSession.Resolution.Record;
             if (index < 0 || index >= record.Effects.Count || actionSession.Reserved.Contains(index) || !actionSession.Applied.Add(index)) return;
-            var effect = record.Effects[index]; Display.Apply(effect); EffectPresented?.Invoke(effect);
+            var effect = record.Effects[index]; Display.Apply(effect); ActionDamage.Present(index, effect); EffectPresented?.Invoke(effect);
             if (effect.Type is BattleEffectRecordType.Damage or BattleEffectRecordType.FollowUp)
             {
                 if (effect.Target != null && reacted.Add(effect.Target) && actors.TryGetActor(effect.Target, out var actor))

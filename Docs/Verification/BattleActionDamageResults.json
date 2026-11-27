@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    "HUD config and scene lifetime are correct",
+    "UIManager registry resolves new damage HUD",
+    "real UIPanel open lifecycle starts hidden",
+    "action begins without premature number",
+    "healing shield gain and zero damage remain hidden",
+    "first hit reveals action total",
+    "next hit adds health damage and shield absorption",
+    "duplicate effect index cannot double count",
+    "legacy follow-up record contributes damage",
+    "damage decoration never blocks pointer input",
+    "damage content anchored top right",
+    "action end immediately hides and resets total",
+    "late hit outside an action is ignored",
+    "shield-only hit displays damage and new action is independent",
+    "large multi-target totals do not overflow int",
+    "disabled panel unsubscribes and hides",
+    "re-enabled panel restores latest source state",
+    "context rebinding detaches previous battle source",
+    "UI close lifecycle unsubscribes without stale number"
+  ],
+  "count": 19,
+  "completedAt": "2026-11-27T17:21:22.4263815+08:00"
+}

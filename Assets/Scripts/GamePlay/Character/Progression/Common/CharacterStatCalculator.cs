@@ -38,7 +38,12 @@ namespace Game.Characters
 
         public static CharacterStats Calculate(UnitConfig config, CharacterProgress progress, InventoryService inventory, out float openingShield)
         {
+            if (config == null) throw new ArgumentNullException(nameof(config));
+            if (progress == null) throw new ArgumentNullException(nameof(progress));
+            if (progress.level < 1) throw new ArgumentOutOfRangeException(nameof(progress.level));
+            if (progress.ascension < 0) throw new ArgumentOutOfRangeException(nameof(progress.ascension));
             openingShield = 0f;
+            config.OffensiveStats.Validate();
             CharacterGrowthConfig growth = config.growth;
             float multiplier = growth == null ? 1f : 1f + growth.levelGrowth * (progress.level - 1) + growth.ascensionGrowth * progress.ascension;
             float health = config.maxHealth * multiplier;
@@ -106,11 +111,15 @@ namespace Game.Characters
 
             return new CharacterStats
             {
+                Level = progress.level,
                 health = Mathf.Max(1, Mathf.RoundToInt(health * (1 + percentages[(int)StatType.Health]) + flatHealth)),
                 attack = Mathf.Max(0, Mathf.RoundToInt(attack * (1 + percentages[(int)StatType.Attack]) + flatAttack)),
                 defence = Mathf.Max(0, Mathf.RoundToInt(defence * (1 + percentages[(int)StatType.Defence]) + flatDefence)),
                 speed = Mathf.Max(1, Mathf.RoundToInt(speed * (1 + percentages[(int)StatType.Speed]) + flatSpeed)),
-                damageBonus = Mathf.Max(0, damage)
+                damageBonus = Mathf.Max(0, damage),
+                // 使用真实养成等级和突破次数，百分比属性使用独立的加法成长规则。
+                OffensiveStats = growth == null ? config.OffensiveStats :
+                    growth.CalculateOffensiveStats(config.OffensiveStats, progress.level, progress.ascension)
             };
         }
     }

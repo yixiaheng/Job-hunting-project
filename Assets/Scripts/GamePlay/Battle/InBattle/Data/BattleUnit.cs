@@ -10,6 +10,8 @@ using UnityEngine;
 public class BattleUnit
 {
     public string displayName;
+    /// <summary>本次入场的等级；玩家由养成快照赋值，纯配置测试单位暂按1级。</summary>
+    public int Level { get; internal set; } = 1;
     public Sprite Icon { get; internal set; }
     public ElementType element;
     public PathType path;
@@ -24,6 +26,23 @@ public class BattleUnit
     public int defence;
     public int speed;
     public float damageBonus;
+    public BattleOffensiveStats OffensiveStats { get; private set; } = BattleOffensiveStats.Default;
+    public float CritRate => OffensiveStats.CritRate;
+    public float EffectiveCritRate => OffensiveStats.EffectiveCritRate;
+    public float CritDamage => OffensiveStats.CritDamage;
+    public float BreakEffect => OffensiveStats.BreakEffect;
+    public float BreakEfficiencyBonus => OffensiveStats.BreakEfficiencyBonus;
+    public float BreakEfficiencyMultiplier => OffensiveStats.BreakEfficiencyMultiplier;
+
+    public float GetElementDamageBonus(ElementType damageElement) => OffensiveStats.ElementalDamage.Get(damageElement);
+
+    /// <summary>只替换本单位的属性值，不修改UnitConfig或其他单位。</summary>
+    public void SetOffensiveStats(BattleOffensiveStats value)
+    {
+        value.Validate();
+        OffensiveStats = value;
+    }
+
     public Game.Characters.CharacterTalent talent;
     public float talentValue;
     public float talentSecondary;

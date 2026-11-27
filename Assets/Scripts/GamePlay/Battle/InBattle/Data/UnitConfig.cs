@@ -13,12 +13,11 @@ public class UnitConfig : ScriptableObject
     public Game.Characters.CharacterGrowthConfig growth;
     public ElementType element;
     public PathType path;
-    public int maxHealth;
-    public int attack;
-    public int defence;
-    public int speed;
-    public int startEnergy;
-    public int maxEnergy = 100;
+    [SerializeField, InspectorName("基础属性配置")]
+    private Game.Characters.UnitBaseStatsConfig baseStats;
+    public Game.Characters.UnitBaseStatsConfig BaseStats => baseStats != null ? baseStats
+        : throw new System.InvalidOperationException("单位缺少基础属性配置：" + id);
+
     public GameObject prefab;
     public List<SkillConfig> skills = new();
     public SkillConfig talentAction;

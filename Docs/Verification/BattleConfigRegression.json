@@ -1,0 +1,15 @@
+{
+  "battlePassed": false,
+  "battleError": "System.NullReferenceException: Object reference not set to an instance of an object\r\n  at BattleActionVerification.ActionTimelineResourceChecks () [0x00172] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleActionVerification.cs:711 \r\n  at BattleActionVerification.Run () [0x000b4] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleActionVerification.cs:63 \r\n  at Battle.Editor.ConfigImport.BattleConfigImportVerification.RunRegression () [0x0000c] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\BattleConfigImportVerification.cs:391 ",
+  "remainingSections": {
+    "ServiceChecks": "Passed",
+    "ResourceChecks": "Passed",
+    "EnemyDecisionChecks": "Passed",
+    "ResolutionChecks": "Passed",
+    "WaveChecks": "Passed",
+    "PersistenceChecks": "Passed"
+  },
+  "characterPassed": true,
+  "characterError": null,
+  "completedAt": "2026-11-27T16:34:15.7352407+08:00"
+}

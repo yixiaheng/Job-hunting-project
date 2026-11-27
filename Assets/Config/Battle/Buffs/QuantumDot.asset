@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 3}
   m_Name: QuantumDot
   m_EditorClassIdentifier: Assembly-CSharp::BuffConfig
-  id: 206
+  id: 9206
   Name: 量子侵蚀
   buffType: 0
   durationTimes: 2

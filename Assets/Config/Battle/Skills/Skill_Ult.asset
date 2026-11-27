@@ -15,12 +15,21 @@ MonoBehaviour:
   id: 3
   Name: Ult
   kind: 2
+  element: 0
+  skillPointCost: 0
+  skillPointGain: 0
   energyCost: 40
   energyGain: 5
   targetRule: 2
   targetSide: 1
   effectConfigs:
-  - effectType: 0
+  - origin: 0
+    key: legacy.3.0
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
     value: 1.5
     scaleStat: 0
     target: 2

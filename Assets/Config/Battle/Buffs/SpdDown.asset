@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a5dd51ad7529e4bbd027ca42138ab5, type: 3}
   m_Name: SpdDown
   m_EditorClassIdentifier: Assembly-CSharp::BuffConfig
-  id: 204
+  id: 9204
   Name: 速度削弱
   buffType: 0
   durationTimes: 2

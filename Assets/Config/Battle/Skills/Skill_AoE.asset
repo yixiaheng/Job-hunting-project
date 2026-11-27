@@ -15,12 +15,21 @@ MonoBehaviour:
   id: 2
   Name: AoE
   kind: 1
+  element: 0
+  skillPointCost: 0
+  skillPointGain: 0
   energyCost: 0
   energyGain: 10
   targetRule: 2
   targetSide: 1
   effectConfigs:
-  - effectType: 0
+  - origin: 0
+    key: legacy.2.0
+    growsWithSkill: 0
+    overrideTarget: 0
+    targetSide: 0
+    buffValueMultiplier: 1
+    effectType: 0
     value: 0.8
     scaleStat: 0
     target: 2

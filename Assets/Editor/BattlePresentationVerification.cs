@@ -183,7 +183,10 @@ public static class BattlePresentationVerification
             Check(result.Succeeded && f.Enemy.currentHealth < before && BattleDisplayState.Health(f.Enemy) == before,
                 "logic resolves while displayed HP remains at pre-action value");
             int completed = 0; int effects = 0; coordinator.EffectPresented += _ => effects++;
+            var damageTotals = new List<long>();
+            coordinator.ActionDamage.Changed += () => { if (coordinator.ActionDamage.Visible) damageTotals.Add(coordinator.ActionDamage.Total); };
             coordinator.Present(result.Resolution, () => completed++); coordinator.Tick(0.01f);
+            Check(!coordinator.ActionDamage.Visible, "damage HUD stays hidden before the first actual impact");
             actors.TryGetActor(f.Support, out var supportActor);
             var supportRenderer = supportActor.GetComponentInChildren<Renderer>(true);
             Check(!supportRenderer.enabled, "other-side skill hides non-acting allies for the full presentation");
@@ -193,9 +196,13 @@ public static class BattlePresentationVerification
             coordinator.Clock.Paused = false; coordinator.Tick(0.5f);
             Check(BattleDisplayState.Health(f.Enemy) < before && BattleDisplayState.Health(f.Enemy) > f.Enemy.currentHealth,
                 "first marker reveals only first damage record");
+            Check(coordinator.ActionDamage.Visible && coordinator.ActionDamage.Total == result.Resolution.Record.Effects.First(e => e.Type == BattleEffectRecordType.Damage).Amount,
+                "first impact displays only that hit, not precomputed action total");
             coordinator.Tick(2f);
             Check(BattleDisplayState.Health(f.Enemy) == f.Enemy.currentHealth && completed == 1
                 && effects == result.Resolution.Record.Effects.Count, "skipped frame dispatches every crossed effect exactly once");
+            Check(damageTotals.Count == 2 && damageTotals[1] == result.Resolution.Record.Effects.Where(e => e.Type == BattleEffectRecordType.Damage).Sum(e => (long)e.Amount)
+                && !coordinator.ActionDamage.Visible, "multi-hit action accumulates in impact order and hides at presentation completion");
             Check(supportRenderer.enabled, "other-side skill restores non-acting allies after presentation");
             Check(!coordinator.cameraDirector.HasExclusiveOwner, "completion returns camera ownership to base");
             int token = coordinator.cameraDirector.Acquire(); coordinator.cameraDirector.Release(token);
@@ -228,7 +235,10 @@ public static class BattlePresentationVerification
             cancelledActors.TryGetActor(cancelled.Support, out var cancelledSupportActor);
             var cancelledSupportRenderer = cancelledSupportActor.GetComponentInChildren<Renderer>(true);
             Check(!cancelledSupportRenderer.enabled, "cancelled other-side presentation starts with non-acting allies hidden");
+            coordinator.Tick(.5f);
+            Check(coordinator.ActionDamage.Visible, "cancellation fixture has already shown a hit");
             coordinator.Cancel();
+            Check(!coordinator.ActionDamage.Visible && coordinator.ActionDamage.Total == 0, "cancelling an active action clears damage display");
             Check(cancelledSupportRenderer.enabled, "presentation cancellation restores non-acting allies");
 
             using var support = new Fixture(includeSupport: true, allyTargetSkill: true);
@@ -240,7 +250,18 @@ public static class BattlePresentationVerification
             supportActors.TryGetActor(support.Support, out var allyTargetActor);
             Check(allyTargetActor.GetComponentInChildren<Renderer>(true).enabled,
                 "ally-target presentation keeps the full party visible");
+            for (int i = 0; i < 40; i++) coordinator.Tick(.1f);
+            Check(!coordinator.ActionDamage.Visible, "support action completes without showing a damage number");
             coordinator.Cancel();
+
+            using var skipped = new Fixture(); using var skippedActors = new Actors(skipped.Flow.Units, scene);
+            coordinator.Bind(skipped.Flow, skippedActors);
+            coordinator.skills = new[] { new BattleSkillSequence { skillId = skipped.Skill.id, casterFaction = Faction.OurSide, sequence = sample } };
+            var skippedResult = skipped.Flow.TryExecute(skipped.Action);
+            coordinator.Present(skippedResult.Resolution, () => { }); coordinator.Tick(.01f); coordinator.Tick(.5f);
+            Check(coordinator.ActionDamage.Visible, "skip fixture shows a partial total");
+            coordinator.SkipCurrent();
+            Check(!coordinator.ActionDamage.Visible && coordinator.ActionDamage.Total == 0, "skip flushes remaining effects and clears action total");
         }
         finally
         {

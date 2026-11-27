@@ -11,7 +11,7 @@ public class BattleUnitAllyUI : MonoBehaviour
 {
     [SerializeField] private Image hp_bar;
     [SerializeField] private Image delay_bar;
-    [SerializeField] private Image energy_bar;
+    [SerializeField] private Image energy_show;
     private BattleUnit Unit;
     private IBattleCommandSource commands;
     private Button ultimateButton;
@@ -31,7 +31,6 @@ public class BattleUnitAllyUI : MonoBehaviour
     {
         subscriptions.Clear();
         subscriptions.Add(GameEvents.Battle.Subscribe<HealthChangedEvent>(OnHealthChanged));
-        subscriptions.Add(GameEvents.Battle.Subscribe<EnergyChangedEvent>(OnEnergyChanged));
         BattleDisplayState.HealthChanged -= OnVisualHealthChanged;
         BattleDisplayState.HealthChanged += OnVisualHealthChanged;
         if (Unit != null)
@@ -61,14 +60,6 @@ public class BattleUnitAllyUI : MonoBehaviour
         float targetFill = changedEvent.CurrentHealth / (float)changedEvent.MaxHealth;
         UpdateLifeBar(targetFill);
         GetComponent<BattleUnitView>().Refresh();
-    }
-
-    private void OnEnergyChanged(EnergyChangedEvent changedEvent)
-    {
-        if (Unit == null || Unit.BattleId != changedEvent.BattleId
-            || Unit != changedEvent.Unit)
-            return;
-        RefreshEnergyBar(changedEvent.CurrentEnergy, changedEvent.MaxEnergy);
     }
 
     private void UpdateLifeBar(float targetFill)
@@ -118,7 +109,6 @@ public class BattleUnitAllyUI : MonoBehaviour
     {
         Unit = unit;
         SnapLifeBars(GetHealthFill());
-        RefreshEnergyBar(Unit?.currentEnergy ?? 0, Unit?.maxEnergy ?? 0);
         RefreshUltimateAvailability();
     }
 
@@ -148,14 +138,6 @@ public class BattleUnitAllyUI : MonoBehaviour
         return Unit != null && Unit.maxHealth > 0
             ? Mathf.Clamp01((float)BattleDisplayState.Health(Unit) / Unit.maxHealth)
             : 0f;
-    }
-
-    private void RefreshEnergyBar(int current, int maximum)
-    {
-        if (energy_bar != null)
-            energy_bar.fillAmount = maximum > 0
-                ? Mathf.Clamp01((float)current / maximum)
-                : 0f;
     }
 
     private void SnapLifeBars(float fill)

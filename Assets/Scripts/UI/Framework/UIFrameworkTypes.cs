@@ -26,7 +26,8 @@ namespace Game.UI
         SceneTransition = 19,
         Campaign = 20,
         HotUpdateProgress = 21,
-        BattleActionTimeline = 22
+        BattleActionTimeline = 22,
+        BattleActionDamage = 23
     }
 
     public enum UILayer
