@@ -12,12 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e7bb14081124f469a573e7119079a1, type: 3}
   m_Name: Growth_AstralChord
   m_EditorClassIdentifier: Assembly-CSharp::Game.Characters.CharacterGrowthConfig
-  levelCaps: 14000000280000003c0000005a00000064000000
-  skillCaps: 0200000003000000040000000600000007000000
-  ascensionCosts: 0200000004000000080000000c000000
+  skillCaps: 02000000030000000300000004000000040000000600000007000000
+  ascensionCosts: 02000000020000000400000004000000080000000c000000
   shardCosts: 0a00000014000000280000003c00000064000000
-  levelGrowth: 0.025
-  ascensionGrowth: 0.05
   experienceBase: 100
   experiencePerLevel: 20
   talentUnlockLevel: 60

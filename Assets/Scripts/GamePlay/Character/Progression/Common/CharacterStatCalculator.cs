@@ -9,9 +9,9 @@ namespace Game.Characters
     {
         public static string DescribeSources(UnitConfig config, CharacterProgress progress, InventoryService inventory)
         {
-            var text = new System.Text.StringBuilder("属性来源\n初始：生命 ").Append(config.maxHealth).Append(" 攻击 ").Append(config.attack).Append(" 防御 ").Append(config.defence).Append(" 速度 ").Append(config.speed);
+            var text = new System.Text.StringBuilder("属性来源\n初始：生命 ").Append(config.BaseStats.Health).Append(" 攻击 ").Append(config.BaseStats.Attack).Append(" 防御 ").Append(config.BaseStats.Defence).Append(" 速度 ").Append(config.BaseStats.Speed);
             var growth = config.growth;
-            text.Append("\n等级成长：").Append((growth.levelGrowth * (progress.level - 1)).ToString("P1")).Append("；突破成长：").Append((growth.ascensionGrowth * progress.ascension).ToString("P1"));
+            text.Append("\n等级：").Append(progress.level).Append("；突破阶段：").Append(progress.ascension).Append("；三围系数：").Append(CharacterGrowthTable.Shared.Evaluate(progress.level, progress.ascension).ToString("F3"));
             text.Append("\n角色升阶：").Append(progress.rank).Append(" 阶（百分比加成）");
             var sets = new Dictionary<RelicSetConfig, int>();
             foreach (string id in progress.equipment)
@@ -43,13 +43,13 @@ namespace Game.Characters
             if (progress.level < 1) throw new ArgumentOutOfRangeException(nameof(progress.level));
             if (progress.ascension < 0) throw new ArgumentOutOfRangeException(nameof(progress.ascension));
             openingShield = 0f;
-            config.OffensiveStats.Validate();
+            config.BaseStats.Validate();
             CharacterGrowthConfig growth = config.growth;
-            float multiplier = growth == null ? 1f : 1f + growth.levelGrowth * (progress.level - 1) + growth.ascensionGrowth * progress.ascension;
-            float health = config.maxHealth * multiplier;
-            float attack = config.attack * multiplier;
-            float defence = config.defence * multiplier;
-            float speed = config.speed;
+            float multiplier = CharacterGrowthTable.Shared.Evaluate(progress.level, progress.ascension);
+            float health = config.BaseStats.Health * multiplier;
+            float attack = config.BaseStats.Attack * multiplier;
+            float defence = config.BaseStats.Defence * multiplier;
+            float speed = config.BaseStats.Speed;
             float flatHealth = 0, flatAttack = 0, flatDefence = 0, flatSpeed = 0, damage = 0;
             var percentages = new float[4];
             var counts = new Dictionary<RelicSetConfig, int>();
@@ -65,7 +65,7 @@ namespace Game.Characters
 
             for (int index = 0; index < 7; index++)
             {
-                if (progress.equipment == null || index >= progress.equipment.Length || !inventory.TryGetEquipment(progress.equipment[index], out EquipmentInstance instance) || !inventory.TryGetConfig(instance.configId, out ItemConfig item) || !(item is EquipmentConfig equipment))
+                if (progress.equipment == null || index >= progress.equipment.Length || inventory == null || !inventory.TryGetEquipment(progress.equipment[index], out EquipmentInstance instance) || !inventory.TryGetConfig(instance.configId, out ItemConfig item) || !(item is EquipmentConfig equipment))
                     continue;
                 EquipmentStats stats = equipment.GetStats(instance.level);
                 if (equipment.equipmentKind == EquipmentKind.LightCone)
@@ -117,9 +117,8 @@ namespace Game.Characters
                 defence = Mathf.Max(0, Mathf.RoundToInt(defence * (1 + percentages[(int)StatType.Defence]) + flatDefence)),
                 speed = Mathf.Max(1, Mathf.RoundToInt(speed * (1 + percentages[(int)StatType.Speed]) + flatSpeed)),
                 damageBonus = Mathf.Max(0, damage),
-                // 使用真实养成等级和突破次数，百分比属性使用独立的加法成长规则。
-                OffensiveStats = growth == null ? config.OffensiveStats :
-                    growth.CalculateOffensiveStats(config.OffensiveStats, progress.level, progress.ascension)
+                // 双暴、元素和击破属性不参与自然成长。
+                OffensiveStats = config.BaseStats.OffensiveStats
             };
         }
     }

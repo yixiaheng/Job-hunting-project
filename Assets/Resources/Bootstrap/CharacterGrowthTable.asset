@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8622d613746cb9b468ca35e90ee3b733, type: 3}
+  m_Name: CharacterGrowthTable
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Characters.CharacterGrowthTable
+  stages:
+  - startLevel: 1
+    maxLevel: 20
+    startMultiplier: 1
+    endMultiplier: 1.95
+  - startLevel: 20
+    maxLevel: 30
+    startMultiplier: 2.35
+    endMultiplier: 2.85
+  - startLevel: 30
+    maxLevel: 40
+    startMultiplier: 3.25
+    endMultiplier: 3.75
+  - startLevel: 40
+    maxLevel: 50
+    startMultiplier: 4.15
+    endMultiplier: 4.65
+  - startLevel: 50
+    maxLevel: 60
+    startMultiplier: 5.05
+    endMultiplier: 5.55
+  - startLevel: 60
+    maxLevel: 70
+    startMultiplier: 5.95
+    endMultiplier: 6.45
+  - startLevel: 70
+    maxLevel: 80
+    startMultiplier: 6.85
+    endMultiplier: 7.35

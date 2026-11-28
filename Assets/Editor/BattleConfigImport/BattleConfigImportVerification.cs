@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -74,7 +74,7 @@ namespace Battle.Editor.ConfigImport
                     new() { key = "test.buff", effectType = EffectType.ApplyBuff, buffId = buff.id, buff = buff, stack = 1 }
                 };
                 var growth = Asset<CharacterGrowthConfig>("Growth"); growth.effectGrowth.Add(new SkillEffectGrowth { effectKey = "test.hit" });
-                var unit = Asset<UnitConfig>("Allies/Unit"); unit.id = "test-unit"; unit.displayName = "测试角色"; unit.maxHealth = 100; unit.attack = 20; unit.defence = 10; unit.speed = 100; unit.maxEnergy = 100;
+                var unit = Asset<UnitConfig>("Allies/Unit"); unit.id = "test-unit"; unit.displayName = "测试角色"; UnitBaseStatsAuthoring.Set(unit, "health", 100f); UnitBaseStatsAuthoring.Set(unit, "attack", 20f); UnitBaseStatsAuthoring.Set(unit, "defence", 10f); UnitBaseStatsAuthoring.Set(unit, "speed", 100f); UnitBaseStatsAuthoring.Set(unit, "maxEnergy", 100);
                 unit.skills = new List<SkillConfig> { skill }; unit.talentAction = skill; unit.growth = growth;
                 var go = new GameObject("test prefab");
                 try { unit.prefab = PrefabUtility.SaveAsPrefabAsset(go, root + "/test.prefab"); } finally { Object.DestroyImmediate(go); }
@@ -117,7 +117,7 @@ namespace Battle.Editor.ConfigImport
                     Apply();
                     Check(ConfigImportService.FileHash(createdBackups.Last() + "/Source.xlsx") == ConfigImportService.Hash(ConfigImportService.ReadWorkbookSnapshot(workbook)), "write and backup use validated snapshot while workbook is open");
                 }
-                Check(unit.attack == 29 && skill.effectConfigs[0].value == 1.7f, "primitive update applied");
+                Check(unit.BaseStats.Attack == 29 && skill.effectConfigs[0].value == 1.7f, "primitive update applied");
                 var runtimeFactory = new BattleUnitFactory();
                 try { var battleUnit = runtimeFactory.Create(unit, Faction.OurSide, 0, 0); Check(battleUnit.attack == 29 && battleUnit.skills[0].effectConfigs[0].value == 1.7f, "battle factory reads imported SO values"); }
                 finally { runtimeFactory.ReleaseAll(); }
@@ -131,7 +131,7 @@ namespace Battle.Editor.ConfigImport
                 var newBuff = Copy(data.Rows("Buffs")[0]); newBuff.Values["buffId"] = 991002; data.MutableRows("Buffs").Add(newBuff);
                 var newSkill = Copy(data.Rows("Skills")[0]); newSkill.Values["skillId"] = 991002; data.MutableRows("Skills").Add(newSkill);
                 var newEffect = Copy(data.Rows("SkillEffects")[1]); newEffect.Values["skillId"] = 991002; newEffect.Values["effectKey"] = "new.buff"; newEffect.Values["order"] = 0; newEffect.Values["buffId"] = 991002; data.MutableRows("SkillEffects").Add(newEffect);
-                var newAlly = Copy(data.Rows("Units")[0]); newAlly.Values["unitId"] = "test-new-ally"; data.MutableRows("Units").Add(newAlly);
+                var newAlly = Copy(data.Rows("Units")[0]); newAlly.Values["unitId"] = "test-new-ally"; newAlly.Values["growthId"] = ""; data.MutableRows("Units").Add(newAlly);
                 var newEnemy = Copy(newAlly); newEnemy.Values["unitId"] = "test-new-enemy"; newEnemy.Values["unitType"] = UnitTableKind.Enemy; data.MutableRows("Units").Add(newEnemy);
                 foreach (var r in new[] { newAlly, newEnemy })
                 { var link = Copy(data.Rows("UnitSkills").First(l => l.Get<UnitSkillRole>("role") == UnitSkillRole.Normal)); link.Values["unitId"] = r.Id; link.Values["skillId"] = 991002; data.MutableRows("UnitSkills").Add(link); }
@@ -201,7 +201,7 @@ namespace Battle.Editor.ConfigImport
                 Write(); using (var doc = SpreadsheetDocument.Open(workbook, true)) { var s = doc.WorkbookPart.Workbook.Sheets.Elements<Sheet>().First(s => s.Name == "UnitSkills"); doc.WorkbookPart.DeletePart(s.Id); s.Remove(); doc.Save(); }
                 Check(!ConfigImportService.Preview(workbook, root, adapter).IsValid, "missing required sheet is not an empty list");
                 data.Rows("SkillEffects")[0].Values["effectKey"] = "renamed.hit"; Write();
-                Check(ConfigImportService.Preview(workbook, root, adapter).Messages.Any(m => m.Kind == ImportMessageKind.Error && m.Sheet == "Growth"), "renamed effect key blocks dangling growth references");
+                Check(ConfigImportService.Preview(workbook, root, adapter).Messages.Any(m => m.Kind == ImportMessageKind.Error && m.Sheet == "SkillEffectGrowth"), "renamed effect key blocks dangling growth references");
                 data.Rows("SkillEffects")[0].Values["effectKey"] = "test.hit";
                 data.Rows("SkillEffects")[0].Values["order"] = 1; data.Rows("SkillEffects")[1].Values["order"] = 0; Write();
                 Check(ConfigImportService.Preview(workbook, root, adapter).Messages.Any(m => m.Kind == ImportMessageKind.Warning && m.Detail.Contains("BattleImpactMarker")), "effect order warns about Timeline index binding");
@@ -219,10 +219,10 @@ namespace Battle.Editor.ConfigImport
                 Write(); p = ConfigImportService.Preview(workbook, root, adapter);
                 data.Rows("Units")[0].Values["attack"] = 30; Write();
                 CheckThrows(() => ConfigImportService.Apply(p), "changed workbook invalidates preview");
-                p = ConfigImportService.Preview(workbook, root, adapter); unit.attack = 31; EditorUtility.SetDirty(unit);
+                p = ConfigImportService.Preview(workbook, root, adapter); UnitBaseStatsAuthoring.Set(unit, "attack", 31f); EditorUtility.SetDirty(unit);
                 CheckThrows(() => ConfigImportService.Apply(p), "asset mutation invalidates preview");
                 Check(!ConfigImportService.Preview(workbook, root, adapter).IsValid, "affected dirty asset blocks preview/application");
-                unit.attack = 29; EditorUtility.SetDirty(unit); AssetDatabase.SaveAssetIfDirty(unit);
+                UnitBaseStatsAuthoring.Set(unit, "attack", 29f); EditorUtility.SetDirty(unit); AssetDatabase.SaveAssetIfDirty(unit);
 
                 // Simulated write failure after existing asset write + new asset creation, then recover exact bytes/meta.
                 newBuff = Copy(data.Rows("Buffs")[0]); newBuff.Values["buffId"] = 991003; data.MutableRows("Buffs").Add(newBuff);
@@ -373,7 +373,7 @@ namespace Battle.Editor.ConfigImport
             Check(Directory.GetFiles(Folder + "/.BattleWorkbookBackups", "publish-*.xlsx").Any(f => ConfigImportService.FileHash(f) == original), "successful overwrite retains exact old workbook backup");
             Check(ConfigImportService.FileHash(test) == ConfigImportService.FileHash(destination), "safe publication writes complete validated output");
             var warningData = adapter.Export(index, new());
-            warningData.Rows("Skills").First(r => r.Get<int>("skillId") == skill.id).Values["energyCost"] = unit.maxEnergy + 1;
+            warningData.Rows("Skills").First(r => r.Get<int>("skillId") == skill.id).Values["energyCost"] = unit.BaseStats.MaxEnergy + 1;
             var buffEffect = warningData.Rows("SkillEffects").First(r => r.Get<EffectType>("effectType") == EffectType.ApplyBuff);
             buffEffect.Values["stack"] = 999;
             var warnings = new List<ImportMessage>(); adapter.Validate(warningData, index, warnings);
@@ -441,7 +441,7 @@ namespace Battle.Editor.ConfigImport
                 foreach (var enemy in index.Units.Values.Where(u => index.Kinds[u.id] == UnitTableKind.Enemy))
                 {
                     var battle = factory.Create(enemy, Faction.Enemy, 0, 0);
-                    if (battle == null || battle.attack != enemy.attack || battle.maxHealth != enemy.maxHealth) throw new InvalidOperationException("敌人配置读取失败：" + enemy.id);
+                    if (battle == null || battle.attack != Mathf.RoundToInt(enemy.BaseStats.Attack) || battle.maxHealth != Mathf.RoundToInt(enemy.BaseStats.Health)) throw new InvalidOperationException("敌人配置读取失败：" + enemy.id);
                     lines.Add($"Enemy {enemy.id}: HP={battle.maxHealth}, ATK={battle.attack}, Skills={battle.skills.Count}");
                 }
             }
@@ -468,7 +468,7 @@ namespace Battle.Editor.ConfigImport
                     foreach (var u in plan.Index.Units.Values)
                     {
                         var battle = factory.Create(u, plan.Index.Kinds[u.id] == UnitTableKind.Ally ? Faction.OurSide : Faction.Enemy, 0, 0);
-                        if (battle == null || battle.attack != u.attack || battle.skills.Count != u.skills.Count) throw new InvalidOperationException("导入后战斗配置读取失败：" + u.id);
+                        if (battle == null || battle.attack != Mathf.RoundToInt(u.BaseStats.Attack) || battle.skills.Count != u.skills.Count) throw new InvalidOperationException("导入后战斗配置读取失败：" + u.id);
                     }
                 }
                 finally { factory.ReleaseAll(); }

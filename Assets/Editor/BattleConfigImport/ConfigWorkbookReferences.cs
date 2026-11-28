@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,19 +41,30 @@ namespace Battle.Editor.ConfigImport
         {
             var names = book.Workbook.GetFirstChild<DefinedNames>();
             if (names == null) { names = new DefinedNames(); book.Workbook.AddChild(names, true); }
-            foreach (string table in new[] { "Units", "Skills", "Buffs" })
+            foreach (string table in new[] { "Units", "Skills", "Buffs", "CharacterGrowth" })
             {
                 string helper = "Ref" + table, rangeName = "Battle" + table + "Ids";
                 var values = new Dictionary<string, object[]>(StringComparer.Ordinal);
                 if (index != null)
                 {
+                    if (table == "CharacterGrowth") foreach (var p in index.Growths) values[p.Key] = new object[] { p.Key, p.Value.name, "SO", AssetDatabase.GetAssetPath(p.Value) };
                     if (table == "Units") foreach (var p in index.Units) values[p.Key] = new object[] { p.Key, p.Value.displayName, "SO", AssetDatabase.GetAssetPath(p.Value) };
                     if (table == "Skills") foreach (var p in index.Skills) values[p.Key.ToString()] = new object[] { p.Key, p.Value.Name, "SO", AssetDatabase.GetAssetPath(p.Value) };
                     if (table == "Buffs") foreach (var p in index.Buffs) values[p.Key.ToString()] = new object[] { p.Key, p.Value.Name, "SO", AssetDatabase.GetAssetPath(p.Value) };
                 }
-                string idField = table == "Units" ? "unitId" : table == "Skills" ? "skillId" : "buffId";
+                string idField = table == "Units" ? "unitId" : table == "Skills" ? "skillId" : table == "Buffs" ? "buffId" : "growthId";
                 foreach (var row in data.Rows(table))
-                    values[row.Id] = new object[] { row.Values[idField], row.Get<string>("name"), "Workbook", values.TryGetValue(row.Id, out var old) ? old[3] : "待导入创建" };
+                {
+                    values.TryGetValue(row.Id, out var old);
+                    string label = table != "CharacterGrowth" ? row.Get<string>("name") : old != null ? (string)old[1] : row.Id;
+                    if (table == "CharacterGrowth")
+                    {
+                        var owners = data.Rows("Units").Where(r => r.Values.TryGetValue("growthId", out var id) && (string)id == row.Id)
+                            .Select(r => r.Get<string>("name")).ToArray();
+                        if (owners.Length > 0) label = string.Join(" / ", owners);
+                    }
+                    values[row.Id] = new object[] { row.Values[idField], label, "Workbook", old != null ? old[3] : "待导入创建" };
+                }
                 if (table == "Buffs") values["0"] = new object[] { 0, "无Buff引用", "保留值", "" };
                 var sheet = book.Workbook.Sheets.Elements<Sheet>().FirstOrDefault(s => s.Name == helper);
                 if (sheet != null) { book.DeletePart(sheet.Id); sheet.Remove(); }
@@ -63,7 +74,7 @@ namespace Battle.Editor.ConfigImport
                 foreach (var n in names.Elements<DefinedName>().Where(n => n.Name == rangeName).ToArray()) n.Remove();
                 names.Append(new DefinedName { Name = rangeName, Text = "'" + helper + "'!$A$3:$A$" + Math.Max(3, values.Count + 2) });
             }
-            foreach (var schema in BattleTableSchema.All.Where(s => s.Name == "SkillEffects" || s.Name == "UnitSkills"))
+            foreach (var schema in BattleTableSchema.All.Where(s => s.Name == "SkillEffects" || s.Name == "UnitSkills" || s.Name == "Units" || s.Name == "CharacterGrowthStages" || s.Name == "CharacterRanks" || s.Name == "SkillEffectGrowth"))
             {
                 var sheet = book.Workbook.Sheets.Elements<Sheet>().FirstOrDefault(s => s.Name == schema.Name);
                 if (sheet == null) continue;
@@ -75,11 +86,11 @@ namespace Battle.Editor.ConfigImport
                 foreach (var cell in header?.Elements<Cell>() ?? Enumerable.Empty<Cell>())
                 {
                     string field = CellText(book, cell);
-                    string table = field == "unitId" ? "Units" : field == "skillId" ? "Skills" : field == "buffId" ? "Buffs" : null;
+                    string table = field == "unitId" ? "Units" : field == "skillId" ? "Skills" : field == "buffId" ? "Buffs" : field == "growthId" ? "CharacterGrowth" : null;
                     if (table == null) continue;
                     string col = ConfigWorkbook.Letters(cell.CellReference);
                     validations.Append(new DataValidation(new Formula1("Battle" + table + "Ids"))
-                    { Type = DataValidationValues.List, AllowBlank = false, ShowErrorMessage = false, ShowInputMessage = true,
+                    { Type = DataValidationValues.List, AllowBlank = field == "growthId" && schema.Name == "Units", ShowErrorMessage = false, ShowInputMessage = true,
                         PromptTitle = "ID引用", Prompt = "名称见Ref" + table + "；允许手填新增ID。保存后用工作台刷新引用辅助表。",
                         SequenceOfReferences = new ListValue<StringValue> { InnerText = col + "3:" + col + "1048576" } });
                 }

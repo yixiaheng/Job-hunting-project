@@ -1,0 +1,36 @@
+{
+  "completedAt": "2026-11-27T21:34:16.5494055+08:00",
+  "additionalChecks": 29,
+  "results": [
+    {
+      "name": "ServiceChecks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ResourceChecks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "EnemyDecisionChecks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ResolutionChecks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "WaveChecks",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "PersistenceChecks",
+      "passed": true,
+      "error": null
+    }
+  ]
+}

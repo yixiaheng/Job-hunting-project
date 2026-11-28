@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,18 +33,19 @@ public static class BattleOffensiveStatsVerification
         {
             Directory.CreateDirectory(temp);
             config = ScriptableObject.CreateInstance<UnitConfig>();
+            UnitBaseStatsAuthoring.Ensure(config);
             config.id = "offensive-enemy"; config.displayName = "属性验证";
-            config.maxHealth = 100; config.attack = 40; config.defence = 10; config.speed = 100;
-            Check(Near(config.OffensiveStats.CritRate, .05f) && Near(config.OffensiveStats.CritDamage, .5f), "new config uses 5% crit / 50% crit damage");
+            UnitBaseStatsAuthoring.Set(config, "health", 100f); UnitBaseStatsAuthoring.Set(config, "attack", 40f); UnitBaseStatsAuthoring.Set(config, "defence", 10f); UnitBaseStatsAuthoring.Set(config, "speed", 100f);
+            Check(Near(config.BaseStats.OffensiveStats.CritRate, .05f) && Near(config.BaseStats.OffensiveStats.CritDamage, .5f), "new config uses 5% crit / 50% crit damage");
             JsonUtility.FromJsonOverwrite("{\"id\":\"offensive-enemy\",\"attack\":40}", config);
-            Check(Near(config.OffensiveStats.CritRate, .05f), "legacy serialized data missing new field retains initializer");
+            Check(Near(config.BaseStats.OffensiveStats.CritRate, .05f), "legacy serialized data missing new field retains initializer");
             var defaults = BattleDataMaping.ToUnit(config, Faction.Enemy, 0, 0);
             Check(Near(defaults.CritRate, .05f) && Near(defaults.CritDamage, .5f) && Near(defaults.BreakEfficiencyMultiplier, 1f), "direct enemy mapping carries defaults; efficiency starts at 100%");
             Check((int)ElementType.Fire == 0 && (int)ElementType.Imaginary == 5 && (int)ElementType.Physical == 6, "existing element serialization IDs preserved");
 
             var values = new ElementDamageBonuses(.1f, .2f, .3f, .4f, .5f, .6f, .7f);
             var configured = new BattleOffensiveStats(1.2f, 1.6f, 2f, .5f, values);
-            BattleTableSchema.WriteField(config, "offensiveStats", configured);
+            BattleTableSchema.WriteField(config, "baseStats.offensiveStats", configured);
             var first = BattleDataMaping.ToUnit(config, Faction.OurSide, 0, 0);
             var second = BattleDataMaping.ToUnit(config, Faction.Enemy, 1, 1);
             Check(Near(first.CritRate, 1.2f) && Near(first.EffectiveCritRate, 1f), "raw crit overcap retained; effective chance capped at 100%");
@@ -53,7 +54,7 @@ public static class BattleOffensiveStatsVerification
             for (int i = 0; i < elements.Length; i++)
                 Check(Near(first.GetElementDamageBonus(elements[i]), (i + 1) * .1f), "independent element bonus: " + elements[i]);
             first.SetOffensiveStats(default);
-            Check(Near(first.CritRate, 0) && Near(second.CritRate, 1.2f) && Near(config.OffensiveStats.CritRate, 1.2f), "explicit zero allowed; changing runtime stats does not mutate asset or other unit");
+            Check(Near(first.CritRate, 0) && Near(second.CritRate, 1.2f) && Near(config.BaseStats.OffensiveStats.CritRate, 1.2f), "explicit zero allowed; changing runtime stats does not mutate asset or other unit");
             Check(Reject(() => new BattleOffensiveStats(float.NaN, .5f)), "reject NaN crit rate");
             Check(Reject(() => new BattleOffensiveStats(.05f, float.PositiveInfinity)), "reject infinite crit damage");
             Check(Reject(() => new BattleOffensiveStats(.05f, .5f, -1)), "reject negative base break effect");
@@ -61,16 +62,16 @@ public static class BattleOffensiveStatsVerification
             Check(Reject(() => first.GetElementDamageBonus((ElementType)999)), "unknown element never silently reads another element");
 
             growth = ScriptableObject.CreateInstance<CharacterGrowthConfig>();
-            growth.levelGrowth = .1f; config.growth = growth;
+            config.growth = growth;
             var runtime = AssetDatabase.LoadAssetAtPath<PlayerRuntimeConfig>("Assets/Resources/Bootstrap/PlayerRuntimeConfig.asset");
             var inventory = new InventoryService(runtime.items, false);
             var progress = new CharacterProgress { unitId = config.id, level = 20 };
             var stats = CharacterStatCalculator.Calculate(config, progress, inventory, out _);
-            Check(stats.attack > config.attack && Near(stats.OffensiveStats.CritRate, 1.2f) && Near(stats.OffensiveStats.BreakEffect, 2f), "level growth affects base attack without scaling percentage attributes");
+            Check(stats.attack > config.BaseStats.Attack && Near(stats.OffensiveStats.CritRate, 1.2f) && Near(stats.OffensiveStats.BreakEffect, 2f), "level growth affects base attack without scaling percentage attributes");
             Check(stats.Level == 20, "calculated stats retain actual progression level");
             var snapshot = new BattleCharacterSnapshot(config, progress, inventory);
-            progress.level = 80;
-            BattleTableSchema.WriteField(config, "offensiveStats", BattleOffensiveStats.Default);
+            progress.level = 80; progress.ascension = 6;
+            BattleTableSchema.WriteField(config, "baseStats.offensiveStats", BattleOffensiveStats.Default);
             var ally = snapshot.CreateUnit(0, 0);
             Check(ally.Level == 20, "battle level is captured at launch, not read from later mutable progress");
             Check(Near(ally.CritRate, 1.2f) && Near(ally.GetElementDamageBonus(ElementType.Imaginary), .7f), "ally battle snapshot retains values captured before later config edits");
@@ -79,20 +80,11 @@ public static class BattleOffensiveStatsVerification
             Check(new BattleCharacterSnapshot(config, progress, inventory).CreateUnit(0, 0).Level == 80,
                 "next launch captures updated progression level");
 
-            BattleTableSchema.WriteField(growth, "offensivePerLevel", new BattleOffensiveStats(.001f, .002f, .01f, 0,
-                new ElementDamageBonuses(fire: .003f, physical: .002f)));
-            BattleTableSchema.WriteField(growth, "offensivePerAscension", new BattleOffensiveStats(.02f, .05f, .1f, .05f,
-                new ElementDamageBonuses(fire: .04f)));
-            progress.level = 11; progress.ascension = 2;
+            progress.level = 80; progress.ascension = 6;
             var grown = CharacterStatCalculator.Calculate(config, progress, inventory, out _);
-            Check(grown.Level == 11 && Near(grown.OffensiveStats.CritRate, .10f), "base config + ten level increments + two ascensions determine crit rate");
-            Check(Near(grown.OffensiveStats.CritDamage, .62f) && Near(grown.OffensiveStats.BreakEffect, .3f), "crit damage and break effect use their own additive growth");
-            Check(Near(grown.OffensiveStats.BreakEfficiencyBonus, .1f) && Near(grown.OffensiveStats.ElementalDamage.Get(ElementType.Fire), .11f), "efficiency and elemental growth are independent");
-            Check(Near(grown.OffensiveStats.ElementalDamage.Get(ElementType.Physical), .02f) && Near(grown.OffensiveStats.ElementalDamage.Get(ElementType.Ice), 0), "element growth affects only configured elements");
-            var growthSnapshot = new BattleCharacterSnapshot(config, progress, inventory);
-            BattleTableSchema.WriteField(growth, "offensivePerLevel", default(BattleOffensiveStats));
-            var grownAlly = growthSnapshot.CreateUnit(0, 0);
-            Check(grownAlly.Level == 11 && Near(grownAlly.CritRate, .10f) && Near(grownAlly.BreakEffect, .3f), "launch snapshots both actual level and evaluated growth, not live growth asset");
+            Check(grown.attack == Mathf.RoundToInt(config.BaseStats.Attack * 7.35f), "level 80 follows shared multiplier");
+            Check(Near(grown.OffensiveStats.CritRate, .05f) && Near(grown.OffensiveStats.CritDamage, .5f), "crit stats do not grow with level or ascension");
+            Check(grown.speed == Mathf.RoundToInt(config.BaseStats.Speed), "speed does not grow");
             progress.level = 1; progress.ascension = 0;
             Check(Near(CharacterStatCalculator.Calculate(config, progress, inventory, out _).OffensiveStats.CritRate, .05f), "level one and no ascension keep exact config baseline");
             progress.level = 0;
@@ -105,6 +97,9 @@ public static class BattleOffensiveStatsVerification
             config.growth = null;
             ConfigImportService.EnsureAssetFolder(root + "/Enemies");
             AssetDatabase.CreateAsset(config, root + "/Enemies/Unit.asset");
+            UnitBaseStatsAuthoring.Ensure(config);
+            EditorUtility.SetDirty(config.BaseStats);
+            EditorUtility.SetDirty(config);
             AssetDatabase.SaveAssetIfDirty(config);
             var adapter = new BattleConfigTableAdapter(root + "/Generated");
             string book = temp + "/attributes.xlsx";
@@ -116,6 +111,7 @@ public static class BattleOffensiveStatsVerification
             var row = data.Rows("Units").Single();
             Check(Near(row.Get<float>("critRate"), .05f) && Near(row.Get<float>("critDamage"), .5f), "Excel exports actual serialized defaults");
             row.Values["critRate"] = .8f; row.Values["critDamage"] = 1.5f; row.Values["breakEffect"] = 2.4f;
+            row.Values["attack"] = 53.25f;
             row.Values["breakEfficiencyBonus"] = .6f;
             string[] columns = { "physicalDamageBonus", "fireDamageBonus", "iceDamageBonus", "lightningDamageBonus", "windDamageBonus", "quantumDamageBonus", "imaginaryDamageBonus" };
             for (int i = 0; i < columns.Length; i++) row.Values[columns[i]] = (i + 1) * .11f;
@@ -123,17 +119,37 @@ public static class BattleOffensiveStatsVerification
             var plan = ConfigImportService.Preview(book, root, adapter);
             Check(plan.IsValid && plan.Updates.Count == 1 && plan.Messages.Any(m => m.Detail.Contains("critRate:")), "preview locates nested attribute differences");
             string backupFolder = ConfigImportService.Apply(plan); backups.Add(backupFolder);
-            Check(Near(config.OffensiveStats.CritRate, .8f) && Near(config.OffensiveStats.CritDamage, 1.5f) && Near(config.OffensiveStats.BreakEffect, 2.4f) && Near(config.OffensiveStats.BreakEfficiencyBonus, .6f), "apply writes nested scalar attributes back into asset");
+            Check(Near(config.BaseStats.OffensiveStats.CritRate, .8f) && Near(config.BaseStats.OffensiveStats.CritDamage, 1.5f) && Near(config.BaseStats.OffensiveStats.BreakEffect, 2.4f) && Near(config.BaseStats.OffensiveStats.BreakEfficiencyBonus, .6f), "apply writes nested scalar attributes back into asset");
             for (int i = 0; i < elements.Length; i++)
-                Check(Near(config.OffensiveStats.ElementalDamage.Get(elements[i]), (i + 1) * .11f), "apply writes nested value-type element: " + elements[i]);
+                Check(Near(config.BaseStats.OffensiveStats.ElementalDamage.Get(elements[i]), (i + 1) * .11f), "apply writes nested value-type element: " + elements[i]);
             Check(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(config)) == guid, "attribute import retains original GUID");
+            Check(Near(config.BaseStats.Attack, 53.25f), "Excel preserves fractional level1 attack in independent stats SO");
             Check(ConfigImportService.Preview(book, root, adapter).Updates.Count == 0, "second import is a no-op");
+
+            // 子资源也参与未保存检测和备份恢复，不能只检查主UnitConfig。
+            row.Values["attack"] = 60.75f;
+            ConfigWorkbook.Write(book, data, adapter.Schemas);
+            var pending = ConfigImportService.Preview(book, root, adapter);
+            UnitBaseStatsAuthoring.Set(config, "attack", 54.5f);
+            Check(!ConfigImportService.Preview(book, root, adapter).IsValid, "dirty base-stats subasset blocks import");
+            UnitBaseStatsAuthoring.Set(config, "attack", 53.25f);
+            AssetDatabase.SaveAssetIfDirty(config.BaseStats);
+            string assetPath = AssetDatabase.GetAssetPath(config), bytesBefore = ConfigImportService.FileHash(assetPath);
+            pending = ConfigImportService.Preview(book, root, adapter);
+            ConfigImportService.AfterWriteForVerification = _ => throw new IOException("stats rollback verification");
+            bool failed = false;
+            try { ConfigImportService.Apply(pending); } catch (InvalidOperationException) { failed = true; }
+            finally { ConfigImportService.AfterWriteForVerification = null; }
+            config = AssetDatabase.LoadAssetAtPath<UnitConfig>(assetPath);
+            Check(failed && ConfigImportService.FileHash(assetPath) == bytesBefore && Near(config.BaseStats.Attack, 53.25f)
+                && AssetDatabase.AssetPathToGUID(assetPath) == guid, "rollback restores both owner and stats reference with same GUID and bytes");
+            row.Values["attack"] = 53.25f;
 
             row.Values["breakEffect"] = -.1f;
             ConfigWorkbook.Write(book, data, adapter.Schemas);
             var invalid = ConfigImportService.Preview(book, root, adapter);
             Check(!invalid.IsValid && invalid.Messages.Any(m => m.Kind == ImportMessageKind.Error && m.Sheet == "Units" && m.Row == 3 && m.Detail.Contains("breakEffect")), "invalid attribute accurately reported at worksheet row and field");
-            Check(Near(config.OffensiveStats.BreakEffect, 2.4f), "invalid preview performs no asset writes");
+            Check(Near(config.BaseStats.OffensiveStats.BreakEffect, 2.4f), "invalid preview performs no asset writes");
 
             // Old workbook without the 11 new columns must not reset authored stats.
             var oldSchema = adapter.Schemas.Select(s => s.Name == "Units"
@@ -148,7 +164,7 @@ public static class BattleOffensiveStatsVerification
             Check(newPlan.IsValid, "legacy workbook can still create a new enemy");
             backupFolder = ConfigImportService.Apply(newPlan); backups.Add(backupFolder);
             var created = AssetDatabase.LoadAssetAtPath<UnitConfig>(newPlan.Updates.Single().Path);
-            Check(Near(created.OffensiveStats.CritRate, .05f) && Near(created.OffensiveStats.CritDamage, .5f), "new unit from legacy workbook gets defaults rather than zero crit damage");
+            Check(Near(created.BaseStats.OffensiveStats.CritRate, .05f) && Near(created.BaseStats.OffensiveStats.CritDamage, .5f), "new unit from legacy workbook gets defaults rather than zero crit damage");
 
             var index = new ConfigAssetIndex(root, new List<ImportMessage>());
             var oldData = adapter.Parse(legacy, new List<ImportMessage>());
@@ -161,6 +177,7 @@ public static class BattleOffensiveStatsVerification
         catch (Exception e) { error = e.ToString(); throw; }
         finally
         {
+            ConfigImportService.AfterWriteForVerification = null;
             if (AssetDatabase.IsValidFolder(root)) AssetDatabase.DeleteAsset(root);
             if (config != null && !AssetDatabase.Contains(config)) Object.DestroyImmediate(config);
             if (growth != null) Object.DestroyImmediate(growth);

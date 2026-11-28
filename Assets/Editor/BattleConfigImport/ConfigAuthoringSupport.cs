@@ -90,8 +90,14 @@ namespace Battle.Editor.ConfigImport
                     var keys = s == null ? (existing.effectConfigs ?? new()).Where(e => e != null && e.growsWithSkill).Select(e => e.key) :
                         data.Rows("SkillEffects").Where(e => e.Get<int>("skillId") == id && e.Get<bool>("growsWithSkill")).Select(e => e.Get<string>("effectKey"));
                     foreach (string key in keys)
-                        if (owner?.growth == null || !(owner.growth.effectGrowth ?? new()).Any(g => g != null && g.effectKey == key))
-                            W(link, "skillId", $"技能{id}效果{key}声明成长，但单位{unit.Id}尚无对应成长条目；需在Unity配置，否则不产生该条目的成长加成。");
+                    {
+                        string growthId = GrowthConfigTables.Reference(unit, index);
+                        bool configured = data.Rows("CharacterGrowth").Any(r => r.Id == growthId);
+                        index.Growths.TryGetValue(growthId, out var growth);
+                        bool found = configured ? data.Rows("SkillEffectGrowth").Any(r => r.Id == growthId && r.Get<string>("effectKey") == key)
+                            : (growth?.effectGrowth ?? new()).Any(g => g != null && g.effectKey == key);
+                        if (!found) W(link, "skillId", $"技能{id}效果{key}声明成长，但单位{unit.Id}尚无对应成长条目；请配置SkillEffectGrowth，否则不产生该条目的成长加成。");
+                    }
                 }
             }
         }
@@ -99,6 +105,8 @@ namespace Battle.Editor.ConfigImport
         internal static Object Resolve(ConfigAssetIndex index, string sheet, string id)
         {
             if (index == null) return null;
+            if (sheet == "GrowthStages") return GrowthConfigTables.Shared;
+            if (GrowthConfigTables.IsSheet(sheet)) return index.Growths.TryGetValue(id, out var growth) ? growth : null;
             if (sheet == "Units" || sheet == "UnitSkills" || sheet == "Growth") return index.Units.TryGetValue(id, out var u) ? u : null;
             if (!int.TryParse(id, out int number)) return null;
             if (sheet == "Skills" || sheet == "SkillEffects") return index.Skills.TryGetValue(number, out var s) ? s : null;

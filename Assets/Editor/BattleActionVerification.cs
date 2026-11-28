@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -752,10 +752,10 @@ public static class BattleActionVerification
         var prefab = new GameObject("BattleActorRegistryPrefab");
         var anchor = new GameObject("BattleActorRegistryAnchor");
         config.displayName = "Service Unit";
-        config.maxHealth = 100;
-        config.attack = 20;
-        config.defence = 10;
-        config.speed = 100;
+        UnitBaseStatsAuthoring.Set(config, "health", 100f);
+        UnitBaseStatsAuthoring.Set(config, "attack", 20f);
+        UnitBaseStatsAuthoring.Set(config, "defence", 10f);
+        UnitBaseStatsAuthoring.Set(config, "speed", 100f);
         config.prefab = prefab;
         var factory = new BattleUnitFactory();
         var registry = new BattleActorRegistry();
@@ -789,6 +789,7 @@ public static class BattleActionVerification
             factory.ReleaseAll();
             Object.DestroyImmediate(anchor);
             Object.DestroyImmediate(prefab);
+            Object.DestroyImmediate(config.BaseStats);
             Object.DestroyImmediate(config);
         }
     }

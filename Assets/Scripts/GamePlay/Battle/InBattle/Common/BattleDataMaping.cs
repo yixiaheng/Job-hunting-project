@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
@@ -14,6 +14,8 @@ namespace Battle.Logic
             if (cfg == null)
                 return null;
 
+            cfg.BaseStats.Validate();
+            var stats = cfg.BaseStats;
             var skills = cfg.skills != null
                 ? new List<SkillConfig>(cfg.skills)
                 : new List<SkillConfig>();
@@ -27,17 +29,17 @@ namespace Battle.Logic
                 faction = faction,
                 pos = pos,
                 tieBreaker = tieBreaker,
-                maxHealth = cfg.maxHealth,
-                currentHealth = cfg.maxHealth,
-                attack = cfg.attack,
-                defence = cfg.defence,
-                speed = cfg.speed,
-                currentEnergy = cfg.startEnergy,
-                maxEnergy = Mathf.Max(1, cfg.maxEnergy),
+                maxHealth = Mathf.RoundToInt(stats.Health),
+                currentHealth = Mathf.RoundToInt(stats.Health),
+                attack = Mathf.RoundToInt(stats.Attack),
+                defence = Mathf.RoundToInt(stats.Defence),
+                speed = Mathf.RoundToInt(stats.Speed),
+                currentEnergy = stats.StartEnergy,
+                maxEnergy = Mathf.Max(1, stats.MaxEnergy),
                 skills = skills,
                 talentAction = cfg.talentAction
             };
-            unit.SetOffensiveStats(cfg.OffensiveStats);
+            unit.SetOffensiveStats(stats.OffensiveStats);
             return unit;
         }
     }

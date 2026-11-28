@@ -1,0 +1,35 @@
+{
+  "completedAt": "2026-11-27T22:11:29.8102643+08:00",
+  "results": [
+    {
+      "name": "GrowthExcel",
+      "passed": false,
+      "error": "System.NullReferenceException: Object reference not set to an instance of an object\r\n  at Battle.Editor.ConfigImport.GrowthConfigTables.Validate (Battle.Editor.ConfigImport.ConfigTableData data, Battle.Editor.ConfigImport.ConfigAssetIndex index, System.Collections.Generic.List`1[T] messages) [0x0076d] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\GrowthConfigTables.cs:163 \r\n  at Battle.Editor.ConfigImport.BattleConfigTableAdapter.Validate (Battle.Editor.ConfigImport.ConfigTableData data, Battle.Editor.ConfigImport.ConfigAssetIndex index, System.Collections.Generic.List`1[T] messages) [0x00643] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\BattleConfigTableAdapter.cs:213 \r\n  at Battle.Editor.ConfigImport.BattleConfigTableAdapter.Export (Battle.Editor.ConfigImport.ConfigAssetIndex index, System.Collections.Generic.List`1[T] messages) [0x0063c] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\BattleConfigTableAdapter.cs:154 \r\n  at Battle.Editor.ConfigImport.ConfigImportService.Export (System.String path, System.String scope, System.Boolean empty, Battle.Editor.ConfigImport.IConfigTableAdapter adapter) [0x00025] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\ConfigImportService.cs:102 \r\n  at Battle.Editor.ConfigImport.GrowthConfigImportVerification.Run () [0x011be] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\GrowthConfigImportVerification.cs:146 \r\n  at PipelineEvaluation.PipelineEval_9575e439.<Execute>g__Run|0_0 (System.String name, System.Action action, PipelineEvaluation.PipelineEval_9575e439+<>c__DisplayClass0_0& ) [0x00002] in <53470fee8e2b4af1b32963054398cb67>:0 "
+    },
+    {
+      "name": "SharedGrowth",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BattleOffensiveStats",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BattleAction",
+      "passed": false,
+      "error": "System.NullReferenceException: Object reference not set to an instance of an object\r\n  at BattleActionVerification.ActionTimelineResourceChecks () [0x00172] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleActionVerification.cs:711 \r\n  at BattleActionVerification.Run () [0x000b4] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleActionVerification.cs:63 \r\n  at PipelineEvaluation.PipelineEval_9575e439.<Execute>g__Run|0_0 (System.String name, System.Action action, PipelineEvaluation.PipelineEval_9575e439+<>c__DisplayClass0_0& ) [0x00002] in <53470fee8e2b4af1b32963054398cb67>:0 "
+    },
+    {
+      "name": "CharacterProgression",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BattleConfigImport",
+      "passed": false,
+      "error": "System.NullReferenceException: Object reference not set to an instance of an object\r\n  at Battle.Editor.ConfigImport.GrowthConfigTables.Validate (Battle.Editor.ConfigImport.ConfigTableData data, Battle.Editor.ConfigImport.ConfigAssetIndex index, System.Collections.Generic.List`1[T] messages) [0x0076d] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\GrowthConfigTables.cs:163 \r\n  at Battle.Editor.ConfigImport.BattleConfigTableAdapter.Validate (Battle.Editor.ConfigImport.ConfigTableData data, Battle.Editor.ConfigImport.ConfigAssetIndex index, System.Collections.Generic.List`1[T] messages) [0x00643] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\BattleConfigTableAdapter.cs:213 \r\n  at Battle.Editor.ConfigImport.BattleConfigTableAdapter.Export (Battle.Editor.ConfigImport.ConfigAssetIndex index, System.Collections.Generic.List`1[T] messages) [0x0063c] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\BattleConfigTableAdapter.cs:154 \r\n  at Battle.Editor.ConfigImport.ConfigImportService.Export (System.String path, System.String scope, System.Boolean empty, Battle.Editor.ConfigImport.IConfigTableAdapter adapter) [0x00025] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\ConfigImportService.cs:102 \r\n  at Battle.Editor.ConfigImport.BattleConfigImportVerification.Run () [0x01ff6] in E:\\unity\\Job hunting project\\Assets\\Editor\\BattleConfigImport\\BattleConfigImportVerification.cs:273 \r\n  at PipelineEvaluation.PipelineEval_9575e439.<Execute>g__Run|0_0 (System.String name, System.Action action, PipelineEvaluation.PipelineEval_9575e439+<>c__DisplayClass0_0& ) [0x00002] in <53470fee8e2b4af1b32963054398cb67>:0 "
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -109,7 +109,7 @@ public static class CharacterProgressionVerification
         Release(levelledUnit);
         Check(preview.WastedExperience >= 0 && preview.Costs[0].quantity < 100000, "automatically reduce excess books");
         Check(!service.TryCommit(preview, out _), "stale preview rejected");
-        for (int stage = 0; stage < 5; stage++)
+        for (int stage = 0; stage < CharacterGrowthTable.Shared.StageCount; stage++)
         {
             int cap = first.growth.skillCaps[stage];
             foreach (SkillKind kind in Enum.GetValues(typeof(SkillKind)))
@@ -126,20 +126,20 @@ public static class CharacterProgressionVerification
                 Check(!service.Preview(requestCap).Success, "skill stage cap " + stage + " " + kind);
             }
 
-            if (stage == 4)
+            if (stage == CharacterGrowthTable.Shared.StageCount - 1)
                 break;
             Commit(Request(CharacterOperation.Ascend), "character ascension " + stage);
             Commit(level, "level next cap " + stage);
             Check(service.GetCharacter(id).level == first.growth.levelCaps[stage + 1], "level cap " + first.growth.levelCaps[stage + 1]);
         }
 
-        Check(!service.Preview(level).Success && service.GetCharacter(id).level == 100, "max 100 blocks leveling");
+        Check(!service.Preview(level).Success && service.GetCharacter(id).level == 80, "max 80 blocks leveling");
         for (int i = 0; i < 5; i++)
             Commit(Request(CharacterOperation.Rank), "rank " + (i + 1));
         Check(!service.Preview(Request(CharacterOperation.Rank)).Success, "rank cap 5");
         var fresh = service.GetCharacter(id);
         fresh.level = 59;
-        fresh.ascension = 2;
+        fresh.ascension = 4;
         var locked = new BattleCharacterSnapshot(first, fresh, inventory).CreateUnit(0, 0);
         fresh.level = 60;
         var unlocked = new BattleCharacterSnapshot(first, fresh, inventory).CreateUnit(0, 0);
@@ -417,7 +417,7 @@ public static class CharacterProgressionVerification
             Check(store.Load().Status == TapTap21.SaveSystem.dyh.SaveStatus.NotFound, "empty slot has no complete profile");
             Check(store.TrySave(imported, out _), "native profile serialization");
             var loaded = store.Load();
-            Check(loaded.Success && !loaded.UsedBackup && loaded.Data.formatVersion == 2
+            Check(loaded.Success && !loaded.UsedBackup && loaded.Data.formatVersion == 3
                 && loaded.Data.inventory.stacks[0].quantity == 2,
                 $"existing complete profile reads without migration (success={loaded.Success}, status={loaded.Status}, backup={loaded.UsedBackup}, message={loaded.Message}, version={loaded.Data?.formatVersion})");
             string directory = Path.Combine(root, "Saves", "slot_character_test");

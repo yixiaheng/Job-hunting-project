@@ -1,6 +1,6 @@
 # 战斗属性扩展：第一步，配置与运行时数据
 
-本轮完成时间：2026-11-27。
+更新：2026-11-27。基础属性已拆到独立SO，成长采用全局突破阶段表；完整配置说明见 [角色共享成长架构](CharacterSharedGrowthGuide.md)。
 
 本轮目标是先让伤害相关属性能配置、能导入、能经过养成与入场快照正确传到战斗单位。**新增属性尚未接入 AttackService 的伤害公式；修改暴击、元素增伤或击破特攻，目前不会改变战斗伤害数字。**
 
@@ -65,7 +65,7 @@ imaginaryDamageBonus
 
 已导出一份当前9个单位的完整工作簿：
 
-`ConfigTables/BattleConfig.WithOffensiveStats.xlsx`
+`ConfigTables/战斗配置.xlsx`
 
 它带有全部原有业务表及新增属性列。导入前仍需要“校验与预览”，再“应用导入”。原 `BattleConfig.xlsx` 保留，避免覆盖用户可能正在编辑的工作簿。
 
@@ -83,38 +83,25 @@ imaginaryDamageBonus
 ## 3. 数据如何流动
 
 ```text
-UnitConfig
-  └─ OffensiveStats：基础属性值
-       ├─ BattleDataMaping → BattleUnit（敌方、直接创建的单位）
+UnitConfig（身份、技能、资源引用）
+  └─ BaseStats → UnitBaseStatsConfig（独立SO，保存为该单位的子资源）
+       ├─ BattleDataMaping → BattleUnit（敌方直接读取基础值）
        └─ CharacterStatCalculator
-            + CharacterProgress.level / ascension（真实存档进度）
-            + UnitConfig.growth（成长规则）
-            → CharacterStats.Level / OffensiveStats
-            → BattleCharacterSnapshot（保存等级及计算后的值快照）
-            → BattleUnit.Level / OffensiveStats（我方养成入场）
+            + CharacterProgress.level / ascension（真实JSON存档进度）
+            + CharacterGrowthTable.Shared（三围统一成长系数）
+            + 光锥白值、百分比与固定词条
+            → CharacterStats → BattleCharacterSnapshot → BattleUnit
 ```
 
-新增 `Battle.Logic.BattleOffensiveStats` 与 `ElementDamageBonuses` 两个可序列化值类型。SO、快照和每个战斗单位分别拥有数值副本；修改其中一个不会通过共享对象引用污染其他实例。
+三围按1级基础值 × 共用系数计算，阶段内线性插值；突破的提升已经包含在阶段端点内。80级、突破阶段6时系数为7.35。基础数值保留小数，最终运行时整数面板才取整。
 
-`UnitConfig` 的序列化字段是私有的，外部通过 `OffensiveStats` 只读属性读取。`BattleUnit` 使用 `SetOffensiveStats(...)` 明确替换本单位的运行时属性，并验证输入。不存在新增的公共可变字段。
+暴击率、暴击伤害、元素伤害、击破特攻、击破效率不随等级或突破自然增长。旧的每级增加/每次突破增加字段已移除，后续由装备、行迹、Buff等明确来源增加。
 
-当前养成对生命、攻击、防御的等级倍率不会自动乘到暴击率和其他百分比上。新属性通过 `UnitConfig.growth` 引用的 `CharacterGrowthConfig`，结合真实等级和突破阶段计算：
+`UnitConfig.BaseStats.OffensiveStats` 是静态基础值；`BattleUnit.SetOffensiveStats(...)` 只改运行时值副本。`CharacterGrowthConfig` 继续负责经验消耗、技能成长、升阶和旧天赋规则，不再决定基础属性成长曲线。
 
-```text
-新属性 = UnitConfig中的基础值
-       + 每级增加 × (CharacterProgress.level - 1)
-       + 每次突破增加 × CharacterProgress.ascension
-```
+正式入场通过 `PlayerRuntime.Characters.GetCharacter(unitId)` 取得真实存档进度，再建立快照。Play Mode中养成未就绪时拒绝正式入场；Edit Mode工具可以直接创建基础测试单位。敌方遭遇等级和敌方成长曲线仍需另行设计。
 
-在对应 Growth 资源的 Inspector 中，找到 **伤害属性成长 → 每级增加 / 每次突破增加**。两组包含同样的11个属性，各自默认0。这里填写的是每次增加的百分点，例如0.001代表增加0.1个百分点。零成长不是等级未读取，而是该项明确不随等级自然增长。
-
-示例：基础暴击率0.05，每级增加0.001，每次突破增加0.02；实际11级、已突破2次时，暴击率为 `0.05 + 10×0.001 + 2×0.02 = 0.10`。这是可配置的本项目成长规则示例，不是《星穹铁道》角色通用的自然暴击成长规则。
-
-真实等级的来源为 `PlayerRuntime.Characters.GetCharacter(unitId)`，取的是存档养成服务提供的进度副本。正式入场通过 `BattleLaunchData → BattleCharacterSnapshot` 使用它，而非把当前等级存回 UnitConfig。`BattleUnit.Level` 保存入场时的等级，后续防御与击破等级系数可以读取它；本轮没有加入具体等级系数公式。
-
-正式 Play Mode 下，玩家养成入口不存在或尚未就绪时拒绝开始战斗，避免悄悄按裸配置创建角色。Edit Mode 的独立工具仍可按基础配置创建测试单位；敌人直接配置路径暂按1级，敌方遭遇等级与等级曲线尚需单独设计。
-
-入场快照一旦建立，随后修改角色进度或成长配置不会改变该快照内的等级和新属性；重新创建入场快照会读取新的进度。新属性的装备、遗器、行迹贡献仍待后续扩展。成长配置仍在Unity中编辑，Excel当前仅管理基础属性，不包含成长表。
+本次仍未将新属性接入装备/Buff加成或伤害结算。
 
 ## 4. 为什么不直接加入现有 GetStat
 
@@ -143,7 +130,7 @@ Quantum=4, Imaginary=5, Physical=6
 
 - 新属性的 Inspector 配置和只读运行时接口。
 - 直接创建、养成计算、我方入场快照的数据传递。
-- 真实角色等级进入CharacterStats与BattleUnit，新属性按独立的等级和突破规则计算。
+- 真实角色等级进入CharacterStats与BattleUnit；三围按共享突破表计算，双暴等属性保持固定。
 - 七种元素的独立存储及物理元素编号兼容。
 - Excel 导出、校验、差异、原位导入、旧表兼容和批量模板。
 - 默认值、显式0、非有限数值、快照隔离与GUID保护的验证。
@@ -158,29 +145,12 @@ Quantum=4, Imaginary=5, Physical=6
 
 **推荐下一步只做普通直伤链路：**明确伤害元素与伤害类型，将适用元素增伤和暴击接入单笔伤害计算，并记录是否暴击、采用的增伤与计算结果。击破还缺等级系数、目标韧性、弱点和结算时点等输入，不应只乘上 `1 + BreakEffect` 就宣称实现击破。
 
-## 7. 本次实际验证结果
+## 7. 验证
 
-| 验证 | 结果 |
-| --- | --- |
-| Unity 脚本编译 | 通过，无编译错误 |
-| `BattleOffensiveStatsVerification` | 53项通过（含真实等级、独立成长、快照隔离） |
-| `CharacterProgressionVerification` | 337项通过（含升级提交后读取真实进度并建立战斗快照） |
-| `BattleConfigImportVerification` | 99项通过 |
-| 现有9个单位默认属性读取 | 全部取得5%暴击率、50%暴击伤害 |
-| 新工作簿导出后原样预览 | 有效，0项更新 |
-| 原 `BattleConfig.xlsx` 兼容预览 | 有效，0项更新；缺新列给出警告 |
-| 完整 `BattleActionVerification` | 154项通过后，被既有能量UI字段检查中断，不能报告全部通过 |
-| 被中断后的战斗逻辑检查补跑 | 服务、资源、敌方决策、结算、波次、持久化6组共29项通过 |
+最新结果见 [角色共享成长架构](CharacterSharedGrowthGuide.md) 和 `Docs/Verification/SharedGrowthRegression.json`。
 
-完整战斗验证中的既有问题：`BattleActionVerification.ActionTimelineResourceChecks` 查找 `energy_bar`，当前 `BattleUnitAllyUI` 已使用 `energy_show`；旧验证读取不存在的序列化字段时产生空引用。本次改动前的报告已记录同一错误。本轮没有为通过验证而修改用户的能量UI。
+专项菜单：`Tools > Battle > Verify Offensive Attributes`、`Tools > Characters > Verify Shared Growth`。
 
-专项验证菜单：`Tools > Battle > Verify Offensive Attributes`。
+完整战斗验证仍有既有阻断：`BattleActionVerification.ActionTimelineResourceChecks` 查找 `energy_bar`，当前UI使用 `energy_show`。未为通过旧验证修改用户UI；其余战斗逻辑检查单独补跑。验证在编辑器进行，不代表完整Play Mode演出验证。
 
-结果文件：
-
-- `Docs/Verification/BattleOffensiveStatsResults.json`
-- `Docs/Verification/BattleOffensiveStatsRegression.json`
-- `Docs/Verification/BattleOffensiveStatsCoreRegression.json`
-- `Docs/Verification/BattleOffensiveStatsProjectCheck.json`
-
-本次验证是在编辑器中使用独立临时资源进行，未声称已经进行完整的 Play Mode 伤害与视觉验证；新属性还没有接入实际伤害公式。
+共享成长与角色养成现也可通过Excel配置，详见 [角色成长Excel配置说明](CharacterGrowthExcelGuide.md)。

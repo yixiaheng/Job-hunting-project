@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -90,8 +90,8 @@ namespace Battle.Editor.ConfigImport
                 unit.Values["unitId"] = unitId; unit.Values["name"] = name; unit.Values["unitType"] = request.Kind;
                 if (request.Recipe == ConfigRecipe.NewUnit)
                 {
-                    unit.Values["maxHealth"] = 1000; unit.Values["attack"] = 100; unit.Values["defence"] = 100;
-                    unit.Values["speed"] = 100; unit.Values["maxEnergy"] = 100;
+                    unit.Values["maxHealth"] = 1000f; unit.Values["attack"] = 100f; unit.Values["defence"] = 100f;
+                    unit.Values["speed"] = 100f; unit.Values["maxEnergy"] = 100;
                     var relation = Defaults("UnitSkills"); relation.Values["unitId"] = unitId; relation.Values["skillId"] = TemplateSkill(name + "普攻", ConfigRecipe.SingleDamage); result.Add(relation);
                 }
                 else
@@ -106,6 +106,29 @@ namespace Battle.Editor.ConfigImport
                             link.Values["skillId"] = newId;
                         }
                         result.Add(link);
+                    }
+                    string sourceGrowth = unit.Get<string>("growthId");
+                    if (request.CloneSkills && sourceGrowth.Length > 0)
+                    {
+                        string newGrowth = "growth." + unitId;
+                        if (index.Growths.ContainsKey(newGrowth) || result.Rows("CharacterGrowth").Any(r => r.Id == newGrowth))
+                            throw new InvalidOperationException("复制养成ID已占用：" + newGrowth);
+                        var growthParent = Copy(Find("CharacterGrowth", sourceGrowth)); growthParent.Values["growthId"] = newGrowth; result.Add(growthParent);
+                        foreach (string sheet in new[] { "CharacterGrowthStages", "CharacterRanks" })
+                            foreach (var original in Children(sheet, "CharacterGrowth", sourceGrowth))
+                            { var child = Copy(original); child.Values["growthId"] = newGrowth; result.Add(child); }
+                        int effectOrder = 0;
+                        foreach (var original in Children("SkillEffectGrowth", "CharacterGrowth", sourceGrowth).OrderBy(r => r.Get<int>("order")))
+                        {
+                            foreach (var mapping in cloned)
+                                foreach (var effect in Children("SkillEffects", "Skills", mapping.Key.ToString()).Where(r => r.Get<string>("effectKey") == original.Get<string>("effectKey")))
+                                {
+                                    var child = Copy(original); child.Values["growthId"] = newGrowth;
+                                    child.Values["effectKey"] = "skill." + mapping.Value + ".effect." + effect.Get<int>("order");
+                                    child.Values["order"] = effectOrder++; result.Add(child);
+                                }
+                        }
+                        unit.Values["growthId"] = newGrowth;
                     }
                 }
                 result.Add(unit);
@@ -161,7 +184,7 @@ namespace Battle.Editor.ConfigImport
         }
         private void OnGUI()
         {
-            EditorGUILayout.HelpBox("生成包含源业务数据与新增行的独立工作簿；原文件不变。额外计算表不复制。模板只提供战斗规则，不制作移动/动画。模型、头像、成长和演出须在Unity单独绑定。", MessageType.Info);
+            EditorGUILayout.HelpBox("生成包含源业务数据与新增行的独立工作簿；原文件不变。额外计算表不复制。模板只提供战斗规则，不制作移动/动画。模型、头像和演出在Unity绑定；成长通过growthId配置。", MessageType.Info);
             EditorGUI.BeginChangeCheck();
             sourcePath = EditorGUILayout.TextField("源工作簿（空=当前SO）", sourcePath);
             scope = EditorGUILayout.TextField("索引范围", scope);
@@ -198,7 +221,7 @@ namespace Battle.Editor.ConfigImport
                 });
                 using (new EditorGUI.DisabledScope(generated == null)) if (GUILayout.Button("另存为工作簿（之后在工作台预览导入）"))
                 {
-                    outputPath = EditorUtility.SaveFilePanel("保存批量配置", Path.GetFullPath("ConfigTables"), "BattleConfig_Batch", "xlsx");
+                    outputPath = EditorUtility.SaveFilePanel("保存批量配置", Path.GetFullPath("ConfigTables"), "战斗配置_批量生成", "xlsx");
                     if (!string.IsNullOrEmpty(outputPath)) Run(() =>
                     {
                         if (!string.IsNullOrWhiteSpace(sourcePath) && Path.GetFullPath(outputPath).Equals(Path.GetFullPath(sourcePath), StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("批量生成请使用新文件名，不覆盖来源工作簿。");

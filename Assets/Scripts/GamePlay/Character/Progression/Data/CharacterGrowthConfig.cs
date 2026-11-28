@@ -5,29 +5,13 @@ namespace Game.Characters
     [CreateAssetMenu(menuName = "Characters/Growth", fileName = "CharacterGrowth")]
     public sealed class CharacterGrowthConfig : ScriptableObject
     {
-        public int[] levelCaps =
-        {
-            20,
-            40,
-            60,
-            90,
-            100
-        };
-        public int[] skillCaps =
-        {
-            2,
-            3,
-            4,
-            6,
-            7
-        };
-        public int[] ascensionCosts =
-        {
-            2,
-            4,
-            8,
-            12
-        };
+        [SerializeField, InspectorName("养成配置ID"), Tooltip("Excel稳定关联标识；旧资源未填写时使用资源GUID。修改ID不是资源重命名。")]
+        private string configId;
+        public string ConfigId => configId;
+        // 等级上限来自全局成长表，角色不能单独覆盖。
+        public int[] levelCaps => CharacterGrowthTable.Shared.GetLevelCaps();
+        public int[] skillCaps = { 2, 3, 3, 4, 4, 6, 7 };
+        public int[] ascensionCosts = { 2, 2, 4, 4, 8, 12 };
         public int[] shardCosts =
         {
             10,
@@ -36,25 +20,6 @@ namespace Game.Characters
             60,
             100
         };
-        public float levelGrowth = 0.025f;
-        public float ascensionGrowth = 0.05f;
-        [Header("伤害属性成长（按百分点累加，不使用生命/攻防的成长倍率）")]
-        [SerializeField, InspectorName("每级增加"), Tooltip("从2级起每级增加；0.01代表每级增加1个百分点。未配置为0，不成长。")]
-        private Battle.Logic.BattleOffensiveStats offensivePerLevel;
-        [SerializeField, InspectorName("每次突破增加"), Tooltip("按已完成突破次数累加；0.05代表每次增加5个百分点。")]
-        private Battle.Logic.BattleOffensiveStats offensivePerAscension;
-        public Battle.Logic.BattleOffensiveStats OffensivePerLevel => offensivePerLevel;
-        public Battle.Logic.BattleOffensiveStats OffensivePerAscension => offensivePerAscension;
-
-        public Battle.Logic.BattleOffensiveStats CalculateOffensiveStats(
-            Battle.Logic.BattleOffensiveStats baseStats, int level, int ascension)
-        {
-            if (level < 1) throw new System.ArgumentOutOfRangeException(nameof(level));
-            if (ascension < 0) throw new System.ArgumentOutOfRangeException(nameof(ascension));
-            return baseStats.AddGrowth(offensivePerLevel, level - 1)
-                .AddGrowth(offensivePerAscension, ascension);
-        }
-
         public int experienceBase = 100;
         public int experiencePerLevel = 20;
         public int talentUnlockLevel = 60;

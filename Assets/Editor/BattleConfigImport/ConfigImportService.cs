@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace Battle.Editor.ConfigImport
 
     public static class ConfigImportService
     {
-        public const string DefaultWorkbook = "ConfigTables/BattleConfig.xlsx";
+        public const string DefaultWorkbook = "ConfigTables/战斗配置.xlsx";
         public const string BackupRoot = "ConfigImportBackups";
         public const string LastReport = "ConfigImportBackups/LatestReport.txt";
         internal static string ExportScope = "Assets/Config";
@@ -85,7 +85,7 @@ namespace Battle.Editor.ConfigImport
                     messages.Add(new(ImportMessageKind.Warning, "Meta", 0, "assetBaseline", "", "SO与导出时的基线不同；请逐项审阅差异，Excel管理字段将覆盖当前值。"));
                 adapter.Validate(data, index, messages);
                 if (!messages.Any(m => m.Kind == ImportMessageKind.Error)) plan.Updates = adapter.BuildUpdates(data, index, messages);
-                foreach (var update in plan.Updates.Where(u => u.Existing != null && EditorUtility.IsDirty(u.Existing)))
+                foreach (var update in plan.Updates.Where(u => u.Existing != null && UnitBaseStatsAuthoring.HasDirtyObjects(u.Existing)))
                     messages.Add(new(ImportMessageKind.Error, "Asset", 0, "", update.Path, "受影响资产有未保存编辑；请先保存或撤销，再重新预览。"));
             }
             catch (Exception e) { messages.Add(new(ImportMessageKind.Error, "Workbook", 0, "", path, e.Message)); }
@@ -141,7 +141,7 @@ namespace Battle.Editor.ConfigImport
                 throw new InvalidOperationException("配置或依赖资产已变化；请重新预览。");
             foreach (var u in plan.Updates)
             {
-                if (u.Existing != null && EditorUtility.IsDirty(u.Existing)) throw new InvalidOperationException("存在未保存编辑：" + u.Path);
+                if (u.Existing != null && UnitBaseStatsAuthoring.HasDirtyObjects(u.Existing)) throw new InvalidOperationException("存在未保存编辑：" + u.Path);
                 if (u.IsNew && (File.Exists(u.Path) || File.Exists(u.Path + ".meta"))) throw new InvalidOperationException("新资源路径已被占用；请重新预览：" + u.Path);
             }
             if (plan.Updates.Count == 0) { WriteReport("无变化：未写入、未保存任何资产。", plan); return LastReport; }
@@ -172,6 +172,7 @@ namespace Battle.Editor.ConfigImport
                 var map = new Dictionary<string, Object>(StringComparer.Ordinal);
                 foreach (var p in current.Buffs) map["Buffs/" + p.Key] = p.Value;
                 foreach (var p in current.Skills) map["Skills/" + p.Key] = p.Value;
+                foreach (var p in current.Growths) map["Growth/" + p.Key] = p.Value;
                 foreach (var p in current.Units) map["Units/" + p.Key] = p.Value;
                 foreach (var u in plan.Updates.Where(u => u.IsNew))
                 {
@@ -189,6 +190,7 @@ namespace Battle.Editor.ConfigImport
                     if (u.CustomApply != null) u.CustomApply(map);
                     else
                     {
+                        if (asset is UnitConfig owner) UnitBaseStatsAuthoring.Ensure(owner);
                         BattleTableSchema.Assign(u.Row, asset);
                         if (asset is SkillConfig skill)
                         {
@@ -201,11 +203,14 @@ namespace Battle.Editor.ConfigImport
                         }
                         if (asset is UnitConfig unit)
                         {
+                            string growthId = u.Row.Get<string>("growthId");
+                            unit.growth = growthId.Length == 0 ? null : (Game.Characters.CharacterGrowthConfig)map["Growth/" + growthId];
                             unit.skills = u.Children.Where(r => r.Get<UnitSkillRole>("role") == UnitSkillRole.Normal).Select(r => (SkillConfig)map["Skills/" + r.Get<int>("skillId")]).ToList();
                             var talent = u.Children.FirstOrDefault(r => r.Get<UnitSkillRole>("role") == UnitSkillRole.TalentAction);
                             unit.talentAction = talent == null ? null : (SkillConfig)map["Skills/" + talent.Get<int>("skillId")];
                         }
                     }
+                    if (asset is UnitConfig statsOwner) EditorUtility.SetDirty(statsOwner.BaseStats);
                     EditorUtility.SetDirty(asset); AssetDatabase.SaveAssetIfDirty(asset);
                     AfterWriteForVerification?.Invoke(++writes);
                 }
@@ -284,7 +289,7 @@ namespace Battle.Editor.ConfigImport
                 string guid = AssetDatabase.AssetPathToGUID(a.path);
                 if (!string.IsNullOrEmpty(a.guid) && !string.IsNullOrEmpty(guid) && guid != a.guid) throw new IOException("路径已被其他GUID的资产占用；拒绝覆盖：" + a.path);
                 var obj = AssetDatabase.LoadMainAssetAtPath(a.path);
-                if (!rollback && obj != null && EditorUtility.IsDirty(obj)) throw new IOException("恢复目标有未保存编辑；请先保存或撤销：" + a.path);
+                if (!rollback && obj != null && UnitBaseStatsAuthoring.HasDirtyObjects(obj)) throw new IOException("恢复目标有未保存编辑；请先保存或撤销：" + a.path);
             }
             foreach (var a in manifest.assets)
             {

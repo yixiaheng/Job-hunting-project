@@ -1,0 +1,249 @@
+{
+  "completedAt": "2026-11-27T21:24:32.9428717+08:00",
+  "backup": "ConfigImportBackups/GrowthArchitecture-20261127-211028",
+  "units": [
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_A.asset",
+      "guid": "2de4983134164232b3516b6c4ef612af",
+      "stats": {
+        "health": 150,
+        "attack": 50,
+        "defence": 32,
+        "speed": 95,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_B.asset",
+      "guid": "efef9fcdbf18407387e260f55bf236de",
+      "stats": {
+        "health": 190,
+        "attack": 42,
+        "defence": 18,
+        "speed": 108,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_C.asset",
+      "guid": "f2e69609e73544ab9e349a15ab1c201a",
+      "stats": {
+        "health": 170,
+        "attack": 68,
+        "defence": 15,
+        "speed": 125,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_D.asset",
+      "guid": "8becdffaf6474ce09058e445d8b74317",
+      "stats": {
+        "health": 180,
+        "attack": 55,
+        "defence": 20,
+        "speed": 102,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_E.asset",
+      "guid": "61ddf358c73f4d27bca4ec06d4cf386f",
+      "stats": {
+        "health": 200,
+        "attack": 52,
+        "defence": 22,
+        "speed": 100,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_F.asset",
+      "guid": "04a2af1c693343368d34d45d2bfe9e2f",
+      "stats": {
+        "health": 175,
+        "attack": 40,
+        "defence": 20,
+        "speed": 115,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Enemies/Enemy_A.asset",
+      "guid": "119a724650adf9b458edd229e1924b1f",
+      "stats": {
+        "health": 60,
+        "attack": 50,
+        "defence": 5,
+        "speed": 110,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Enemies/Enemy_B.asset",
+      "guid": "f95072e1bf7efae4bb87e6057b8cb58e",
+      "stats": {
+        "health": 50,
+        "attack": 100,
+        "defence": 3,
+        "speed": 90,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Enemies/Enemy_C.asset",
+      "guid": "2a5e417b5391cc24eb35b902eca17ba4",
+      "stats": {
+        "health": 55,
+        "attack": 50,
+        "defence": 7,
+        "speed": 130,
+        "startEnergy": 0,
+        "maxEnergy": 100,
+        "offensiveStats": {
+          "critRate": 0.05000000074505806,
+          "critDamage": 0.5,
+          "breakEffect": 0.0,
+          "breakEfficiencyBonus": 0.0,
+          "elementalDamage": {
+            "physical": 0.0,
+            "fire": 0.0,
+            "ice": 0.0,
+            "lightning": 0.0,
+            "wind": 0.0,
+            "quantum": 0.0,
+            "imaginary": 0.0
+          }
+        }
+      }
+    }
+  ]
+}

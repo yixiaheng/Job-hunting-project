@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,11 +28,13 @@ namespace Battle.Editor.ConfigImport
         private void OnGUI()
         {
             EditorGUILayout.LabelField("战斗配置 Excel 工作台", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Excel → 校验与差异预览 → 原位更新SO。可保持Excel/WPS打开，但请先保存；只读取磁盘上的已保存内容。模型、头像、成长和演出引用由Unity管理。修改ID视为新增。", MessageType.Info);
+            EditorGUILayout.HelpBox("Excel → 校验与差异预览 → 原位更新SO。可保持Excel/WPS打开，但请先保存。基础属性、共享成长和角色养成规则可在表格配置；模型、头像和演出在Unity管理。修改ID视为新增。", MessageType.Info);
             EditorGUI.BeginChangeCheck();
             using (new EditorGUILayout.HorizontalScope())
             {
                 workbook = EditorGUILayout.TextField("工作簿 .xlsx", workbook);
+                if (GUILayout.Button("默认中文表", GUILayout.Width(85)))
+                { workbook = ConfigImportService.DefaultWorkbook; plan = null; lookupIndex = null; }
                 if (GUILayout.Button("选择文件", GUILayout.Width(80)))
                 {
                     string selected = EditorUtility.OpenFilePanel("选择战斗配置表", Path.GetDirectoryName(Path.GetFullPath(workbook)), "xlsx");
@@ -125,7 +127,7 @@ namespace Battle.Editor.ConfigImport
         }
         private void Export(bool empty)
         {
-            string output = EditorUtility.SaveFilePanel(empty ? "生成空模板" : "导出现有配置", Path.GetDirectoryName(Path.GetFullPath(workbook)), empty ? "BattleConfigTemplate" : Path.GetFileNameWithoutExtension(workbook), "xlsx");
+            string output = EditorUtility.SaveFilePanel(empty ? "生成空模板" : "导出现有配置", Path.GetDirectoryName(Path.GetFullPath(workbook)), empty ? "战斗配置模板" : Path.GetFileNameWithoutExtension(workbook), "xlsx");
             if (string.IsNullOrEmpty(output)) return;
             if (File.Exists(output) && !EditorUtility.DisplayDialog("覆盖工作簿", "导出将以当前SO重建工作簿，未导入的Excel修改和额外计算表不会合并。旧文件将备份到旁边的.BattleWorkbookBackups目录。\n" + output, "备份并覆盖", "取消")) return;
             Execute(() =>

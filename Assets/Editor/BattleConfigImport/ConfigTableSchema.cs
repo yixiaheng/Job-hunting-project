@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -31,8 +31,9 @@ namespace Battle.Editor.ConfigImport
         public string AssetField { get; }
         public double Minimum { get; }
         public bool OptionalColumn { get; }
-        public TableColumn(string name, string description, Type type, string assetField = null, double minimum = double.NegativeInfinity, bool optionalColumn = false)
-        { Name = name; Description = description; Type = type; AssetField = assetField; Minimum = minimum; OptionalColumn = optionalColumn; }
+        public bool AllowEmpty { get; }
+        public TableColumn(string name, string description, Type type, string assetField = null, double minimum = double.NegativeInfinity, bool optionalColumn = false, bool allowEmpty = false)
+        { Name = name; Description = description; Type = type; AssetField = assetField; Minimum = minimum; OptionalColumn = optionalColumn; AllowEmpty = allowEmpty; }
     }
 
     public sealed class TableSchema
@@ -57,7 +58,7 @@ namespace Battle.Editor.ConfigImport
             return row;
         }
         public string Id => Values.TryGetValue("unitId", out var u) ? u.ToString() :
-            Values.TryGetValue("skillId", out var s) ? s.ToString() : Values.TryGetValue("buffId", out var b) ? b.ToString() : "";
+            Values.TryGetValue("growthId", out var g) ? g.ToString() : Values.TryGetValue("skillId", out var s) ? s.ToString() : Values.TryGetValue("buffId", out var b) ? b.ToString() : "";
         public ImportMessage Message(ImportMessageKind kind, string field, string detail) =>
             new(kind, Sheet, Number, Locations.TryGetValue(field, out string c) ? c : field, Id, detail);
     }
@@ -90,13 +91,13 @@ namespace Battle.Editor.ConfigImport
         private static TableColumn B(string n, string d, string f) => new(n, d + "；TRUE/FALSE", typeof(bool), f);
         private static TableColumn E<T>(string n, string d, string f = null) => new(n, d + "；代码见 Enums", typeof(T), f);
         private static TableColumn Combat(string name, string description, string field) =>
-            new(name, description + "；小数比例，0.2=20%；旧表缺列时保留已有值，新单位用默认值", typeof(float), "offensiveStats." + field, 0, true);
+            new(name, description + "；小数比例，0.2=20%；旧表缺列时保留已有值，新单位用默认值", typeof(float), "baseStats.offensiveStats." + field, 0, true);
         public static readonly IReadOnlyList<TableSchema> All = Array.AsReadOnly(new[]
         {
             new TableSchema("Units", S("unitId", "必填；稳定字符串ID，修改视为新增", "id"), S("name", "必填；显示名称", "displayName"),
                 E<UnitTableKind>("unitType", "Ally 我方 / Enemy 敌方"), E<ElementType>("element", "元素", "element"), E<PathType>("path", "命途", "path"),
-                I("maxHealth", "基础生命；正整数", "maxHealth", 1), I("attack", "基础攻击；非负", "attack"), I("defence", "基础防御；非负", "defence"),
-                I("speed", "基础速度；正整数", "speed", 1), I("startEnergy", "初始能量；不超过上限", "startEnergy"), I("maxEnergy", "能量上限；正整数", "maxEnergy", 1),
+                F("maxHealth", "1级生命；支持小数；独立基础属性SO", "baseStats.health", 1), F("attack", "1级攻击；支持小数", "baseStats.attack", 0), F("defence", "1级防御；支持小数", "baseStats.defence", 0),
+                F("speed", "固定基础速度；不随等级增长", "baseStats.speed", 1), I("startEnergy", "初始能量；不超过上限", "baseStats.startEnergy"), I("maxEnergy", "能量上限；正整数", "baseStats.maxEnergy", 1),
                 Combat("critRate", "基础暴击率；默认0.05；允许溢出100%", "critRate"),
                 Combat("critDamage", "基础暴击额外伤害；默认0.5，暴击倍率为1.5", "critDamage"),
                 Combat("breakEffect", "击破特攻；默认0", "breakEffect"),
@@ -107,7 +108,8 @@ namespace Battle.Editor.ConfigImport
                 Combat("lightningDamageBonus", "雷伤害加成", "elementalDamage.lightning"),
                 Combat("windDamageBonus", "风伤害加成", "elementalDamage.wind"),
                 Combat("quantumDamageBonus", "量子伤害加成", "elementalDamage.quantum"),
-                Combat("imaginaryDamageBonus", "虚数伤害加成", "elementalDamage.imaginary")),
+                Combat("imaginaryDamageBonus", "虚数伤害加成", "elementalDamage.imaginary"),
+                new TableColumn("growthId", "养成配置ID；空值明确解除引用；旧表缺列保留原引用", typeof(string), optionalColumn: true, allowEmpty: true)),
             new TableSchema("Skills", I("skillId", "稳定技能ID；正整数", "id", 1), S("name", "必填；技能名称", "Name"), E<SkillKind>("kind", "技能类型", "kind"),
                 E<ElementType>("element", "元素", "element"), I("skillPointCost", "战技点消耗；非负", "skillPointCost"),
                 I("skillPointGain", "战技点产出；零消耗普攻填0仍可能默认回1点", "skillPointGain"), I("energyCost", "能量消耗；非负", "energyCost"), I("energyGain", "能量回复；非负", "energyGain"),
@@ -122,7 +124,7 @@ namespace Battle.Editor.ConfigImport
                 F("value", "属性倍率；允许负值；-0.2表示降低20%", "value"), B("isDebuff", "是否负面", "isDebuff")),
             new TableSchema("UnitSkills", S("unitId", "所属单位必须出现在 Units"), I("skillId", "技能ID；允许引用已有配置", null, 1),
                 E<UnitSkillRole>("role", "Normal 普通技能列表 / TalentAction 天赋行动"), I("order", "Normal从0连续；TalentAction只能一条且为0"))
-        });
+        }.Concat(GrowthConfigTables.Schemas).ToArray());
         public static TableSchema Get(string name) => All.Single(s => s.Name == name);
         public static string Text(object value) => value is float f ? f.ToString("R", CultureInfo.InvariantCulture) :
             value is bool b ? (b ? "TRUE" : "FALSE") : Convert.ToString(value, CultureInfo.InvariantCulture) ?? "";
@@ -130,7 +132,7 @@ namespace Battle.Editor.ConfigImport
         {
             var row = new ConfigRow { Sheet = sheet };
             foreach (var c in Get(sheet).Columns.Where(c => c.AssetField != null))
-                row.Values[c.Name] = ReadField(source, c.AssetField);
+                row.Values[c.Name] = ReadField(source, c.AssetField) ?? (c.Type == typeof(string) ? "" : null);
             return row;
         }
         internal static void Assign(ConfigRow row, object target)
@@ -163,7 +165,8 @@ namespace Battle.Editor.ConfigImport
 
         internal static object CombatDefault(TableColumn column)
         {
-            const string prefix = "offensiveStats.";
+            if (column.Name == "growthId") return "";
+            const string prefix = "baseStats.offensiveStats.";
             return ReadField(Battle.Logic.BattleOffensiveStats.Default, column.AssetField.Substring(prefix.Length));
         }
 
@@ -173,7 +176,7 @@ namespace Battle.Editor.ConfigImport
                 foreach (var column in Get("Units").Columns.Where(c => c.OptionalColumn))
                     if (!row.Values.ContainsKey(column.Name))
                         row.Values[column.Name] = index.Units.TryGetValue(row.Id, out var unit)
-                            ? ReadField(unit, column.AssetField) : CombatDefault(column);
+                            ? column.Name == "growthId" ? GrowthConfigTables.Id(unit.growth) : ReadField(unit, column.AssetField) : CombatDefault(column);
         }
     }
 }

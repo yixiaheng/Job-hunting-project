@@ -1,0 +1,2107 @@
+{
+  "completedAt": "2026-11-27T22:28:02.6552314+08:00",
+  "configs": [
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_A.asset",
+      "id": "Aegis",
+      "guid": "2de4983134164232b3516b6c4ef612af",
+      "referencesPreserved": true,
+      "Health": 150.0,
+      "Attack": 50.0,
+      "Defence": 32.0,
+      "Speed": 95.0
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_B.asset",
+      "id": "Verdant",
+      "guid": "efef9fcdbf18407387e260f55bf236de",
+      "referencesPreserved": true,
+      "Health": 190.0,
+      "Attack": 42.0,
+      "Defence": 18.0,
+      "Speed": 108.0
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_C.asset",
+      "id": "VoltHunt",
+      "guid": "f2e69609e73544ab9e349a15ab1c201a",
+      "referencesPreserved": true,
+      "Health": 170.0,
+      "Attack": 68.0,
+      "Defence": 15.0,
+      "Speed": 125.0
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_D.asset",
+      "id": "FrostNova",
+      "guid": "8becdffaf6474ce09058e445d8b74317",
+      "referencesPreserved": true,
+      "Health": 180.0,
+      "Attack": 55.0,
+      "Defence": 20.0,
+      "Speed": 102.0
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_E.asset",
+      "id": "UmbralHex",
+      "guid": "61ddf358c73f4d27bca4ec06d4cf386f",
+      "referencesPreserved": true,
+      "Health": 200.0,
+      "Attack": 52.0,
+      "Defence": 22.0,
+      "Speed": 100.0
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Allies/Ally_F.asset",
+      "id": "AstralChord",
+      "guid": "04a2af1c693343368d34d45d2bfe9e2f",
+      "referencesPreserved": true,
+      "Health": 175.0,
+      "Attack": 40.0,
+      "Defence": 20.0,
+      "Speed": 115.0
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Enemies/Enemy_A.asset",
+      "id": "Enemy_A",
+      "guid": "119a724650adf9b458edd229e1924b1f",
+      "referencesPreserved": true,
+      "Health": 60.0,
+      "Attack": 50.0,
+      "Defence": 5.0,
+      "Speed": 110.0
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Enemies/Enemy_B.asset",
+      "id": "Enemy_B",
+      "guid": "f95072e1bf7efae4bb87e6057b8cb58e",
+      "referencesPreserved": true,
+      "Health": 50.0,
+      "Attack": 100.0,
+      "Defence": 3.0,
+      "Speed": 90.0
+    },
+    {
+      "path": "Assets/Config/Battle/Units/Enemies/Enemy_C.asset",
+      "id": "Enemy_C",
+      "guid": "2a5e417b5391cc24eb35b902eca17ba4",
+      "referencesPreserved": true,
+      "Health": 55.0,
+      "Attack": 50.0,
+      "Defence": 7.0,
+      "Speed": 130.0
+    }
+  ],
+  "actualProfileLoaded": true,
+  "actualSaveUnchanged": true,
+  "characters": [
+    {
+      "id": "Aegis",
+      "level": 32,
+      "ascension": 2,
+      "experience": 580,
+      "multiplier": 3.35,
+      "health": 502,
+      "attack": 168,
+      "defence": 107,
+      "speed": 95,
+      "CritRate": 0.05,
+      "CritDamage": 0.5
+    },
+    {
+      "id": "Verdant",
+      "level": 1,
+      "ascension": 0,
+      "experience": 0,
+      "multiplier": 1.0,
+      "health": 190,
+      "attack": 42,
+      "defence": 18,
+      "speed": 108,
+      "CritRate": 0.05,
+      "CritDamage": 0.5
+    },
+    {
+      "id": "VoltHunt",
+      "level": 1,
+      "ascension": 0,
+      "experience": 0,
+      "multiplier": 1.0,
+      "health": 170,
+      "attack": 68,
+      "defence": 15,
+      "speed": 125,
+      "CritRate": 0.05,
+      "CritDamage": 0.5
+    },
+    {
+      "id": "FrostNova",
+      "level": 20,
+      "ascension": 0,
+      "experience": 0,
+      "multiplier": 1.95,
+      "health": 351,
+      "attack": 107,
+      "defence": 39,
+      "speed": 102,
+      "CritRate": 0.05,
+      "CritDamage": 0.5
+    },
+    {
+      "id": "UmbralHex",
+      "level": 1,
+      "ascension": 0,
+      "experience": 0,
+      "multiplier": 1.0,
+      "health": 200,
+      "attack": 52,
+      "defence": 22,
+      "speed": 100,
+      "CritRate": 0.05,
+      "CritDamage": 0.5
+    },
+    {
+      "id": "AstralChord",
+      "level": 1,
+      "ascension": 0,
+      "experience": 0,
+      "multiplier": 1.0,
+      "health": 175,
+      "attack": 40,
+      "defence": 20,
+      "speed": 115,
+      "CritRate": 0.05,
+      "CritDamage": 0.5
+    }
+  ],
+  "growthRows": {
+    "GrowthStages": 7,
+    "CharacterGrowth": 6,
+    "CharacterGrowthStages": 42,
+    "CharacterRanks": 30,
+    "SkillEffectGrowth": 23
+  },
+  "exportMessages": [
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 3,
+      "Column": "skillPointGain",
+      "Id": "1",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 6,
+      "Column": "skillPointGain",
+      "Id": "101",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 9,
+      "Column": "skillPointGain",
+      "Id": "104",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 12,
+      "Column": "skillPointGain",
+      "Id": "107",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 15,
+      "Column": "skillPointGain",
+      "Id": "110",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 18,
+      "Column": "skillPointGain",
+      "Id": "113",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 21,
+      "Column": "skillPointGain",
+      "Id": "116",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 3,
+      "Column": "overrideTarget",
+      "Id": "1",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 4,
+      "Column": "overrideTarget",
+      "Id": "1",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 5,
+      "Column": "overrideTarget",
+      "Id": "2",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 6,
+      "Column": "overrideTarget",
+      "Id": "3",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 7,
+      "Column": "overrideTarget",
+      "Id": "101",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 9,
+      "Column": "overrideTarget",
+      "Id": "102",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 10,
+      "Column": "overrideTarget",
+      "Id": "103",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 12,
+      "Column": "overrideTarget",
+      "Id": "104",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 15,
+      "Column": "overrideTarget",
+      "Id": "106",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 17,
+      "Column": "overrideTarget",
+      "Id": "107",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 18,
+      "Column": "overrideTarget",
+      "Id": "108",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 20,
+      "Column": "overrideTarget",
+      "Id": "109",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 21,
+      "Column": "overrideTarget",
+      "Id": "110",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 22,
+      "Column": "overrideTarget",
+      "Id": "111",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 23,
+      "Column": "overrideTarget",
+      "Id": "111",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 24,
+      "Column": "overrideTarget",
+      "Id": "112",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 25,
+      "Column": "overrideTarget",
+      "Id": "112",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 26,
+      "Column": "overrideTarget",
+      "Id": "113",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 27,
+      "Column": "overrideTarget",
+      "Id": "114",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 28,
+      "Column": "overrideTarget",
+      "Id": "114",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 29,
+      "Column": "overrideTarget",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 30,
+      "Column": "overrideTarget",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 31,
+      "Column": "overrideTarget",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 32,
+      "Column": "overrideTarget",
+      "Id": "116",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 35,
+      "Column": "overrideTarget",
+      "Id": "118",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "UnitSkills",
+      "Row": 14,
+      "Column": "skillId",
+      "Id": "FrostNova",
+      "Detail": "技能112能量消耗120大于单位FrostNova基础能量上限100；若无额外规则将无法释放。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "UnitSkills",
+      "Row": 23,
+      "Column": "skillId",
+      "Id": "VoltHunt",
+      "Detail": "技能109能量消耗110大于单位VoltHunt基础能量上限100；若无额外规则将无法释放。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 3,
+      "Column": "F",
+      "Id": "1",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 6,
+      "Column": "F",
+      "Id": "101",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 9,
+      "Column": "F",
+      "Id": "104",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 12,
+      "Column": "F",
+      "Id": "107",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 15,
+      "Column": "F",
+      "Id": "110",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 18,
+      "Column": "F",
+      "Id": "113",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 21,
+      "Column": "F",
+      "Id": "116",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 3,
+      "Column": "I",
+      "Id": "1",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 4,
+      "Column": "I",
+      "Id": "1",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 5,
+      "Column": "I",
+      "Id": "2",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 6,
+      "Column": "I",
+      "Id": "3",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 7,
+      "Column": "I",
+      "Id": "101",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 9,
+      "Column": "I",
+      "Id": "102",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 10,
+      "Column": "I",
+      "Id": "103",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 12,
+      "Column": "I",
+      "Id": "104",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 15,
+      "Column": "I",
+      "Id": "106",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 17,
+      "Column": "I",
+      "Id": "107",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 18,
+      "Column": "I",
+      "Id": "108",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 20,
+      "Column": "I",
+      "Id": "109",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 21,
+      "Column": "I",
+      "Id": "110",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 22,
+      "Column": "I",
+      "Id": "111",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 23,
+      "Column": "I",
+      "Id": "111",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 24,
+      "Column": "I",
+      "Id": "112",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 25,
+      "Column": "I",
+      "Id": "112",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 26,
+      "Column": "I",
+      "Id": "113",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 27,
+      "Column": "I",
+      "Id": "114",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 28,
+      "Column": "I",
+      "Id": "114",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 29,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 30,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 31,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 32,
+      "Column": "I",
+      "Id": "116",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 35,
+      "Column": "I",
+      "Id": "118",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "UnitSkills",
+      "Row": 14,
+      "Column": "B",
+      "Id": "FrostNova",
+      "Detail": "技能112能量消耗120大于单位FrostNova基础能量上限100；若无额外规则将无法释放。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "UnitSkills",
+      "Row": 23,
+      "Column": "B",
+      "Id": "VoltHunt",
+      "Detail": "技能109能量消耗110大于单位VoltHunt基础能量上限100；若无额外规则将无法释放。"
+    }
+  ],
+  "emptyMessages": [],
+  "freshValid": true,
+  "freshUpdateCount": 0,
+  "freshMessages": [
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 3,
+      "Column": "F",
+      "Id": "1",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 6,
+      "Column": "F",
+      "Id": "101",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 9,
+      "Column": "F",
+      "Id": "104",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 12,
+      "Column": "F",
+      "Id": "107",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 15,
+      "Column": "F",
+      "Id": "110",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 18,
+      "Column": "F",
+      "Id": "113",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 21,
+      "Column": "F",
+      "Id": "116",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 3,
+      "Column": "I",
+      "Id": "1",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 4,
+      "Column": "I",
+      "Id": "1",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 5,
+      "Column": "I",
+      "Id": "2",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 6,
+      "Column": "I",
+      "Id": "3",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 7,
+      "Column": "I",
+      "Id": "101",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 9,
+      "Column": "I",
+      "Id": "102",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 10,
+      "Column": "I",
+      "Id": "103",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 12,
+      "Column": "I",
+      "Id": "104",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 15,
+      "Column": "I",
+      "Id": "106",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 17,
+      "Column": "I",
+      "Id": "107",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 18,
+      "Column": "I",
+      "Id": "108",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 20,
+      "Column": "I",
+      "Id": "109",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 21,
+      "Column": "I",
+      "Id": "110",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 22,
+      "Column": "I",
+      "Id": "111",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 23,
+      "Column": "I",
+      "Id": "111",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 24,
+      "Column": "I",
+      "Id": "112",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 25,
+      "Column": "I",
+      "Id": "112",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 26,
+      "Column": "I",
+      "Id": "113",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 27,
+      "Column": "I",
+      "Id": "114",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 28,
+      "Column": "I",
+      "Id": "114",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 29,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 30,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 31,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 32,
+      "Column": "I",
+      "Id": "116",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 35,
+      "Column": "I",
+      "Id": "118",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "UnitSkills",
+      "Row": 14,
+      "Column": "B",
+      "Id": "FrostNova",
+      "Detail": "技能112能量消耗120大于单位FrostNova基础能量上限100；若无额外规则将无法释放。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "UnitSkills",
+      "Row": 23,
+      "Column": "B",
+      "Id": "VoltHunt",
+      "Detail": "技能109能量消耗110大于单位VoltHunt基础能量上限100；若无额外规则将无法释放。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 3,
+      "Column": "",
+      "Id": "201",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 4,
+      "Column": "",
+      "Id": "202",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 5,
+      "Column": "",
+      "Id": "203",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 6,
+      "Column": "",
+      "Id": "204",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 7,
+      "Column": "",
+      "Id": "205",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 8,
+      "Column": "",
+      "Id": "206",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 9,
+      "Column": "",
+      "Id": "9201",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 10,
+      "Column": "",
+      "Id": "9202",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 11,
+      "Column": "",
+      "Id": "9203",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 12,
+      "Column": "",
+      "Id": "9204",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 13,
+      "Column": "",
+      "Id": "9205",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 14,
+      "Column": "",
+      "Id": "9206",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 3,
+      "Column": "",
+      "Id": "1",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 4,
+      "Column": "",
+      "Id": "2",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 5,
+      "Column": "",
+      "Id": "3",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 6,
+      "Column": "",
+      "Id": "101",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 7,
+      "Column": "",
+      "Id": "102",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 8,
+      "Column": "",
+      "Id": "103",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 9,
+      "Column": "",
+      "Id": "104",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 10,
+      "Column": "",
+      "Id": "105",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 11,
+      "Column": "",
+      "Id": "106",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 12,
+      "Column": "",
+      "Id": "107",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 13,
+      "Column": "",
+      "Id": "108",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 14,
+      "Column": "",
+      "Id": "109",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 15,
+      "Column": "",
+      "Id": "110",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 16,
+      "Column": "",
+      "Id": "111",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 17,
+      "Column": "",
+      "Id": "112",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 18,
+      "Column": "",
+      "Id": "113",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 19,
+      "Column": "",
+      "Id": "114",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 20,
+      "Column": "",
+      "Id": "115",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 21,
+      "Column": "",
+      "Id": "116",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 22,
+      "Column": "",
+      "Id": "117",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 23,
+      "Column": "",
+      "Id": "118",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 3,
+      "Column": "",
+      "Id": "Aegis",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 4,
+      "Column": "",
+      "Id": "AstralChord",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 5,
+      "Column": "",
+      "Id": "Enemy_A",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 6,
+      "Column": "",
+      "Id": "Enemy_B",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 7,
+      "Column": "",
+      "Id": "Enemy_C",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 8,
+      "Column": "",
+      "Id": "FrostNova",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 9,
+      "Column": "",
+      "Id": "UmbralHex",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 10,
+      "Column": "",
+      "Id": "Verdant",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 11,
+      "Column": "",
+      "Id": "VoltHunt",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "CharacterGrowth",
+      "Row": 3,
+      "Column": "",
+      "Id": "0877620af7888bc408cd54c04c6384d0",
+      "Detail": "养成配置无变化。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "CharacterGrowth",
+      "Row": 4,
+      "Column": "",
+      "Id": "3498dc7771a25eb4b97882d89240dc7c",
+      "Detail": "养成配置无变化。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "CharacterGrowth",
+      "Row": 5,
+      "Column": "",
+      "Id": "9365e114d3296834797af8777fcda93c",
+      "Detail": "养成配置无变化。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "CharacterGrowth",
+      "Row": 6,
+      "Column": "",
+      "Id": "a246a15340e7e9745af359bafeaac16a",
+      "Detail": "养成配置无变化。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "CharacterGrowth",
+      "Row": 7,
+      "Column": "",
+      "Id": "bc50764d04da09942879f4e3dae1fc11",
+      "Detail": "养成配置无变化。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "CharacterGrowth",
+      "Row": 8,
+      "Column": "",
+      "Id": "d4c359b65c817da4395cc2d3fdd14cbe",
+      "Detail": "养成配置无变化。"
+    }
+  ],
+  "legacyValid": true,
+  "legacyUpdateCount": 0,
+  "legacyMessages": [
+    {
+      "Kind": 1,
+      "Sheet": "Growth",
+      "Row": 0,
+      "Column": "",
+      "Id": "",
+      "Detail": "旧版工作簿无成长表，保留现有成长规则；导出新版后可配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "critRate",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "critDamage",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "breakEffect",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "breakEfficiencyBonus",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "physicalDamageBonus",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "fireDamageBonus",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "iceDamageBonus",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "lightningDamageBonus",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "windDamageBonus",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "quantumDamageBonus",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "imaginaryDamageBonus",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Units",
+      "Row": 1,
+      "Column": "growthId",
+      "Id": "",
+      "Detail": "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 3,
+      "Column": "F",
+      "Id": "1",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 6,
+      "Column": "F",
+      "Id": "101",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 9,
+      "Column": "F",
+      "Id": "104",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 12,
+      "Column": "F",
+      "Id": "107",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 15,
+      "Column": "F",
+      "Id": "110",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 18,
+      "Column": "F",
+      "Id": "113",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "Skills",
+      "Row": 21,
+      "Column": "F",
+      "Id": "116",
+      "Detail": "零消耗普攻填写0仍可能默认恢复1点战技点；本工具不改变运行时规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 3,
+      "Column": "I",
+      "Id": "1",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 4,
+      "Column": "I",
+      "Id": "1",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 5,
+      "Column": "I",
+      "Id": "2",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 6,
+      "Column": "I",
+      "Id": "3",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 7,
+      "Column": "I",
+      "Id": "101",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 9,
+      "Column": "I",
+      "Id": "102",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 10,
+      "Column": "I",
+      "Id": "103",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 12,
+      "Column": "I",
+      "Id": "104",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 15,
+      "Column": "I",
+      "Id": "106",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 17,
+      "Column": "I",
+      "Id": "107",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 18,
+      "Column": "I",
+      "Id": "108",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 20,
+      "Column": "I",
+      "Id": "109",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 21,
+      "Column": "I",
+      "Id": "110",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 22,
+      "Column": "I",
+      "Id": "111",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 23,
+      "Column": "I",
+      "Id": "111",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 24,
+      "Column": "I",
+      "Id": "112",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 25,
+      "Column": "I",
+      "Id": "112",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 26,
+      "Column": "I",
+      "Id": "113",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 27,
+      "Column": "I",
+      "Id": "114",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 28,
+      "Column": "I",
+      "Id": "114",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 29,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 30,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 31,
+      "Column": "I",
+      "Id": "115",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 32,
+      "Column": "I",
+      "Id": "116",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "SkillEffects",
+      "Row": 35,
+      "Column": "I",
+      "Id": "118",
+      "Detail": "overrideTarget=FALSE：此行目标字段不生效，使用所属技能的目标规则。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "UnitSkills",
+      "Row": 14,
+      "Column": "B",
+      "Id": "FrostNova",
+      "Detail": "技能112能量消耗120大于单位FrostNova基础能量上限100；若无额外规则将无法释放。"
+    },
+    {
+      "Kind": 1,
+      "Sheet": "UnitSkills",
+      "Row": 23,
+      "Column": "B",
+      "Id": "VoltHunt",
+      "Detail": "技能109能量消耗110大于单位VoltHunt基础能量上限100；若无额外规则将无法释放。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 3,
+      "Column": "",
+      "Id": "201",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 4,
+      "Column": "",
+      "Id": "202",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 5,
+      "Column": "",
+      "Id": "203",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 6,
+      "Column": "",
+      "Id": "204",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 7,
+      "Column": "",
+      "Id": "205",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 8,
+      "Column": "",
+      "Id": "206",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 9,
+      "Column": "",
+      "Id": "9201",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 10,
+      "Column": "",
+      "Id": "9202",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 11,
+      "Column": "",
+      "Id": "9203",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 12,
+      "Column": "",
+      "Id": "9204",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 13,
+      "Column": "",
+      "Id": "9205",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Buffs",
+      "Row": 14,
+      "Column": "",
+      "Id": "9206",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 3,
+      "Column": "",
+      "Id": "1",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 4,
+      "Column": "",
+      "Id": "2",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 5,
+      "Column": "",
+      "Id": "3",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 6,
+      "Column": "",
+      "Id": "101",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 7,
+      "Column": "",
+      "Id": "102",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 8,
+      "Column": "",
+      "Id": "103",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 9,
+      "Column": "",
+      "Id": "104",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 10,
+      "Column": "",
+      "Id": "105",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 11,
+      "Column": "",
+      "Id": "106",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 12,
+      "Column": "",
+      "Id": "107",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 13,
+      "Column": "",
+      "Id": "108",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 14,
+      "Column": "",
+      "Id": "109",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 15,
+      "Column": "",
+      "Id": "110",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 16,
+      "Column": "",
+      "Id": "111",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 17,
+      "Column": "",
+      "Id": "112",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 18,
+      "Column": "",
+      "Id": "113",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 19,
+      "Column": "",
+      "Id": "114",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 20,
+      "Column": "",
+      "Id": "115",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 21,
+      "Column": "",
+      "Id": "116",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 22,
+      "Column": "",
+      "Id": "117",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Skills",
+      "Row": 23,
+      "Column": "",
+      "Id": "118",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 3,
+      "Column": "",
+      "Id": "Aegis",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 4,
+      "Column": "",
+      "Id": "AstralChord",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 5,
+      "Column": "",
+      "Id": "Enemy_A",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 6,
+      "Column": "",
+      "Id": "Enemy_B",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 7,
+      "Column": "",
+      "Id": "Enemy_C",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 8,
+      "Column": "",
+      "Id": "FrostNova",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 9,
+      "Column": "",
+      "Id": "UmbralHex",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 10,
+      "Column": "",
+      "Id": "Verdant",
+      "Detail": "无变化；不保存资产。"
+    },
+    {
+      "Kind": 4,
+      "Sheet": "Units",
+      "Row": 11,
+      "Column": "",
+      "Id": "VoltHunt",
+      "Detail": "无变化；不保存资产。"
+    }
+  ]
+}

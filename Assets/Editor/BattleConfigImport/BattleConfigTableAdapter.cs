@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,6 +20,7 @@ namespace Battle.Editor.ConfigImport
         internal readonly Dictionary<string, UnitTableKind> Kinds = new(StringComparer.Ordinal);
         internal readonly List<Object> Watched = new();
         internal UnitCatalog Catalog;
+        internal readonly Dictionary<string, CharacterGrowthConfig> Growths = new(StringComparer.Ordinal);
         public ConfigAssetIndex(string scope, List<ImportMessage> messages)
         {
             Scope = scope.Replace('\\', '/').TrimEnd('/');
@@ -32,6 +33,15 @@ namespace Battle.Editor.ConfigImport
             foreach (var a in Find<UnitConfig>())
             {
                 Watched.Add(a);
+                try
+                {
+                    var stats = a.BaseStats;
+                    if (!AssetDatabase.IsSubAsset(stats) || AssetDatabase.GetAssetPath(stats) != AssetDatabase.GetAssetPath(a))
+                        Error(a.id, "基础属性必须为当前单位独占子资源，请先完成迁移。");
+                    stats.Validate();
+                    Watched.Add(stats);
+                }
+                catch (Exception e) { Error(a.id, e.Message); }
                 if (string.IsNullOrWhiteSpace(a.id) || a.id != a.id.Trim() || Units.ContainsKey(a.id)) { Error(a.name, "单位ID为空、含首尾空格或重复：" + a.id + "；" + AssetDatabase.GetAssetPath(a)); continue; }
                 Units.Add(a.id, a);
                 string path = AssetDatabase.GetAssetPath(a);
@@ -44,6 +54,8 @@ namespace Battle.Editor.ConfigImport
             { Watched.Add(a); if (a.id <= 0 || Skills.ContainsKey(a.id)) Error(a.name, "技能ID非正或重复：" + a.id + "；" + AssetDatabase.GetAssetPath(a) + (Skills.TryGetValue(a.id, out var other) ? " 与 " + AssetDatabase.GetAssetPath(other) : "")); else Skills.Add(a.id, a); }
             foreach (var a in Find<BuffConfig>())
             { Watched.Add(a); if (a.id <= 0 || Buffs.ContainsKey(a.id)) Error(a.name, "Buff ID非正或重复：" + a.id + "；" + AssetDatabase.GetAssetPath(a) + (Buffs.TryGetValue(a.id, out var other) ? " 与 " + AssetDatabase.GetAssetPath(other) : "")); else Buffs.Add(a.id, a); }
+            GrowthConfigTables.Index(this, messages);
+            Watched.Add(Game.Characters.CharacterGrowthTable.Shared);
             // Growth dependencies outside the import scope are still protected.
             Watched.AddRange(AssetDatabase.FindAssets("t:CharacterGrowthConfig", new[] { "Assets" }).Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<CharacterGrowthConfig>));
             Watched.AddRange(AssetDatabase.FindAssets("t:UnitConfig", new[] { "Assets" }).Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<UnitConfig>));
@@ -98,7 +110,7 @@ namespace Battle.Editor.ConfigImport
             {
                 var unit = item.Value;
                 if (!index.Kinds.TryGetValue(item.Key, out var kind)) continue;
-                var r = BattleTableSchema.FromObject("Units", unit); r.Values["unitType"] = kind; data.MutableRows("Units").Add(r);
+                var r = BattleTableSchema.FromObject("Units", unit); r.Values["unitType"] = kind; r.Values["growthId"] = GrowthConfigTables.Id(unit.growth); data.MutableRows("Units").Add(r);
                 for (int i = 0; i < (unit.skills?.Count ?? 0); i++) Relation(unit, unit.skills[i], UnitSkillRole.Normal, i);
                 if (unit.talentAction != null) Relation(unit, unit.talentAction, UnitSkillRole.TalentAction, 0);
             }
@@ -136,6 +148,7 @@ namespace Battle.Editor.ConfigImport
                 }
             }
             foreach (var b in index.Buffs.OrderBy(p => p.Key)) data.MutableRows("Buffs").Add(BattleTableSchema.FromObject("Buffs", b.Value));
+            GrowthConfigTables.Export(data, index);
             foreach (var rows in data.Tables.Values)
                 for (int i = 0; i < rows.Count; i++) rows[i].Number = i + 3;
             Validate(data, index, messages);
@@ -158,7 +171,7 @@ namespace Battle.Editor.ConfigImport
             var buffIds = new HashSet<int>(buffs.Select(r => r.Get<int>("buffId")));
             foreach (var r in units)
             {
-                foreach (var column in BattleTableSchema.Get("Units").Columns.Where(c => c.OptionalColumn))
+                foreach (var column in BattleTableSchema.Get("Units").Columns.Where(c => c.OptionalColumn && c.Name != "growthId"))
                 {
                     float value = (float)(r.Values.TryGetValue(column.Name, out var configured) ? configured :
                         index.Units.TryGetValue(r.Id, out var existing) ? BattleTableSchema.ReadField(existing, column.AssetField) : BattleTableSchema.CombatDefault(column));
@@ -169,7 +182,7 @@ namespace Battle.Editor.ConfigImport
                 if (index.Kinds.TryGetValue(r.Id, out var old) && old != r.Get<UnitTableKind>("unitType")) Error(r, "unitType", "首版禁止转换已有单位类别；需要单独迁移角色登记和引用。");
                 if (!index.Units.ContainsKey(r.Id))
                 {
-                    Warning(r, "unitId", "新单位：请在Unity绑定prefab、icon及我方growth。修改旧ID将新增资产，旧配置不会删除；请检查存档和演出映射。");
+                    Warning(r, "unitId", "新单位：请在Unity绑定prefab、icon；我方养成通过growthId绑定。修改旧ID将新增资产，旧配置不会删除；请检查存档和演出映射。");
                     if (r.Get<UnitTableKind>("unitType") == UnitTableKind.Ally && index.Catalog == null) Error(r, "unitType", "新增我方角色需要索引范围内恰好一个UnitCatalog。");
                 }
             }
@@ -197,28 +210,7 @@ namespace Battle.Editor.ConfigImport
                 Order(group);
                 if (group.Key.Role == UnitSkillRole.TalentAction && group.Count() > 1) Error(group.First(), "role", "每个单位最多一个TalentAction。");
             }
-            // Protect each growth owner's reachable key set after ALL link/effect edits, including shared skills.
-            var allOwners = AssetDatabase.FindAssets("t:UnitConfig", new[] { "Assets" }).Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<UnitConfig>);
-            foreach (var owner in allOwners.Where(u => u != null && u.growth != null))
-            {
-                var beforeSkills = (owner.skills ?? new()).Concat(owner.talentAction != null ? new[] { owner.talentAction } : Array.Empty<SkillConfig>()).Where(s => s != null).ToArray();
-                var before = new HashSet<string>(beforeSkills.SelectMany(s => s.effectConfigs ?? new()).Where(e => e != null).Select(e => e.key), StringComparer.Ordinal);
-                var afterSkills = index.Units.TryGetValue(owner.id ?? "", out var indexed) && indexed == owner && unitIds.Contains(owner.id)
-                    ? links.Where(r => r.Id == owner.id).Select(r => r.Get<int>("skillId")).ToArray() : beforeSkills.Select(s => s.id).ToArray();
-                var after = new HashSet<string>(StringComparer.Ordinal);
-                foreach (int id in afterSkills)
-                {
-                    if (skillIds.Contains(id)) after.UnionWith(effects.Where(r => r.Get<int>("skillId") == id).Select(r => r.Get<string>("effectKey")));
-                    else
-                    {
-                        var skill = beforeSkills.FirstOrDefault(s => s.id == id) ?? (index.Skills.TryGetValue(id, out var known) ? known : null);
-                        if (skill != null) after.UnionWith((skill.effectConfigs ?? new()).Where(e => e != null).Select(e => e.key));
-                    }
-                }
-                foreach (var growth in owner.growth.effectGrowth ?? new())
-                    if (growth != null && before.Contains(growth.effectKey) && !after.Contains(growth.effectKey))
-                        messages.Add(new(ImportMessageKind.Error, "Growth", 0, "effectKey", owner.id, $"删除/替换后成长引用悬空：{growth.effectKey}；来源 {AssetDatabase.GetAssetPath(owner.growth)}。先调整成长配置。"));
-            }
+            GrowthConfigTables.Validate(data, index, messages);
             if (!messages.Any(m => m.Kind == ImportMessageKind.Error)) ConfigAuthoringSupport.Warn(data, index, messages);
         }
 
@@ -233,6 +225,7 @@ namespace Battle.Editor.ConfigImport
             foreach (var r in data.Rows("Units")) Add(r, index.Units.TryGetValue(r.Id, out var u) ? u : null, typeof(UnitConfig),
                 "Units/" + (r.Get<UnitTableKind>("unitType") == UnitTableKind.Ally ? "Allies" : "Enemies"),
                 data.Rows("UnitSkills").Where(l => l.Id == r.Id).OrderBy(l => l.Get<UnitSkillRole>("role")).ThenBy(l => l.Get<int>("order")).ToArray());
+            updates.AddRange(GrowthConfigTables.BuildUpdates(data, index, destinationRoot, messages));
             var newAllies = data.Rows("Units").Where(r => r.Get<UnitTableKind>("unitType") == UnitTableKind.Ally && !index.Units.ContainsKey(r.Id)).Select(r => r.Id).ToArray();
             if (newAllies.Length > 0 && index.Catalog != null)
             {
@@ -270,7 +263,10 @@ namespace Battle.Editor.ConfigImport
                     if (asset is UnitConfig unit)
                     {
                         differences.AddRange(ConfigAuthoringSupport.LinkDiff(unit, children, data, index));
-                        clears = (unit.skills?.Count > 0 && !children.Any(c => c.Get<UnitSkillRole>("role") == UnitSkillRole.Normal)) ||
+                        string growthId = row.Get<string>("growthId"), oldGrowth = GrowthConfigTables.Id(unit.growth);
+                        if (growthId != oldGrowth) differences.Add("growthId: " + oldGrowth + " → " + growthId);
+                        if (unit.growth != null && growthId.Length == 0) clears = true;
+                        clears |= (unit.skills?.Count > 0 && !children.Any(c => c.Get<UnitSkillRole>("role") == UnitSkillRole.Normal)) ||
                             (unit.talentAction != null && !children.Any(c => c.Get<UnitSkillRole>("role") == UnitSkillRole.TalentAction));
                     }
                 }

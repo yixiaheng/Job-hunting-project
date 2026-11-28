@@ -1,0 +1,15 @@
+{
+  "completedAt": "2026-11-27T22:19:08.9311028+08:00",
+  "results": [
+    {
+      "name": "GrowthExcel",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "BattleConfigImport",
+      "passed": true,
+      "error": null
+    }
+  ]
+}

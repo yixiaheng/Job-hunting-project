@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Battle.Logic
@@ -26,20 +26,6 @@ namespace Battle.Logic
         public float BreakEfficiencyMultiplier => 1f + breakEfficiencyBonus;
         public ElementDamageBonuses ElementalDamage => elementalDamage;
         public static BattleOffensiveStats Default => new(0.05f, 0.5f);
-
-        /// <summary>成长按百分点累加；growth不是另一套基础面板，零值表示不成长。</summary>
-        public BattleOffensiveStats AddGrowth(BattleOffensiveStats growth, int steps)
-        {
-            if (steps < 0) throw new ArgumentOutOfRangeException(nameof(steps));
-            Validate();
-            growth.Validate();
-            return new BattleOffensiveStats(
-                critRate + growth.critRate * steps,
-                critDamage + growth.critDamage * steps,
-                breakEffect + growth.breakEffect * steps,
-                breakEfficiencyBonus + growth.breakEfficiencyBonus * steps,
-                elementalDamage.AddGrowth(growth.elementalDamage, steps));
-        }
 
         public BattleOffensiveStats(float critRate, float critDamage, float breakEffect = 0f,
             float breakEfficiencyBonus = 0f, ElementDamageBonuses elementalDamage = default)
@@ -104,12 +90,6 @@ namespace Battle.Logic
             ElementType.Imaginary => imaginary,
             _ => throw new ArgumentOutOfRangeException(nameof(element), element, "未知元素。")
         };
-
-        internal ElementDamageBonuses AddGrowth(ElementDamageBonuses growth, int steps) => new(
-            physical + growth.physical * steps, fire + growth.fire * steps,
-            ice + growth.ice * steps, lightning + growth.lightning * steps,
-            wind + growth.wind * steps, quantum + growth.quantum * steps,
-            imaginary + growth.imaginary * steps);
 
         public void Validate()
         {

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6302887248977543470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a96e929419ec4409727489cf8030ab, type: 3}
+  m_Name: BaseStats
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Characters.UnitBaseStatsConfig
+  health: 200
+  attack: 52
+  defence: 22
+  speed: 100
+  startEnergy: 0
+  maxEnergy: 100
+  offensiveStats:
+    critRate: 0.05
+    critDamage: 0.5
+    breakEffect: 0
+    breakEfficiencyBonus: 0
+    elementalDamage:
+      physical: 0
+      fire: 0
+      ice: 0
+      lightning: 0
+      wind: 0
+      quantum: 0
+      imaginary: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18,14 +49,10 @@ MonoBehaviour:
   growth: {fileID: 11400000, guid: a246a15340e7e9745af359bafeaac16a, type: 2}
   element: 4
   path: 4
-  maxHealth: 200
-  attack: 52
-  defence: 22
-  speed: 100
-  startEnergy: 0
-  maxEnergy: 100
+  baseStats: {fileID: -6302887248977543470}
   prefab: {fileID: 100000000000000001, guid: 397f9c4546f1429ebf6a7eabfaa1994f, type: 3}
   skills:
   - {fileID: 11400000, guid: aaa5ec42aed946058f772406c7c7cce0, type: 2}
   - {fileID: 11400000, guid: cae41c173f6241d484d3f2af1ae26396, type: 2}
   - {fileID: 11400000, guid: 59221934424e45f89ef3f0ed0024721a, type: 2}
+  talentAction: {fileID: 0}

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -11,7 +11,7 @@ namespace Battle.Editor.ConfigImport
 {
     public static class ConfigWorkbook
     {
-        public const string Version = "1";
+        public const string Version = "2";
         public static ConfigTableData Read(string path, IReadOnlyList<TableSchema> schemas, List<ImportMessage> messages)
         {
             var data = new ConfigTableData();
@@ -39,11 +39,15 @@ namespace Battle.Editor.ConfigImport
                     if (key.Length > 0) data.Metadata[key] = Value(row.Elements<Cell>().FirstOrDefault(c => Letters(c.CellReference) == "B"));
                 }
                 if (Value(cells.FirstOrDefault(c => c.CellReference == "A3")) != "formatVersion" ||
-                    Value(cells.FirstOrDefault(c => c.CellReference == "B3")) != Version)
+                    (Value(cells.FirstOrDefault(c => c.CellReference == "B3")) != Version && Value(cells.FirstOrDefault(c => c.CellReference == "B3")) != "1"))
                     messages.Add(new(ImportMessageKind.Error, "Meta", 3, "B", "", "不支持的格式版本；使用当前工具导出的模板。"));
             }
+            bool legacy = data.Metadata.TryGetValue("formatVersion", out string version) && version == "1";
+            bool hasGrowth = sheets.Any(s => GrowthConfigTables.IsSheet(s.Name));
+            if (legacy && !hasGrowth) messages.Add(new(ImportMessageKind.Warning, "Growth", 0, "", "", "旧版工作簿无成长表，保留现有成长规则；导出新版后可配置。"));
             foreach (var schema in schemas)
             {
+                if (legacy && !hasGrowth && GrowthConfigTables.IsSheet(schema.Name)) continue;
                 var matches = sheets.Where(s => s.Name == schema.Name).ToArray();
                 if (matches.Length != 1)
                 { messages.Add(new(ImportMessageKind.Error, schema.Name, 0, "", "", "必需表缺失或重复；缺表不能解释为清空。")); continue; }
@@ -61,7 +65,7 @@ namespace Battle.Editor.ConfigImport
                 }
                 foreach (var c in schema.Columns.Where(c => !headers.ContainsKey(c.Name)))
                     messages.Add(new(c.OptionalColumn ? ImportMessageKind.Warning : ImportMessageKind.Error, schema.Name, 1, c.Name, "",
-                        c.OptionalColumn ? "旧表缺少新属性列：保留已有单位对应属性，新单位使用默认值。重新导出可编辑完整属性。" : "缺少必需字段；请恢复表头。"));
+                        c.OptionalColumn ? "旧表缺少新列：保留已有单位对应属性或成长引用，新单位使用默认值。重新导出可编辑完整配置。" : "缺少必需字段；请恢复表头。"));
                 var output = data.MutableRows(schema.Name);
                 foreach (var excelRow in rows.Where(r => r.RowIndex >= 3))
                 {
@@ -81,6 +85,7 @@ namespace Battle.Editor.ConfigImport
                         object parsed = null;
                         if (cell?.CellFormula != null) error = "业务数据不允许公式；请粘贴为值。";
                         else if (cell?.DataType?.Value == CellValues.Error) error = "Excel错误值；请填写确定值。";
+                        else if (c.AllowEmpty && raw.Length == 0) parsed = "";
                         else if (string.IsNullOrWhiteSpace(raw)) error = "必填值为空；没有值的数字请显式填0。";
                         else if (c.Type == typeof(string))
                         {
@@ -139,7 +144,9 @@ namespace Battle.Editor.ConfigImport
                         new object[] { "数值", "业务表不允许公式或合并单元格。0.2代表20%；允许百分比格式。计算后粘贴为值。" },
                         new object[] { "身份", "ID是稳定关联，不是名称。改ID视为新增，旧资产保留；涉及存档和技能表现映射。" },
                         new object[] { "完整子列表", "Units对应的UnitSkills、Skills对应的SkillEffects为完整替换；缺子行表示清空。未列主体不修改。" },
-                        new object[] { "资源", "模型、头像、成长与技能演出在Unity配置；新单位导入后手动绑定。基础属性不等于养成后属性。" },
+                        new object[] { "资源", "模型、头像与技能演出在Unity配置。Units.growthId绑定CharacterGrowth；基础属性不等于养成后属性。" },
+                        new object[] { "基础成长", "Units的生命/攻击/防御为1级值，允许小数，写入单位独占的BaseStats子资源。玩家按JSON等级与突破阶段查全局成长表；速度、双暴、元素/击破不自然增长。敌人暂直接读取基础值。" },
+                        new object[] { "成长", "GrowthStages有行时完整替换全局七阶段；空表保留。CharacterGrowth出现的主体完整替换其阶段/升阶/效果成长子表。旧v1缺全部成长表时保留原配置。" },
                         new object[] { "顺序", "order从0连续；排序Excel行不影响执行顺序。效果下标关联命中标记，改动时请复查动画。" },
                         new object[] { "普攻", "保留现有规则：零消耗普攻skillPointGain=0时仍可能默认恢复1点战技点。" },
                         new object[] { "来源", "由当前Unity项目SO导出；索引范围和生成时间见Meta。额外计算工作表不参与导入。" }
@@ -177,7 +184,7 @@ namespace Battle.Editor.ConfigImport
                 { WorkbookViewId = 0, ShowGridLines = false });
             var cols = new Columns();
             for (int i = 0; i < headers.Length; i++) cols.Append(new Column { Min = (uint)i + 1, Max = (uint)i + 1,
-                Width = name.StartsWith("Ref", StringComparison.Ordinal) ? (i == 3 ? 100 : i == 1 ? 38 : 25) : name == "Enums" ? (i == 2 ? 32 : 25) : prose ? (i == 0 ? 27 : 105) : headers[i] == "effectKey" ? 48 : Math.Max(19, Math.Min(38, headers[i].Length + 7)), CustomWidth = true });
+                Width = name.StartsWith("Ref", StringComparison.Ordinal) ? (i == 3 ? 100 : i == 1 ? 38 : name == "RefCharacterGrowth" && i == 0 ? 44 : 25) : name == "Enums" ? (i == 2 ? 32 : 25) : prose ? (i == 0 ? 27 : 105) : headers[i] == "effectKey" ? 48 : headers[i] == "growthId" ? 44 : Math.Max(19, Math.Min(38, headers[i].Length + 7)), CustomWidth = true });
             part.Worksheet = new Worksheet(views, new SheetFormatProperties { DefaultRowHeight = 22 }, cols, data);
             void Row(object[] values, uint index, uint style, double height)
             {
@@ -233,6 +240,7 @@ namespace Battle.Editor.ConfigImport
             var map = new Dictionary<string, string>
             {
                 ["Ally"]="我方角色", ["Enemy"]="敌人", ["Normal"]="普通技能列表", ["TalentAction"]="天赋行动",
+                ["None"]="无天赋", ["Aegis"]="岩壁守卫天赋", ["Verdant"]="春风医者天赋", ["VoltHunt"]="雷鸣猎手天赋", ["FrostNova"]="寒星术士天赋", ["UmbralHex"]="暮影诅咒师天赋", ["AstralChord"]="星弦指挥家天赋",
                 ["Fire"]="火", ["Ice"]="冰", ["Lightning"]="雷", ["Wind"]="风", ["Quantum"]="量子", ["Imaginary"]="虚数", ["Physical"]="物理",
                 ["Preservation"]="存护", ["Abundance"]="丰饶", ["Hunt"]="巡猎", ["Erudition"]="智识", ["Nihility"]="虚无", ["Harmony"]="同谐",
                 ["Basic"]="普通攻击", ["Skill"]="战技", ["Ultimate"]="终结技", ["OurSide"]="施法者一方", ["OtherSide"]="施法者对面",

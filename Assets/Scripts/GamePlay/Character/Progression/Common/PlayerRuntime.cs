@@ -61,7 +61,7 @@ namespace Game.Characters
                 if (loaded.Success)
                 {
                     profile = loaded.Data;
-                    if (profile == null || profile.formatVersion != 2 || profile.roster == null
+                    if (profile == null || profile.formatVersion != 3 || profile.roster == null
                         || profile.inventory == null || profile.battle == null)
                         throw new InvalidOperationException("玩家进度文件格式无效，原文件不会被覆盖。");
                 }

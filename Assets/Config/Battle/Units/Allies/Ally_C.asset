@@ -18,14 +18,41 @@ MonoBehaviour:
   growth: {fileID: 11400000, guid: 9365e114d3296834797af8777fcda93c, type: 2}
   element: 2
   path: 2
-  maxHealth: 170
-  attack: 68
-  defence: 15
-  speed: 125
-  startEnergy: 0
-  maxEnergy: 100
+  baseStats: {fileID: 8833377350174649697}
   prefab: {fileID: 100000000000000001, guid: be1ab89e03254c2fb5b7929b06de4b8e, type: 3}
   skills:
   - {fileID: 11400000, guid: e3be44acf9b043299864aa44ccfce467, type: 2}
   - {fileID: 11400000, guid: fff9548cd6e24b5f8fd3fe55fd460ae8, type: 2}
   - {fileID: 11400000, guid: 99d453969ed148afa14b88e10674de19, type: 2}
+  talentAction: {fileID: 0}
+--- !u!114 &8833377350174649697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a96e929419ec4409727489cf8030ab, type: 3}
+  m_Name: BaseStats
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Characters.UnitBaseStatsConfig
+  health: 170
+  attack: 68
+  defence: 15
+  speed: 125
+  startEnergy: 0
+  maxEnergy: 100
+  offensiveStats:
+    critRate: 0.05
+    critDamage: 0.5
+    breakEffect: 0
+    breakEfficiencyBonus: 0
+    elementalDamage:
+      physical: 0
+      fire: 0
+      ice: 0
+      lightning: 0
+      wind: 0
+      quantum: 0
+      imaginary: 0

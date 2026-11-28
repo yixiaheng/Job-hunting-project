@@ -197,3 +197,23 @@ Unity 继续管理 `prefab`、`icon`、`growth` 和演出资源。Excel 管理�
 
 旧表整列缺失时保留已有单位对应值，新单位使用默认值（暴击率0.05、暴击伤害0.5，其余0）；列存在但单元格为空仍然报错。新属性目前完成配置与运行时数据传递，尚未参与伤害结算。
 
+
+
+## 2026-11-27：共享成长与独立基础属性
+
+新导出工作簿为 `ConfigTables/战斗配置.xlsx`。原 `BattleConfig.xlsx` 不被覆盖，旧数值列继续兼容；最新空模板为 `ConfigTables/战斗配置模板.xlsx`。
+
+`Units.maxHealth/attack/defence` 现在明确是1级基础值并支持小数，`speed` 为不自然成长的基础速度。Excel表头仍采用原字段名，写入目标改为单位独占的 `UnitBaseStatsConfig` 子资源；`UnitConfig` 本身不再存数值。暴击、爆伤、元素和击破属性也存入此子资源，不参与自然成长。
+
+每个单位与自己的基础属性子资源保存在同一 `.asset` 文件中，仍原位更新、保留主体GUID。导入会检查子资源未保存修改，备份和回滚同时涵盖主体与基础属性。新建单位自动创建自己的基础属性SO；模型、头像、成长与演出仍由Unity配置。
+
+共享成长表在 `Assets/Resources/Bootstrap/CharacterGrowthTable.asset`，现可通过GrowthStages导入；角色养成通过CharacterGrowth及关联子表导入。真实等级与突破阶段来自JSON；详见 [角色共享成长架构](CharacterSharedGrowthGuide.md)。敌人暂直接使用基础值。
+
+
+## 2026-11-27：角色养成表与中文文件名
+
+默认完整工作簿改为 `ConfigTables/战斗配置.xlsx`，空模板为 `ConfigTables/战斗配置模板.xlsx`，批量输出默认 `战斗配置_批量生成.xlsx`。工作台新增“默认中文表”按钮。旧英文文件保留；工作表与字段标识保持英文，填写说明继续中文。
+
+新增 `GrowthStages`、`CharacterGrowth`、`CharacterGrowthStages`、`CharacterRanks`、`SkillEffectGrowth` 五张业务表和 `RefCharacterGrowth` 辅助表。`Units.growthId` 可绑定同工作簿新建或现有养成SO。物品ID、阶段连续性、效果key引用都会校验；共享曲线和养成资产均纳入备份与失败恢复。
+
+新版格式为2；完整v1旧表仍可导入并保留未涉及的成长。新版缺表报错。具体字段含义、成长计算示例、清空语义及旧参数区别见 [角色成长Excel配置说明](CharacterGrowthExcelGuide.md)。此节更新优先于前文“成长在Unity手动绑定”的旧流程。

@@ -214,12 +214,14 @@ namespace Game.Characters
                 CharacterGrowthConfig growth = config?.growth;
                 if (growth == null || !ids.Add(progress.unitId)
                     || progress.ascension < 0 || progress.ascension >= growth.levelCaps.Length
-                    || progress.level < 1 || progress.level > growth.levelCaps[progress.ascension]
+                    || !CharacterGrowthTable.Shared.IsValidProgress(progress.level, progress.ascension)
                     || progress.experience < 0 || progress.experience >= growth.NextExperience(progress.level)
                     || progress.level == growth.levelCaps[progress.ascension] && progress.experience != 0
                     || progress.rank < 0 || progress.rank > growth.shardCosts.Length
                     || progress.equipment?.Length != 7
                     || progress.basicLevel < 1 || progress.skillLevel < 1 || progress.ultimateLevel < 1
+                    || growth.skillCaps == null || growth.skillCaps.Length != CharacterGrowthTable.Shared.StageCount
+                    || growth.ascensionCosts == null || growth.ascensionCosts.Length != CharacterGrowthTable.Shared.StageCount - 1
                     || progress.basicLevel > growth.skillCaps[progress.ascension]
                     || progress.skillLevel > growth.skillCaps[progress.ascension]
                     || progress.ultimateLevel > growth.skillCaps[progress.ascension])
